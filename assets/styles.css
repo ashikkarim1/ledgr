@@ -329,8 +329,8 @@ section + section {
 }
 
 .nav__links a[aria-current="page"] {
-  color: var(--ink-1);
-  font-weight: 500;
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .nav__cta {
