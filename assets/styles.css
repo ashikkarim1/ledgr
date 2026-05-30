@@ -1420,12 +1420,13 @@ section + section {
 
 .price__num {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 8px;
   font-size: 44px;
   letter-spacing: -0.035em;
   font-weight: 500;
   color: var(--ink-1);
+  min-height: 52px;
 }
 
 .price__num small {
