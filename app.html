@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Ledgr · Dashboard — Hilal Trading FZ-LLC</title>
+    <meta name="description" content="A live product preview of the Ledgr autonomous finance platform." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='-apple-system,sans-serif' font-size='17' font-weight='600' fill='%23fbfaf7'%3EL%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/tailwind-output.css" />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <!-- ============================================================
+           Sidebar
+           ============================================================ -->
+      <aside class="app-side">
+        <a class="brand" href="index.html">
+          <span class="brand__mark" aria-hidden="true">L</span>
+          <span>Ledgr</span>
+        </a>
+
+        <div class="org">
+          <div class="org__badge">H</div>
+          <div class="org__meta">
+            <span class="org__name">Hilal Trading FZ-LLC</span>
+            <span class="org__sub">IFZA · TRN 100 234 519 ··· 03</span>
+          </div>
+        </div>
+
+        <nav class="nav-group" aria-label="Today">
+          <span class="nav-group__title">Today</span>
+          <a class="nav-item is-active" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13 12 4l9 9"/><path d="M5 11v9h14v-9"/></svg> Overview</a>
+          <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg> Inbox <span class="pill">14</span></a>
+          <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Approvals <span class="pill">2</span></a>
+          <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16M4 12h10M4 18h16"/></svg> Documents</a>
+        </nav>
+
+        <nav class="nav-group" aria-label="Books">
+          <span class="nav-group__title">Books</span>
+          <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v14H4z"/><path d="M4 9h16"/></svg> Transactions</a>
+          <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 6h14M5 12h14M5 18h9"/></svg> Reconciliation</a>
+          <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h12l4 4v12H4z"/></svg> Invoices &amp; e-invoicing</a>
+          <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg> Bank feeds</a>
+        </nav>
+
+        <nav class="nav-group" aria-label="Compliance">
+          <span class="nav-group__title">Compliance</span>
+          <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/></svg> VAT</a>
+          <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg> Corporate Tax</a>
+          <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><path d="M2 20c0-3 3-5 7-5s7 2 7 5"/><circle cx="17" cy="10" r="2"/></svg> Payroll &amp; WPS</a>
+          <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg> Filings calendar</a>
+        </nav>
+
+        <nav class="nav-group" aria-label="Insights">
+          <span class="nav-group__title">Insights</span>
+          <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V5M4 19h16M8 16V9M12 16v-5M16 16v-9"/></svg> Reports</a>
+          <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h12a4 4 0 0 1 0 8H8l-4 4V6z"/></svg> CFO chat</a>
+        </nav>
+
+        <div class="foot-mini">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)"></span>
+            <span>All systems operational</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ============================================================
+           Main
+           ============================================================ -->
+      <main class="app-main">
+        <nav class="crumbs" aria-label="Breadcrumb" style="background:transparent;border-bottom:0;margin:-4px 0 -8px">
+          <div class="crumbs__inner" style="min-height:0;padding:0">
+            <ol>
+              <li>
+                <a href="index.html" class="crumbs__home">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></svg>
+                  Ledgr
+                </a>
+              </li>
+              <li><a href="app.html">Workspace</a></li>
+              <li><span>Hilal Trading FZ-LLC</span></li>
+              <li aria-current="page">Overview</li>
+            </ol>
+          </div>
+        </nav>
+
+        <header class="app-top">
+          <div>
+            <h1>Overview</h1>
+            <div class="sub">Wednesday 21 May 2026 · Books are up to date as of 11 minutes ago.</div>
+          </div>
+          <div class="app-top__right">
+            <div class="search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <input type="text" placeholder="Search transactions, invoices, contacts" style="background:transparent;border:0;outline:none;font:inherit;color:var(--ink-1);flex:1;min-width:0" />
+              <kbd>⌘ K</kbd>
+            </div>
+            <a class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" href="index.html">Back to site</a>
+            <a class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" href="#">New transaction</a>
+          </div>
+        </header>
+
+        <!-- Compliance callout -->
+        <div class="callout">
+          <div>
+            <strong>VAT Q2 return is ready for your sign-off.</strong> AED&nbsp;41,205 net payable. Filed automatically to EmaraTax once approved — no further action needed.
+          </div>
+          <a class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" href="#">Review &amp; approve</a>
+        </div>
+
+        <!-- KPIs -->
+        <div class="kpis">
+          <div class="kpi kpi--lg">
+            <div class="kpi__head">
+              <div class="kpi__label">Cash on hand</div>
+              <div class="kpi__sub mono">3 accounts</div>
+            </div>
+            <div class="kpi__value mono">AED 482,318</div>
+            <div class="kpi__delta">▲ 4.2% week over week</div>
+            <svg class="mini" viewBox="0 0 200 32" preserveAspectRatio="none"><path d="M0,22 L20,18 L40,24 L60,12 L80,16 L100,8 L120,14 L140,6 L160,12 L180,4 L200,8"/></svg>
+          </div>
+          <div class="kpi kpi--lg">
+            <div class="kpi__head">
+              <div class="kpi__label">VAT due · Q2 2026</div>
+              <div class="kpi__sub mono">Filed 11 days early</div>
+            </div>
+            <div class="kpi__value mono">AED 41,205</div>
+            <div class="kpi__delta">Output 67,420 · Input 26,215</div>
+            <svg class="mini" viewBox="0 0 200 32" preserveAspectRatio="none"><path d="M0,20 L25,22 L50,16 L75,18 L100,12 L125,14 L150,10 L175,12 L200,8"/></svg>
+          </div>
+          <div class="kpi kpi--lg">
+            <div class="kpi__head">
+              <div class="kpi__label">Corporate Tax · FY26 est.</div>
+              <div class="kpi__sub mono">Above SBR threshold</div>
+            </div>
+            <div class="kpi__value mono">AED 19,840</div>
+            <div class="kpi__delta is-warn">Small Business Relief no longer eligible</div>
+            <svg class="mini" viewBox="0 0 200 32" preserveAspectRatio="none"><path d="M0,28 L25,26 L50,24 L75,22 L100,18 L125,16 L150,14 L175,10 L200,6"/></svg>
+          </div>
+          <div class="kpi kpi--lg">
+            <div class="kpi__head">
+              <div class="kpi__label">Runway</div>
+              <div class="kpi__sub mono">at current burn</div>
+            </div>
+            <div class="kpi__value mono">14.2 months</div>
+            <div class="kpi__delta">Burn AED 33,840 / mo</div>
+            <svg class="mini" viewBox="0 0 200 32" preserveAspectRatio="none"><path d="M0,10 L25,12 L50,8 L75,14 L100,12 L125,16 L150,14 L175,18 L200,14"/></svg>
+          </div>
+        </div>
+
+        <!-- Forecast + VAT -->
+        <div class="app-grid">
+          <div class="card card--lg">
+            <div class="card__head card__head--row">
+              <div>
+                <div class="card__title">Cash forecast</div>
+                <div class="card__sub">Projected closing balance, next 90 days</div>
+              </div>
+              <div class="tabs" role="tablist" aria-label="Range">
+                <button class="is-active" type="button">90d</button>
+                <button type="button">6mo</button>
+                <button type="button">FY26</button>
+              </div>
+            </div>
+
+            <svg class="chart" viewBox="0 0 800 240" preserveAspectRatio="none" aria-label="Cash forecast chart">
+              <defs>
+                <linearGradient id="chart-grad" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="currentColor" stop-opacity="0.16"/>
+                  <stop offset="100%" stop-color="currentColor" stop-opacity="0"/>
+                </linearGradient>
+                <linearGradient id="chart-grad-2" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="currentColor" stop-opacity="0.08"/>
+                  <stop offset="100%" stop-color="currentColor" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+
+              <!-- gridlines -->
+              <g stroke="var(--line)" stroke-width="1">
+                <line x1="0" x2="800" y1="60" y2="60"/>
+                <line x1="0" x2="800" y1="120" y2="120"/>
+                <line x1="0" x2="800" y1="180" y2="180"/>
+                <line x1="0" x2="800" y1="220" y2="220"/>
+              </g>
+
+              <!-- y-axis labels -->
+              <g font-family="var(--font-mono)" font-size="10" fill="var(--ink-3)">
+                <text x="4" y="56">AED 700k</text>
+                <text x="4" y="116">AED 500k</text>
+                <text x="4" y="176">AED 300k</text>
+              </g>
+
+              <!-- comparison: last year (dim) -->
+              <path d="M0,170 C80,160 120,168 200,150 C280,132 320,142 400,122 C480,104 520,114 600,98 C680,84 720,92 800,76 L800,220 L0,220 Z"
+                fill="url(#chart-grad-2)" stroke="none"/>
+              <path d="M0,170 C80,160 120,168 200,150 C280,132 320,142 400,122 C480,104 520,114 600,98 C680,84 720,92 800,76"
+                fill="none" stroke="var(--ink-4)" stroke-width="1.4" stroke-dasharray="4 4"/>
+
+              <!-- actual + projection -->
+              <path
+                d="M0,150 C60,140 100,148 160,128 C220,108 260,118 320,98 C380,78 420,86 480,68 C540,52 580,58 640,42 C700,28 740,32 800,18 L800,220 L0,220 Z"
+                fill="url(#chart-grad)" stroke="none"
+              />
+              <path
+                d="M0,150 C60,140 100,148 160,128 C220,108 260,118 320,98 C380,78 420,86 480,68 C540,52 580,58 640,42 C700,28 740,32 800,18"
+                fill="none" stroke="var(--ink-1)" stroke-width="1.8" stroke-linecap="round"
+              />
+
+              <!-- today marker -->
+              <line x1="320" x2="320" y1="20" y2="220" stroke="var(--accent)" stroke-width="1" stroke-dasharray="2 4"/>
+              <circle cx="320" cy="98" r="4" fill="var(--accent)"/>
+              <text x="328" y="92" font-family="var(--font-mono)" font-size="10" fill="var(--accent)" letter-spacing="0.04em">TODAY</text>
+
+              <!-- x-axis -->
+              <g font-family="var(--font-mono)" font-size="10" fill="var(--ink-3)">
+                <text x="0" y="236">21 May</text>
+                <text x="160" y="236">4 Jun</text>
+                <text x="320" y="236">18 Jun</text>
+                <text x="480" y="236">2 Jul</text>
+                <text x="640" y="236">16 Jul</text>
+                <text x="780" y="236" text-anchor="end">19 Aug</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="card card--lg vat">
+            <div class="card__head card__head--row">
+              <div>
+                <div class="card__title">VAT this quarter</div>
+                <div class="card__sub">Q2 2026 · 62% of period elapsed</div>
+              </div>
+              <span class="txn__tag is-accent">Auto-prepared</span>
+            </div>
+
+            <div class="vat__bar" aria-hidden="true"></div>
+
+            <div class="vat__breakdown">
+              <div class="vat__row"><span>Output VAT</span><span class="num">+ 67,420.00</span></div>
+              <div class="vat__row"><span>Input VAT</span><span class="num">− 26,215.00</span></div>
+              <div class="vat__row"><span>Reverse charge</span><span class="num">+ 0.00</span></div>
+              <div class="vat__row"><span>Designated zone sales</span><span class="num">− 0.00</span></div>
+              <div class="vat__row" style="grid-column:1/-1">
+                <span><strong style="color:var(--ink-1);font-weight:500">Net payable to FTA</strong></span>
+                <span class="num" style="font-size:14px">AED 41,205.00</span>
+              </div>
+            </div>
+
+            <a class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" href="#" style="align-self:flex-start">Review draft return</a>
+          </div>
+        </div>
+
+        <!-- Agent activity + transactions + spend -->
+        <div class="app-grid app-grid--3">
+          <div class="card card--lg">
+            <div class="card__head card__head--row">
+              <div>
+                <div class="card__title">Just categorised</div>
+                <div class="card__sub">Capture agent · 4 in the last hour</div>
+              </div>
+              <a class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" style="height:32px;padding:0 12px;font-size:12.5px" href="#">View all 1,824</a>
+            </div>
+
+            <div class="txns">
+              <div class="txn">
+                <div class="txn__ico">EE</div>
+                <div class="txn__meta">
+                  <span class="txn__title">Etisalat e&amp; — fibre &amp; mobile, May</span>
+                  <span class="txn__sub">ENBD ·· 4731 · matched to INV-2410</span>
+                </div>
+                <span class="txn__tag is-accent">Telecom</span>
+                <span class="txn__amt is-neg mono">− 1,242.00</span>
+              </div>
+              <div class="txn">
+                <div class="txn__ico">DE</div>
+                <div class="txn__meta">
+                  <span class="txn__title">DEWA — Business Bay office</span>
+                  <span class="txn__sub">Mashreq ·· 0188 · OCR slip attached</span>
+                </div>
+                <span class="txn__tag is-accent">Utilities · 5%</span>
+                <span class="txn__amt is-neg mono">− 3,818.40</span>
+              </div>
+              <div class="txn">
+                <div class="txn__ico">A1</div>
+                <div class="txn__meta">
+                  <span class="txn__title">Al Mazaya Holding — consulting retainer</span>
+                  <span class="txn__sub">Stripe · e-invoice via Peppol</span>
+                </div>
+                <span class="txn__tag">Revenue · DZ</span>
+                <span class="txn__amt mono">+ 42,000.00</span>
+              </div>
+              <div class="txn">
+                <div class="txn__ico">CR</div>
+                <div class="txn__meta">
+                  <span class="txn__title">Careem for Business — May</span>
+                  <span class="txn__sub">Wio ·· 9931 · 14 trips · auto-split</span>
+                </div>
+                <span class="txn__tag is-accent">Travel</span>
+                <span class="txn__amt is-neg mono">− 612.80</span>
+              </div>
+              <div class="txn">
+                <div class="txn__ico">SF</div>
+                <div class="txn__meta">
+                  <span class="txn__title">Salik Free-zone toll wallet</span>
+                  <span class="txn__sub">ENBD ·· 4731 · 22 charges grouped</span>
+                </div>
+                <span class="txn__tag is-accent">Travel</span>
+                <span class="txn__amt is-neg mono">− 168.00</span>
+              </div>
+              <div class="txn">
+                <div class="txn__ico">JP</div>
+                <div class="txn__meta">
+                  <span class="txn__title">JAFZA annual licence — Hilal Trading</span>
+                  <span class="txn__sub">Mashreq ·· 0188 · prepaid · 12-mo schedule</span>
+                </div>
+                <span class="txn__tag">Prepaid expense</span>
+                <span class="txn__amt is-neg mono">− 18,500.00</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card--lg">
+            <div class="card__head card__head--row">
+              <div>
+                <div class="card__title">Agent activity</div>
+                <div class="card__sub">Last 24 hours</div>
+              </div>
+              <span class="txn__tag is-accent">All green</span>
+            </div>
+
+            <div class="agent-log">
+              <div class="agent">
+                <div class="agent__dot is-done">✓</div>
+                <div class="agent__body">
+                  <span class="agent__title">VAT Q2 draft return generated</span>
+                  <span class="agent__sub">Tax-Prep · 67,420 output / 26,215 input</span>
+                </div>
+                <span class="agent__when">6m ago</span>
+              </div>
+              <div class="agent">
+                <div class="agent__dot is-done">✓</div>
+                <div class="agent__body">
+                  <span class="agent__title">Reconciled ENBD ··4731 to 21 May</span>
+                  <span class="agent__sub">Reconcile · 142 transactions · 1 needs review</span>
+                </div>
+                <span class="agent__when">26m ago</span>
+              </div>
+              <div class="agent">
+                <div class="agent__dot is-review">!</div>
+                <div class="agent__body">
+                  <span class="agent__title">"Adnec event — Mar 14" — vendor unclear</span>
+                  <span class="agent__sub">Capture · waiting for your tag</span>
+                </div>
+                <span class="agent__when">1h ago</span>
+              </div>
+              <div class="agent">
+                <div class="agent__dot is-done">✓</div>
+                <div class="agent__body">
+                  <span class="agent__title">May payroll WPS file ready</span>
+                  <span class="agent__sub">Payroll · 12 employees · AED 184,200</span>
+                </div>
+                <span class="agent__when">3h ago</span>
+              </div>
+              <div class="agent">
+                <div class="agent__dot is-done">✓</div>
+                <div class="agent__body">
+                  <span class="agent__title">E-invoice sent to Al Mazaya Holding</span>
+                  <span class="agent__sub">Filer · Peppol · 5-corner acknowledged</span>
+                </div>
+                <span class="agent__when">5h ago</span>
+              </div>
+              <div class="agent">
+                <div class="agent__dot is-done">✓</div>
+                <div class="agent__body">
+                  <span class="agent__title">CT forecast updated · AED 19,840</span>
+                  <span class="agent__sub">Advisor · SBR flag raised</span>
+                </div>
+                <span class="agent__when">Yesterday</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card--lg">
+            <div class="card__head card__head--row">
+              <div>
+                <div class="card__title">Spend by category</div>
+                <div class="card__sub">May 2026 · MTD</div>
+              </div>
+              <span class="txn__tag">12 categories</span>
+            </div>
+
+            <div class="donut">
+              <svg viewBox="0 0 42 42" aria-hidden="true">
+                <circle cx="21" cy="21" r="15.9" fill="none" stroke="var(--paper-2)" stroke-width="6"/>
+                <!-- segments via stroke-dasharray (circumference ≈ 100) -->
+                <circle cx="21" cy="21" r="15.9" fill="none" stroke="var(--ink-1)" stroke-width="6"
+                        stroke-dasharray="32 68" stroke-dashoffset="25" transform="rotate(-90 21 21)"/>
+                <circle cx="21" cy="21" r="15.9" fill="none" stroke="var(--accent)" stroke-width="6"
+                        stroke-dasharray="22 78" stroke-dashoffset="-7" transform="rotate(-90 21 21)"/>
+                <circle cx="21" cy="21" r="15.9" fill="none" stroke="var(--ink-3)" stroke-width="6"
+                        stroke-dasharray="18 82" stroke-dashoffset="-29" transform="rotate(-90 21 21)"/>
+                <circle cx="21" cy="21" r="15.9" fill="none" stroke="var(--warn)" stroke-width="6"
+                        stroke-dasharray="14 86" stroke-dashoffset="-47" transform="rotate(-90 21 21)"/>
+                <circle cx="21" cy="21" r="15.9" fill="none" stroke="var(--line-2)" stroke-width="6"
+                        stroke-dasharray="14 86" stroke-dashoffset="-61" transform="rotate(-90 21 21)"/>
+                <text x="21" y="22" text-anchor="middle" font-size="5.4" font-family="var(--font-mono)" fill="var(--ink-1)" font-weight="500">189k</text>
+                <text x="21" y="26" text-anchor="middle" font-size="2.4" fill="var(--ink-3)">AED · MTD</text>
+              </svg>
+
+              <div class="donut__legend">
+                <div class="donut__row"><span class="swatch" style="background:var(--ink-1)"></span><span class="label">Payroll &amp; WPS</span><span class="v">60,500</span></div>
+                <div class="donut__row"><span class="swatch" style="background:var(--accent)"></span><span class="label">Rent &amp; offices</span><span class="v">41,600</span></div>
+                <div class="donut__row"><span class="swatch" style="background:var(--ink-3)"></span><span class="label">Marketing</span><span class="v">34,000</span></div>
+                <div class="donut__row"><span class="swatch" style="background:var(--warn)"></span><span class="label">Software &amp; SaaS</span><span class="v">26,400</span></div>
+                <div class="donut__row"><span class="swatch" style="background:var(--line-2)"></span><span class="label">Other</span><span class="v">26,500</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- A/R aging + invoice reminders -->
+        <div class="app-grid">
+          <div class="card card--lg">
+            <div class="card__head card__head--row">
+              <div>
+                <div class="card__title">Accounts receivable</div>
+                <div class="card__sub">5 open invoices · AED 168,420 outstanding</div>
+              </div>
+              <span class="txn__tag is-accent">2 reminders sent today</span>
+            </div>
+
+            <div class="txns">
+              <div class="txn">
+                <div class="txn__ico">AM</div>
+                <div class="txn__meta">
+                  <span class="txn__title">Al Mazaya Holding · INV-2418</span>
+                  <span class="txn__sub">Due in 9 days · last reminder 2 days ago</span>
+                </div>
+                <span class="txn__tag">Current</span>
+                <span class="txn__amt mono">42,000.00</span>
+              </div>
+              <div class="txn">
+                <div class="txn__ico">EM</div>
+                <div class="txn__meta">
+                  <span class="txn__title">Emirates Media · INV-2412</span>
+                  <span class="txn__sub">2 days overdue · auto-reminder queued for 6pm</span>
+                </div>
+                <span class="txn__tag" style="background:var(--warn-soft);color:var(--warn);border-color:transparent">1–30 days</span>
+                <span class="txn__amt mono">18,500.00</span>
+              </div>
+              <div class="txn">
+                <div class="txn__ico">RT</div>
+                <div class="txn__meta">
+                  <span class="txn__title">RT Logistics · INV-2403</span>
+                  <span class="txn__sub">17 days overdue · escalated to your accountant</span>
+                </div>
+                <span class="txn__tag" style="background:var(--warn-soft);color:var(--warn);border-color:transparent">1–30 days</span>
+                <span class="txn__amt mono">62,300.00</span>
+              </div>
+              <div class="txn">
+                <div class="txn__ico">SQ</div>
+                <div class="txn__meta">
+                  <span class="txn__title">Souq Mart · INV-2387</span>
+                  <span class="txn__sub">38 days overdue · second reminder scheduled</span>
+                </div>
+                <span class="txn__tag" style="background:rgba(176,48,72,0.08);color:var(--rose);border-color:transparent">31–60 days</span>
+                <span class="txn__amt mono">29,820.00</span>
+              </div>
+              <div class="txn">
+                <div class="txn__ico">DK</div>
+                <div class="txn__meta">
+                  <span class="txn__title">Diwan Kitchens · INV-2371</span>
+                  <span class="txn__sub">61 days overdue · awaiting your call</span>
+                </div>
+                <span class="txn__tag" style="background:rgba(176,48,72,0.08);color:var(--rose);border-color:transparent">60+ days</span>
+                <span class="txn__amt mono">15,800.00</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card--lg">
+            <div class="card__head card__head--row">
+              <div>
+                <div class="card__title">Izza · your AI tax manager</div>
+                <div class="card__sub">Answers cite the exact FTA clause</div>
+              </div>
+              <span class="txn__tag is-accent">Online</span>
+            </div>
+
+            <div style="background:var(--paper-2);border-radius:var(--radius);padding:16px 18px;font-size:13.5px;color:var(--ink-2);line-height:1.55">
+              <strong style="color:var(--ink-1);font-weight:500">You</strong><br />
+              Do I still qualify for Small Business Relief this year?
+            </div>
+
+            <div style="border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;font-size:13.5px;color:var(--ink-2);line-height:1.6">
+              <strong style="color:var(--ink-1);font-weight:500">Izza</strong><br />
+              No. Your trailing-twelve-month revenue is AED 3.18M as of 21 May — above the AED 3M threshold for FY26. You first crossed it in March. Your FY26 Corporate Tax estimate is AED 19,840 at the 9% headline rate.
+              <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-3);font-family:var(--font-mono);letter-spacing:0.02em">
+                Cited · FTA Corporate Tax Public Clarification CTP001 · Cabinet Decision 73 of 2023, Art. 2(1)
+              </div>
+              <div style="margin-top:12px;display:flex;gap:8px">
+                <a href="#" class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" style="height:30px;padding:0 12px;font-size:12.5px">Show working</a>
+                <a href="#" class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" style="height:30px;padding:0 12px;font-size:12.5px">Plan around it</a>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:0 12px;height:42px;background:var(--surface)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" style="width:14px;height:14px;color:var(--ink-3)"><path d="M4 4h16v12H6l-2 4z"/></svg>
+              <input type="text" placeholder="Ask Izza in English or Arabic…" style="background:transparent;border:0;outline:none;font:inherit;color:var(--ink-1);flex:1;font-size:13.5px" />
+              <kbd style="font-family:var(--font-mono);font-size:10.5px;padding:2px 6px;border-radius:4px;background:var(--paper-2);color:var(--ink-3);border:1px solid var(--line)">⏎</kbd>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notifications & reminders -->
+        <div class="app-grid">
+          <div class="card card--lg">
+            <div class="card__head card__head--row">
+              <div>
+                <div class="card__title">Reminders &amp; notifications</div>
+                <div class="card__sub">One engine · VAT, CT, payroll, e-invoicing, A/R · routed by channel</div>
+              </div>
+              <span class="txn__tag is-accent">12 sent · 4 scheduled</span>
+            </div>
+
+            <div class="notif">
+              <div class="notif__item">
+                <div class="notif__ico is-accent" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/></svg>
+                </div>
+                <div class="notif__body">
+                  <span class="notif__title">VAT Q2 return ready for your approval</span>
+                  <span class="notif__sub">AED 41,205 net payable · awaits your sign-off before EmaraTax push</span>
+                  <div class="notif__chs">
+                    <span class="ch is-on">Email</span>
+                    <span class="ch is-on">WhatsApp</span>
+                    <span class="ch">Push</span>
+                    <span class="ch">SMS</span>
+                  </div>
+                </div>
+                <span class="notif__when">in 67 days</span>
+              </div>
+
+              <div class="notif__item">
+                <div class="notif__ico is-warn" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 12h14"/></svg>
+                </div>
+                <div class="notif__body">
+                  <span class="notif__title">May WPS payroll · approve by 27 May</span>
+                  <span class="notif__sub">12 employees · AED 184,200 · MOHRE deadline 28 May</span>
+                  <div class="notif__chs">
+                    <span class="ch is-on">Email</span>
+                    <span class="ch is-on">WhatsApp</span>
+                    <span class="ch is-on">Push</span>
+                    <span class="ch">SMS</span>
+                  </div>
+                </div>
+                <span class="notif__when">in 6 days</span>
+              </div>
+
+              <div class="notif__item">
+                <div class="notif__ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h12l4 4v12H4z"/></svg>
+                </div>
+                <div class="notif__body">
+                  <span class="notif__title">A/R reminder · Souq Mart INV-2387</span>
+                  <span class="notif__sub">Second reminder · 38 days overdue · AED 29,820</span>
+                  <div class="notif__chs">
+                    <span class="ch is-on">Email</span>
+                    <span class="ch">WhatsApp</span>
+                    <span class="ch">Push</span>
+                    <span class="ch">SMS</span>
+                  </div>
+                </div>
+                <span class="notif__when">tomorrow 09:00</span>
+              </div>
+
+              <div class="notif__item">
+                <div class="notif__ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                </div>
+                <div class="notif__body">
+                  <span class="notif__title">E-invoicing Phase 1 readiness check</span>
+                  <span class="notif__sub">Peppol endpoint provisioned · 40 days to live cut-over</span>
+                  <div class="notif__chs">
+                    <span class="ch is-on">Email</span>
+                    <span class="ch">WhatsApp</span>
+                    <span class="ch is-on">Push</span>
+                    <span class="ch">SMS</span>
+                  </div>
+                </div>
+                <span class="notif__when">1 Jul</span>
+              </div>
+
+              <div class="notif__item">
+                <div class="notif__ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+                </div>
+                <div class="notif__body">
+                  <span class="notif__title">Corporate Tax FY25 filing window opens</span>
+                  <span class="notif__sub">12-month deadline · we'll draft 90 days in advance</span>
+                  <div class="notif__chs">
+                    <span class="ch is-on">Email</span>
+                    <span class="ch">WhatsApp</span>
+                    <span class="ch">Push</span>
+                    <span class="ch">SMS</span>
+                  </div>
+                </div>
+                <span class="notif__when">in 132 days</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card--lg">
+            <div class="card__head card__head--row">
+              <div>
+                <div class="card__title">Channel preferences</div>
+                <div class="card__sub">Per-category, per-channel · saves on tap</div>
+              </div>
+              <a class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" style="height:30px;padding:0 12px;font-size:12px" href="#">Edit defaults</a>
+            </div>
+
+            <div style="font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-3);display:grid;grid-template-columns:1fr 40px 40px 40px 40px;gap:8px;padding-bottom:10px;border-bottom:1px solid var(--line);align-items:center">
+              <span>Category</span>
+              <span style="text-align:center">Email</span>
+              <span style="text-align:center">WApp</span>
+              <span style="text-align:center">Push</span>
+              <span style="text-align:center">SMS</span>
+            </div>
+
+            <div class="notif-prefs" style="border-top:0;padding-top:0;margin-top:0">
+              <div class="notif-prefs__row" style="display:grid;grid-template-columns:1fr 40px 40px 40px 40px;gap:8px;justify-items:center;align-items:center">
+                <span class="label" style="justify-self:start"><span class="ch-name">Filings · VAT, CT, WPS</span><br /><span style="color:var(--ink-3);font-size:11.5px">Statutory deadlines</span></span>
+                <label class="switch"><input type="checkbox" checked /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" checked /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+              </div>
+
+              <div class="notif-prefs__row" style="display:grid;grid-template-columns:1fr 40px 40px 40px 40px;gap:8px;justify-items:center;align-items:center">
+                <span class="label" style="justify-self:start"><span class="ch-name">A/R reminders</span><br /><span style="color:var(--ink-3);font-size:11.5px">Aging buckets &amp; escalations</span></span>
+                <label class="switch"><input type="checkbox" checked /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+              </div>
+
+              <div class="notif-prefs__row" style="display:grid;grid-template-columns:1fr 40px 40px 40px 40px;gap:8px;justify-items:center;align-items:center">
+                <span class="label" style="justify-self:start"><span class="ch-name">Agent escalations</span><br /><span style="color:var(--ink-3);font-size:11.5px">Edge cases needing your input</span></span>
+                <label class="switch"><input type="checkbox" checked /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" checked /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" checked /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+              </div>
+
+              <div class="notif-prefs__row" style="display:grid;grid-template-columns:1fr 40px 40px 40px 40px;gap:8px;justify-items:center;align-items:center">
+                <span class="label" style="justify-self:start"><span class="ch-name">Cash &amp; runway alerts</span><br /><span style="color:var(--ink-3);font-size:11.5px">Burn rate, low-balance thresholds</span></span>
+                <label class="switch"><input type="checkbox" checked /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" checked /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+              </div>
+
+              <div class="notif-prefs__row" style="display:grid;grid-template-columns:1fr 40px 40px 40px 40px;gap:8px;justify-items:center;align-items:center">
+                <span class="label" style="justify-self:start"><span class="ch-name">FTA &amp; regulatory changes</span><br /><span style="color:var(--ink-3);font-size:11.5px">Phase-in dates, rate changes</span></span>
+                <label class="switch"><input type="checkbox" checked /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+              </div>
+
+              <div class="notif-prefs__row" style="display:grid;grid-template-columns:1fr 40px 40px 40px 40px;gap:8px;justify-items:center;align-items:center">
+                <span class="label" style="justify-self:start"><span class="ch-name">Product updates</span><br /><span style="color:var(--ink-3);font-size:11.5px">Once a month, max</span></span>
+                <label class="switch"><input type="checkbox" checked /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+                <label class="switch"><input type="checkbox" /><span class="switch__track"></span></label>
+              </div>
+            </div>
+
+            <div style="margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-3);line-height:1.55">
+              Quiet hours · 22:00 – 07:00 GST. Friday off for statutory
+              filings. Critical agent escalations always go through.
+            </div>
+          </div>
+        </div>
+
+        <!-- Filings strip -->
+        <div class="card card--lg">
+          <div class="card__head card__head--row">
+            <div>
+              <div class="card__title">Upcoming filings</div>
+              <div class="card__sub">All deadlines below are handled by Ledgr unless you say otherwise</div>
+            </div>
+            <a class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" style="height:32px;padding:0 12px;font-size:12.5px" href="#">Full calendar →</a>
+          </div>
+
+          <div class="txns">
+            <div class="txn">
+              <div class="txn__ico">V2</div>
+              <div class="txn__meta">
+                <span class="txn__title">VAT 201 · Q2 2026</span>
+                <span class="txn__sub">Filer · drafted &amp; awaiting your approval</span>
+              </div>
+              <span class="txn__tag is-accent">28 Jul · in 68 days</span>
+              <span class="txn__amt mono">AED 41,205.00</span>
+            </div>
+            <div class="txn">
+              <div class="txn__ico">WP</div>
+              <div class="txn__meta">
+                <span class="txn__title">WPS payroll · May 2026</span>
+                <span class="txn__sub">Payroll · SIF generated · 12 employees</span>
+              </div>
+              <span class="txn__tag is-accent">28 May · in 7 days</span>
+              <span class="txn__amt is-neg mono">AED 184,200.00</span>
+            </div>
+            <div class="txn">
+              <div class="txn__ico">EI</div>
+              <div class="txn__meta">
+                <span class="txn__title">E-invoicing readiness · Phase 1</span>
+                <span class="txn__sub">Filer · Peppol endpoint provisioned · testing</span>
+              </div>
+              <span class="txn__tag">1 Jul · in 41 days</span>
+              <span class="txn__amt mono">—</span>
+            </div>
+            <div class="txn">
+              <div class="txn__ico">CT</div>
+              <div class="txn__meta">
+                <span class="txn__title">Corporate Tax · FY25</span>
+                <span class="txn__sub">Tax-Prep · provisional return · SBR check failed</span>
+              </div>
+              <span class="txn__tag">30 Sep · in 132 days</span>
+              <span class="txn__amt mono">AED 19,840.00</span>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="assets/app.js" defer></script>
+  </body>
+</html>

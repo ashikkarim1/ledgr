@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Legacy custom components that aren't easily replaced by Tailwind */
+@layer components {
+  /* Typography */
+  .text-display-lg {
+    @apply text-5xl font-bold leading-tight;
+  }
+
+  .text-display-md {
+    @apply text-4xl font-bold leading-tight;
+  }
+
+  .text-display-sm {
+    @apply text-3xl font-bold leading-tight;
+  }
+
+  .text-heading-lg {
+    @apply text-2xl font-bold;
+  }
+
+  .text-heading-md {
+    @apply text-xl font-semibold;
+  }
+
+  .text-heading-sm {
+    @apply text-lg font-semibold;
+  }
+
+  .text-body-lg {
+    @apply text-base;
+  }
+
+  .text-body-sm {
+    @apply text-sm;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 font-medium rounded-md transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700;
+  }
+
+  .btn-secondary {
+    @apply bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300;
+  }
+
+  .btn-ghost {
+    @apply text-bg-800 hover:bg-bg-100 active:bg-bg-200;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white rounded-lg border border-bg-500 p-6;
+    @apply transition-all duration-200 hover:shadow-md;
+  }
+
+  .card-featured {
+    @apply bg-white border-2 border-primary-500 shadow-lg;
+  }
+
+  /* Inputs */
+  .input {
+    @apply w-full px-4 py-3 border border-bg-500 rounded-md;
+    @apply text-bg-800 placeholder-bg-600;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+    @apply transition-all duration-200;
+  }
+
+  .input:disabled {
+    @apply bg-bg-100 text-bg-600 cursor-not-allowed;
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium;
+  }
+
+  .badge-primary {
+    @apply bg-primary-100 text-primary-700;
+  }
+
+  .badge-success {
+    @apply bg-green-100 text-green-700;
+  }
+
+  .badge-warning {
+    @apply bg-warning text-orange-900;
+  }
+
+  .badge-error {
+    @apply bg-error bg-opacity-10 text-error;
+  }
+}
+
+/* Animations */
+@layer utilities {
+  .animate-hardware {
+    @apply will-change-transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}

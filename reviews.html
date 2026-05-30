@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Ledgr · Reviews — The honest directory of UAE accountants</title>
+    <meta name="description" content="Read real reviews of UAE accounting firms from businesses that actually work with them. Verified through Ledgr — every reviewer is a paying customer of the firm they rate." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='-apple-system,sans-serif' font-size='17' font-weight='600' fill='%23fbfaf7'%3EL%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/tailwind-output.css" />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="nav" id="nav">
+      <div class="wrap nav__inner">
+        <a class="brand" href="index.html">
+          <span class="brand__mark" aria-hidden="true">L</span>
+          <span>Ledgr</span>
+        </a>
+        <nav class="nav__links" aria-label="Primary">
+          <a href="index.html#platform">Platform</a>
+          <a href="agents.html">AI Agents</a>
+          <a href="resources.html">Resources</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="accountants.html">Accountants</a>
+          <a href="reviews.html" aria-current="page" style="color:var(--ink-1)">Reviews</a>
+        </nav>
+        <div class="nav__cta" id="nav-auth">
+          <a class="btn btn--primary" href="#signin">Sign in</a>
+          <a class="btn btn--primary" href="index.html#waitlist">Join the waitlist</a>
+        </div>
+      </div>
+    </header>
+
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <div class="wrap crumbs__inner">
+        <ol>
+          <li>
+            <a href="index.html" class="crumbs__home">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></svg>
+              Ledgr
+            </a>
+          </li>
+          <li><a href="accountants.html">Accountants</a></li>
+          <li aria-current="page">Reviews</li>
+        </ol>
+      </div>
+    </nav>
+
+    <main>
+      <!-- ============================================================
+           Page hero
+           ============================================================ -->
+      <section class="page-hero">
+        <div class="max-w-7xl mx-auto px-6">
+          <span class="eyebrow reveal">Reviews</span>
+          <h1 class="display reveal" style="margin-top:18px">
+            The honest directory of <em>UAE accountants.</em>
+          </h1>
+          <p class="lede reveal" style="--d:80ms">
+            Real reviews from real businesses. Every reviewer is a verified
+            Ledgr customer of the firm they rate — no scrape, no purchase, no
+            anonymous astroturf.
+          </p>
+          <div class="page-hero__meta reveal" style="--d:120ms">
+            <span><strong style="color:var(--ink-1)">62 firms</strong> listed</span>
+            <span class="dot" aria-hidden="true"></span>
+            <span><strong style="color:var(--ink-1)">418 reviews</strong> · all verified</span>
+            <span class="dot" aria-hidden="true"></span>
+            <span>Updated daily from Ledgr workspaces</span>
+          </div>
+
+          <!-- Auth banner -->
+          <div class="auth-banner reveal" id="auth-banner" style="--d:160ms">
+            <div class="auth-banner__left">
+              <span class="auth-banner__dot" aria-hidden="true"></span>
+              <span class="auth-banner__who" id="auth-who">
+                Sign in with your Ledgr account to leave a review for any
+                firm you've worked with.
+              </span>
+            </div>
+            <div class="auth-banner__right" id="auth-actions">
+              <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" data-open-signin>
+                Sign in to review
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           Filters + directory
+           ============================================================ -->
+      <section class="tight" style="padding-top:16px" id="directory">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="section-head reveal" style="grid-template-columns:1fr;gap:12px;margin-bottom:0">
+            <div>
+              <span class="text-xs uppercase tracking-widest font-semibold text-primary-500">Directory</span>
+              <h2 class="section-title">Find an accountant who fits you.</h2>
+            </div>
+          </div>
+
+          <form class="filters reveal" id="filters" onsubmit="event.preventDefault()">
+            <input class="input" type="search" id="f-q" placeholder="Search by firm name or area of focus" autocomplete="off" />
+            <select class="select" id="f-jurisdiction">
+              <option value="">All jurisdictions</option>
+              <option>DIFC</option>
+              <option>ADGM</option>
+              <option>DMCC</option>
+              <option>Dubai mainland</option>
+              <option>Abu Dhabi mainland</option>
+              <option>IFZA / SHAMS / Meydan</option>
+              <option>JAFZA / RAKEZ</option>
+            </select>
+            <select class="select" id="f-size">
+              <option value="">All firm sizes</option>
+              <option>Boutique (1–10)</option>
+              <option>Mid-tier (11–50)</option>
+              <option>National (51–250)</option>
+              <option>Big Four affiliate</option>
+            </select>
+            <select class="select" id="f-service">
+              <option value="">All services</option>
+              <option>VAT &amp; Corporate Tax</option>
+              <option>External audit</option>
+              <option>Outsourced bookkeeping</option>
+              <option>Payroll &amp; WPS</option>
+              <option>Transfer pricing</option>
+              <option>UBO / ESR / AML</option>
+              <option>CFO &amp; advisory</option>
+            </select>
+            <button type="button" class="btn btn--ghost reset" id="f-reset">Reset</button>
+          </form>
+
+          <div class="firms reveal" id="firm-grid"><!-- firms render here --></div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           Selected firm detail
+           ============================================================ -->
+      <section style="padding-top:0">
+        <div class="max-w-7xl mx-auto px-6">
+          <div id="firm-detail-host"><!-- detail renders here --></div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           Closing CTA
+           ============================================================ -->
+      <section class="cta">
+        <div class="wrap between" style="align-items:flex-start;gap:32px;flex-wrap:wrap">
+          <div style="max-width:540px">
+            <span class="text-xs uppercase tracking-widest font-semibold text-primary-500" style="color:color-mix(in srgb,var(--paper) 70%,transparent)">For firms</span>
+            <h2 style="margin-top:18px">Claim your listing.</h2>
+            <p>Add your services, hours, and case studies. Respond to reviews directly. Free for any UAE-licensed firm — verified through your FTA tax agent number.</p>
+          </div>
+          <div class="cta__ctas">
+            <a class="btn btn--lg" href="accountants.html#apply">Claim your firm page</a>
+            <a class="btn btn--lg btn--ghost" href="mailto:ceo@theupcapital.com?subject=Ledgr%20Reviews%20%E2%80%94%20listing%20question">Ask a question</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============================================================
+         Sign-in modal (mock auth)
+         ============================================================ -->
+    <div class="modal-bd" id="signin-modal" role="dialog" aria-modal="true" aria-labelledby="signin-title">
+      <div class="modal">
+        <div>
+          <h3 class="modal__title" id="signin-title">Sign in to Ledgr</h3>
+          <p class="modal__sub">A two-second sign-in so reviews stay verified. We'll use your name on the review — your email stays private.</p>
+        </div>
+        <form class="modal__form" id="signin-form">
+          <div class="field">
+            <label class="field__label" for="si-name">Your name</label>
+            <input class="input" type="text" id="si-name" required autocomplete="name" placeholder="Sara Al Mansoori" />
+          </div>
+          <div class="field">
+            <label class="field__label" for="si-email">Work email</label>
+            <input class="input" type="email" id="si-email" required autocomplete="email" placeholder="sara@yourcompany.ae" />
+          </div>
+          <div class="field">
+            <label class="field__label" for="si-company">Company you're reviewing as</label>
+            <input class="input" type="text" id="si-company" required autocomplete="organization" placeholder="Hilal Trading FZ-LLC" />
+          </div>
+          <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="submit" style="height:44px;justify-content:center;margin-top:6px">Sign in &amp; start reviewing</button>
+          <p class="modal__legal">By signing in you confirm you are an authorised representative of the company you list. Reviews are tied to verified Ledgr workspaces.</p>
+        </form>
+        <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md text-bg-800 hover:bg-bg-100 active:bg-bg-200 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" data-close-signin style="justify-content:center">Cancel</button>
+      </div>
+    </div>
+
+    <footer class="foot">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="foot__grid">
+          <div>
+            <a class="brand" href="index.html">
+              <span class="brand__mark" aria-hidden="true">L</span>
+              <span>Ledgr</span>
+            </a>
+            <p class="foot__brand">The autonomous finance function for every UAE business. Built in Dubai. Licensed in the DIFC.</p>
+          </div>
+          <div class="foot__col">
+            <h4>Platform</h4>
+            <a href="index.html#platform">Books</a>
+            <a href="index.html#platform">VAT</a>
+            <a href="index.html#platform">Corporate Tax</a>
+            <a href="index.html#platform">Payroll &amp; WPS</a>
+            <a href="extractor.html">Extractor</a>
+          </div>
+          <div class="foot__col">
+            <h4>Company</h4>
+            <a href="accountants.html">Accountants programme</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="customers.html">Customers</a>
+            <a href="security.html">Security &amp; trust</a>
+            <a href="onboarding.html">How onboarding works</a>
+            <a href="app.html">Live dashboard</a>
+          </div>
+          <div class="foot__col">
+            <h4>Resources</h4>
+            <a href="resources.html">All guides</a>
+            <a href="calculator.html">FTA readiness check</a>
+            <a href="guide-e-invoicing.html">E-invoicing guide</a>
+            <a href="pricing.html">Pricing</a>
+          </div>
+          <div class="foot__col">
+            <h4>Legal</h4>
+            <a href="#">Terms</a>
+            <a href="#">Privacy</a>
+            <a href="#">DPA</a>
+          </div>
+        </div>
+        <div class="foot__bar">
+          <span>© 2026 Ledgr Technologies Ltd. All rights reserved.</span>
+          <span>Made in Dubai · ledgr.ae</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/app.js" defer></script>
+    <script src="assets/reviews.js" defer></script>
+  </body>
+</html>

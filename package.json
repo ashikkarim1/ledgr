@@ -1,0 +1,22 @@
+{
+  "name": "ledgr",
+  "version": "1.0.0",
+  "description": "A deployable static prototype for **Ledgr**, the autonomous finance function for UAE businesses. Built directly from the v1.0 business plan.",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind-output.css",
+    "build:css:watch": "tailwindcss -i ./assets/tailwind.css -o ./assets/tailwind-output.css --watch",
+    "build": "npm run build:css",
+    "dev": "npm run build:css:watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.15",
+    "tailwindcss": "^3.4.19"
+  }
+}

@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Ledgr Extractor — Push your books where they need to go</title>
+    <meta name="description" content="Scheduled, audited, structured exports of trial balance, GL, source documents and VAT packs to CaseWare, Power BI, SFTP, email, Google Drive and webhooks." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='-apple-system,sans-serif' font-size='17' font-weight='600' fill='%23fbfaf7'%3EL%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/tailwind-output.css" />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="nav" id="nav">
+      <div class="wrap nav__inner">
+        <a class="brand" href="index.html">
+          <span class="brand__mark" aria-hidden="true">L</span>
+          <span>Ledgr</span>
+        </a>
+        <nav class="nav__links" aria-label="Primary">
+          <a href="index.html#platform">Platform</a>
+          <a href="resources.html">Resources</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="accountants.html">Accountants</a>
+          <a href="reviews.html">Reviews</a>
+        </nav>
+        <div class="nav__cta">
+          <a class="btn btn--dark" href="#signin">Sign in</a>
+          <a class="btn btn--primary" href="#waitlist">Join the waitlist</a>
+        </div>
+      </div>
+    </header>
+
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <div class="wrap crumbs__inner">
+        <ol>
+          <li>
+            <a href="index.html" class="crumbs__home">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></svg>
+              Ledgr
+            </a>
+          </li>
+          <li><a href="index.html#platform">Platform</a></li>
+          <li aria-current="page">Extractor</li>
+        </ol>
+      </div>
+    </nav>
+
+    <main>
+      <!-- ============================================================
+           Hero
+           ============================================================ -->
+      <section class="page-hero">
+        <div class="max-w-7xl mx-auto px-6">
+          <span class="eyebrow reveal">Extractor</span>
+          <h1 class="display reveal" style="margin-top:18px">
+            Push your books exactly <em>where they need to go.</em>
+          </h1>
+          <p class="lede reveal" style="--d:80ms">
+            Trial balance, general ledger, source documents and VAT packs —
+            on a schedule you set, to the destinations your firm and your
+            auditors already use. Encrypted, audited, and idempotent.
+          </p>
+          <div class="page-hero__meta reveal" style="--d:120ms">
+            <span>CaseWare · Power BI · Google Sheets · SFTP · S3 · Webhook · Email</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           Destinations
+           ============================================================ -->
+      <section class="tight" style="padding-top:24px">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="section-head reveal">
+            <div>
+              <span class="text-xs uppercase tracking-widest font-semibold text-primary-500">Where to</span>
+              <h2 class="section-title">Eight destinations. One audit trail.</h2>
+            </div>
+            <p class="text-lg text-bg-700 leading-relaxed">Every push is signed, hashed and idempotent. If a run fails, the next attempt picks up exactly where it left off — no duplicate journal entries downstream.</p>
+          </div>
+
+          <div class="dest-grid reveal">
+            <article class="dest is-connected">
+              <div class="dest__head">
+                <span class="dest__mark">CW</span>
+                <span class="dest__name">CaseWare Working Papers</span>
+              </div>
+              <p class="dest__sub">Push trial balance, GL detail and lead sheets into your audit binder, mapped to your firm's chart of accounts.</p>
+              <div class="dest__foot">
+                <span class="status">Connected · audit@khalifa.ae</span>
+                <a href="#schedules">Edit</a>
+              </div>
+            </article>
+
+            <article class="dest is-connected">
+              <div class="dest__head">
+                <span class="dest__mark">PB</span>
+                <span class="dest__name">Microsoft Power BI</span>
+              </div>
+              <p class="dest__sub">Refresh a dataset on schedule. Pre-built semantic model for cash, P&amp;L, A/R aging and VAT position.</p>
+              <div class="dest__foot">
+                <span class="status">Connected · KA-Group workspace</span>
+                <a href="#schedules">Edit</a>
+              </div>
+            </article>
+
+            <article class="dest">
+              <div class="dest__head">
+                <span class="dest__mark">GS</span>
+                <span class="dest__name">Google Sheets</span>
+              </div>
+              <p class="dest__sub">Append rows to a tab on a schedule. Handy for KPI dashboards, board prep, and intercompany matrices.</p>
+              <div class="dest__foot">
+                <span class="status">Not connected</span>
+                <a href="#">Connect</a>
+              </div>
+            </article>
+
+            <article class="dest is-connected">
+              <div class="dest__head">
+                <span class="dest__mark">SF</span>
+                <span class="dest__name">SFTP</span>
+              </div>
+              <p class="dest__sub">Drop CSV, ZIP or XBRL packs into your firm's SFTP. SSH-key auth, rotation reminders, optional PGP encryption.</p>
+              <div class="dest__foot">
+                <span class="status">Connected · sftp.khalifa-ca.ae:22</span>
+                <a href="#schedules">Edit</a>
+              </div>
+            </article>
+
+            <article class="dest">
+              <div class="dest__head">
+                <span class="dest__mark">S3</span>
+                <span class="dest__name">AWS S3 / Azure Blob</span>
+              </div>
+              <p class="dest__sub">Object storage with server-side encryption. Ideal for archival of seven-year source-document evidence.</p>
+              <div class="dest__foot">
+                <span class="status">Not connected</span>
+                <a href="#">Connect</a>
+              </div>
+            </article>
+
+            <article class="dest is-connected">
+              <div class="dest__head">
+                <span class="dest__mark">WH</span>
+                <span class="dest__name">Webhook</span>
+              </div>
+              <p class="dest__sub">Signed JSON to any HTTPS endpoint. Retries with exponential back-off, dead-letter queue on five failures.</p>
+              <div class="dest__foot">
+                <span class="status">Connected · 2 endpoints</span>
+                <a href="#schedules">Edit</a>
+              </div>
+            </article>
+
+            <article class="dest is-connected">
+              <div class="dest__head">
+                <span class="dest__mark">@</span>
+                <span class="dest__name">Email</span>
+              </div>
+              <p class="dest__sub">Attachments to a distribution list. PDF, CSV, and machine-readable IFRS packs. Encrypted ZIP optional.</p>
+              <div class="dest__foot">
+                <span class="status">Connected · 3 recipients</span>
+                <a href="#schedules">Edit</a>
+              </div>
+            </article>
+
+            <article class="dest">
+              <div class="dest__head">
+                <span class="dest__mark">DR</span>
+                <span class="dest__name">Google Drive / OneDrive</span>
+              </div>
+              <p class="dest__sub">Folder sync with versioning. Useful for advisory teams who keep client folders on Drive.</p>
+              <div class="dest__foot">
+                <span class="status">Not connected</span>
+                <a href="#">Connect</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           Schedules
+           ============================================================ -->
+      <section id="schedules">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="section-head reveal">
+            <div>
+              <span class="text-xs uppercase tracking-widest font-semibold text-primary-500">Schedules</span>
+              <h2 class="section-title">Set it once. It runs forever.</h2>
+            </div>
+            <p class="text-lg text-bg-700 leading-relaxed">Each row is a live schedule for the client <strong style="color:var(--ink-1);font-weight:500">Hilal Trading FZ-LLC</strong>. Disable, edit or trigger manually with one click. Run history is at the bottom of this page.</p>
+          </div>
+
+          <div class="schedules reveal">
+            <div class="schedules__head">
+              <span>What goes out</span>
+              <span>Cadence</span>
+              <span>Destination</span>
+              <span>Status</span>
+              <span></span>
+            </div>
+
+            <div class="schedules__row">
+              <div>
+                <div class="title">Trial balance · CSV</div>
+                <div class="sub">Mapped to KA chart of accounts · last-month-end snapshot</div>
+              </div>
+              <div>
+                <div class="cron">Daily · 06:00 GST</div>
+                <div class="sub">Next run in 8h 32m</div>
+              </div>
+              <div>
+                <div class="where">audit@khalifa.ae</div>
+                <div class="sub">CaseWare Working Papers</div>
+              </div>
+              <div><span class="dot-status is-ok">Active</span></div>
+              <button class="btn run-btn" type="button">Run now</button>
+            </div>
+
+            <div class="schedules__row">
+              <div>
+                <div class="title">General ledger · monthly CSV</div>
+                <div class="sub">Full GL detail with reasoning trail · one file per period</div>
+              </div>
+              <div>
+                <div class="cron">Monthly · 1st @ 08:00</div>
+                <div class="sub">Next run · 1 Jun 2026</div>
+              </div>
+              <div>
+                <div class="where">sftp.khalifa-ca.ae:22</div>
+                <div class="sub">/clients/hilal/2026/</div>
+              </div>
+              <div><span class="dot-status is-ok">Active</span></div>
+              <button class="btn run-btn" type="button">Run now</button>
+            </div>
+
+            <div class="schedules__row">
+              <div>
+                <div class="title">VAT pack · quarterly PDF + CSV</div>
+                <div class="sub">VAT 201 draft + supporting transactions + reverse-charge log</div>
+              </div>
+              <div>
+                <div class="cron">Quarterly · T+1 day</div>
+                <div class="sub">Next run · 1 Jul 2026</div>
+              </div>
+              <div>
+                <div class="where">ghada@yasamin.ae</div>
+                <div class="sub">+ 2 more via email</div>
+              </div>
+              <div><span class="dot-status is-ok">Active</span></div>
+              <button class="btn run-btn" type="button">Run now</button>
+            </div>
+
+            <div class="schedules__row">
+              <div>
+                <div class="title">Source documents · weekly ZIP</div>
+                <div class="sub">Receipts, invoices and contracts captured in the period · PGP-encrypted</div>
+              </div>
+              <div>
+                <div class="cron">Weekly · Sun @ 22:00</div>
+                <div class="sub">Next run · 24 May 2026</div>
+              </div>
+              <div>
+                <div class="where">s3://hilal-archive</div>
+                <div class="sub">eu-central-1 · SSE-KMS</div>
+              </div>
+              <div><span class="dot-status">Paused</span></div>
+              <button class="btn run-btn" type="button">Resume</button>
+            </div>
+
+            <div class="schedules__row">
+              <div>
+                <div class="title">Power BI refresh · semantic model</div>
+                <div class="sub">Cash, P&amp;L, A/R aging, VAT position · 7-day rolling window</div>
+              </div>
+              <div>
+                <div class="cron">Daily · 07:30 GST</div>
+                <div class="sub">Next run in 9h 02m</div>
+              </div>
+              <div>
+                <div class="where">KA-Group workspace</div>
+                <div class="sub">Hilal-finance dataset</div>
+              </div>
+              <div><span class="dot-status is-ok">Active</span></div>
+              <button class="btn run-btn" type="button">Run now</button>
+            </div>
+
+            <div class="schedules__row">
+              <div>
+                <div class="title">CT estimate · webhook</div>
+                <div class="sub">Posts JSON whenever the Corporate Tax estimate changes by &gt; AED 5,000</div>
+              </div>
+              <div>
+                <div class="cron">Event-driven</div>
+                <div class="sub">Last fired · 3 days ago</div>
+              </div>
+              <div>
+                <div class="where">api.khalifa.ae/ledgr</div>
+                <div class="sub">HMAC-SHA256 signed</div>
+              </div>
+              <div><span class="dot-status is-ok">Active</span></div>
+              <button class="btn run-btn" type="button">Test</button>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:flex-end;margin-top:16px">
+            <a class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" href="#">
+              New schedule
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           Run history
+           ============================================================ -->
+      <section>
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="section-head reveal">
+            <div>
+              <span class="text-xs uppercase tracking-widest font-semibold text-primary-500">Run history</span>
+              <h2 class="section-title">Audit trail. Replay anything.</h2>
+            </div>
+            <p class="text-lg text-bg-700 leading-relaxed">Every run is hashed and signed. Re-running the same payload produces the same result downstream — schedules are idempotent by design.</p>
+          </div>
+
+          <div class="runs reveal">
+            <div class="runs__row">
+              <span>When</span>
+              <span>What</span>
+              <span>Where</span>
+              <span>Size</span>
+              <span></span>
+            </div>
+
+            <div class="runs__row">
+              <span class="when">21 May 06:00</span>
+              <span class="what">Trial balance · 21 May snapshot</span>
+              <span class="when">audit@khalifa.ae · CaseWare</span>
+              <span class="size">1.4 MB</span>
+              <span class="ok">200 OK</span>
+            </div>
+            <div class="runs__row">
+              <span class="when">21 May 07:30</span>
+              <span class="what">Power BI refresh · 7-day rolling</span>
+              <span class="when">KA-Group · Hilal-finance</span>
+              <span class="size">3.2 MB</span>
+              <span class="ok">200 OK</span>
+            </div>
+            <div class="runs__row">
+              <span class="when">20 May 06:00</span>
+              <span class="what">Trial balance · 20 May snapshot</span>
+              <span class="when">audit@khalifa.ae · CaseWare</span>
+              <span class="size">1.4 MB</span>
+              <span class="ok">200 OK</span>
+            </div>
+            <div class="runs__row">
+              <span class="when">19 May 14:08</span>
+              <span class="what">CT estimate change · AED 19,840</span>
+              <span class="when">api.khalifa.ae/ledgr</span>
+              <span class="size">2 KB</span>
+              <span class="ok">202 OK</span>
+            </div>
+            <div class="runs__row">
+              <span class="when">17 May 22:00</span>
+              <span class="what">Source documents · week 20 archive</span>
+              <span class="when">s3://hilal-archive · 2026/W20</span>
+              <span class="size">48.6 MB</span>
+              <span class="ok">200 OK</span>
+            </div>
+            <div class="runs__row">
+              <span class="when">1 May 08:00</span>
+              <span class="what">General ledger · April</span>
+              <span class="when">sftp.khalifa-ca.ae:22</span>
+              <span class="size">8.1 MB</span>
+              <span class="ok">200 OK</span>
+            </div>
+            <div class="runs__row">
+              <span class="when">1 Apr 08:00</span>
+              <span class="what">VAT pack · Q1 2026</span>
+              <span class="when">ghada@yasamin.ae · email</span>
+              <span class="size">2.3 MB</span>
+              <span class="ok">200 OK</span>
+            </div>
+          </div>
+
+          <p class="muted reveal" style="margin-top:16px;font-size:12.5px;max-width:60ch">
+            Runs are kept for seven years to satisfy the FTA record-keeping
+            requirement. Older runs are still indexed and searchable; their
+            payloads remain encrypted at rest.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           Field mapping callout
+           ============================================================ -->
+      <section>
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="principles reveal">
+            <article class="principle">
+              <h3>Mapped to your chart of accounts.</h3>
+              <p>
+                Your firm imports its master chart once. Every client export
+                is mapped through it on the way out, so what lands in
+                CaseWare and Power BI looks like everything else in your
+                book — same codes, same hierarchies, same lead-sheet refs.
+              </p>
+            </article>
+            <article class="principle">
+              <h3>Idempotent by design.</h3>
+              <p>
+                Each payload carries a deterministic content hash. Re-running
+                a schedule against the same period produces the same output;
+                consumers downstream upsert by hash and never duplicate. You
+                can replay an entire month safely if a destination was down.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           Closing CTA
+           ============================================================ -->
+      <section class="cta">
+        <div class="wrap between" style="align-items:flex-start;gap:32px;flex-wrap:wrap">
+          <div style="max-width:540px">
+            <span class="text-xs uppercase tracking-widest font-semibold text-primary-500" style="color:color-mix(in srgb,var(--paper) 70%,transparent)">For firms</span>
+            <h2 style="margin-top:18px">Wire your books into your firm's stack.</h2>
+            <p>The Extractor is included on the Accountant Portal and on the Scale plan. Need a destination we haven't built yet? Email and we'll prioritise it.</p>
+          </div>
+          <div class="cta__ctas">
+            <a class="btn btn--lg" href="accountants.html#apply">Apply to partner</a>
+            <a class="btn btn--lg btn--ghost" href="mailto:ceo@theupcapital.com?subject=Ledgr%20extractor%20destination%20request">Request a destination</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="foot__grid">
+          <div>
+            <a class="brand" href="index.html">
+              <span class="brand__mark" aria-hidden="true">L</span>
+              <span>Ledgr</span>
+            </a>
+            <p class="foot__brand">The autonomous finance function for every UAE business. Built in Dubai. Licensed in the DIFC.</p>
+          </div>
+          <div class="foot__col">
+            <h4>Platform</h4>
+            <a href="index.html#platform">Books</a>
+            <a href="index.html#platform">VAT</a>
+            <a href="index.html#platform">Corporate Tax</a>
+            <a href="index.html#platform">Payroll &amp; WPS</a>
+            <a href="extractor.html">Extractor</a>
+          </div>
+          <div class="foot__col">
+            <h4>Company</h4>
+            <a href="accountants.html">Accountants</a>
+            <a href="reviews.html">Firm reviews</a>
+            <a href="customers.html">Customers</a>
+            <a href="security.html">Security &amp; trust</a>
+            <a href="onboarding.html">Onboarding</a>
+            <a href="app.html">Live dashboard</a>
+          </div>
+          <div class="foot__col">
+            <h4>Resources</h4>
+            <a href="resources.html">All guides</a>
+            <a href="calculator.html">FTA readiness check</a>
+            <a href="guide-e-invoicing.html">E-invoicing guide</a>
+            <a href="pricing.html">Pricing</a>
+          </div>
+          <div class="foot__col">
+            <h4>Legal</h4>
+            <a href="#">Terms</a>
+            <a href="#">Privacy</a>
+            <a href="#">DPA</a>
+          </div>
+        </div>
+        <div class="foot__bar">
+          <span>© 2026 Ledgr Technologies Ltd. All rights reserved.</span>
+          <span>Made in Dubai · ledgr.ae</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/app.js" defer></script>
+  </body>
+</html>

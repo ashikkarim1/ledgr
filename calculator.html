@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Ledgr · FTA Readiness Check — Free in 90 seconds</title>
+    <meta name="description" content="A free, instant check on where your UAE business stands with Corporate Tax, VAT and the FTA e-invoicing mandate. Six questions, one report." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='-apple-system,sans-serif' font-size='17' font-weight='600' fill='%23fbfaf7'%3EL%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/tailwind-output.css" />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="nav" id="nav">
+      <div class="wrap nav__inner">
+        <a class="brand" href="index.html">
+          <span class="brand__mark" aria-hidden="true">L</span>
+          <span>Ledgr</span>
+        </a>
+        <nav class="nav__links" aria-label="Primary">
+          <a href="index.html#platform">Platform</a>
+          <a href="resources.html">Resources</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="accountants.html">Accountants</a>
+          <a href="reviews.html">Reviews</a>
+        </nav>
+        <div class="nav__cta">
+          <a class="btn btn--primary" href="#signin">Sign in</a>
+          <a class="btn btn--primary" href="#waitlist">Join the waitlist</a>
+        </div>
+      </div>
+    </header>
+
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <div class="wrap crumbs__inner">
+        <ol>
+          <li>
+            <a href="index.html" class="crumbs__home">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></svg>
+              Ledgr
+            </a>
+          </li>
+          <li><a href="resources.html">Resources</a></li>
+          <li aria-current="page">FTA readiness check</li>
+        </ol>
+      </div>
+    </nav>
+
+    <main>
+      <section class="page-hero">
+        <div class="max-w-7xl mx-auto px-6">
+          <span class="eyebrow reveal">Free check · 90 seconds</span>
+          <h1 class="display reveal" style="margin-top:18px">
+            Where do you stand with the FTA, <em>really?</em>
+          </h1>
+          <p class="lede reveal" style="--d:80ms">
+            Six questions. A personalised report on your Corporate Tax,
+            VAT, and e-invoicing exposure for FY26 and FY27. No card,
+            no signup until the very last step.
+          </p>
+        </div>
+      </section>
+
+      <section class="tight" style="padding-top:16px">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="wizard reveal" id="wizard">
+            <aside class="wizard__rail">
+              <span class="wizard__title">FTA readiness check</span>
+              <div>
+                <div class="wizard__progress" id="wz-progress">Step 1 of 6 · 17%</div>
+                <div class="wizard__bar" aria-hidden="true"><span id="wz-bar" style="width:17%"></span></div>
+              </div>
+
+              <div class="wizard__steps" id="wz-steps">
+                <div class="wizard__step is-active" data-step="0">
+                  <span class="num">1</span><span class="label">Entity &amp; jurisdiction</span>
+                </div>
+                <div class="wizard__step" data-step="1">
+                  <span class="num">2</span><span class="label">Annual revenue</span>
+                </div>
+                <div class="wizard__step" data-step="2">
+                  <span class="num">3</span><span class="label">VAT position</span>
+                </div>
+                <div class="wizard__step" data-step="3">
+                  <span class="num">4</span><span class="label">Team &amp; payroll</span>
+                </div>
+                <div class="wizard__step" data-step="4">
+                  <span class="num">5</span><span class="label">E-invoicing readiness</span>
+                </div>
+                <div class="wizard__step" data-step="5">
+                  <span class="num">6</span><span class="label">Your report</span>
+                </div>
+              </div>
+
+              <div class="wizard__legal">
+                Your answers stay in your browser until you choose to share
+                them. The full report is emailed only when you ask for it.
+              </div>
+            </aside>
+
+            <div class="wizard__body">
+              <!-- Step 1 — Entity -->
+              <section class="wizard__pane is-active" data-pane="0">
+                <div class="wizard__head">
+                  <h2>Where is your entity registered?</h2>
+                  <p>This drives the Free-zone QFZP test, ESR scope, and which FTA agent network we route you to.</p>
+                </div>
+
+                <div class="choice-grid" role="radiogroup">
+                  <label class="choice"><input type="radio" name="entity" value="mainland" /><span class="choice__title">Dubai mainland</span><span class="choice__sub">DED-licensed · onshore operations</span></label>
+                  <label class="choice"><input type="radio" name="entity" value="ad-mainland" /><span class="choice__title">Abu Dhabi mainland</span><span class="choice__sub">ADDED-licensed · onshore operations</span></label>
+                  <label class="choice"><input type="radio" name="entity" value="freezone" /><span class="choice__title">Free zone (IFZA, DMCC, etc.)</span><span class="choice__sub">QFZP test applies · 0% on qualifying income</span></label>
+                  <label class="choice"><input type="radio" name="entity" value="financial-fz" /><span class="choice__title">DIFC or ADGM</span><span class="choice__sub">Financial free zone · independent regulator</span></label>
+                </div>
+
+                <div class="wizard__foot">
+                  <span class="meta">Question 1 of 6</span>
+                  <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" data-next>
+                    Continue
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                  </button>
+                </div>
+              </section>
+
+              <!-- Step 2 — Revenue -->
+              <section class="wizard__pane" data-pane="1">
+                <div class="wizard__head">
+                  <h2>What is your trailing-twelve-month revenue?</h2>
+                  <p>Drives Small Business Relief eligibility (AED 3M threshold) and your CT exposure.</p>
+                </div>
+
+                <div class="choice-grid" role="radiogroup">
+                  <label class="choice"><input type="radio" name="revenue" value="under-375k" /><span class="choice__title">Under AED 375k</span><span class="choice__sub">Below CT bracket · 0% on profit</span></label>
+                  <label class="choice"><input type="radio" name="revenue" value="375k-3m" /><span class="choice__title">AED 375k – 3M</span><span class="choice__sub">Potentially SBR-eligible until 31 Dec 2026</span></label>
+                  <label class="choice"><input type="radio" name="revenue" value="3m-10m" /><span class="choice__title">AED 3M – 10M</span><span class="choice__sub">Above SBR · standard 9% CT</span></label>
+                  <label class="choice"><input type="radio" name="revenue" value="over-10m" /><span class="choice__title">Above AED 10M</span><span class="choice__sub">9% CT · large taxpayer e-invoicing</span></label>
+                </div>
+
+                <div class="wizard__foot">
+                  <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" data-prev>Back</button>
+                  <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" data-next>
+                    Continue
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                  </button>
+                </div>
+              </section>
+
+              <!-- Step 3 — VAT -->
+              <section class="wizard__pane" data-pane="2">
+                <div class="wizard__head">
+                  <h2>Where are you with VAT?</h2>
+                  <p>Mandatory if your taxable supplies cross AED 375k. Voluntary from AED 187.5k.</p>
+                </div>
+
+                <div class="choice-grid" role="radiogroup">
+                  <label class="choice"><input type="radio" name="vat" value="registered-current" /><span class="choice__title">Registered &amp; on time</span><span class="choice__sub">Filing every quarter, no penalties pending</span></label>
+                  <label class="choice"><input type="radio" name="vat" value="registered-late" /><span class="choice__title">Registered, fallen behind</span><span class="choice__sub">One or more late filings in the last 12 months</span></label>
+                  <label class="choice"><input type="radio" name="vat" value="should-register" /><span class="choice__title">Should be — not yet</span><span class="choice__sub">Crossed the threshold but not registered</span></label>
+                  <label class="choice"><input type="radio" name="vat" value="not-required" /><span class="choice__title">Below threshold</span><span class="choice__sub">No VAT obligation at the moment</span></label>
+                </div>
+
+                <div class="wizard__foot">
+                  <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" data-prev>Back</button>
+                  <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" data-next>
+                    Continue
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                  </button>
+                </div>
+              </section>
+
+              <!-- Step 4 — Payroll -->
+              <section class="wizard__pane" data-pane="3">
+                <div class="wizard__head">
+                  <h2>How many employees do you pay through WPS?</h2>
+                  <p>WPS is mandatory for almost every mainland and free-zone entity that employs UAE residents.</p>
+                </div>
+
+                <div class="choice-grid choice-grid--3" role="radiogroup">
+                  <label class="choice"><input type="radio" name="payroll" value="none" /><span class="choice__title">No staff yet</span><span class="choice__sub">Solo founder</span></label>
+                  <label class="choice"><input type="radio" name="payroll" value="1-10" /><span class="choice__title">1 – 10</span><span class="choice__sub">Single SIF file each month</span></label>
+                  <label class="choice"><input type="radio" name="payroll" value="11-50" /><span class="choice__title">11 – 50</span><span class="choice__sub">Gratuity tracking matters</span></label>
+                  <label class="choice"><input type="radio" name="payroll" value="50-plus" /><span class="choice__title">50+</span><span class="choice__sub">EOSB, leave accruals, multi-entity</span></label>
+                </div>
+
+                <div class="wizard__foot">
+                  <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" data-prev>Back</button>
+                  <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" data-next>
+                    Continue
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                  </button>
+                </div>
+              </section>
+
+              <!-- Step 5 — E-invoicing -->
+              <section class="wizard__pane" data-pane="4">
+                <div class="wizard__head">
+                  <h2>Are you ready for e-invoicing?</h2>
+                  <p>Phase 1 begins July 2026 for large taxpayers. Phase 2 covers every VAT-registered SME by Q1 2027.</p>
+                </div>
+
+                <div class="choice-grid" role="radiogroup">
+                  <label class="choice"><input type="radio" name="einv" value="ready" /><span class="choice__title">Ready &amp; Peppol-connected</span><span class="choice__sub">Endpoint provisioned, tested</span></label>
+                  <label class="choice"><input type="radio" name="einv" value="in-progress" /><span class="choice__title">Working on it</span><span class="choice__sub">Vendor selected, implementing</span></label>
+                  <label class="choice"><input type="radio" name="einv" value="aware" /><span class="choice__title">Aware, no plan yet</span><span class="choice__sub">Need help scoping</span></label>
+                  <label class="choice"><input type="radio" name="einv" value="unaware" /><span class="choice__title">First I'm hearing of it</span><span class="choice__sub">We'll walk you through it</span></label>
+                </div>
+
+                <div class="wizard__foot">
+                  <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" data-prev>Back</button>
+                  <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" data-next id="wz-finish">
+                    See my report
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                  </button>
+                </div>
+              </section>
+
+              <!-- Step 6 — Result -->
+              <section class="wizard__pane" data-pane="5">
+                <div class="wizard__head">
+                  <h2 id="result-title">Your FTA readiness report</h2>
+                  <p id="result-sub">Based on your answers, here's where your business stands across the four obligations. Email the full PDF to yourself at the bottom.</p>
+                </div>
+
+                <div class="result" id="result">
+                  <div class="result__score">
+                    <div class="result__ring" id="result-ring" style="--pct:78">
+                      <div class="result__ring-inner">
+                        <div class="result__num" id="result-num">78<small>/100</small></div>
+                      </div>
+                    </div>
+                    <span class="result__band" id="result-band">SOLID — minor gaps</span>
+                    <span class="result__label">Readiness score</span>
+                  </div>
+
+                  <div class="result__findings" id="result-findings"><!-- rendered by JS --></div>
+                </div>
+
+                <div style="margin-top:20px;border-top:1px solid var(--line);padding-top:24px">
+                  <h3 style="font-size:17px;letter-spacing:-0.015em;color:var(--ink-1);margin-bottom:8px">Email me the full PDF report</h3>
+                  <p style="font-size:13.5px;color:var(--ink-3);margin-bottom:14px;line-height:1.55">Includes a step-by-step action plan, indicative penalty exposure for each gap, and an introduction to a UAE-licensed chartered accountant who can fix the gaps for you. We'll only email you about this report.</p>
+
+                  <form
+                    id="result-form"
+                    method="POST"
+                    action="https://formsubmit.co/ceo@theupcapital.com"
+                    style="display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end"
+                  >
+                    <input type="hidden" name="_subject" value="New Ledgr readiness report request" />
+                    <input type="hidden" name="_template" value="table" />
+                    <input type="hidden" name="_captcha" value="false" />
+                    <input type="hidden" name="answers" id="hidden-answers" />
+                    <input type="hidden" name="score" id="hidden-score" />
+                    <div class="honeypot" aria-hidden="true">
+                      <label>Don't fill this out: <input name="company-website" tabindex="-1" autocomplete="off" /></label>
+                    </div>
+
+                    <div class="field" style="min-width:0">
+                      <label class="field__label" for="r-name">Your name</label>
+                      <input class="input" id="r-name" name="name" type="text" required autocomplete="name" placeholder="Sara Al Mansoori" />
+                    </div>
+                    <div class="field" style="min-width:0">
+                      <label class="field__label" for="r-email">Work email</label>
+                      <input class="input" id="r-email" name="email" type="email" required autocomplete="email" placeholder="sara@yourcompany.ae" />
+                    </div>
+                    <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="submit" style="height:42px">
+                      Email me the report
+                    </button>
+                  </form>
+
+                  <div id="result-thanks" style="display:none;margin-top:18px;padding:16px 18px;border-radius:var(--radius);background:var(--accent-soft);color:var(--accent-2);font-size:14px;line-height:1.55"></div>
+                </div>
+
+                <div class="wizard__foot">
+                  <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" data-prev>Back</button>
+                  <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" id="wz-restart">Start over</button>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <p class="muted reveal" style="font-size:12px;margin-top:16px;max-width:60ch">
+            The report is an indicative readiness check, not formal tax
+            advice. Any filing decisions should be reviewed with a
+            UAE-licensed chartered accountant — we'll happily introduce
+            you to one.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="section-head reveal">
+            <div>
+              <span class="text-xs uppercase tracking-widest font-semibold text-primary-500">Built on the source</span>
+              <h2 class="section-title">The same rules our agents use, distilled into six questions.</h2>
+            </div>
+            <p class="text-lg text-bg-700 leading-relaxed">
+              Behind the wizard sits the same compliance engine that powers
+              the Ledgr product — driven by the FTA's published rules,
+              Cabinet Decisions, and Public Clarifications, and updated
+              weekly by our team.
+            </p>
+          </div>
+
+          <div class="principles reveal">
+            <article class="principle">
+              <h3>Cited every time.</h3>
+              <p>Every finding links to the exact FTA Public Clarification, Cabinet Decision or VAT Law article it relies on, so your accountant can verify in seconds.</p>
+            </article>
+            <article class="principle">
+              <h3>Updated weekly.</h3>
+              <p>When the FTA changes a rate, threshold or deadline, the calculator updates the same day. The version stamp at the foot of every PDF tells you exactly when it was generated.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="foot__grid">
+          <div>
+            <a class="brand" href="index.html">
+              <span class="brand__mark" aria-hidden="true">L</span>
+              <span>Ledgr</span>
+            </a>
+            <p class="foot__brand">The autonomous finance function for every UAE business. Built in Dubai. Licensed in the DIFC.</p>
+          </div>
+          <div class="foot__col">
+            <h4>Platform</h4>
+            <a href="index.html#platform">Books</a>
+            <a href="index.html#platform">VAT</a>
+            <a href="index.html#platform">Corporate Tax</a>
+            <a href="index.html#platform">Payroll &amp; WPS</a>
+            <a href="extractor.html">Extractor</a>
+          </div>
+          <div class="foot__col">
+            <h4>Resources</h4>
+            <a href="resources.html">All guides</a>
+            <a href="calculator.html">FTA readiness check</a>
+            <a href="guide-e-invoicing.html">E-invoicing guide</a>
+            <a href="pricing.html">Pricing</a>
+          </div>
+          <div class="foot__col">
+            <h4>Company</h4>
+            <a href="accountants.html">Accountants programme</a>
+            <a href="reviews.html">Firm reviews</a>
+            <a href="customers.html">Customers</a>
+            <a href="security.html">Security &amp; trust</a>
+          </div>
+          <div class="foot__col">
+            <h4>Legal</h4>
+            <a href="#">Terms</a>
+            <a href="#">Privacy</a>
+            <a href="#">DPA</a>
+          </div>
+        </div>
+        <div class="foot__bar">
+          <span>© 2026 Ledgr Technologies Ltd. All rights reserved.</span>
+          <span>Made in Dubai · ledgr.ae</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/app.js" defer></script>
+    <script src="assets/calculator.js" defer></script>
+  </body>
+</html>

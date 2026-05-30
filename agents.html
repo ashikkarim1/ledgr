@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f9f9f9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0b0e" media="(prefers-color-scheme: dark)" />
+    <title>AI Financial Agents — Ledgr</title>
+    <meta name="description" content="Meet Ledgr's AI finance team: Financial Director, Accounting Manager, Document Processor, Bank Verifier, Tax Specialist, and Regulatory Filer. Supervised by chartered accountants." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='-apple-system,sans-serif' font-size='17' font-weight='600' fill='%23fbfaf7'%3EL%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/tailwind-output.css" />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <style>
+      /* Agents Page Styles */
+      .agents-hero {
+        padding: 80px 40px;
+        background: linear-gradient(135deg, #f9f9f9 0%, #fafafa 100%);
+      }
+      
+      .agents-hero__inner {
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      
+      .agents-hero h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 700;
+        margin: 0 0 24px 0;
+        color: var(--ink-1);
+        line-height: 1.2;
+      }
+      
+      .agents-hero p {
+        font-size: clamp(16px, 2vw, 18px);
+        color: var(--ink-2);
+        line-height: 1.7;
+        margin: 0 0 40px 0;
+      }
+      
+      .agents-hero__ctas {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      
+      /* Agents Grid */
+      .agents-section {
+        padding: 80px 40px;
+        background: var(--paper);
+      }
+      
+      .agents-section__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      
+      .agents-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+      
+      .agents-header h2 {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 700;
+        margin: 0 0 16px 0;
+        color: var(--ink-1);
+      }
+      
+      .agents-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 28px;
+        margin-bottom: 80px;
+      }
+      
+      .agent-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 40px 32px;
+        text-align: center;
+        transition: all 0.3s var(--ease);
+        cursor: pointer;
+        position: relative;
+      }
+      
+      .agent-card:hover {
+        border-color: var(--accent);
+        box-shadow: 0 8px 24px rgba(255, 92, 0, 0.08);
+        transform: translateY(-4px);
+      }
+      
+      .agent-icon {
+        font-size: 48px;
+        margin-bottom: 16px;
+      }
+      
+      .agent-card h3 {
+        font-size: 20px;
+        font-weight: 700;
+        margin: 0 0 12px 0;
+        color: var(--ink-1);
+      }
+      
+      .agent-card p {
+        font-size: 14px;
+        color: var(--ink-2);
+        line-height: 1.6;
+        margin: 0;
+      }
+      
+      /* Demos Section */
+      .demos-section {
+        background: var(--surface);
+        padding: 80px 40px;
+      }
+      
+      .demos-section__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      
+      .demos-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+      
+      .demos-header h2 {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 700;
+        margin: 0 0 16px 0;
+        color: var(--ink-1);
+      }
+      
+      .demos-header p {
+        font-size: 16px;
+        color: var(--ink-2);
+        line-height: 1.6;
+        margin: 0;
+      }
+      
+      /* Sector Tabs */
+      .sector-tabs {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 40px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      
+      .sector-tab {
+        padding: 10px 20px;
+        border: 2px solid var(--line);
+        background: var(--paper);
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--ink-2);
+        cursor: pointer;
+        transition: all 0.3s var(--ease);
+      }
+      
+      .sector-tab:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      
+      .sector-tab.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      
+      /* Demo Content */
+      .demo-content {
+        background: var(--paper);
+        border-radius: 12px;
+        padding: 40px;
+        display: none;
+        animation: fadeIn 0.4s var(--ease);
+      }
+      
+      .demo-content.active {
+        display: block;
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      
+      .demo-content h3 {
+        font-size: 24px;
+        font-weight: 700;
+        margin: 0 0 32px 0;
+        color: var(--ink-1);
+      }
+      
+      .demo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 32px;
+      }
+      
+      .demo-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 28px;
+      }
+      
+      .demo-card h4 {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--ink-2);
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        margin: 0 0 12px 0;
+      }
+      
+      .demo-card p {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--ink-1);
+        margin: 0 0 12px 0;
+      }
+      
+      .demo-card .metric {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--accent);
+        margin: 0;
+      }
+      
+      .demo-features {
+        margin-top: 24px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+      }
+      
+      .demo-features h5 {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ink-2);
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        margin: 0 0 12px 0;
+      }
+      
+      .demo-features ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      
+      .demo-features li {
+        font-size: 13px;
+        color: var(--ink-2);
+        line-height: 1.6;
+        margin-bottom: 8px;
+      }
+      
+      .demo-features li:before {
+        content: "✓ ";
+        color: var(--accent);
+        font-weight: 700;
+        margin-right: 6px;
+      }
+      
+      /* CTA Section */
+      .agents-cta {
+        padding: 80px 40px;
+        background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+        text-align: center;
+      }
+      
+      .agents-cta__inner {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      
+      .agents-cta h2 {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 700;
+        margin: 0 0 24px 0;
+        color: white;
+      }
+      
+      .agents-cta p {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.6;
+        margin: 0 0 32px 0;
+      }
+      
+      .agents-cta__buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main" class="skip">Skip to content</a>
+
+    <header class="nav" id="nav">
+      <div class="wrap nav__inner">
+        <a class="brand" href="index.html">
+          <span class="brand__mark" aria-hidden="true">L</span>
+          <span>Ledgr</span>
+        </a>
+
+        <nav class="nav__links" aria-label="Primary">
+          <a href="index.html#platform">Platform</a>
+          <a href="agents.html" style="color: #FF5C00; font-weight: 600;">AI Agents</a>
+          <a href="resources.html">Resources</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="accountants.html">Accountants</a>
+          <a href="reviews.html">Reviews</a>
+        </nav>
+
+        <div class="nav__cta">
+          <a class="btn btn--dark" href="#signin">Sign in</a>
+          <a class="btn btn--primary" href="#waitlist">Join the waitlist</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- Hero Section -->
+      <section class="agents-hero">
+        <div class="agents-hero__inner">
+          <h1>Your AI Finance Team</h1>
+          <p>Six AI specialists working 24/7 to handle your accounting, billing, reconciliation, and tax compliance. Like having a full finance department that never sleeps—supervised by real chartered accountants.</p>
+          <div class="agents-hero__ctas">
+            <a class="btn btn--primary" href="#demos">See Your Team In Action</a>
+            <a class="btn btn--dark" href="#waitlist">Schedule Demo</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Agents Grid -->
+      <section class="agents-section">
+        <div class="agents-section__inner">
+          <div class="agents-header">
+            <h2>Your Finance Team</h2>
+          </div>
+          
+          <div class="agents-grid">
+            <div class="agent-card" data-agent="financial-director">
+              <div class="agent-icon">💰</div>
+              <h3>Financial Director</h3>
+              <p>Cash flow planning, budgets, and financial reports for leadership decisions</p>
+            </div>
+            
+            <div class="agent-card" data-agent="accounting-manager">
+              <div class="agent-icon">📊</div>
+              <h3>Accounting Manager</h3>
+              <p>Day-to-day bookkeeping, expense tracking, and financial control</p>
+            </div>
+            
+            <div class="agent-card" data-agent="document-processor">
+              <div class="agent-icon">📸</div>
+              <h3>Document Processor</h3>
+              <p>Reads invoices and receipts from email, phone, or any format instantly</p>
+            </div>
+            
+            <div class="agent-card" data-agent="bank-verifier">
+              <div class="agent-icon">✓</div>
+              <h3>Bank Verifier</h3>
+              <p>Matches your bank statements to your records automatically</p>
+            </div>
+            
+            <div class="agent-card" data-agent="tax-specialist">
+              <div class="agent-icon">⚖️</div>
+              <h3>Tax Specialist</h3>
+              <p>Calculates VAT, corporate tax, and tracks compliance requirements</p>
+            </div>
+            
+            <div class="agent-card" data-agent="regulatory-filer">
+              <div class="agent-icon">📋</div>
+              <h3>Regulatory Filer</h3>
+              <p>Files returns to FTA, MoF, and other agencies on schedule</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Demos Section -->
+      <section class="demos-section" id="demos">
+        <div class="demos-section__inner">
+          <div class="demos-header">
+            <h2>Your AI Team In Action</h2>
+            <p>See how our team handles finance operations across different business types.</p>
+          </div>
+          
+          <div class="sector-tabs">
+            <button class="sector-tab active" data-sector="professional-services">Professional Services</button>
+            <button class="sector-tab" data-sector="ecommerce">eCommerce & Retail</button>
+            <button class="sector-tab" data-sector="manufacturing">Manufacturing</button>
+            <button class="sector-tab" data-sector="healthcare">Healthcare</button>
+            <button class="sector-tab" data-sector="food-beverage">Food & Beverage</button>
+          </div>
+          
+          <!-- Professional Services Demo -->
+          <div class="demo-content active" data-sector="professional-services">
+            <h3>Professional Services</h3>
+            <div class="demo-grid">
+              <div class="demo-card">
+                <h4>Time to Close</h4>
+                <p class="metric">2 days</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">vs. 7 days manual</p>
+              </div>
+              <div class="demo-card">
+                <h4>Billing Accuracy</h4>
+                <p class="metric">99.8%</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">with AI validation</p>
+              </div>
+              <div class="demo-card">
+                <h4>Days to Collect Payment</h4>
+                <p class="metric">-8 days</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">faster customer payments</p>
+              </div>
+              <div class="demo-card">
+                <h4>Monthly Invoices</h4>
+                <p class="metric">450+</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">processed automatically</p>
+              </div>
+            </div>
+            <div style="margin-top: 32px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px;">
+              <h4 style="font-size: 14px; font-weight: 600; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.8px; margin: 0 0 16px 0;">Primary Agents in Use</h4>
+              <p style="margin: 0; font-size: 15px; color: var(--ink-1); line-height: 1.8;">
+                <span style="color: var(--accent); font-weight: 600;">Document Processor:</span> Reads invoices from Zoho, email, and custom portals automatically
+                <br><span style="color: var(--accent); font-weight: 600;">Accounting Manager:</span> Tracks project costs and work-in-progress
+                <br><span style="color: var(--accent); font-weight: 600;">Bank Verifier:</span> Matches bank deposits to customer payments
+                <br><span style="color: var(--accent); font-weight: 600;">Tax Specialist:</span> Handles VAT on fixed-price and time-based work
+              </p>
+            </div>
+          </div>
+          
+          <!-- eCommerce Demo -->
+          <div class="demo-content" data-sector="ecommerce">
+            <h3>eCommerce & Retail</h3>
+            <div class="demo-grid">
+              <div class="demo-card">
+                <h4>Daily Reconciliation</h4>
+                <p class="metric">Same Day</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">multi-channel sales</p>
+              </div>
+              <div class="demo-card">
+                <h4>Transaction Processing</h4>
+                <p class="metric">10K+</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">daily automated</p>
+              </div>
+              <div class="demo-card">
+                <h4>Inventory Accuracy</h4>
+                <p class="metric">99.5%</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">with automatic inventory costs</p>
+              </div>
+              <div class="demo-card">
+                <h4>VAT Compliance</h4>
+                <p class="metric">Real-Time</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">cross-border tracking</p>
+              </div>
+            </div>
+            <div style="margin-top: 32px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px;">
+              <h4 style="font-size: 14px; font-weight: 600; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.8px; margin: 0 0 16px 0;">Primary Agents in Use</h4>
+              <p style="margin: 0; font-size: 15px; color: var(--ink-1); line-height: 1.8;">
+                <span style="color: var(--accent); font-weight: 600;">Document Processor:</span> Reads sales data from POS, marketplaces, and returns automatically
+                <br><span style="color: var(--accent); font-weight: 600;">Accounting Manager:</span> Records daily sales, inventory changes, and expenses
+                <br><span style="color: var(--accent); font-weight: 600;">Bank Verifier:</span> Matches payments from all sales channels to bank deposits
+                <br><span style="color: var(--accent); font-weight: 600;">Tax Specialist:</span> Handles VAT across different countries and regions
+              </p>
+            </div>
+          </div>
+          
+          <!-- Manufacturing Demo -->
+          <div class="demo-content" data-sector="manufacturing">
+            <h3>Manufacturing</h3>
+            <div class="demo-grid">
+              <div class="demo-card">
+                <h4>Production Cost Tracking</h4>
+                <p class="metric">99.2%</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">job costing accuracy</p>
+              </div>
+              <div class="demo-card">
+                <h4>Purchase Order Processing</h4>
+                <p class="metric">100% Orders Verified</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">fully automated</p>
+              </div>
+              <div class="demo-card">
+                <h4>Cash Cycle Improvement</h4>
+                <p class="metric">-15 days</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">faster payables</p>
+              </div>
+              <div class="demo-card">
+                <h4>Cost Comparison</h4>
+                <p class="metric">Weekly</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">automatic weekly reports</p>
+              </div>
+            </div>
+            <div style="margin-top: 32px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px;">
+              <h4 style="font-size: 14px; font-weight: 600; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.8px; margin: 0 0 16px 0;">Primary Agents in Use</h4>
+              <p style="margin: 0; font-size: 15px; color: var(--ink-1); line-height: 1.8;">
+                <span style="color: var(--accent); font-weight: 600;">Document Processor:</span> Reads supplier invoices and customs documents automatically
+                <br><span style="color: var(--accent); font-weight: 600;">Accounting Manager:</span> Tracks production costs and allocates expenses
+                <br><span style="color: var(--accent); font-weight: 600;">Bank Verifier:</span> Verifies supplier payments and cost discrepancies
+                <br><span style="color: var(--accent); font-weight: 600;">Financial Director:</span> Plans cash flow based on production schedules
+              </p>
+            </div>
+          </div>
+          
+          <!-- Healthcare Demo -->
+          <div class="demo-content" data-sector="healthcare">
+            <h3>Healthcare</h3>
+            <div class="demo-grid">
+              <div class="demo-card">
+                <h4>Patient Billing</h4>
+                <p class="metric">98.7%</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">first-time accuracy</p>
+              </div>
+              <div class="demo-card">
+                <h4>Insurance Claims</h4>
+                <p class="metric">85%</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">automatic processing</p>
+              </div>
+              <div class="demo-card">
+                <h4>Collection Rate</h4>
+                <p class="metric">+12%</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">vs. manual</p>
+              </div>
+              <div class="demo-card">
+                <h4>Compliance Audits</h4>
+                <p class="metric">Continuous</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">real-time monitoring</p>
+              </div>
+            </div>
+            <div style="margin-top: 32px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px;">
+              <h4 style="font-size: 14px; font-weight: 600; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.8px; margin: 0 0 16px 0;">Primary Agents in Use</h4>
+              <p style="margin: 0; font-size: 15px; color: var(--ink-1); line-height: 1.8;">
+                <span style="color: var(--accent); font-weight: 600;">Document Processor:</span> Reads patient invoices and insurance documents automatically
+                <br><span style="color: var(--accent); font-weight: 600;">Accounting Manager:</span> Tracks doctor and provider reimbursements
+                <br><span style="color: var(--accent); font-weight: 600;">Bank Verifier:</span> Verifies insurance payments match claims
+                <br><span style="color: var(--accent); font-weight: 600;">Tax Specialist:</span> Handles VAT compliance for healthcare services
+              </p>
+            </div>
+          </div>
+          
+          <!-- Food & Beverage Demo -->
+          <div class="demo-content" data-sector="food-beverage">
+            <h3>Food & Beverage</h3>
+            <div class="demo-grid">
+              <div class="demo-card">
+                <h4>Daily Profit Report</h4>
+                <p class="metric">Automated</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">by location</p>
+              </div>
+              <div class="demo-card">
+                <h4>Food Cost Tracking</h4>
+                <p class="metric">97.1%</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">accuracy</p>
+              </div>
+              <div class="demo-card">
+                <h4>Supplier Invoicing</h4>
+                <p class="metric">100+</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">daily items processed</p>
+              </div>
+              <div class="demo-card">
+                <h4>Staff Payroll</h4>
+                <p class="metric">Integrated</p>
+                <p style="font-size: 13px; color: var(--ink-2); margin: 4px 0 0 0;">with payroll</p>
+              </div>
+            </div>
+            <div style="margin-top: 32px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px;">
+              <h4 style="font-size: 14px; font-weight: 600; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.8px; margin: 0 0 16px 0;">Primary Agents in Use</h4>
+              <p style="margin: 0; font-size: 15px; color: var(--ink-1); line-height: 1.8;">
+                <span style="color: var(--accent); font-weight: 600;">Document Processor:</span> Reads supplier invoices and POS receipts automatically
+                <br><span style="color: var(--accent); font-weight: 600;">Accounting Manager:</span> Consolidates finances across all locations
+                <br><span style="color: var(--accent); font-weight: 600;">Bank Verifier:</span> Verifies daily sales match bank deposits
+                <br><span style="color: var(--accent); font-weight: 600;">Financial Director:</span> Analyzes performance across all locations
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="agents-cta">
+        <div class="agents-cta__inner">
+          <h2>Ready to handle your accounting automatically?</h2>
+          <p>Join hundreds of UAE businesses that are saving time, improving accuracy, and gaining financial visibility with Ledgr's AI agents.</p>
+          <div class="agents-cta__buttons">
+            <a class="btn btn--primary" href="#waitlist" style="background: white; color: var(--accent); border: none;">Join the Waitlist</a>
+            <a class="btn btn--dark" href="#contact" style="background: transparent; border: 2px solid white; color: white;">Schedule Demo</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // Sector tab switching
+      document.querySelectorAll('.sector-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          const sector = this.dataset.sector;
+          
+          // Remove active from all tabs
+          document.querySelectorAll('.sector-tab').forEach(t => t.classList.remove('active'));
+          // Remove active from all content
+          document.querySelectorAll('.demo-content').forEach(c => c.classList.remove('active'));
+          
+          // Add active to clicked tab
+          this.classList.add('active');
+          // Add active to corresponding content
+          document.querySelector(`.demo-content[data-sector="${sector}"]`).classList.add('active');
+        });
+      });
+      
+      // Smooth scroll to demos
+      document.querySelectorAll('a[href="#demos"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('demos').scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+    </script>
+  </body>
+</html>

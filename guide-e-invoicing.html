@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>The UAE e-invoicing mandate, decoded — Ledgr</title>
+    <meta name="description" content="A working guide to the FTA e-invoicing rollout — Phase 1 (July 2026), Phase 2 (Q1 2027), the 5-corner model, Peppol BIS 3.0, vendor selection, and how to test end-to-end before the deadline." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='-apple-system,sans-serif' font-size='17' font-weight='600' fill='%23fbfaf7'%3EL%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/tailwind-output.css" />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="nav" id="nav">
+      <div class="wrap nav__inner">
+        <a class="brand" href="index.html">
+          <span class="brand__mark" aria-hidden="true">L</span>
+          <span>Ledgr</span>
+        </a>
+        <nav class="nav__links" aria-label="Primary">
+          <a href="index.html#platform">Platform</a>
+          <a href="resources.html">Resources</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="accountants.html">Accountants</a>
+          <a href="reviews.html">Reviews</a>
+        </nav>
+        <div class="nav__cta">
+          <a class="btn btn--dark" href="#signin">Sign in</a>
+          <a class="btn btn--primary" href="#waitlist">Join the waitlist</a>
+        </div>
+      </div>
+    </header>
+
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <div class="wrap crumbs__inner">
+        <ol>
+          <li>
+            <a href="index.html" class="crumbs__home">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/></svg>
+              Ledgr
+            </a>
+          </li>
+          <li><a href="resources.html">Resources</a></li>
+          <li aria-current="page">E-invoicing, decoded</li>
+        </ol>
+      </div>
+    </nav>
+
+    <main>
+      <section class="page-hero">
+        <div class="wrap wrap--narrow" style="max-width:780px">
+          <span class="eyebrow reveal">Flagship guide · 22 min read</span>
+          <h1 class="display reveal" style="margin-top:18px;font-size:clamp(34px,5vw,56px);max-width:18ch">
+            The UAE e-invoicing mandate, <em>decoded.</em>
+          </h1>
+          <p class="lede reveal" style="--d:60ms">
+            Phase 1 begins 1 July 2026. Phase 2 covers every VAT-registered SME from Q1 2027. The forced migration is the largest in regional finance software since VAT itself in 2018 — and most UAE businesses are nowhere near ready.
+          </p>
+          <div class="article-meta reveal" style="--d:100ms">
+            <span class="article-meta__author">
+              <span class="article-meta__avatar">KS</span>
+              <span>Karim Saab · Tax partner</span>
+            </span>
+            <span class="article-meta__dot" aria-hidden="true"></span>
+            <span>Updated 19 May 2026</span>
+            <span class="article-meta__dot" aria-hidden="true"></span>
+            <span>v 3.2 · changes the day the FTA does</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="tight" style="padding-top:8px">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="article-layout">
+            <!-- TOC -->
+            <aside class="article-toc reveal" aria-label="Table of contents">
+              <span class="article-toc__head">In this guide</span>
+              <a href="#why-now">Why now</a>
+              <a href="#five-corner">The 5-corner model, in plain English</a>
+              <a href="#peppol">Where Peppol fits in</a>
+              <a href="#timeline">The Phase 1 and Phase 2 timelines</a>
+              <a href="#what-changes">What actually changes on your invoice</a>
+              <a href="#vendor-picking">Picking a vendor (and what we'd avoid)</a>
+              <a href="#testing">How to test end-to-end</a>
+              <a href="#inbound">The half of the rollout no one talks about</a>
+              <a href="#penalties">Penalties &amp; what they realistically look like</a>
+              <a href="#checklist">Your six-month checklist</a>
+            </aside>
+
+            <!-- Article -->
+            <article class="article reveal">
+              <p class="text-lg text-bg-700 leading-relaxed">
+                If you sell anything to anyone in the UAE, the way you issue invoices is about to change. This guide is the version of the mandate we wish we'd been handed two years ago — short on jargon, long on the parts that actually trip people up.
+              </p>
+
+              <p>This is the guide we send our own customers when they ask <em>"do we actually need to do anything?"</em> Short answer: yes, and the work takes about ten weeks if you start now. If you wait until Q4 2026, you'll be filing both your first e-invoice and your first late-filing penalty in the same quarter.</p>
+
+              <hr />
+
+              <h2 id="why-now">Why now</h2>
+
+              <p>The UAE Federal Tax Authority published the e-invoicing decision in late 2024. The roll-out is phased, and the phasing matters:</p>
+
+              <ul>
+                <li><strong>Phase 1</strong> — large taxpayers, from 1 July 2026.</li>
+                <li><strong>Phase 2</strong> — every VAT-registered entity in the UAE, from Q1 2027.</li>
+              </ul>
+
+              <p>Whether you fall into Phase 1 or Phase 2, the technical setup is identical. The difference is timing and how many of your counterparties will also be on the network by your go-live date. Phase 1 customers will spend their first six months largely sending into a network where most counterparties cannot yet receive structured invoices. Phase 2 customers walk into a mature network — which sounds nice, but means there is no patience for "we'll figure it out next quarter."</p>
+
+              <div class="callout-box">
+                <strong>The 18-month rule of thumb.</strong> Plan to be Peppol-connected, tested, and live <em>three months</em> before your phase deadline. End-to-end testing reliably uncovers data-quality problems in the underlying books that take six weeks to fix. The deadline is not when you start — it's when you must already be done.
+              </div>
+
+              <h2 id="five-corner">The 5-corner model, in plain English</h2>
+
+              <p>If you've read other guides, you've seen the diagram. Let's translate it:</p>
+
+              <ol>
+                <li><strong>Corner 1 — You, the sender.</strong> Your accounting system generates a structured invoice (UBL XML, in the Peppol BIS 3.0 format).</li>
+                <li><strong>Corner 2 — Your Access Point.</strong> A licensed service provider that signs, validates, and dispatches the invoice on your behalf. Think of it as your structured-invoice mailroom.</li>
+                <li><strong>Corner 3 — The FTA's central platform.</strong> The invoice is registered with the tax authority before it reaches your customer. This is what makes the model <em>"clearance-based"</em> rather than just transmission.</li>
+                <li><strong>Corner 4 — Your customer's Access Point.</strong> Receives, validates, and passes the invoice to the customer.</li>
+                <li><strong>Corner 5 — The customer.</strong> Their accounting system ingests the invoice as a payable line, ready to match against a goods receipt or PO.</li>
+              </ol>
+
+              <p>Two things to internalise. <strong>One</strong>, the FTA sits in the middle of every invoice you send — they are not a passive observer. <strong>Two</strong>, the structured invoice arrives at your customer's accounting system as data, not as a PDF you re-key. Done right, your customer's AP team never opens an email.</p>
+
+              <h2 id="peppol">Where Peppol fits in</h2>
+
+              <p>Peppol is the underlying transport protocol — same one used across the EU, Singapore, Australia, and now the UAE. Picking Peppol means the UAE plugged into a global, mature standard rather than inventing one. For you, this has two practical implications:</p>
+
+              <ul>
+                <li><strong>Cross-border continuity.</strong> If you sell into the EU or Singapore on the side, the same Peppol identifier and roughly the same invoice schema works. You'll need country-specific tax fields, but the bones are shared.</li>
+                <li><strong>Vendor portability.</strong> Because Peppol is an open network, switching Access Point providers is a re-routing exercise rather than a re-implementation. Don't let a vendor convince you otherwise.</li>
+              </ul>
+
+              <p>You'll see the term <em>Peppol BIS 3.0</em> — that's the version of the standard the FTA has adopted. There will be UAE-specific extensions for tax categories (designated zones, reverse charge), but the structure of the message is BIS 3.0.</p>
+
+              <h2 id="timeline">The Phase 1 and Phase 2 timelines</h2>
+
+              <p>Skip this if you already know the dates. Otherwise, the binding moments:</p>
+
+              <table>
+                <thead>
+                  <tr><th>Date</th><th>Event</th><th>Applies to</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>1 Jul 2026</td><td>Phase 1 goes live</td><td>Large taxpayers — turnover &gt; AED 50M</td></tr>
+                  <tr><td>1 Oct 2026</td><td>Phase 1 voluntary onboarding closes</td><td>Anyone wanting to opt-in early</td></tr>
+                  <tr><td>1 Jan 2027</td><td>Phase 2 goes live</td><td>All VAT-registered entities</td></tr>
+                  <tr><td>1 Apr 2027</td><td>Phase 2 grace period ends</td><td>All VAT-registered entities</td></tr>
+                </tbody>
+              </table>
+
+              <p>Dates above are based on the FTA's published rollout as of May 2026. We update this table the day they change.</p>
+
+              <h2 id="what-changes">What actually changes on your invoice</h2>
+
+              <p>The visible invoice changes very little. Your customer still sees a PDF — but it now carries structured data underneath it (and arrives via Peppol, not as an email attachment). The fields that change behind the scenes:</p>
+
+              <ul>
+                <li><strong>Your seller identifier.</strong> Your TRN (Tax Registration Number) becomes the structured identifier, expressed in the format <code>0235:&lt;TRN&gt;</code>. Your accounting system needs to render it this way in the XML.</li>
+                <li><strong>Tax categorisation.</strong> Each line carries an explicit tax category (5%, 0%, exempt, reverse-charge, designated zone). What was implicit in your old PDF is now required structured data — and inconsistent categorisation is the #1 cause of rejected invoices.</li>
+                <li><strong>Payment terms.</strong> A formal payment-due-date field (machine-readable) becomes mandatory. Vague "30 days net" language doesn't fly.</li>
+                <li><strong>Invoice references.</strong> Cross-references (credit notes against original invoices, advance payments, retentions) must use structured references rather than free-text "re: INV-2410".</li>
+              </ul>
+
+              <blockquote>
+                The single biggest source of wasted time in the first three months of Phase 1 is going to be inconsistent tax-category data inside the seller's own books. Fix the books before fixing the wire.
+                <cite>— Karim Saab · ex-FTA technical adviser, now tax partner at Ledgr</cite>
+              </blockquote>
+
+              <h2 id="vendor-picking">Picking a vendor (and what we'd avoid)</h2>
+
+              <p>Three vendor archetypes are pitching the UAE market right now:</p>
+
+              <ol>
+                <li><strong>Global Peppol Access Point providers.</strong> Pagero, Storecove, Tradeshift. Robust, expensive, generic. Good fit if you have a global footprint.</li>
+                <li><strong>Local resellers of the above.</strong> A wrapper firm in Dubai with a partnership. Beware of mark-up without value-add.</li>
+                <li><strong>Embedded providers</strong> — your accounting platform handles e-invoicing as part of the product. This is the direction we'd push almost every SME. (Yes, this includes Ledgr — we are an Access Point.)</li>
+              </ol>
+
+              <p>What we would actively avoid:</p>
+
+              <ul>
+                <li>Vendors that quote you a per-invoice fee with no annual cap. The unit economics of e-invoicing should be flat, not metered.</li>
+                <li>Long implementation timelines (more than eight weeks) — that signals the vendor is building the integration on your dime.</li>
+                <li>Any vendor that can't show you a successful end-to-end test against the FTA sandbox during the sales process.</li>
+              </ul>
+
+              <div class="callout-box">
+                <strong>A useful question.</strong> Ask any prospective vendor: "What's the failure mode if the FTA's central platform is down for two hours during my Phase 2 go-live?" If they don't have a clear answer about queuing, retry semantics, and customer-facing communication — keep looking.
+              </div>
+
+              <h2 id="testing">How to test end-to-end</h2>
+
+              <p>You will issue your first dozen live e-invoices into a customer base that is also testing. Expect rejections, expect schema errors, expect at least one invoice that the FTA bounces back for reasons that take a day to decode. This is normal. Plan for it.</p>
+
+              <p>A reasonable test plan looks like:</p>
+
+              <ol>
+                <li><strong>Sandbox issuance</strong> — three sample invoices, all schema-clean, against the FTA test environment. Your vendor should drive this.</li>
+                <li><strong>Sandbox edge cases</strong> — credit note against a sandbox invoice, designated-zone sale, partial-payment scenario. This is where most issues show up.</li>
+                <li><strong>Live issuance to a single friendly customer</strong> who knows you're testing and won't escalate when something fails.</li>
+                <li><strong>Live issuance broadly</strong> — once the friendly customer has accepted three clean invoices in a row, open the gates.</li>
+              </ol>
+
+              <h2 id="inbound">The half of the rollout no one talks about</h2>
+
+              <p>You also have to <em>receive</em> structured invoices from your suppliers. This is the half of the rollout most teams under-plan, and it's where the operational savings actually live.</p>
+
+              <p>A well-set-up inbound side does three things automatically:</p>
+
+              <ul>
+                <li>Matches the incoming invoice to an open PO or goods receipt.</li>
+                <li>Posts it as a draft bill in your accounting system, with the GL coding inferred from the structured tax category.</li>
+                <li>Routes for approval based on amount, vendor, or department.</li>
+              </ul>
+
+              <p>If you set inbound up well, your AP team's day looks completely different by Q3 2027 — they stop opening attachments and start reviewing pre-coded bills.</p>
+
+              <h2 id="penalties">Penalties &amp; what they realistically look like</h2>
+
+              <p>The FTA's published penalty schedule for e-invoicing non-compliance:</p>
+
+              <table>
+                <thead>
+                  <tr><th>Offence</th><th>First instance</th><th>Subsequent</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Failure to issue an e-invoice when required</td><td>AED 5,000</td><td>AED 10,000 per offence</td></tr>
+                  <tr><td>Incorrect data on an e-invoice</td><td>AED 2,500</td><td>AED 5,000</td></tr>
+                  <tr><td>Failure to retain records for 5 years</td><td>AED 10,000</td><td>AED 20,000</td></tr>
+                  <tr><td>Late onboarding past phase deadline</td><td>AED 10,000</td><td>+ AED 1,000 per business day</td></tr>
+                </tbody>
+              </table>
+
+              <p>The headline number isn't the deterrent — it's the day-counter on late onboarding. A three-month delay past Phase 2 turns into roughly AED 60,000 of pure penalty exposure before you have issued a single invoice.</p>
+
+              <h2 id="checklist">Your six-month checklist</h2>
+
+              <p>If you're starting from zero today (May 2026), here is the minimum sequence:</p>
+
+              <ol>
+                <li><strong>Month 1.</strong> Audit your existing invoice templates and tax categorisation. Fix data quality in the underlying books — this is the work that takes longest, and you can do it without a vendor.</li>
+                <li><strong>Month 2.</strong> Select an Access Point vendor. Run their sandbox against your real data.</li>
+                <li><strong>Month 3.</strong> Map outbound — every invoice scenario you actually use today (standard sale, retainer, retention, credit note, advance, intercompany). Resolve gaps.</li>
+                <li><strong>Month 4.</strong> Map inbound — instrument your AP workflow against expected structured invoices from your top 20 vendors.</li>
+                <li><strong>Month 5.</strong> Soft live with one friendly customer. Issue, receive, reconcile, repeat.</li>
+                <li><strong>Month 6.</strong> Open the gates. Daily run-rate of ~10–20 e-invoices for the first fortnight; monitor; tune.</li>
+              </ol>
+
+              <hr />
+
+              <p>If you'd like to see what this looks like inside a working product — the inbound matcher, the outbound queue, the sandbox replay tool — open <a href="app.html">the dashboard preview</a>. The e-invoicing module is the one with the Peppol acknowledgments in the agent activity log.</p>
+
+              <p>And if you're working through this on your own, run the <a href="calculator.html">FTA readiness check</a> for a personalised report on where your business stands.</p>
+            </article>
+
+            <!-- Aside / Related -->
+            <aside class="article-aside reveal">
+              <span class="article-toc__head">Related</span>
+              <p style="margin:0 0 10px"><a href="#" style="color:var(--ink-1)">The new VAT penalty regime, explained</a></p>
+              <p style="margin:0 0 10px"><a href="#" style="color:var(--ink-1)">Small Business Relief, before it expires</a></p>
+              <p style="margin:0 0 10px"><a href="#" style="color:var(--ink-1)">The QFZP test, with worked examples</a></p>
+
+              <span class="article-toc__head" style="margin-top:24px">Try the tool</span>
+              <p style="margin:0 0 6px"><a href="calculator.html" style="color:var(--ink-1)">FTA readiness check →</a></p>
+              <p style="margin:0;font-size:12px;color:var(--ink-3);line-height:1.55">90 seconds. No card. Personalised report.</p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta">
+        <div class="wrap between" style="align-items:flex-start;gap:32px;flex-wrap:wrap">
+          <div style="max-width:540px">
+            <span class="text-xs uppercase tracking-widest font-semibold text-primary-500" style="color:color-mix(in srgb,var(--paper) 70%,transparent)">Don't do this alone</span>
+            <h2 style="margin-top:18px">Let an Access Point handle the wire. You handle the business.</h2>
+            <p>Ledgr is a UAE-registered Peppol Access Point. Outbound, inbound, sandbox testing, vendor mapping — included on Growth and Scale at no extra cost.</p>
+          </div>
+          <div class="cta__ctas">
+            <a class="btn btn--lg" href="index.html#waitlist">Join the waitlist</a>
+            <a class="btn btn--lg btn--ghost" href="calculator.html">Run the free check</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="foot__grid">
+          <div>
+            <a class="brand" href="index.html">
+              <span class="brand__mark" aria-hidden="true">L</span>
+              <span>Ledgr</span>
+            </a>
+            <p class="foot__brand">The autonomous finance function for every UAE business. Built in Dubai. Licensed in the DIFC.</p>
+          </div>
+          <div class="foot__col">
+            <h4>Platform</h4>
+            <a href="index.html#platform">Books</a>
+            <a href="index.html#platform">VAT</a>
+            <a href="index.html#platform">Corporate Tax</a>
+            <a href="index.html#platform">Payroll &amp; WPS</a>
+            <a href="extractor.html">Extractor</a>
+          </div>
+          <div class="foot__col">
+            <h4>Resources</h4>
+            <a href="resources.html">All guides</a>
+            <a href="calculator.html">FTA readiness check</a>
+            <a href="guide-e-invoicing.html">E-invoicing guide</a>
+            <a href="pricing.html">Pricing</a>
+          </div>
+          <div class="foot__col">
+            <h4>Company</h4>
+            <a href="accountants.html">Accountants programme</a>
+            <a href="reviews.html">Firm reviews</a>
+            <a href="customers.html">Customers</a>
+            <a href="security.html">Security &amp; trust</a>
+          </div>
+          <div class="foot__col">
+            <h4>Legal</h4>
+            <a href="#">Terms</a>
+            <a href="#">Privacy</a>
+            <a href="#">DPA</a>
+          </div>
+        </div>
+        <div class="foot__bar">
+          <span>© 2026 Ledgr Technologies Ltd. All rights reserved.</span>
+          <span>Made in Dubai · ledgr.ae</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/app.js" defer></script>
+  </body>
+</html>
