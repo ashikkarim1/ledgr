@@ -23,6 +23,10 @@ import { createIntegrationRoutes, createWebhookRoutes } from "./routes/integrati
 
 // Integration Manager
 import { IntegrationManager } from "./integrations/integration-factory";
+import { PersistentIntegrationManager } from "./integrations/integration-manager";
+
+// Database
+import { Pool } from "pg";
 
 // Types
 import { ApiResponse, HealthCheckResponse } from "./response-types";
@@ -30,11 +34,21 @@ import { ApiResponse, HealthCheckResponse } from "./response-types";
 /**
  * Initialize Express Application
  */
-export function createApp(integrationManager?: IntegrationManager): express.Application {
+export function createApp(
+  integrationManager?: IntegrationManager | PersistentIntegrationManager,
+  dbPool?: Pool
+): express.Application {
   const app = express();
 
   // Initialize integration manager if not provided
-  const manager = integrationManager || new IntegrationManager();
+  let manager: IntegrationManager | PersistentIntegrationManager;
+  if (integrationManager) {
+    manager = integrationManager;
+  } else if (dbPool) {
+    manager = new PersistentIntegrationManager(dbPool);
+  } else {
+    manager = new IntegrationManager();
+  }
 
   /**
    * ==========================================
@@ -439,8 +453,12 @@ export function createApp(integrationManager?: IntegrationManager): express.Appl
 /**
  * Start Server
  */
-export function startServer(port: number = 3000, integrationManager?: IntegrationManager): void {
-  const app = createApp(integrationManager);
+export function startServer(
+  port: number = 3000,
+  integrationManager?: IntegrationManager | PersistentIntegrationManager,
+  dbPool?: Pool
+): void {
+  const app = createApp(integrationManager, dbPool);
 
   // Start rate limit cleanup
   startRateLimitCleanup(60);
