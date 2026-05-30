@@ -2422,6 +2422,8 @@ section + section {
 
 .pricing--4 .price__num {
   font-size: 36px;
+  height: 72px;
+  justify-content: center;
 }
 
 .pricing--4 .price__feats {

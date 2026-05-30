@@ -24,7 +24,7 @@
   const setActiveNav = () => {
     const navLinks = document.querySelectorAll('.nav__links a');
     navLinks.forEach((link) => {
-      if (link.hasAttribute('aria-current')) {
+      if (link.getAttribute('aria-current') === 'page') {
         link.classList.add('is-active');
       } else {
         link.classList.remove('is-active');
