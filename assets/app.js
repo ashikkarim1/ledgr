@@ -20,6 +20,21 @@
     onScroll();
   }
 
+  /* ---------- Active navigation highlight ---------- */
+  const setActiveNav = () => {
+    const navLinks = document.querySelectorAll('.nav__links a');
+    navLinks.forEach((link) => {
+      if (link.hasAttribute('aria-current')) {
+        link.classList.add('is-active');
+      } else {
+        link.classList.remove('is-active');
+      }
+    });
+  };
+  
+  // Run on initial load
+  setActiveNav();
+
   /* ---------- Reveal on scroll ---------- */
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver(
