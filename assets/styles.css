@@ -2433,6 +2433,57 @@ section + section {
   }
 }
 
+/* ============================================================
+   Pricing — 5 tier layout (with Founder Early Access)
+   ============================================================ */
+.pricing--5 {
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.pricing--5 .price {
+  padding: 28px 24px;
+  gap: 18px;
+}
+
+.pricing--5 .price.is-featured {
+  grid-row: 1 / span 1;
+  padding: 32px 28px;
+  background: linear-gradient(135deg, rgba(255, 92, 0, 0.02) 0%, rgba(255, 92, 0, 0.01) 100%);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 1px rgba(255, 92, 0, 0.1), 0 8px 32px rgba(255, 92, 0, 0.08);
+}
+
+.pricing--5 .price__num {
+  font-size: 36px;
+}
+
+.pricing--5 .price__feats {
+  font-size: 13px;
+}
+
+@media (max-width: 1200px) {
+  .pricing--5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pricing--5 .price.is-featured {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 1000px) {
+  .pricing--5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .pricing--5 {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 600px) {
   .pricing--4 {
     grid-template-columns: 1fr;
