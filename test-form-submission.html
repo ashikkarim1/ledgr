@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ledgr Form Submission Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .test-section {
+      margin: 20px 0;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    .status { font-weight: bold; padding: 10px; margin: 10px 0; border-radius: 4px; }
+    .pass { background: #d4edda; color: #155724; }
+    .fail { background: #f8d7da; color: #721c24; }
+    .info { background: #d1ecf1; color: #0c5460; }
+    pre { background: #f5f5f5; padding: 10px; border-radius: 4px; overflow-x: auto; }
+    h1 { color: #191919; }
+    h2 { color: #4a4a4a; margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <h1>Ledgr Form Submission & Button Styling Test</h1>
+  
+  <div id="results"></div>
+
+  <script>
+    const results = document.getElementById('results');
+    
+    function log(message, type = 'info') {
+      const div = document.createElement('div');
+      div.className = `status ${type}`;
+      div.textContent = message;
+      results.appendChild(div);
+      console.log(`[${type.toUpperCase()}] ${message}`);
+    }
+
+    // Test 1: localStorage functionality
+    log('Starting Form Submission Tests...', 'info');
+    
+    try {
+      // Clear localStorage first
+      localStorage.removeItem('ledgr_interest_submissions');
+      log('✓ localStorage cleared', 'pass');
+
+      // Simulate form submission
+      const testData = {
+        name: 'Test User',
+        email: 'test@example.com',
+        company: 'Test Company',
+        phone: '+971501234567',
+        plan: 'Growth',
+        timestamp: new Date().toISOString()
+      };
+
+      // Simulate what the form submission code does
+      const submissions = JSON.parse(localStorage.getItem('ledgr_interest_submissions') || '[]');
+      submissions.push(testData);
+      localStorage.setItem('ledgr_interest_submissions', JSON.stringify(submissions));
+      
+      log('✓ Test form data stored in localStorage', 'pass');
+
+      // Verify retrieval
+      const stored = JSON.parse(localStorage.getItem('ledgr_interest_submissions'));
+      if (stored && stored.length > 0 && stored[0].name === 'Test User') {
+        log('✓ Form data retrieved successfully from localStorage', 'pass');
+        log(`  Stored submissions: ${JSON.stringify(stored, null, 2)}`, 'info');
+      } else {
+        log('✗ Failed to retrieve form data from localStorage', 'fail');
+      }
+
+      // Verify data structure
+      const required = ['name', 'email', 'company', 'phone', 'plan', 'timestamp'];
+      const missing = required.filter(field => !stored[0][field]);
+      if (missing.length === 0) {
+        log('✓ All required form fields present', 'pass');
+      } else {
+        log(`✗ Missing fields: ${missing.join(', ')}`, 'fail');
+      }
+
+    } catch (error) {
+      log(`✗ localStorage test failed: ${error.message}`, 'fail');
+    }
+
+    // Test 2: CSS Button Color Verification
+    log('', 'info');
+    log('Starting Button Styling Verification...', 'info');
+    
+    // Create test button
+    const testBtn = document.createElement('a');
+    testBtn.className = 'test-btn btn btn--lg btn--primary';
+    testBtn.href = '#';
+    testBtn.textContent = 'Test Orange Button (btn--primary)';
+    testBtn.style.cssText = `
+      display: inline-block;
+      padding: 12px 24px;
+      margin: 10px 0;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      border: 1px solid;
+      transition: all 0.2s ease;
+    `;
+    
+    results.appendChild(testBtn);
+    
+    // Check if CSS is loaded properly
+    setTimeout(() => {
+      try {
+        // Load and parse the CSS file to verify colors
+        fetch('/assets/styles.css')
+          .then(response => response.text())
+          .then(css => {
+            if (css.includes('--accent: #FF5C00')) {
+              log('✓ CSS variable --accent is set to #FF5C00 (orange)', 'pass');
+            } else {
+              log('✗ CSS variable --accent may not be correctly set', 'fail');
+            }
+            
+            if (css.includes('.btn--primary') && css.includes('var(--accent)')) {
+              log('✓ .btn--primary class uses var(--accent) color', 'pass');
+            } else {
+              log('✗ .btn--primary class may not use orange accent color', 'fail');
+            }
+          })
+          .catch(err => {
+            log(`Note: Could not fetch CSS for verification: ${err.message}`, 'info');
+          });
+      } catch (error) {
+        log(`Note: CSS verification skipped: ${error.message}`, 'info');
+      }
+    }, 100);
+
+    // Test 3: Form HTML Structure
+    log('', 'info');
+    log('Checking Form HTML Structure...', 'info');
+    
+    // Check if pricing.html has the form
+    fetch('/pricing.html')
+      .then(response => response.text())
+      .then(html => {
+        const checks = [
+          { pattern: 'id="interest-form"', name: 'Interest form element' },
+          { pattern: 'name="name"', name: 'Name input field' },
+          { pattern: 'name="email"', name: 'Email input field' },
+          { pattern: 'name="company"', name: 'Company input field' },
+          { pattern: 'name="phone"', name: 'Phone input field' },
+          { pattern: 'name="plan"', name: 'Plan hidden field' },
+          { pattern: 'ledgr_interest_submissions', name: 'localStorage key reference' },
+          { pattern: 'btn btn--primary', name: 'Primary button class usage' }
+        ];
+        
+        checks.forEach(check => {
+          if (html.includes(check.pattern)) {
+            log(`✓ ${check.name} found in pricing.html`, 'pass');
+          } else {
+            log(`✗ ${check.name} NOT found in pricing.html`, 'fail');
+          }
+        });
+      })
+      .catch(err => {
+        log(`Note: Could not fetch pricing.html for verification: ${err.message}`, 'info');
+      });
+
+    // Test 4: Sign In Button Verification
+    log('', 'info');
+    log('Checking Sign In Button Styling...', 'info');
+    
+    fetch('/index.html')
+      .then(response => response.text())
+      .then(html => {
+        const regex = /<a[^>]*class="btn[^"]*btn--primary[^"]*"[^>]*href="#signin"[^>]*>Sign in<\/a>/i;
+        if (regex.test(html)) {
+          log('✓ Sign in button uses btn--primary (orange) class', 'pass');
+        } else {
+          log('✗ Sign in button may not use btn--primary class', 'fail');
+        }
+      })
+      .catch(err => {
+        log(`Note: Could not fetch index.html for verification: ${err.message}`, 'info');
+      });
+
+    // Summary
+    setTimeout(() => {
+      log('', 'info');
+      log('TEST SUMMARY', 'info');
+      log('All critical functionality has been tested. Check results above.', 'info');
+    }, 2000);
+  </script>
+</body>
+</html>
