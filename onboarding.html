@@ -11,6 +11,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/tailwind-output.css" />
     <link rel="stylesheet" href="assets/styles.css" />
+    <style>
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      
+      .step3-low-conf {
+        background-color: var(--accent-soft);
+        color: var(--accent-2);
+      }
+      
+      .step3-flagged {
+        background-color: var(--accent-soft);
+      }
+      
+      .step3-flagged td {
+        color: var(--accent);
+        font-weight: 500;
+      }
+      
+      @media (max-width: 760px) {
+        .step3-table {
+          font-size: 13px;
+        }
+        
+        .step3-table th,
+        .step3-table td {
+          padding: 10px 12px !important;
+        }
+      }
+    </style>
   </head>
   <body>
     <header class="nav" id="nav">
@@ -87,7 +118,7 @@
               </div>
 
               <div>
-                <div class="onb__progress">Step 2 of 4 · 50%</div>
+                <div class="onb__progress" id="onb-progress">Step 2 of 4 · 50%</div>
                 <div class="onb-bar" aria-hidden="true"><span></span></div>
               </div>
 
@@ -102,7 +133,7 @@
                   </span>
                 </div>
 
-                <div class="onb-step is-active">
+                <div class="onb-step is-active" id="step2-indicator">
                   <span class="num">2</span>
                   <span class="label">
                     <span class="t">Connect your bank</span>
@@ -110,7 +141,7 @@
                   </span>
                 </div>
 
-                <div class="onb-step">
+                <div class="onb-step" id="step3-indicator">
                   <span class="num">3</span>
                   <span class="label">
                     <span class="t">Classify 18 months of history</span>
@@ -134,93 +165,373 @@
             </aside>
 
             <!-- Main panel -->
-            <div class="onb__main">
-              <div class="onb__step-title">
-                <span class="text-xs uppercase tracking-widest font-semibold text-primary-500">Step 2 · Bank connection</span>
-                <h2>Pick the banks where your business runs.</h2>
-                <p>
-                  We use UAE-licensed Open Finance providers — Lean and
-                  Tarabut — to pull eighteen months of transactions in a
-                  single, read-only connection. We never see your login.
-                </p>
+            <div class="onb__main" id="onb-main">
+              <!-- STEP 1: UAE Pass Verification -->
+              <div data-onb-step="1" class="onb-step-content" id="step1-content">
+                <div class="onb__step-title">
+                  <span class="text-xs uppercase tracking-widest font-semibold text-primary-500">Step 1 · UAE Pass verification</span>
+                  <h2>Let's verify your business with UAE Pass.</h2>
+                  <p>
+                    We use the official UAE Pass to verify your business entity and retrieve your trade licence details. This is instant, secure, and cryptographically verified.
+                  </p>
+                </div>
+
+                <div style="background: var(--paper); padding: 32px; border-radius: 12px; margin-bottom: 32px;">
+                  <div id="step1-login-panel" style="text-align: center;">
+                    <button id="btn-uae-pass-login" style="
+                      background: var(--accent);
+                      color: white;
+                      border: none;
+                      padding: 16px 32px;
+                      border-radius: 8px;
+                      font-size: 16px;
+                      font-weight: 600;
+                      cursor: pointer;
+                      margin-bottom: 16px;
+                      min-width: 200px;
+                      transition: background 0.2s ease;
+                    ">
+                      Redirect to UAE Pass
+                    </button>
+                    <p style="color: var(--ink-3); font-size: 13px;">You will be redirected to the official UAE Pass portal to verify your business.</p>
+                  </div>
+
+                  <div id="step1-loader" style="display: none; text-align: center;">
+                    <div class="loading-spinner" style="margin: 0 auto 16px; width: 60px; height: 60px;">
+                      <div class="spinner-ring" style="border-width: 4px;"></div>
+                      <span style="display: block; margin-top: 8px; font-size: 14px; color: var(--ink-2);">
+                        <span id="step1-loader-text">Redirecting...</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div id="step1-verified" style="display: none;">
+                    <div style="background: #e8f5e9; border-radius: 8px; padding: 16px; margin-bottom: 24px; border-left: 4px solid #34c759;">
+                      <p style="color: #1b5e20; font-weight: 600; margin: 0;">✓ UAE Pass verification successful</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 24px;">
+                      <label style="display: block; font-weight: 600; color: var(--ink-1); margin-bottom: 8px;">Entity Name</label>
+                      <input type="text" id="step1-entity-name" readonly style="
+                        width: 100%;
+                        padding: 12px;
+                        border: 1px solid var(--ink-4);
+                        border-radius: 6px;
+                        background: var(--surface);
+                        color: var(--ink-1);
+                        font-family: inherit;
+                        font-size: 14px;
+                      " />
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+                      <div>
+                        <label style="display: block; font-weight: 600; color: var(--ink-1); margin-bottom: 8px; font-size: 13px;">Trade Licence No.</label>
+                        <input type="text" id="step1-trade-licence" readonly style="
+                          width: 100%;
+                          padding: 12px;
+                          border: 1px solid var(--ink-4);
+                          border-radius: 6px;
+                          background: var(--surface);
+                          color: var(--ink-1);
+                          font-family: 'JetBrains Mono', monospace;
+                          font-size: 13px;
+                        " />
+                      </div>
+                      <div>
+                        <label style="display: block; font-weight: 600; color: var(--ink-1); margin-bottom: 8px; font-size: 13px;">Free Zone</label>
+                        <input type="text" id="step1-free-zone" readonly style="
+                          width: 100%;
+                          padding: 12px;
+                          border: 1px solid var(--ink-4);
+                          border-radius: 6px;
+                          background: var(--surface);
+                          color: var(--ink-1);
+                          font-family: inherit;
+                          font-size: 13px;
+                        " />
+                      </div>
+                    </div>
+
+                    <div style="margin-bottom: 32px;">
+                      <label style="display: block; font-weight: 600; color: var(--ink-1); margin-bottom: 8px;">Shareholders</label>
+                      <input type="text" id="step1-shareholders" readonly style="
+                        width: 100%;
+                        padding: 12px;
+                        border: 1px solid var(--ink-4);
+                        border-radius: 6px;
+                        background: var(--surface);
+                        color: var(--ink-1);
+                        font-family: inherit;
+                        font-size: 13px;
+                      " />
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display: flex; gap: 12px; justify-content: flex-start;">
+                  <button id="btn-step1-back" style="
+                    background: var(--ink-4);
+                    color: var(--ink-1);
+                    border: none;
+                    padding: 12px 24px;
+                    border-radius: 6px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    display: none;
+                  ">Back</button>
+                  <button id="btn-step1-confirm" style="
+                    background: var(--accent);
+                    color: white;
+                    border: none;
+                    padding: 12px 24px;
+                    border-radius: 6px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    display: none;
+                  ">Confirm & Continue</button>
+                </div>
               </div>
 
-              <div class="account-picker">
-                <div class="bank-card is-selected" role="button" tabindex="0">
-                  <span class="bank-card__chk" aria-hidden="true"></span>
-                  <span class="bank-card__mark">EN</span>
-                  <span class="bank-card__name">Emirates NBD</span>
-                  <span class="bank-card__sub">Business · Lean</span>
+              <!-- STEP 2: Bank Connection -->
+              <div data-onb-step="2" class="onb-step-content" id="step2-content">
+                <div class="onb__step-title">
+                  <span class="text-xs uppercase tracking-widest font-semibold text-primary-500">Step 2 · Bank connection</span>
+                  <h2>Pick the banks where your business runs.</h2>
+                  <p>
+                    We use UAE-licensed Open Finance providers — Lean and
+                    Tarabut — to pull eighteen months of transactions in a
+                    single, read-only connection. We never see your login.
+                  </p>
                 </div>
-                <div class="bank-card is-selected" role="button" tabindex="0">
-                  <span class="bank-card__chk" aria-hidden="true"></span>
-                  <span class="bank-card__mark">M</span>
-                  <span class="bank-card__name">Mashreq Neo Biz</span>
-                  <span class="bank-card__sub">Business · Tarabut</span>
+
+                <div class="account-picker">
+                  <div class="bank-card is-selected" role="button" tabindex="0">
+                    <span class="bank-card__chk" aria-hidden="true"></span>
+                    <span class="bank-card__mark">EN</span>
+                    <span class="bank-card__name">Emirates NBD</span>
+                    <span class="bank-card__sub">Business · Lean</span>
+                  </div>
+                  <div class="bank-card is-selected" role="button" tabindex="0">
+                    <span class="bank-card__chk" aria-hidden="true"></span>
+                    <span class="bank-card__mark">M</span>
+                    <span class="bank-card__name">Mashreq Neo Biz</span>
+                    <span class="bank-card__sub">Business · Tarabut</span>
+                  </div>
+                  <div class="bank-card" role="button" tabindex="0">
+                    <span class="bank-card__chk" aria-hidden="true"></span>
+                    <span class="bank-card__mark">W</span>
+                    <span class="bank-card__name">Wio Business</span>
+                    <span class="bank-card__sub">Business · Lean</span>
+                  </div>
+                  <div class="bank-card" role="button" tabindex="0">
+                    <span class="bank-card__chk" aria-hidden="true"></span>
+                    <span class="bank-card__mark">AD</span>
+                    <span class="bank-card__name">ADCB Business</span>
+                    <span class="bank-card__sub">Business · Lean</span>
+                  </div>
+                  <div class="bank-card" role="button" tabindex="0">
+                    <span class="bank-card__chk" aria-hidden="true"></span>
+                    <span class="bank-card__mark">FA</span>
+                    <span class="bank-card__name">FAB Business</span>
+                    <span class="bank-card__sub">Business · Tarabut</span>
+                  </div>
+                  <div class="bank-card" role="button" tabindex="0">
+                    <span class="bank-card__chk" aria-hidden="true"></span>
+                    <span class="bank-card__mark">RA</span>
+                    <span class="bank-card__name">RAKBANK Business</span>
+                    <span class="bank-card__sub">Business · Tarabut</span>
+                  </div>
+                  <div class="bank-card" role="button" tabindex="0">
+                    <span class="bank-card__chk" aria-hidden="true"></span>
+                    <span class="bank-card__mark">CB</span>
+                    <span class="bank-card__name">CBD Business</span>
+                    <span class="bank-card__sub">Business · Lean</span>
+                  </div>
+                  <div class="bank-card" role="button" tabindex="0">
+                    <span class="bank-card__chk" aria-hidden="true"></span>
+                    <span class="bank-card__mark">+</span>
+                    <span class="bank-card__name">Another bank</span>
+                    <span class="bank-card__sub">Manual statements</span>
+                  </div>
                 </div>
-                <div class="bank-card" role="button" tabindex="0">
-                  <span class="bank-card__chk" aria-hidden="true"></span>
-                  <span class="bank-card__mark">W</span>
-                  <span class="bank-card__name">Wio Business</span>
-                  <span class="bank-card__sub">Business · Lean</span>
+
+                <div class="callout" style="margin-top:8px">
+                  <div>
+                    <strong>Two banks selected.</strong> We'll pull 18 months of
+                    history — about 4,200 transactions — and classify them in
+                    the next step. Estimated time: 90 seconds.
+                  </div>
                 </div>
-                <div class="bank-card" role="button" tabindex="0">
-                  <span class="bank-card__chk" aria-hidden="true"></span>
-                  <span class="bank-card__mark">AD</span>
-                  <span class="bank-card__name">ADCB Business</span>
-                  <span class="bank-card__sub">Business · Lean</span>
-                </div>
-                <div class="bank-card" role="button" tabindex="0">
-                  <span class="bank-card__chk" aria-hidden="true"></span>
-                  <span class="bank-card__mark">FA</span>
-                  <span class="bank-card__name">FAB Business</span>
-                  <span class="bank-card__sub">Business · Tarabut</span>
-                </div>
-                <div class="bank-card" role="button" tabindex="0">
-                  <span class="bank-card__chk" aria-hidden="true"></span>
-                  <span class="bank-card__mark">RA</span>
-                  <span class="bank-card__name">RAKBANK Business</span>
-                  <span class="bank-card__sub">Business · Tarabut</span>
-                </div>
-                <div class="bank-card" role="button" tabindex="0">
-                  <span class="bank-card__chk" aria-hidden="true"></span>
-                  <span class="bank-card__mark">CB</span>
-                  <span class="bank-card__name">CBD Business</span>
-                  <span class="bank-card__sub">Business · Lean</span>
-                </div>
-                <div class="bank-card" role="button" tabindex="0">
-                  <span class="bank-card__chk" aria-hidden="true"></span>
-                  <span class="bank-card__mark">+</span>
-                  <span class="bank-card__name">Another bank</span>
-                  <span class="bank-card__sub">Manual statements</span>
+
+                <div class="onb__foot">
+                  <span class="secure">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+                    Read-only access · revocable anytime · UAE-resident
+                  </span>
+                  <div style="display:flex;gap:10px">
+                    <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" id="btn-step2-back">Back</button>
+                    <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" id="btn-step2-continue">
+                      Continue
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              <div class="callout" style="margin-top:8px">
-                <div>
-                  <strong>Two banks selected.</strong> We'll pull 18 months of
-                  history — about 4,200 transactions — and classify them in
-                  the next step. Estimated time: 90 seconds.
+              <!-- STEP 3: Classification Review -->
+              <div data-onb-step="3" class="onb-step-content" id="step3-content" style="display:none">
+                <div class="onb__step-title">
+                  <span class="text-xs uppercase tracking-widest font-semibold text-primary-500">Step 3 · Transaction classification</span>
+                  <h2>Review and confirm classified transactions.</h2>
+                  <p>
+                    Our Capture agent classified every transaction with a confidence score. Anything below 75% is flagged for your review.
+                  </p>
                 </div>
-              </div>
 
-              <div class="onb__foot">
-                <span class="secure">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-                  Read-only access · revocable anytime · UAE-resident
-                </span>
-                <div style="display:flex;gap:10px">
-                  <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button">Back</button>
-                  <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button">
-                    Continue
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                  </button>
+                <!-- Loading state -->
+                <div id="step3-loading" style="text-align:center;padding:48px 24px">
+                  <div style="margin-bottom:24px">
+                    <div style="width:48px;height:48px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto"></div>
+                  </div>
+                  <p style="font-weight:500;color:var(--ink-1);margin:0 0 8px">Classifying 4,200 transactions...</p>
+                  <p style="font-size:14px;color:var(--ink-2);margin:0">This typically takes 60–90 seconds.</p>
+                  <div style="width:100%;height:6px;background:var(--line);border-radius:3px;margin:16px auto;overflow:hidden;max-width:400px">
+                    <div id="step3-progress" style="width:0%;height:100%;background:var(--accent);transition:width 0.2s ease"></div>
+                  </div>
+                  <p style="font-size:12px;color:var(--ink-3);margin:0"><span id="step3-percent">0</span>%</p>
+                </div>
+
+                <!-- Results state -->
+                <div id="step3-results" style="display:none">
+                  <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:24px">
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px">
+                      <div>
+                        <p style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-3);margin:0 0 8px;font-weight:600">Confirmed</p>
+                        <p style="font-size:32px;font-weight:600;color:var(--ink-1);margin:0" id="step3-confirmed">4,188</p>
+                      </div>
+                      <div>
+                        <p style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-3);margin:0 0 8px;font-weight:600">Flagged for review</p>
+                        <p style="font-size:32px;font-weight:600;color:var(--accent);margin:0" id="step3-flagged">12</p>
+                      </div>
+                      <div>
+                        <p style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-3);margin:0 0 8px;font-weight:600">Low confidence (&lt;60%)</p>
+                        <p style="font-size:32px;font-weight:600;color:var(--accent-2);margin:0">2</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:24px">
+                    <div style="padding:16px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+                      <p style="font-weight:500;color:var(--ink-1);margin:0;font-size:14px">Sample transactions</p>
+                      <a href="#" style="color:var(--accent);font-size:13px;font-weight:500;text-decoration:none;cursor:pointer" id="step3-review-link" onclick="return false">Review flagged items →</a>
+                    </div>
+                    <div style="overflow-x:auto">
+                      <table class="step3-table" style="width:100%;border-collapse:collapse;font-size:14px">
+                        <thead>
+                          <tr style="background:var(--paper);border-bottom:1px solid var(--line)">
+                            <th style="padding:12px 16px;text-align:left;font-weight:500;color:var(--ink-2);font-size:11px;text-transform:uppercase;letter-spacing:0.03em;white-space:nowrap">Date</th>
+                            <th style="padding:12px 16px;text-align:right;font-weight:500;color:var(--ink-2);font-size:11px;text-transform:uppercase;letter-spacing:0.03em;white-space:nowrap">Amount</th>
+                            <th style="padding:12px 16px;text-align:left;font-weight:500;color:var(--ink-2);font-size:11px;text-transform:uppercase;letter-spacing:0.03em;white-space:nowrap">Category</th>
+                            <th style="padding:12px 16px;text-align:center;font-weight:500;color:var(--ink-2);font-size:11px;text-transform:uppercase;letter-spacing:0.03em;white-space:nowrap">Confidence</th>
+                            <th style="padding:12px 16px;text-align:center;font-weight:500;color:var(--ink-2);font-size:11px;text-transform:uppercase;letter-spacing:0.03em;white-space:nowrap">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody id="step3-table-body">
+                          <!-- Populated by JS -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="onb__foot">
+                  <span class="secure">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C6.477 22 2 17.523 2 12s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10z"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    Your dedicated accountant will review flagged items within 24 hours.
+                  </span>
+                  <div style="display:flex;gap:10px">
+                    <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" id="btn-step3-back">Back</button>
+                    <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" id="btn-step3-continue">
+                      Continue to tax position
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <!-- STEP 4: Tax Position Results -->
+<div data-onb-step="4" class="onb-step-content" id="step4-content" style="display:none">
+  <div class="onb__step-title">
+    <span class="text-xs uppercase tracking-widest font-semibold text-primary-500">Step 4 · Baseline tax position</span>
+    <h2>Your tax position at a glance.</h2>
+    <p>
+      The Capture agent classified all transactions. Tax-Prep calculated your VAT position and Corporate Tax estimate. Your dedicated accountant will review this within 24 hours.
+    </p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:32px">
+    <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px">
+      <p style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-3);margin:0 0 8px;font-weight:600">VAT to date</p>
+      <p style="font-size:28px;font-weight:600;color:var(--ink-1);margin:0 0 4px" id="step4-vat">AED 13,500</p>
+      <p style="font-size:12px;color:var(--accent);margin:0" id="step4-vat-status">Due · Next filing: 30 Apr 2026</p>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px">
+      <p style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-3);margin:0 0 8px;font-weight:600">Corporate Tax (annual estimate)</p>
+      <p style="font-size:28px;font-weight:600;color:var(--ink-1);margin:0 0 4px" id="step4-ct">AED 13,500</p>
+      <p style="font-size:12px;color:var(--ink-2);margin:0">Based on 18-month average</p>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px">
+      <p style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-3);margin:0 0 8px;font-weight:600">Small Business Relief</p>
+      <p style="font-size:20px;font-weight:600;color:var(--accent);margin:0" id="step4-sbr">Eligible</p>
+      <p style="font-size:12px;color:var(--ink-2);margin:0">Revenue &lt; AED 1M</p>
+    </div>
+  </div>
+
+  <div style="background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:32px">
+    <p style="font-weight:500;color:var(--ink-1);margin:0 0 16px;font-size:14px">Year-to-date summary</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;font-size:13px">
+      <div>
+        <p style="color:var(--ink-3);margin:0 0 4px">Revenue</p>
+        <p style="font-weight:600;color:var(--ink-1);font-size:18px;margin:0" id="step4-revenue">AED 450,000</p>
+      </div>
+      <div>
+        <p style="color:var(--ink-3);margin:0 0 4px">Expenses</p>
+        <p style="font-weight:600;color:var(--ink-1);font-size:18px;margin:0" id="step4-expenses">AED 180,000</p>
+      </div>
+      <div>
+        <p style="color:var(--ink-3);margin:0 0 4px">Net position</p>
+        <p style="font-weight:600;color:var(--accent);font-size:18px;margin:0" id="step4-net">AED 270,000</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border-left:3px solid var(--accent);border-radius:var(--radius);padding:16px 20px;margin-bottom:32px">
+    <p style="margin:0;color:var(--ink-1);font-size:14px;font-weight:500">
+      Your dedicated accountant will review this position and reach out within <strong>24 hours</strong> to discuss any adjustments and final filing strategy.
+    </p>
+  </div>
+
+  <div class="onb__foot">
+    <span class="secure">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C6.477 22 2 17.523 2 12s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10z"/><path d="M12 16v-4M12 8h.01"/></svg>
+      Your data is encrypted, isolated, and audited under DFSA-equivalent controls.
+    </span>
+    <div style="display:flex;gap:10px">
+      <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-bg-100 text-bg-800 hover:bg-bg-200 active:bg-bg-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" id="btn-step4-back">Back</button>
+      <button class="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-md bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" type="button" id="btn-step4-complete">
+        Go to dashboard
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
 
       <!-- ============================================================
            Step deep-dive
@@ -365,5 +676,292 @@
     </footer>
 
     <script src="assets/app.js" defer></script>
+    
+    <script>
+      // ============================================================
+      // STEP 1: UAE Pass Verification Logic
+      // ============================================================
+      document.getElementById('btn-uae-pass-login').addEventListener('click', function() {
+        // Hide login panel, show loader
+        document.getElementById('step1-login-panel').style.display = 'none';
+        document.getElementById('step1-loader').style.display = 'block';
+        
+        // Simulate 2-second redirect
+        setTimeout(() => {
+          // Simulate getting token from AuthModule
+          const mockToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MjAwMDAwMDAwMDAwMDAwMDEiLCJlbnRpdHlfbmFtZSI6IkFjbWUgQ29uc3VsdGluZ3MgTExDIiwidHJhZGVfbGljZW5jZV9udW0iOiJUTEMvMjAyNS8wMDEyMzQ1NiIsImZyZWVfem9uZSI6Tm8sInNoYXJlaG9sZGVycyI6IkFobWVkIGFsIEZhbHWDaSAoNzUlKSwgRGlydCBBbCBJbWFyYXQgRklaIChDbyksIE9tYXIgQWxiaWduIiwiZW1haWwiOiJjZW9AYWNtZWNvbnN1bHRpbmdzLmFlIn0";
+          
+          // Decode token (mock)
+          try {
+            const parts = mockToken.split('.');
+            const payload = atob(parts[1]);
+            const decoded = JSON.parse(payload);
+            
+            // Update UI with decoded data
+            document.getElementById('step1-entity-name').value = decoded.entity_name || 'ACME Consulting LLC';
+            document.getElementById('step1-trade-licence').value = decoded.trade_licence_num || 'TLC/2025/00123456';
+            document.getElementById('step1-free-zone').value = decoded.free_zone || 'No';
+            document.getElementById('step1-shareholders').value = decoded.shareholders || 'Ahmad al Faluwi (75%), Dirt Al Imaarat FIZ (Co), Omar Albign';
+          } catch (e) {
+            console.log('Token decode error (expected in this mock)', e);
+          }
+          
+          // Hide loader, show verified panel
+          document.getElementById('step1-loader').style.display = 'none';
+          document.getElementById('step1-verified').style.display = 'block';
+          
+          // Show buttons
+          document.getElementById('btn-step1-back').style.display = 'inline-block';
+          document.getElementById('btn-step1-confirm').style.display = 'inline-block';
+        }, 2000);
+      });
+
+      // Step 1 back button
+      document.getElementById('btn-step1-back').addEventListener('click', function() {
+        document.getElementById('step1-content').style.display = 'none';
+        // In full app, this would go to previous step or exit
+        console.log('[Step 1] Back clicked');
+      });
+
+      // Step 1 confirm button
+      document.getElementById('btn-step1-confirm').addEventListener('click', function() {
+        // Save Step 1 data
+        const step1Data = {
+          completed: true,
+          timestamp: new Date().toISOString(),
+          entityName: document.getElementById('step1-entity-name').value,
+          tradeLicence: document.getElementById('step1-trade-licence').value,
+          freeZone: document.getElementById('step1-free-zone').value,
+          shareholders: document.getElementById('step1-shareholders').value
+        };
+        localStorage.setItem('onb_step_1_data', JSON.stringify(step1Data));
+
+        // Emit custom event to trigger step progression
+        window.dispatchEvent(new CustomEvent('step1:complete', {
+          detail: step1Data
+        }));
+
+        console.log('[Step 1] Confirmed and saved to localStorage');
+      });
+
+      // Mock transaction data for Step 3
+      const mockTransactions = [
+        { date: '2024-01-15', amount: 'AED 5,000', category: 'Revenue', confidence: 98, flagged: false },
+        { date: '2024-01-18', amount: 'AED -500', category: 'Office Supplies', confidence: 72, flagged: true },
+        { date: '2024-01-22', amount: 'AED -2,100', category: 'Rent', confidence: 95, flagged: false },
+        { date: '2024-01-25', amount: 'AED -300', category: 'Utilities', confidence: 65, flagged: true },
+        { date: '2024-01-28', amount: 'AED 8,500', category: 'Revenue', confidence: 99, flagged: false },
+        { date: '2024-02-01', amount: 'AED -1,200', category: 'Software Licenses', confidence: 85, flagged: false },
+        { date: '2024-02-05', amount: 'AED -450', category: 'Meals & Entertainment', confidence: 58, flagged: true },
+        { date: '2024-02-10', amount: 'AED 6,200', category: 'Revenue', confidence: 97, flagged: false },
+        { date: '2024-02-14', amount: 'AED -800', category: 'Professional Services', confidence: 82, flagged: false },
+        { date: '2024-02-18', amount: 'AED -150', category: 'Office Supplies', confidence: 92, flagged: false },
+        { date: '2024-02-22', amount: 'AED 7,800', category: 'Revenue', confidence: 99, flagged: false },
+        { date: '2024-02-25', amount: 'AED -350', category: 'Travel', confidence: 68, flagged: true },
+      ];
+
+      // Step 2 -> Step 3 transition
+      document.getElementById('btn-step2-continue').addEventListener('click', function() {
+        // Save progress to localStorage
+        const step2Data = {
+          completed: true,
+          timestamp: new Date().toISOString(),
+          banks: ['Emirates NBD', 'Mashreq Neo Biz']
+        };
+        localStorage.setItem('onb_step_2_data', JSON.stringify(step2Data));
+
+        // Hide step 2, show step 3
+        document.getElementById('step2-content').style.display = 'none';
+        document.getElementById('step3-content').style.display = 'block';
+
+        // Update rail indicators
+        document.getElementById('step2-indicator').classList.remove('is-active');
+        document.getElementById('step2-indicator').classList.add('is-done');
+        document.getElementById('step3-indicator').classList.add('is-active');
+
+        // Update progress
+        document.getElementById('onb-progress').textContent = 'Step 3 of 4 · 75%';
+
+        // Start loading animation
+        initializeStep3Loading();
+
+        // Scroll to top
+        document.getElementById('onb-main').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      // Initialize Step 3 loading animation
+      function initializeStep3Loading() {
+        const loading = document.getElementById('step3-loading');
+        const results = document.getElementById('step3-results');
+        const progress = document.getElementById('step3-progress');
+        const percent = document.getElementById('step3-percent');
+        
+        loading.style.display = 'block';
+        results.style.display = 'none';
+
+        let current = 0;
+        const targetValue = 100;
+        const duration = 5000; // 5 seconds
+        const steps = 50;
+        const stepDuration = duration / steps;
+        const increment = targetValue / steps;
+
+        const startTime = Date.now();
+
+        function animate() {
+          const elapsed = Date.now() - startTime;
+          const progress_pct = Math.min((elapsed / duration) * 100, 100);
+          
+          progress.style.width = progress_pct + '%';
+          percent.textContent = Math.floor(progress_pct);
+
+          if (progress_pct < 100) {
+            requestAnimationFrame(animate);
+          } else {
+            // Show results after loading completes
+            showStep3Results();
+          }
+        }
+
+        animate();
+      }
+
+      // Display Step 3 results
+      function showStep3Results() {
+        const loading = document.getElementById('step3-loading');
+        const results = document.getElementById('step3-results');
+        const tableBody = document.getElementById('step3-table-body');
+
+        loading.style.display = 'none';
+        results.style.display = 'block';
+
+        // Calculate stats
+        const flagged = mockTransactions.filter(t => t.flagged).length;
+        const confirmed = mockTransactions.length - flagged;
+
+        document.getElementById('step3-confirmed').textContent = (4200 - flagged).toLocaleString();
+        document.getElementById('step3-flagged').textContent = flagged;
+
+        // Populate table
+        tableBody.innerHTML = mockTransactions.map(tx => `
+          <tr${tx.flagged ? ' class="step3-flagged"' : ''}>
+            <td style="padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--font-mono);font-size:13px">${tx.date}</td>
+            <td style="padding:12px 16px;border-bottom:1px solid var(--line);text-align:right;font-family:var(--font-mono);font-size:13px">${tx.amount}</td>
+            <td style="padding:12px 16px;border-bottom:1px solid var(--line)">${tx.category}</td>
+            <td style="padding:12px 16px;border-bottom:1px solid var(--line);text-align:center;font-size:13px">${tx.confidence}%</td>
+            <td style="padding:12px 16px;border-bottom:1px solid var(--line);text-align:center">
+              ${tx.flagged ? '<span style="color:var(--accent);font-weight:500;font-size:12px">REVIEW</span>' : '<span style="color:#34c759;font-weight:500;font-size:12px">OK</span>'}
+            </td>
+          </tr>
+        `).join('');
+
+        // Save to localStorage
+        const step3Data = {
+          completed: false,
+          timestamp: new Date().toISOString(),
+          transactions: mockTransactions,
+          stats: {
+            total: mockTransactions.length,
+            confirmed: confirmed,
+            flagged: flagged
+          }
+        };
+        localStorage.setItem('onb_step_3_data', JSON.stringify(step3Data));
+      }
+
+      // Step 3 back button
+      document.getElementById('btn-step3-back').addEventListener('click', function() {
+        document.getElementById('step3-content').style.display = 'none';
+        document.getElementById('step2-content').style.display = 'block';
+        
+        document.getElementById('step2-indicator').classList.remove('is-done');
+        document.getElementById('step2-indicator').classList.add('is-active');
+        document.getElementById('step3-indicator').classList.remove('is-active');
+        
+        document.getElementById('onb-progress').textContent = 'Step 2 of 4 · 50%';
+      });
+
+      // Step 3 continue button
+      document.getElementById('btn-step3-continue').addEventListener('click', function() {
+        const step3Data = JSON.parse(localStorage.getItem('onb_step_3_data') || '{}');
+        step3Data.completed = true;
+        step3Data.timestamp = new Date().toISOString();
+        localStorage.setItem('onb_step_3_data', JSON.stringify(step3Data));
+
+        // Emit custom event for parent app
+        window.dispatchEvent(new CustomEvent('step3:complete', {
+          detail: step3Data
+        }));
+
+        // Hide step 3, show step 4
+        document.getElementById('step3-content').style.display = 'none';
+        document.getElementById('step4-content').style.display = 'block';
+
+        // Update rail indicators
+        document.getElementById('step3-indicator').classList.remove('is-active');
+        document.getElementById('step3-indicator').classList.add('is-done');
+        document.getElementById('step4-indicator').classList.add('is-active');
+
+        // Update progress
+        document.getElementById('onb-progress').textContent = 'Step 4 of 4 · 100%';
+
+        document.getElementById('onb-main').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      // Step 2 back button
+      document.getElementById('btn-step2-back').addEventListener('click', function() {
+        document.getElementById('step2-content').style.display = 'none';
+        document.getElementById('step1-content').style.display = 'block';
+        
+        document.getElementById('step1-indicator').classList.add('is-active');
+        document.getElementById('step2-indicator').classList.remove('is-active', 'is-done');
+        
+        document.getElementById('onb-progress').textContent = 'Step 1 of 4 · 25%';
+        
+        document.getElementById('onb-main').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      // Step 4 back button
+      document.getElementById('btn-step4-back').addEventListener('click', function() {
+        document.getElementById('step4-content').style.display = 'none';
+        document.getElementById('step3-content').style.display = 'block';
+        
+        document.getElementById('step3-indicator').classList.remove('is-done');
+        document.getElementById('step3-indicator').classList.add('is-active');
+        document.getElementById('step4-indicator').classList.remove('is-active');
+        
+        document.getElementById('onb-progress').textContent = 'Step 3 of 4 · 75%';
+        
+        document.getElementById('onb-main').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      // Step 4 complete button
+      document.getElementById('btn-step4-complete').addEventListener('click', function() {
+        const step4Data = {
+          completed: true,
+          timestamp: new Date().toISOString()
+        };
+        localStorage.setItem('onb_step_4_data', JSON.stringify(step4Data));
+        localStorage.setItem('onb_current_step', '4');
+
+        // Emit completion event
+        window.dispatchEvent(new CustomEvent('step4:complete', {
+          detail: step4Data
+        }));
+
+        // Navigate to dashboard
+        console.log('[Step 4] Complete! Navigating to dashboard...');
+        // Set demo mode and redirect
+        localStorage.setItem('demo_mode', 'true');
+        window.location.href = '/dashboard.html';
+      });
+
+      // Review flagged items link
+      document.getElementById('step3-review-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        const flaggedTxs = mockTransactions.filter(t => t.flagged);
+        alert(`${flaggedTxs.length} flagged transactions for review:\n\n${flaggedTxs.map(t => `${t.date} - ${t.amount} - ${t.category} (${t.confidence}% confidence)`).join('\n')}`);
+      });
+    </script>
   </body>
 </html>
