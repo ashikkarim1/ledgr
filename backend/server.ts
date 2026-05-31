@@ -17,6 +17,13 @@ import { rateLimiter, requestLogger, startRateLimitCleanup } from "./middleware/
 
 // Controllers
 import * as authController from "./controllers/auth.controller";
+import * as workspacesController from "./controllers/workspaces.controller";
+import * as financialsController from "./controllers/financials.controller";
+import * as agentsController from "./controllers/agents.controller";
+import * as helpController from "./controllers/help.controller";
+import * as billingController from "./controllers/billing.controller";
+import * as integrationsController from "./controllers/integrations.controller";
+import * as auditController from "./controllers/audit.controller";
 
 // Routes
 import { createIntegrationRoutes, createWebhookRoutes } from "./routes/integrations";
