@@ -182,17 +182,31 @@ jobs:
     needs: build
     
     steps:
-      - name: Run Trivy vulnerability scanner
+      - name: Run Trivy vulnerability scanner for frontend
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: ${{ needs.build.outputs.frontend-image }}
           format: 'sarif'
-          output: 'trivy-results.sarif'
+          output: 'trivy-frontend-results.sarif'
       
-      - name: Upload Trivy results to GitHub Security tab
+      - name: Run Trivy vulnerability scanner for backend
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ needs.build.outputs.backend-image }}
+          format: 'sarif'
+          output: 'trivy-backend-results.sarif'
+      
+      - name: Upload Trivy frontend results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: 'trivy-frontend-results.sarif'
+          category: 'Trivy Frontend'
+      
+      - name: Upload Trivy backend results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-backend-results.sarif'
+          category: 'Trivy Backend'
 
   deploy-staging:
     name: Deploy to Staging
