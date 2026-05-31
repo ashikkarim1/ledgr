@@ -213,6 +213,13 @@ jobs:
           echo "Frontend image: ${FRONTEND_IMAGE_REF}"
           echo "Backend image: ${BACKEND_IMAGE_REF}"
       
+      - name: Verify Docker can access ECR images
+        run: |
+          echo "Attempting to pull frontend image: ${{ steps.image-uris.outputs.frontend-image }}"
+          docker pull ${{ steps.image-uris.outputs.frontend-image }} || echo "Failed to pull frontend image"
+          echo "Attempting to pull backend image: ${{ steps.image-uris.outputs.backend-image }}"
+          docker pull ${{ steps.image-uris.outputs.backend-image }} || echo "Failed to pull backend image"
+      
       - name: Run Trivy vulnerability scanner for frontend
         uses: aquasecurity/trivy-action@master
         with:
