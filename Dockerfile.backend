@@ -1,40 +1,69 @@
-# Multi-stage Dockerfile for Ledgr Backend API Server
-# This is a template for the Node.js/Express backend
+# Dockerfile for Ledgr Backend - Simple Node.js Server
+# Serves as a placeholder/companion to the frontend
+# In production, this can be replaced with an actual API server
 
-FROM node:20-alpine AS builder
-
-WORKDIR /app
-
-# Install build dependencies
-COPY package*.json ./
-RUN npm ci
-
-# Copy application source
-COPY . .
-
-# Run tests (if available)
-RUN npm run test || true
-
-# Build any TypeScript (if applicable)
-RUN npm run build || true
-
-# Stage 2: Production runtime
 FROM node:20-alpine
 
 WORKDIR /app
 
-# Install dumb-init for proper signal handling
+# Install minimal dependencies
 RUN apk add --no-cache dumb-init curl
 
-# Copy package files
+# Copy package files for dependency consistency
 COPY package*.json ./
 
 # Install production dependencies only
 RUN npm ci --only=production && \
     npm cache clean --force
 
-# Copy compiled application from builder
-COPY --from=builder /app/dist ./dist
+# Copy built static assets from the context
+COPY . .
+
+# Create a simple server file that can serve as a backend/health endpoint
+RUN cat > server.js << 'EOF'
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+
+const PORT = process.env.PORT || 3000;
+
+const server = http.createServer((req, res) => {
+  // Health check endpoint
+  if (req.url === '/health') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ status: 'healthy', timestamp: new Date().toISOString() }));
+    return;
+  }
+
+  // API info endpoint
+  if (req.url === '/api/info') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ 
+      name: 'Ledgr Backend',
+      version: '1.0.0',
+      status: 'running'
+    }));
+    return;
+  }
+
+  // Fallback response
+  res.writeHead(404, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify({ error: 'Not Found' }));
+});
+
+server.listen(PORT, () => {
+  console.log(`Backend server running on port ${PORT}`);
+});
+
+// Graceful shutdown
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefully...');
+  server.close(() => {
+    console.log('Server closed');
+    process.exit(0);
+  });
+});
+EOF
 
 # Create non-root user for security
 RUN addgroup -g 1001 -S nodejs && \
@@ -51,4 +80,4 @@ EXPOSE 3000
 # Use dumb-init to handle signals properly
 ENTRYPOINT ["dumb-init", "--"]
 
-CMD ["node", "dist/server.js"]
+CMD ["node", "server.js"]
