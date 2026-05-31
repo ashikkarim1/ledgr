@@ -280,6 +280,8 @@ jobs:
           FRONTEND_IMAGE: ${{ needs.build.outputs.frontend-image }}
           BACKEND_IMAGE: ${{ needs.build.outputs.backend-image }}
         run: |
+          kubectl config use-context arn:aws:eks:${{ env.AWS_REGION }}:${{ secrets.AWS_ACCOUNT_ID }}:cluster/${{ secrets.EKS_CLUSTER_NAME_STAGING }}
+          
           kubectl set image deployment/frontend \
             frontend=${{ env.FRONTEND_IMAGE }} \
             -n ${{ env.KUBE_NAMESPACE }} --record
