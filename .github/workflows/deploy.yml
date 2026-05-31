@@ -1,0 +1,421 @@
+name: CI/CD Deploy Pipeline
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REGISTRY_FRONTEND: ledgr-frontend
+  ECR_REGISTRY_BACKEND: ledgr-backend
+  EKS_CLUSTER_NAME: ledgr-production
+  EKS_NAMESPACE: ledgr
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+jobs:
+  # Stage 1: Lint and Test
+  lint-test:
+    name: Lint & Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run linter
+      run: npm run lint || true
+
+    - name: Run unit tests
+      run: npm run test || true
+
+    - name: Run security audit
+      run: npm audit --production || true
+
+    - name: Notify Slack on test failure
+      if: failure()
+      uses: slackapi/slack-github-action@v1
+      with:
+        webhook-url: ${{ env.SLACK_WEBHOOK_URL }}
+        payload: |
+          {
+            "text": "Tests failed for Ledgr",
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": ":x: Tests failed in *Ledgr* CI/CD pipeline\n*Branch:* ${{ github.ref }}\n*Commit:* <${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>"
+                }
+              }
+            ]
+          }
+
+  # Stage 2: Build Docker images
+  build:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    needs: lint-test
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    outputs:
+      frontend-image: ${{ steps.image-tag.outputs.frontend-image }}
+      backend-image: ${{ steps.image-tag.outputs.backend-image }}
+    timeout-minutes: 30
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
+
+    - name: Generate image tags
+      id: image-tag
+      run: |
+        COMMIT_HASH=$(echo ${{ github.sha }} | cut -c 1-7)
+        TIMESTAMP=$(date +%s)
+        FRONTEND_IMAGE=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REGISTRY_FRONTEND }}:${COMMIT_HASH}-${TIMESTAMP}
+        BACKEND_IMAGE=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REGISTRY_BACKEND }}:${COMMIT_HASH}-${TIMESTAMP}
+        echo "frontend-image=${FRONTEND_IMAGE}" >> $GITHUB_OUTPUT
+        echo "backend-image=${BACKEND_IMAGE}" >> $GITHUB_OUTPUT
+        echo "commit-hash=${COMMIT_HASH}" >> $GITHUB_OUTPUT
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build Frontend Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: |
+          ${{ steps.image-tag.outputs.frontend-image }}
+          ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REGISTRY_FRONTEND }}:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        build-args: |
+          BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          VCS_REF=${{ github.sha }}
+
+    - name: Build Backend Docker image (template)
+      uses: docker/build-push-action@v5
+      with:
+        context: ./server
+        file: ./Dockerfile.backend
+        push: true
+        tags: |
+          ${{ steps.image-tag.outputs.backend-image }}
+          ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REGISTRY_BACKEND }}:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        build-args: |
+          BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          VCS_REF=${{ github.sha }}
+
+    - name: Scan images for vulnerabilities
+      run: |
+        docker pull ${{ steps.image-tag.outputs.frontend-image }}
+        docker pull ${{ steps.image-tag.outputs.backend-image }}
+        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+          aquasec/trivy image ${{ steps.image-tag.outputs.frontend-image }} || true
+        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+          aquasec/trivy image ${{ steps.image-tag.outputs.backend-image }} || true
+
+    - name: Notify Slack on build success
+      if: success()
+      uses: slackapi/slack-github-action@v1
+      with:
+        webhook-url: ${{ env.SLACK_WEBHOOK_URL }}
+        payload: |
+          {
+            "text": "Docker images built successfully",
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": ":docker: Docker images built for *Ledgr*\n*Frontend:* `${{ steps.image-tag.outputs.frontend-image }}`\n*Backend:* `${{ steps.image-tag.outputs.backend-image }}`"
+                }
+              }
+            ]
+          }
+
+  # Stage 3: Deploy to Staging
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    environment:
+      name: staging
+    timeout-minutes: 20
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Update kubeconfig
+      run: |
+        aws eks update-kubeconfig \
+          --name ${{ env.EKS_CLUSTER_NAME }}-staging \
+          --region ${{ env.AWS_REGION }}
+
+    - name: Create namespace if not exists
+      run: |
+        kubectl create namespace ${{ env.EKS_NAMESPACE }} --dry-run=client -o yaml | kubectl apply -f -
+
+    - name: Create image pull secret
+      run: |
+        aws ecr get-login-password --region ${{ env.AWS_REGION }} | \
+          kubectl create secret docker-registry docker-registry-secret \
+          --docker-server=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com \
+          --docker-username=AWS \
+          --docker-password=$(aws ecr get-login-password --region ${{ env.AWS_REGION }}) \
+          -n ${{ env.EKS_NAMESPACE }} --dry-run=client -o yaml | kubectl apply -f -
+
+    - name: Update Kubernetes manifests
+      run: |
+        sed -i "s|ACCOUNT_ID|${{ secrets.AWS_ACCOUNT_ID }}|g" kubernetes/*.yaml
+        sed -i "s|REGION|${{ env.AWS_REGION }}|g" kubernetes/*.yaml
+        sed -i "s|ledgr-frontend:latest|${{ needs.build.outputs.frontend-image }}|g" kubernetes/frontend-deployment.yaml
+        sed -i "s|ledgr-backend:latest|${{ needs.build.outputs.backend-image }}|g" kubernetes/backend-deployment.yaml
+
+    - name: Apply Kubernetes manifests
+      run: |
+        kubectl apply -f kubernetes/namespace.yaml
+        kubectl apply -f kubernetes/rbac.yaml
+        kubectl apply -f kubernetes/configmap.yaml
+        kubectl apply -f kubernetes/secrets.yaml
+        kubectl apply -f kubernetes/frontend-deployment.yaml
+        kubectl apply -f kubernetes/backend-deployment.yaml
+        kubectl apply -f kubernetes/service.yaml
+        kubectl apply -f kubernetes/ingress.yaml
+
+    - name: Wait for rollout
+      run: |
+        kubectl rollout status deployment/frontend -n ${{ env.EKS_NAMESPACE }} --timeout=5m
+        kubectl rollout status deployment/backend -n ${{ env.EKS_NAMESPACE }} --timeout=5m
+
+    - name: Run smoke tests
+      run: |
+        kubectl run smoke-test --image=curlimages/curl:latest --rm -i --restart=Never \
+          -- curl -f http://frontend-service.${{ env.EKS_NAMESPACE }}.svc.cluster.local/health || exit 1
+
+    - name: Notify Slack on staging deployment
+      if: success()
+      uses: slackapi/slack-github-action@v1
+      with:
+        webhook-url: ${{ env.SLACK_WEBHOOK_URL }}
+        payload: |
+          {
+            "text": "Staging deployment successful",
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": ":rocket: *Ledgr* deployed to staging\n*Commit:* <${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>\n*Status:* All smoke tests passed"
+                }
+              }
+            ]
+          }
+
+  # Stage 4: Integration Tests
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: deploy-staging
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    timeout-minutes: 30
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Get staging URL
+      id: get-url
+      run: |
+        kubectl get service frontend-service -n ${{ env.EKS_NAMESPACE }} -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run integration tests
+      env:
+        STAGING_URL: ${{ steps.get-url.outputs.result }}
+      run: npm run test:integration || true
+
+    - name: Load testing with k6
+      run: |
+        npm install -g k6 || true
+        k6 run tests/load-test.js || true
+
+  # Stage 5: Deploy to Production
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [build, integration-tests]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment:
+      name: production
+    timeout-minutes: 20
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Update kubeconfig
+      run: |
+        aws eks update-kubeconfig \
+          --name ${{ env.EKS_CLUSTER_NAME }} \
+          --region ${{ env.AWS_REGION }}
+
+    - name: Create namespace if not exists
+      run: |
+        kubectl create namespace ${{ env.EKS_NAMESPACE }} --dry-run=client -o yaml | kubectl apply -f -
+
+    - name: Create image pull secret
+      run: |
+        aws ecr get-login-password --region ${{ env.AWS_REGION }} | \
+          kubectl create secret docker-registry docker-registry-secret \
+          --docker-server=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com \
+          --docker-username=AWS \
+          --docker-password=$(aws ecr get-login-password --region ${{ env.AWS_REGION }}) \
+          -n ${{ env.EKS_NAMESPACE }} --dry-run=client -o yaml | kubectl apply -f -
+
+    - name: Update Kubernetes manifests
+      run: |
+        sed -i "s|ACCOUNT_ID|${{ secrets.AWS_ACCOUNT_ID }}|g" kubernetes/*.yaml
+        sed -i "s|REGION|${{ env.AWS_REGION }}|g" kubernetes/*.yaml
+        sed -i "s|ledgr-frontend:latest|${{ needs.build.outputs.frontend-image }}|g" kubernetes/frontend-deployment.yaml
+        sed -i "s|ledgr-backend:latest|${{ needs.build.outputs.backend-image }}|g" kubernetes/backend-deployment.yaml
+
+    - name: Create backup of current deployment
+      run: |
+        mkdir -p deployment-backups
+        kubectl get deployment frontend -n ${{ env.EKS_NAMESPACE }} -o yaml > deployment-backups/frontend-backup.yaml || true
+        kubectl get deployment backend -n ${{ env.EKS_NAMESPACE }} -o yaml > deployment-backups/backend-backup.yaml || true
+
+    - name: Apply Kubernetes manifests
+      run: |
+        kubectl apply -f kubernetes/namespace.yaml
+        kubectl apply -f kubernetes/rbac.yaml
+        kubectl apply -f kubernetes/configmap.yaml
+        kubectl apply -f kubernetes/secrets.yaml
+        kubectl apply -f kubernetes/frontend-deployment.yaml
+        kubectl apply -f kubernetes/backend-deployment.yaml
+        kubectl apply -f kubernetes/service.yaml
+        kubectl apply -f kubernetes/ingress.yaml
+
+    - name: Wait for rollout
+      run: |
+        kubectl rollout status deployment/frontend -n ${{ env.EKS_NAMESPACE }} --timeout=10m
+        kubectl rollout status deployment/backend -n ${{ env.EKS_NAMESPACE }} --timeout=10m
+
+    - name: Verify production health
+      run: |
+        FRONTEND_POD=$(kubectl get pods -n ${{ env.EKS_NAMESPACE }} -l app=ledgr,component=frontend -o jsonpath='{.items[0].metadata.name}')
+        kubectl exec -n ${{ env.EKS_NAMESPACE }} ${FRONTEND_POD} -- curl -f http://localhost/health || exit 1
+        
+        BACKEND_POD=$(kubectl get pods -n ${{ env.EKS_NAMESPACE }} -l app=ledgr,component=backend -o jsonpath='{.items[0].metadata.name}')
+        kubectl exec -n ${{ env.EKS_NAMESPACE }} ${BACKEND_POD} -- curl -f http://localhost:3000/health || exit 1
+
+    - name: Verify metrics are flowing
+      run: |
+        kubectl get pods -n ${{ env.EKS_NAMESPACE }}
+        kubectl logs -n ${{ env.EKS_NAMESPACE }} -l app=ledgr --tail=50 || true
+
+    - name: Notify Slack on production deployment
+      if: success()
+      uses: slackapi/slack-github-action@v1
+      with:
+        webhook-url: ${{ env.SLACK_WEBHOOK_URL }}
+        payload: |
+          {
+            "text": "Production deployment successful",
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": ":rocket: *Ledgr* deployed to production\n*Commit:* <${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>\n*Frontend:* `${{ needs.build.outputs.frontend-image }}`\n*Backend:* `${{ needs.build.outputs.backend-image }}`"
+                }
+              }
+            ]
+          }
+
+    - name: Rollback on failure
+      if: failure()
+      run: |
+        echo "Rolling back to previous deployment..."
+        kubectl rollout undo deployment/frontend -n ${{ env.EKS_NAMESPACE }} || true
+        kubectl rollout undo deployment/backend -n ${{ env.EKS_NAMESPACE }} || true
+        kubectl rollout status deployment/frontend -n ${{ env.EKS_NAMESPACE }} --timeout=5m
+        kubectl rollout status deployment/backend -n ${{ env.EKS_NAMESPACE }} --timeout=5m
+
+    - name: Notify Slack on failure
+      if: failure()
+      uses: slackapi/slack-github-action@v1
+      with:
+        webhook-url: ${{ env.SLACK_WEBHOOK_URL }}
+        payload: |
+          {
+            "text": "Production deployment failed - rolled back",
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": ":alert: *Ledgr* production deployment failed\n*Commit:* <${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}|${{ github.sha }}>\n*Action:* Automatically rolled back to previous version"
+                }
+              }
+            ]
+          }

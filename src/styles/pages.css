@@ -1,0 +1,515 @@
+/**
+ * Page Styles
+ * Individual page layouts and components
+ */
+
+/* ============================================================
+   PAGE STRUCTURE
+   ============================================================ */
+
+.page {
+  animation: fadeIn 0.4s var(--ease);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.page__header {
+  margin-bottom: 40px;
+}
+
+.page__title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--ink-1);
+  margin: 0 0 8px 0;
+}
+
+.page__subtitle {
+  font-size: 16px;
+  color: var(--ink-2);
+  margin: 0 0 16px 0;
+}
+
+.page__actions {
+  display: flex;
+  gap: 12px;
+}
+
+.page__section {
+  margin-bottom: 48px;
+}
+
+.page__section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink-1);
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+  text-decoration: none;
+  gap: 8px;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn--primary:hover {
+  background: var(--accent-2);
+}
+
+.btn--secondary {
+  background: var(--paper);
+  color: var(--ink-1);
+  border: 1px solid var(--line);
+}
+
+.btn--secondary:hover {
+  border-color: var(--accent);
+  background: white;
+}
+
+/* ============================================================
+   DASHBOARD PAGE
+   ============================================================ */
+
+.page--dashboard {
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.activity-feed {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.cta-card {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  color: white;
+  text-align: center;
+}
+
+.cta-card__title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+}
+
+.cta-card__description {
+  font-size: 16px;
+  margin: 0 0 24px 0;
+  opacity: 0.95;
+}
+
+.cta-card__buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-card .btn {
+  background: white;
+  color: var(--accent);
+}
+
+.cta-card .btn:hover {
+  opacity: 0.9;
+}
+
+/* ============================================================
+   FINANCIAL DASHBOARD PAGE
+   ============================================================ */
+
+.page--financial-dashboard {
+}
+
+.financial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.financial-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  text-align: center;
+}
+
+.financial-card__label {
+  font-size: 12px;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.financial-card__value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink-1);
+  font-feature-settings: "tnum";
+}
+
+.close-status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.close-status-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 24px;
+  text-align: center;
+  transition: all 0.2s var(--ease);
+}
+
+.close-status-card:hover {
+  border-color: var(--accent);
+  background: white;
+}
+
+.close-status-card__percentage,
+.close-status-card__icon {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.close-status-card__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-1);
+  margin-bottom: 8px;
+}
+
+.close-status-card__detail {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+/* Transactions Table */
+.transactions-table {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr;
+  gap: 16px;
+  padding: 16px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.table-header__cell {
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+  transition: all 0.2s var(--ease);
+}
+
+.table-row:hover {
+  background: var(--paper);
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-cell {
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.table-cell--posted {
+  color: #10b981;
+  font-weight: 500;
+}
+
+.table-cell--pending {
+  color: #f59e0b;
+  font-weight: 500;
+}
+
+/* Performance Grid */
+.performance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.performance-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  text-align: center;
+  transition: all 0.2s var(--ease);
+}
+
+.performance-card:hover {
+  border-color: var(--accent);
+  background: white;
+}
+
+.performance-card__icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.performance-card__label {
+  font-size: 12px;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.performance-card__value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ink-1);
+  margin-bottom: 8px;
+  font-feature-settings: "tnum";
+}
+
+.performance-card__detail {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+/* ============================================================
+   AGENTS PAGE
+   ============================================================ */
+
+.page--agents {
+}
+
+.agent-config {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.agent-config__section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.agent-config__section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.agent-config__heading {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-1);
+  margin: 0;
+}
+
+.agent-config__item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.agent-config__item label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-1);
+}
+
+.agent-config__item input {
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  background: var(--paper);
+}
+
+.agent-config__item input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.agent-config__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.agent-config__checkbox input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.agent-config__checkbox label {
+  font-size: 13px;
+  color: var(--ink-1);
+  cursor: pointer;
+}
+
+.agent-config__actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  text-align: center;
+  transition: all 0.2s var(--ease);
+}
+
+.stat-card:hover {
+  border-color: var(--accent);
+  background: white;
+}
+
+.stat-card__label {
+  font-size: 12px;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.stat-card__value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+  font-feature-settings: "tnum";
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .page__title {
+    font-size: 24px;
+  }
+
+  .page__subtitle {
+    font-size: 14px;
+  }
+
+  .metrics-grid,
+  .agents-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .table-header,
+  .table-row {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+
+  .close-status-grid,
+  .performance-grid,
+  .financial-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .cta-card {
+    padding: 24px;
+  }
+
+  .cta-card__title {
+    font-size: 20px;
+  }
+
+  .cta-card__buttons {
+    flex-direction: column;
+  }
+
+  .agent-config {
+    padding: 16px;
+  }
+}

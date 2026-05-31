@@ -1,0 +1,190 @@
+groups:
+  - name: ledgr.rules
+    interval: 30s
+    rules:
+
+    # Pod crash alerts
+    - alert: PodCrashLooping
+      expr: rate(kube_pod_container_status_restarts_total[1h]) > 0
+      for: 5m
+      labels:
+        severity: critical
+        component: application
+      annotations:
+        summary: "Pod {{ $labels.pod }} is crash looping"
+        description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} has restarted {{ $value }} times in the last hour"
+
+    # Pod not ready
+    - alert: PodNotReady
+      expr: sum by (namespace, pod) (kube_pod_status_phase{phase=~"Failed|Unknown"}) > 0
+      for: 10m
+      labels:
+        severity: warning
+        component: application
+      annotations:
+        summary: "Pod {{ $labels.pod }} is not ready"
+        description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} has been in {{ $labels.phase }} state for more than 10 minutes"
+
+    # High latency
+    - alert: HighLatency
+      expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 1
+      for: 5m
+      labels:
+        severity: warning
+        component: performance
+      annotations:
+        summary: "High HTTP latency detected"
+        description: "95th percentile latency is {{ $value | humanizeDuration }} (threshold: 1s)"
+
+    # High error rate
+    - alert: HighErrorRate
+      expr: (sum(rate(http_requests_total{status=~"5.."}[5m])) / sum(rate(http_requests_total[5m]))) > 0.01
+      for: 5m
+      labels:
+        severity: warning
+        component: application
+      annotations:
+        summary: "High error rate detected"
+        description: "Error rate is {{ $value | humanizePercentage }} (threshold: 1%)"
+
+    # Database connection pool exhaustion
+    - alert: DatabaseConnectionPoolNearExhaustion
+      expr: (pg_stat_activity_count / pg_settings_max_connections) > 0.8
+      for: 5m
+      labels:
+        severity: warning
+        component: database
+      annotations:
+        summary: "Database connection pool near exhaustion"
+        description: "{{ $value | humanizePercentage }} of available connections are in use"
+
+    # Database down
+    - alert: DatabaseDown
+      expr: pg_up == 0
+      for: 1m
+      labels:
+        severity: critical
+        component: database
+      annotations:
+        summary: "PostgreSQL database is down"
+        description: "PostgreSQL instance {{ $labels.instance }} is not responding"
+
+    # Redis down
+    - alert: RedisDown
+      expr: redis_up == 0
+      for: 1m
+      labels:
+        severity: critical
+        component: cache
+      annotations:
+        summary: "Redis cache is down"
+        description: "Redis instance {{ $labels.instance }} is not responding"
+
+    # Redis memory usage high
+    - alert: RedisMemoryHigh
+      expr: (redis_memory_used_bytes / redis_memory_max_bytes) > 0.85
+      for: 5m
+      labels:
+        severity: warning
+        component: cache
+      annotations:
+        summary: "Redis memory usage is high"
+        description: "Redis is using {{ $value | humanizePercentage }} of available memory"
+
+    # Node memory pressure
+    - alert: KubernetesMemoryPressure
+      expr: kube_node_status_condition{condition="MemoryPressure",status="true"} == 1
+      for: 5m
+      labels:
+        severity: warning
+        component: infrastructure
+      annotations:
+        summary: "Kubernetes node memory pressure"
+        description: "Node {{ $labels.node }} is experiencing memory pressure"
+
+    # Node disk pressure
+    - alert: KubernetesDiskPressure
+      expr: kube_node_status_condition{condition="DiskPressure",status="true"} == 1
+      for: 5m
+      labels:
+        severity: warning
+        component: infrastructure
+      annotations:
+        summary: "Kubernetes node disk pressure"
+        description: "Node {{ $labels.node }} is experiencing disk pressure"
+
+    # Persistent volume nearly full
+    - alert: PersistentVolumeNearlyFull
+      expr: (kubelet_volume_stats_available_bytes / kubelet_volume_stats_capacity_bytes) < 0.1
+      for: 10m
+      labels:
+        severity: warning
+        component: storage
+      annotations:
+        summary: "Persistent volume nearly full"
+        description: "PV {{ $labels.persistentvolumeclaim }} is {{ $value | humanizePercentage }} full"
+
+    # CPU throttling
+    - alert: ContainerCPUThrottling
+      expr: rate(container_cpu_cfs_throttled_seconds_total[5m]) > 0.1
+      for: 5m
+      labels:
+        severity: warning
+        component: performance
+      annotations:
+        summary: "Container CPU throttling"
+        description: "Container {{ $labels.pod }} is being CPU throttled"
+
+    # OOM killed pods
+    - alert: OOMKilledPods
+      expr: increase(kube_pod_container_status_last_terminated_reason{reason="OOMKilled"}[1h]) > 0
+      labels:
+        severity: critical
+        component: application
+      annotations:
+        summary: "Pod out of memory"
+        description: "Pod {{ $labels.pod }} was killed due to OOM in the last hour"
+
+    # High ingress latency
+    - alert: HighIngressLatency
+      expr: histogram_quantile(0.99, rate(nginx_ingress_controller_request_duration_seconds_bucket[5m])) > 2
+      for: 5m
+      labels:
+        severity: warning
+        component: networking
+      annotations:
+        summary: "High ingress latency"
+        description: "99th percentile ingress latency is {{ $value | humanizeDuration }}"
+
+    # Ingress errors
+    - alert: HighIngressErrorRate
+      expr: rate(nginx_ingress_controller_requests{status=~"5.."}[5m]) > 0.05
+      for: 5m
+      labels:
+        severity: warning
+        component: networking
+      annotations:
+        summary: "High ingress error rate"
+        description: "Ingress error rate is {{ $value }} requests/sec"
+
+    # API response time SLO
+    - alert: APIResponseTimeSLOViolation
+      expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 0.5
+      for: 10m
+      labels:
+        severity: warning
+        component: application
+      annotations:
+        summary: "API response time SLO violated"
+        description: "95th percentile response time is {{ $value | humanizeDuration }} (SLO: 500ms)"
+
+    # Deployment replica mismatch
+    - alert: DeploymentReplicasMismatch
+      expr: kube_deployment_spec_replicas != kube_deployment_status_replicas_available
+      for: 10m
+      labels:
+        severity: warning
+        component: kubernetes
+      annotations:
+        summary: "Deployment replicas mismatch"
+        description: "Deployment {{ $labels.deployment }} has {{ $value }} replicas, but only {{ $labels.replicas }} are available"

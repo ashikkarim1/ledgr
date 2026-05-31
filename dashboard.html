@@ -6,12 +6,13 @@
     <meta name="theme-color" content="#f9f9f9" media="(prefers-color-scheme: light)" />
     <title>Finance Dashboard — Ledgr</title>
     <meta name="description" content="Your unified AI finance dashboard. Business overview and operations on demand." />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='-apple-system,sans-serif' font-size='17' font-weight='600' fill='%23fbfaf7'%3EL%3C/text%3E%3C/svg%3E" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='-apple-system,sans-serif' font-size='17' font-weight='600' fill='%23f9f9f9'%3EL%3C/text%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/tailwind-output.css" />
     <link rel="stylesheet" href="assets/styles.css" />
+    <link rel="stylesheet" href="assets/chat-styles.css" />
     <style>
       /* Dashboard Container */
       .dashboard {
@@ -361,6 +362,63 @@
         }
       }
 
+      /* Agent Roster Grid */
+      .agent-roster {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+
+      .agent-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 20px;
+        transition: all 0.3s var(--ease);
+        cursor: pointer;
+        position: relative;
+      }
+
+      .agent-card:hover {
+        border-color: var(--accent);
+        box-shadow: 0 8px 24px rgba(255, 92, 0, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .agent-card__role {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--ink-1);
+        margin: 0 0 12px 0;
+        display: block;
+      }
+
+      .agent-card__status {
+        font-size: 13px;
+        color: var(--accent);
+        margin: 0 0 12px 0;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .agent-card__current {
+        font-size: 13px;
+        color: var(--ink-2);
+        margin: 0 0 12px 0;
+        line-height: 1.4;
+        min-height: 32px;
+      }
+
+      .agent-card__confidence {
+        font-size: 12px;
+        color: var(--ink-3);
+        margin: 0;
+        padding-top: 12px;
+        border-top: 1px solid var(--line);
+      }
+
       /* Agent Activity Feed */
       .activity-feed {
         background: var(--surface);
@@ -382,7 +440,7 @@
 
       .activity-feed__title::before {
         content: "●";
-        color: #10b981;
+        color: var(--accent);
         font-size: 12px;
         animation: pulse 2s infinite;
       }
@@ -414,8 +472,8 @@
       }
 
       .activity-item.success {
-        border-left-color: #10b981;
-        background: rgba(16, 185, 129, 0.02);
+        border-left-color: var(--accent);
+        background: rgba(255, 92, 0, 0.02);
       }
 
       .activity-item__header {
@@ -484,7 +542,7 @@
       }
 
       .task-section.success .task-section__label {
-        color: #10b981;
+        color: var(--accent);
       }
 
       .task-item {
@@ -702,7 +760,7 @@
         width: 6px;
         height: 6px;
         border-radius: 50%;
-        background: #10b981;
+        background: var(--accent);
       }
 
       /* Responsive */
@@ -904,9 +962,47 @@
         <!-- FINANCE OPERATIONS TAB -->
         <div id="operationsTab" class="dashboard__content">
           <div class="operations">
-            <div class="operations__container">
-              <!-- Left Column: Activity Feed -->
-              <div>
+            <!-- SECTION 1: AGENT TEAM ROSTER -->
+            <div class="overview__section">
+              <h2 class="overview__section-title">Your Finance Team</h2>
+              <div class="agent-roster">
+                <div class="agent-card">
+                  <div class="agent-card__role">Chief Accountant</div>
+                  <div class="agent-card__status">● Active</div>
+                  <div class="agent-card__current">Currently: Reconciliation review</div>
+                  <div class="agent-card__confidence">Confidence: 98%</div>
+                </div>
+                <div class="agent-card">
+                  <div class="agent-card__role">Accounts Payable Manager</div>
+                  <div class="agent-card__status">● Active</div>
+                  <div class="agent-card__current">Currently: Invoice matching</div>
+                  <div class="agent-card__confidence">Confidence: 95%</div>
+                </div>
+                <div class="agent-card">
+                  <div class="agent-card__role">Tax Advisor</div>
+                  <div class="agent-card__status">● Active</div>
+                  <div class="agent-card__current">Currently: Deduction analysis</div>
+                  <div class="agent-card__confidence">Confidence: 97%</div>
+                </div>
+                <div class="agent-card">
+                  <div class="agent-card__role">Accounts Receivable Specialist</div>
+                  <div class="agent-card__status">● Active</div>
+                  <div class="agent-card__current">Currently: Collection review</div>
+                  <div class="agent-card__confidence">Confidence: 96%</div>
+                </div>
+                <div class="agent-card">
+                  <div class="agent-card__role">External CPA</div>
+                  <div class="agent-card__status">● Standby</div>
+                  <div class="agent-card__current">Available for review</div>
+                  <div class="agent-card__confidence">Trusted partner</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION 2: LIVE ACTIVITY & TASK QUEUE -->
+            <div class="overview__section">
+              <h2 class="overview__section-title">Live Activity & Current Tasks</h2>
+              <div class="operations__container">
                 <div class="activity-feed">
                   <div class="activity-feed__title">Real-Time Agent Activity</div>
                   <div class="activity-list" id="activityList">
@@ -1126,7 +1222,31 @@
       </div>
     </div>
 
+    <script src="assets/chat-types.js"></script>
+    <script src="assets/chat-widget.js"></script>
+    <script src="assets/escalation-modal.js"></script>
     <script>
+      // Initialize Chat Widget
+      const chatWidget = new ChatWidget({
+        apiBaseUrl: '/api/v1',
+        whatsappNumber: '+971501234567',
+        enableDarkMode: true,
+        maxHistoryItems: 50,
+        position: 'bottom-right',
+        primaryColor: '#FF5C00',
+        accentColor: '#FF5C00'
+      });
+      
+      chatWidget.mount();
+      
+      // Initialize Escalation Modal
+      const escalationModal = new EscalationModal({
+        apiBaseUrl: '/api/v1',
+        whatsappNumber: '+971501234567'
+      });
+      
+      escalationModal.mount();
+
       // Tab Switching
       document.querySelectorAll('.dashboard__tab').forEach(tab => {
         tab.addEventListener('click', () => {

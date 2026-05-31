@@ -1,0 +1,64 @@
+# Deployment and Infrastructure
+
+# Kubernetes secrets (DO NOT COMMIT)
+kubernetes/secrets.yaml
+kubernetes/secrets.local.yaml
+
+# Local environment files
+.env
+.env.local
+.env.*.local
+
+# AWS credentials
+.aws/
+aws_credentials.txt
+
+# Terraform
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+*.tfvars
+!*.tfvars.example
+
+# Docker
+.docker/
+docker-compose.override.yml
+.dockerignore.local
+
+# Helm
+helm/values.local.yaml
+helm/values.*.yaml
+!helm/values.example.yaml
+
+# Backup files
+*.backup
+*.bak
+deployment-backups/
+
+# Logs
+*.log
+logs/
+
+# IDE
+.idea/
+.vscode/local*
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# Credentials (general)
+*credentials*
+*password*
+*token*
+*secret*
+!*example*

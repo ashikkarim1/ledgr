@@ -1,0 +1,88 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ledgr-config
+  namespace: ledgr
+  labels:
+    app: ledgr
+    component: config
+data:
+  # Environment configuration
+  NODE_ENV: "production"
+  LOG_LEVEL: "info"
+  API_PORT: "3000"
+  FRONTEND_PORT: "80"
+
+  # Database configuration (use Secrets for sensitive data)
+  POSTGRES_DB: "ledgr"
+  POSTGRES_HOST: "postgres-service.ledgr.svc.cluster.local"
+  POSTGRES_PORT: "5432"
+
+  # Redis configuration
+  REDIS_HOST: "redis-service.ledgr.svc.cluster.local"
+  REDIS_PORT: "6379"
+  REDIS_DB: "0"
+
+  # Vector DB configuration
+  PINECONE_INDEX: "ledgr-index"
+  PINECONE_ENVIRONMENT: "production"
+
+  # Application configuration
+  SESSION_TIMEOUT: "3600"
+  JWT_EXPIRY: "86400"
+  RATE_LIMIT: "100"
+  RATE_LIMIT_WINDOW: "60"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: ledgr
+  labels:
+    app: ledgr
+    component: frontend
+data:
+  nginx.conf: |
+    server {
+        listen 80;
+        server_name _;
+
+        gzip on;
+        gzip_types text/plain text/css text/xml text/javascript 
+                   application/x-javascript application/xml+rss 
+                   application/javascript application/json;
+        gzip_min_length 256;
+        gzip_vary on;
+
+        root /app;
+        index index.html;
+
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header X-Frame-Options "SAMEORIGIN" always;
+        add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+
+        location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {
+            expires 1y;
+            add_header Cache-Control "public, immutable";
+        }
+
+        location ~* \.html$ {
+            add_header Cache-Control "public, max-age=3600";
+        }
+
+        location / {
+            try_files $uri $uri/ /index.html;
+        }
+
+        location /health {
+            access_log off;
+            return 200 "healthy\n";
+            add_header Content-Type text/plain;
+        }
+
+        location ~ /\. {
+            deny all;
+            access_log off;
+        }
+    }

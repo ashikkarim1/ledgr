@@ -9,7 +9,197 @@
      gracefully simulates success and stores locally
    - UAE Pass authentication: mock OAuth flow, JWT tokens,
      session management, logout
+   - Corgi animation enhancements: infinite carousel support,
+     hardware-accelerated transforms, smooth looping
    ============================================================ */
+
+/* ============================================================
+   ANIMATION MODULE - Carousel & Scroll Reveal Helpers
+   Provides hardware-accelerated infinite carousel animations
+   and enhanced scroll-reveal support for dynamic content
+   ============================================================ */
+const AnimationModule = (() => {
+  /**
+   * Initialize infinite carousel animation
+   * Adds CSS animation and hardware acceleration to carousel elements
+   * @param {string} selector - CSS selector for carousel containers
+   * @param {number} duration - Animation duration in seconds (default: 60)
+   */
+  function initCarousel(selector = ".carousel-infinite", duration = 60) {
+    const carousels = document.querySelectorAll(selector);
+    if (carousels.length === 0) {
+      console.log("[Animation] No carousel elements found");
+      return;
+    }
+
+    carousels.forEach((carousel) => {
+      // Apply hardware acceleration
+      carousel.style.transform = "translateZ(0)";
+      carousel.style.willChange = "transform";
+      
+      // Add animation class with duration
+      carousel.style.animation = `carousel-infinite ${duration}s linear infinite`;
+      
+      console.log(
+        `[Animation] Carousel initialized: ${selector} (${duration}s duration)`
+      );
+    });
+
+    // Inject CSS animation if not already present
+    if (!document.getElementById("carousel-animation-styles")) {
+      const style = document.createElement("style");
+      style.id = "carousel-animation-styles";
+      style.textContent = `
+        @keyframes carousel-infinite {
+          0% {
+            transform: translateX(0) translateZ(0);
+          }
+          100% {
+            transform: translateX(-100%) translateZ(0);
+          }
+        }
+        
+        @keyframes carousel-infinite-rtl {
+          0% {
+            transform: translateX(0) translateZ(0);
+          }
+          100% {
+            transform: translateX(100%) translateZ(0);
+          }
+        }
+      `;
+      document.head.appendChild(style);
+      console.log("[Animation] Carousel animation styles injected");
+    }
+  }
+
+  /**
+   * Initialize enhanced scroll-reveal for carousel sections
+   * Supports both static reveal and infinite carousel animations
+   * @param {string} revealSelector - CSS selector for reveal elements
+   * @param {string} carouselSelector - CSS selector for carousel elements (optional)
+   */
+  function initScrollReveal(revealSelector = ".reveal", carouselSelector = null) {
+    if (!("IntersectionObserver" in window)) {
+      console.log("[Animation] IntersectionObserver not supported, adding is-in to all reveals");
+      document
+        .querySelectorAll(revealSelector)
+        .forEach((el) => el.classList.add("is-in"));
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-in");
+            // Don't unobserve carousels — they may need to loop
+            if (!e.target.matches(carouselSelector || ".carousel-infinite")) {
+              io.unobserve(e.target);
+            }
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    document.querySelectorAll(revealSelector).forEach((el) => io.observe(el));
+    console.log(
+      `[Animation] Scroll-reveal initialized for ${revealSelector}`
+    );
+  }
+
+  /**
+   * Pause/resume carousel animation
+   * Useful for hover states or user interactions
+   * @param {string} selector - CSS selector for carousel
+   * @param {boolean} paused - True to pause, false to resume
+   */
+  function toggleCarouselPause(selector, paused = true) {
+    document.querySelectorAll(selector).forEach((carousel) => {
+      carousel.style.animationPlayState = paused ? "paused" : "running";
+    });
+  }
+
+  // Public API
+  return {
+    initCarousel,
+    initScrollReveal,
+    toggleCarouselPause,
+  };
+})();
+
+/* ============================================================
+   STORAGE MODULE - Persistent localStorage with fallback
+   Provides safe localStorage access with verification
+   ============================================================ */
+const StorageModule = (() => {
+  /**
+   * Check if localStorage is available and functional
+   */
+  function isAvailable() {
+    try {
+      const test = "__ledgr_storage_test__";
+      localStorage.setItem(test, "1");
+      localStorage.removeItem(test);
+      return true;
+    } catch (err) {
+      console.warn("[Storage] localStorage unavailable:", err);
+      return false;
+    }
+  }
+
+  /**
+   * Safely get item from localStorage
+   */
+  function getItem(key, fallback = null) {
+    try {
+      if (!isAvailable()) return fallback;
+      const item = localStorage.getItem(key);
+      return item ? JSON.parse(item) : fallback;
+    } catch (err) {
+      console.warn(`[Storage] Failed to get ${key}:`, err);
+      return fallback;
+    }
+  }
+
+  /**
+   * Safely set item in localStorage
+   */
+  function setItem(key, value) {
+    try {
+      if (!isAvailable()) return false;
+      localStorage.setItem(key, JSON.stringify(value));
+      console.log(`[Storage] Set ${key}`);
+      return true;
+    } catch (err) {
+      console.warn(`[Storage] Failed to set ${key}:`, err);
+      return false;
+    }
+  }
+
+  /**
+   * Safely remove item from localStorage
+   */
+  function removeItem(key) {
+    try {
+      if (!isAvailable()) return false;
+      localStorage.removeItem(key);
+      console.log(`[Storage] Removed ${key}`);
+      return true;
+    } catch (err) {
+      console.warn(`[Storage] Failed to remove ${key}:`, err);
+      return false;
+    }
+  }
+
+  return {
+    isAvailable,
+    getItem,
+    setItem,
+    removeItem,
+  };
+})();
 
 /* ============================================================
    AUTHENTICATION MODULE (UAE Pass + Session Management)
@@ -61,50 +251,31 @@ const AuthModule = (() => {
    * Retrieve stored auth token from localStorage
    */
   function getStoredToken() {
-    try {
-      return localStorage.getItem(CONFIG.STORAGE_KEY_TOKEN);
-    } catch (err) {
-      console.warn("[Auth] localStorage unavailable:", err);
-      return null;
-    }
+    return StorageModule.getItem(CONFIG.STORAGE_KEY_TOKEN);
   }
 
   /**
    * Retrieve stored user data from localStorage
    */
   function getStoredUser() {
-    try {
-      const userJson = localStorage.getItem(CONFIG.STORAGE_KEY_USER);
-      return userJson ? JSON.parse(userJson) : null;
-    } catch (err) {
-      console.warn("[Auth] Failed to retrieve stored user:", err);
-      return null;
-    }
+    return StorageModule.getItem(CONFIG.STORAGE_KEY_USER);
   }
 
   /**
    * Store token in localStorage
    */
   function storeToken(token, expiresAt) {
-    try {
-      localStorage.setItem(CONFIG.STORAGE_KEY_TOKEN, token);
-      localStorage.setItem("auth_token_expires_at", expiresAt.toString());
-      console.log("[Auth] Token stored successfully, expires at:", new Date(expiresAt).toISOString());
-    } catch (err) {
-      console.warn("[Auth] Failed to store token:", err);
-    }
+    StorageModule.setItem(CONFIG.STORAGE_KEY_TOKEN, token);
+    StorageModule.setItem("auth_token_expires_at", expiresAt);
+    console.log("[Auth] Token stored successfully, expires at:", new Date(expiresAt).toISOString());
   }
 
   /**
    * Store user data in localStorage
    */
   function storeUser(userData) {
-    try {
-      localStorage.setItem(CONFIG.STORAGE_KEY_USER, JSON.stringify(userData));
-      console.log("[Auth] User data stored:", userData.entity_name);
-    } catch (err) {
-      console.warn("[Auth] Failed to store user data:", err);
-    }
+    StorageModule.setItem(CONFIG.STORAGE_KEY_USER, userData);
+    console.log("[Auth] User data stored:", userData.entity_name);
   }
 
   /**
@@ -160,13 +331,9 @@ const AuthModule = (() => {
    */
   function logout() {
     console.log("[Auth] Logging out...");
-    try {
-      localStorage.removeItem(CONFIG.STORAGE_KEY_TOKEN);
-      localStorage.removeItem(CONFIG.STORAGE_KEY_USER);
-      localStorage.removeItem("auth_token_expires_at");
-    } catch (err) {
-      console.warn("[Auth] Error during logout:", err);
-    }
+    StorageModule.removeItem(CONFIG.STORAGE_KEY_TOKEN);
+    StorageModule.removeItem(CONFIG.STORAGE_KEY_USER);
+    StorageModule.removeItem("auth_token_expires_at");
     updateAuthUI();
   }
 
@@ -355,6 +522,25 @@ const AuthModule = (() => {
       .forEach((el) => el.classList.add("is-in"));
   }
 
+  /* ---------- Carousel animation initialization ---------- */
+  // Initialize infinite carousel animations on page load
+  document.addEventListener("DOMContentLoaded", () => {
+    // Initialize carousels for customers, guides, logos sections
+    AnimationModule.initCarousel(".carousel-infinite", 60);
+    
+    // Pause carousel on hover
+    document.querySelectorAll(".carousel-infinite").forEach((carousel) => {
+      carousel.addEventListener("mouseenter", () => {
+        AnimationModule.toggleCarouselPause(".carousel-infinite", true);
+      });
+      carousel.addEventListener("mouseleave", () => {
+        AnimationModule.toggleCarouselPause(".carousel-infinite", false);
+      });
+    });
+    
+    console.log("[App] Carousel animations initialized");
+  });
+
   /* ---------- Tabs ---------- */
   document.querySelectorAll(".tabs").forEach((group) => {
     group.addEventListener("click", (e) => {
@@ -417,7 +603,7 @@ const AuthModule = (() => {
 
     // Restore prior submission
     try {
-      const prior = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+      const prior = StorageModule.getItem(STORAGE_KEY);
       if (prior?.email) showSuccess(prior, { focus: false });
     } catch {
       /* ignore */
@@ -442,7 +628,7 @@ const AuthModule = (() => {
       const submittedAt = Date.now();
 
       const payload = {
-        _subject: `Ledgr waitlist · ${fd.get("name") || "Unknown"} · ${
+        _subject: `Ledgr waitlist · ${fd.get("name") || "Unknown"} · ${ 
           fd.get("company") || "—"
         }`,
         _template: "table",
@@ -461,11 +647,7 @@ const AuthModule = (() => {
       const data = { ...payload, firstName, submittedAt };
 
       // Persist locally first so we never lose a submission on flaky network.
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-      } catch {
-        /* ignore */
-      }
+      StorageModule.setItem(STORAGE_KEY, data);
 
       try {
         const res = await fetch(ENDPOINT, {
@@ -482,11 +664,7 @@ const AuthModule = (() => {
         // Mark as queued — we still confirm to the user so they aren't blocked.
         // The submission is in localStorage and can be resent on next load.
         data.queued = true;
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-        } catch {
-          /* ignore */
-        }
+        StorageModule.setItem(STORAGE_KEY, data);
         console.warn("Waitlist submission queued (network):", err);
       }
 
@@ -552,7 +730,11 @@ const AuthModule = (() => {
       els.cTermTotal.textContent = fmtAed(termTotal);
     };
 
-    ["clients", "plan", "months"].forEach((k) =>
+    [
+      "clients",
+      "plan",
+      "months",
+    ].forEach((k) =>
       els[k].addEventListener("input", update)
     );
     update();
@@ -658,7 +840,7 @@ const AuthModule = (() => {
    */
   const init = () => {
     // Restore step from localStorage or default to 1
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = StorageModule.getItem(STORAGE_KEY);
     if (saved && !isNaN(parseInt(saved))) {
       currentStep = Math.max(1, Math.min(TOTAL_STEPS, parseInt(saved)));
     } else {
@@ -718,7 +900,7 @@ const AuthModule = (() => {
     if (stepNum === currentStep) return;
 
     currentStep = stepNum;
-    localStorage.setItem(STORAGE_KEY, currentStep.toString());
+    StorageModule.setItem(STORAGE_KEY, currentStep);
     console.log(`[Onboarding] Navigated to step ${currentStep}`);
 
     updateStepVisibility();
@@ -731,12 +913,8 @@ const AuthModule = (() => {
    */
   const setStepData = (stepNum, data) => {
     const key = `${DATA_PREFIX}${stepNum}`;
-    try {
-      localStorage.setItem(key, JSON.stringify(data));
-      console.log(`[Onboarding] Saved data for step ${stepNum}:`, data);
-    } catch (err) {
-      console.error(`[Onboarding] Failed to save step ${stepNum} data:`, err);
-    }
+    StorageModule.setItem(key, data);
+    console.log(`[Onboarding] Saved data for step ${stepNum}:`, data);
   };
 
   /**
@@ -744,15 +922,10 @@ const AuthModule = (() => {
    */
   const getStepData = (stepNum) => {
     const key = `${DATA_PREFIX}${stepNum}`;
-    try {
-      const stored = localStorage.getItem(key);
-      if (stored) {
-        const data = JSON.parse(stored);
-        console.log(`[Onboarding] Retrieved data for step ${stepNum}:`, data);
-        return data;
-      }
-    } catch (err) {
-      console.error(`[Onboarding] Failed to retrieve step ${stepNum} data:`, err);
+    const data = StorageModule.getItem(key);
+    if (data) {
+      console.log(`[Onboarding] Retrieved data for step ${stepNum}:`, data);
+      return data;
     }
     return null;
   };

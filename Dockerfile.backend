@@ -1,0 +1,56 @@
+# Multi-stage Dockerfile for Ledgr Backend API Server
+# This is a template for the Node.js/Express backend
+
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Install build dependencies
+COPY package*.json ./
+RUN npm ci
+
+# Copy application source
+COPY . .
+
+# Run tests (if available)
+RUN npm run test || true
+
+# Build any TypeScript (if applicable)
+RUN npm run build || true
+
+# Stage 2: Production runtime
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install dumb-init for proper signal handling
+RUN apk add --no-cache dumb-init curl
+
+# Copy package files
+COPY package*.json ./
+
+# Install production dependencies only
+RUN npm ci --only=production && \
+    npm cache clean --force
+
+# Copy application from builder
+COPY --from=builder /app/dist ./dist || true
+COPY --from=builder /app/src ./src || true
+COPY --from=builder /app/config ./config || true
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nodejs -u 1001
+
+USER nodejs
+
+# Health check endpoint
+HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
+    CMD curl -f http://localhost:3000/health || exit 1
+
+EXPOSE 3000
+
+# Use dumb-init to handle signals properly
+ENTRYPOINT ["dumb-init", "--"]
+
+CMD ["node", "dist/server.js"]

@@ -1,0 +1,432 @@
+/**
+ * Components Styles
+ * Reusable component styles
+ */
+
+/* ============================================================
+   METRIC CARD
+   ============================================================ */
+
+.metric-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: all 0.3s var(--ease);
+  cursor: pointer;
+}
+
+.metric-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(255, 92, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.metric-card__label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.metric-card__value {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--ink-1);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-feature-settings: "tnum";
+}
+
+.metric-card__unit {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.metric-card__trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.metric-card__trend--up {
+  color: #10b981;
+}
+
+.metric-card__trend--down {
+  color: #f59e0b;
+}
+
+.metric-card__trend--neutral {
+  color: var(--ink-3);
+}
+
+.metric-card__trend-icon {
+  font-weight: 700;
+}
+
+.metric-card__status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: var(--radius-xs);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.metric-card--healthy {
+  border-color: #10b981;
+}
+
+.metric-card--warning {
+  border-color: #f59e0b;
+}
+
+.metric-card--critical {
+  border-color: var(--warn);
+}
+
+.metric-card__status--healthy {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.metric-card__status--warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+}
+
+.metric-card__status--critical {
+  background: rgba(255, 64, 93, 0.1);
+  color: var(--warn);
+}
+
+/* ============================================================
+   AGENT CARD
+   ============================================================ */
+
+.agent-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: all 0.3s var(--ease);
+  cursor: pointer;
+  position: relative;
+}
+
+.agent-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(255, 92, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.agent-card--offline {
+  opacity: 0.6;
+}
+
+.agent-card--selected {
+  border-color: var(--accent);
+  background: var(--paper);
+}
+
+.agent-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.agent-card__role {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-1);
+  margin: 0;
+}
+
+.agent-card__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: var(--radius-xs);
+  background: var(--accent-soft);
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.agent-card__status--active {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.agent-card__status--standby {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+}
+
+.agent-card__status--offline {
+  background: rgba(156, 163, 175, 0.1);
+  color: #6b7280;
+}
+
+.agent-card__status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.agent-card__current {
+  font-size: 13px;
+  color: var(--ink-2);
+  margin: 12px 0;
+  line-height: 1.4;
+  min-height: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.agent-card__current-label {
+  font-weight: 600;
+  color: var(--ink-1);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.agent-card__current-task {
+  color: var(--ink-2);
+  font-size: 13px;
+}
+
+.agent-card__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+
+.agent-card__stat {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.agent-card__stat-label {
+  font-size: 11px;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.agent-card__stat-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-1);
+  font-feature-settings: "tnum";
+}
+
+.agent-card__confidence-bar {
+  height: 4px;
+  background: var(--line);
+  border-radius: 2px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.agent-card__confidence-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s var(--ease);
+}
+
+/* ============================================================
+   USER TABLE
+   ============================================================ */
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.user-table__header {
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.user-table__header-cell {
+  padding: 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.user-table__row {
+  border-bottom: 1px solid var(--line);
+  transition: all 0.2s var(--ease);
+}
+
+.user-table__row:hover {
+  background: var(--paper);
+}
+
+.user-table__row:last-child {
+  border-bottom: none;
+}
+
+.user-table__cell {
+  padding: 16px;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.user-table__cell--user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-table__avatar {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: white;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.user-table__badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: var(--radius-xs);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ============================================================
+   ACTIVITY FEED
+   ============================================================ */
+
+.activity-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.activity-item {
+  padding: 12px;
+  background: var(--paper);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--line);
+  transition: all 0.2s var(--ease);
+}
+
+.activity-item--info {
+  border-left-color: var(--ink-3);
+}
+
+.activity-item--success {
+  border-left-color: #10b981;
+  background: rgba(16, 185, 129, 0.02);
+}
+
+.activity-item--warning {
+  border-left-color: var(--warn);
+  background: rgba(255, 64, 93, 0.02);
+}
+
+.activity-item--error {
+  border-left-color: var(--warn);
+  background: rgba(255, 64, 93, 0.02);
+}
+
+.activity-item__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.activity-item__agent {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-1);
+}
+
+.activity-item__time {
+  font-size: 11px;
+  color: var(--ink-3);
+}
+
+.activity-item__message {
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .metric-card {
+    padding: 16px;
+  }
+
+  .metric-card__value {
+    font-size: 24px;
+  }
+
+  .agent-card {
+    padding: 16px;
+  }
+
+  .agent-card__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .user-table__cell {
+    padding: 12px;
+    font-size: 13px;
+  }
+}
