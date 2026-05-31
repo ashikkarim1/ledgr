@@ -182,6 +182,11 @@ jobs:
     needs: build
     
     steps:
+      - name: Debug - Print build outputs
+        run: |
+          echo "Frontend image: ${{ needs.build.outputs.frontend-image }}"
+          echo "Backend image: ${{ needs.build.outputs.backend-image }}"
+      
       - name: Run Trivy vulnerability scanner for frontend
         uses: aquasecurity/trivy-action@master
         with:
