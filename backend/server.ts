@@ -121,45 +121,14 @@ export function createApp(
   app.post(
     "/v1/workspaces",
     authMiddleware,
-    requireRole("admin"),
-    asyncHandler(async (req: Request, res: Response) => {
-      // TODO: Implement controller
-      res.status(201).json({
-        success: true,
-        data: { workspace_id: "ws_123", name: req.body.name },
-        meta: {
-          timestamp: new Date().toISOString(),
-          request_id: req.headers["x-request-id"],
-          version: "v1",
-        },
-        errors: null,
-      });
-    })
+    workspacesController.createWorkspace
   );
 
   // List workspaces
   app.get(
     "/v1/workspaces",
     authMiddleware,
-    asyncHandler(async (req: Request, res: Response) => {
-      // TODO: Implement controller
-      res.json({
-        success: true,
-        data: [],
-        meta: {
-          timestamp: new Date().toISOString(),
-          request_id: req.headers["x-request-id"],
-          version: "v1",
-          pagination: {
-            total: 0,
-            limit: 50,
-            offset: 0,
-            has_more: false,
-          },
-        },
-        errors: null,
-      });
-    })
+    workspacesController.listWorkspaces
   );
 
   // Get workspace
@@ -167,25 +136,31 @@ export function createApp(
     "/v1/workspaces/:workspace_id",
     authMiddleware,
     workspaceIsolation,
-    asyncHandler(async (req: Request, res: Response) => {
-      // TODO: Implement controller
-      res.json({
-        success: true,
-        data: {
-          workspace_id: req.params.workspace_id,
-          name: "Workspace Name",
-          industry: "retail",
-          members: [],
-          created_at: new Date().toISOString(),
-        },
-        meta: {
-          timestamp: new Date().toISOString(),
-          request_id: req.headers["x-request-id"],
-          version: "v1",
-        },
-        errors: null,
-      });
-    })
+    workspacesController.getWorkspace
+  );
+
+  // Update workspace
+  app.patch(
+    "/v1/workspaces/:workspace_id",
+    authMiddleware,
+    workspaceIsolation,
+    workspacesController.updateWorkspace
+  );
+
+  // Invite member
+  app.post(
+    "/v1/workspaces/:workspace_id/members",
+    authMiddleware,
+    workspaceIsolation,
+    workspacesController.inviteMember
+  );
+
+  // List members
+  app.get(
+    "/v1/workspaces/:workspace_id/members",
+    authMiddleware,
+    workspaceIsolation,
+    workspacesController.listMembers
   );
 
   /**
@@ -198,78 +173,35 @@ export function createApp(
   app.get(
     "/v1/financials/dashboard",
     authMiddleware,
-    asyncHandler(async (req: Request, res: Response) => {
-      // TODO: Implement controller
-      res.json({
-        success: true,
-        data: {
-          period: "2026-05",
-          summary: {
-            total_revenue: 0,
-            total_expenses: 0,
-            net_profit: 0,
-            vat_liability: 0,
-            currency: "AED",
-          },
-          accounts: {
-            assets: 0,
-            liabilities: 0,
-            equity: 0,
-          },
-          transactions_count: 0,
-        },
-        meta: {
-          timestamp: new Date().toISOString(),
-          request_id: req.headers["x-request-id"],
-          version: "v1",
-        },
-        errors: null,
-      });
-    })
+    financialsController.getDashboard
   );
 
   // Get accounts
   app.get(
     "/v1/financials/accounts",
     authMiddleware,
-    asyncHandler(async (req: Request, res: Response) => {
-      // TODO: Implement controller
-      res.json({
-        success: true,
-        data: [],
-        meta: {
-          timestamp: new Date().toISOString(),
-          request_id: req.headers["x-request-id"],
-          version: "v1",
-        },
-        errors: null,
-      });
-    })
+    financialsController.listAccounts
   );
 
   // Get transactions
   app.get(
     "/v1/financials/transactions",
     authMiddleware,
-    asyncHandler(async (req: Request, res: Response) => {
-      // TODO: Implement controller
-      res.json({
-        success: true,
-        data: [],
-        meta: {
-          timestamp: new Date().toISOString(),
-          request_id: req.headers["x-request-id"],
-          version: "v1",
-          pagination: {
-            total: 0,
-            limit: 50,
-            offset: 0,
-            has_more: false,
-          },
-        },
-        errors: null,
-      });
-    })
+    financialsController.listTransactions
+  );
+
+  // Create transaction
+  app.post(
+    "/v1/financials/transactions",
+    authMiddleware,
+    financialsController.createTransaction
+  );
+
+  // Get P&L report
+  app.get(
+    "/v1/financials/reports/profit-loss",
+    authMiddleware,
+    financialsController.getProfitLossReport
   );
 
   /**
@@ -282,19 +214,35 @@ export function createApp(
   app.get(
     "/v1/agents",
     authMiddleware,
-    asyncHandler(async (req: Request, res: Response) => {
-      // TODO: Implement controller
-      res.json({
-        success: true,
-        data: [],
-        meta: {
-          timestamp: new Date().toISOString(),
-          request_id: req.headers["x-request-id"],
-          version: "v1",
-        },
-        errors: null,
-      });
-    })
+    agentsController.listAgents
+  );
+
+  // Get agent
+  app.get(
+    "/v1/agents/:agent_id",
+    authMiddleware,
+    agentsController.getAgent
+  );
+
+  // Execute agent
+  app.post(
+    "/v1/agents/:agent_id/execute",
+    authMiddleware,
+    agentsController.executeAgent
+  );
+
+  // Get execution history
+  app.get(
+    "/v1/agents/:agent_id/executions",
+    authMiddleware,
+    agentsController.getAgentHistory
+  );
+
+  // Get execution details
+  app.get(
+    "/v1/agents/:agent_id/executions/:execution_id",
+    authMiddleware,
+    agentsController.getExecution
   );
 
   /**
@@ -307,19 +255,42 @@ export function createApp(
   app.get(
     "/v1/help/articles",
     optionalAuthMiddleware,
-    asyncHandler(async (req: Request, res: Response) => {
-      // TODO: Implement controller
-      res.json({
-        success: true,
-        data: [],
-        meta: {
-          timestamp: new Date().toISOString(),
-          request_id: req.headers["x-request-id"],
-          version: "v1",
-        },
-        errors: null,
-      });
-    })
+    helpController.searchArticles
+  );
+
+  // Get article
+  app.get(
+    "/v1/help/articles/:article_id",
+    optionalAuthMiddleware,
+    helpController.getArticle
+  );
+
+  // Create support ticket
+  app.post(
+    "/v1/help/tickets",
+    authMiddleware,
+    helpController.createTicket
+  );
+
+  // List user tickets
+  app.get(
+    "/v1/help/tickets",
+    authMiddleware,
+    helpController.listTickets
+  );
+
+  // Get ticket
+  app.get(
+    "/v1/help/tickets/:ticket_id",
+    authMiddleware,
+    helpController.getTicket
+  );
+
+  // Add message to ticket
+  app.post(
+    "/v1/help/tickets/:ticket_id/messages",
+    authMiddleware,
+    helpController.addTicketMessage
   );
 
   /**
@@ -344,27 +315,35 @@ export function createApp(
   app.get(
     "/v1/billing/subscription",
     authMiddleware,
-    asyncHandler(async (req: Request, res: Response) => {
-      // TODO: Implement controller
-      res.json({
-        success: true,
-        data: {
-          subscription_id: "sub_123",
-          workspace_id: (req as any).workspace_id,
-          plan: "professional",
-          status: "active",
-          amount: 2500,
-          currency: "AED",
-          billing_cycle: "monthly",
-        },
-        meta: {
-          timestamp: new Date().toISOString(),
-          request_id: req.headers["x-request-id"],
-          version: "v1",
-        },
-        errors: null,
-      });
-    })
+    billingController.getSubscription
+  );
+
+  // Upgrade subscription
+  app.post(
+    "/v1/billing/subscription/upgrade",
+    authMiddleware,
+    billingController.upgradeSubscription
+  );
+
+  // List invoices
+  app.get(
+    "/v1/billing/invoices",
+    authMiddleware,
+    billingController.listInvoices
+  );
+
+  // List payment methods
+  app.get(
+    "/v1/billing/payment-methods",
+    authMiddleware,
+    billingController.listPaymentMethods
+  );
+
+  // Add payment method
+  app.post(
+    "/v1/billing/payment-methods",
+    authMiddleware,
+    billingController.addPaymentMethod
   );
 
   /**
@@ -378,19 +357,31 @@ export function createApp(
     "/v1/audit/logs",
     authMiddleware,
     requireRole("admin"),
-    asyncHandler(async (req: Request, res: Response) => {
-      // TODO: Implement controller
-      res.json({
-        success: true,
-        data: [],
-        meta: {
-          timestamp: new Date().toISOString(),
-          request_id: req.headers["x-request-id"],
-          version: "v1",
-        },
-        errors: null,
-      });
-    })
+    auditController.getAuditLogs
+  );
+
+  // Get compliance report
+  app.get(
+    "/v1/audit/compliance",
+    authMiddleware,
+    requireRole("admin"),
+    auditController.getComplianceReport
+  );
+
+  // Get user activity
+  app.get(
+    "/v1/audit/activity/:user_id",
+    authMiddleware,
+    requireRole("admin"),
+    auditController.getUserActivity
+  );
+
+  // Export audit logs
+  app.post(
+    "/v1/audit/export",
+    authMiddleware,
+    requireRole("admin"),
+    auditController.exportAuditLogs
   );
 
   /**
