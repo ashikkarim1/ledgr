@@ -34,9 +34,9 @@ RUN npm ci --only=production && \
     npm cache clean --force
 
 # Copy application from builder
-COPY --from=builder /app/dist ./dist || true
-COPY --from=builder /app/src ./src || true
-COPY --from=builder /app/config ./config || true
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/src ./src
+COPY --from=builder /app/config ./config
 
 # Create non-root user for security
 RUN addgroup -g 1001 -S nodejs && \
