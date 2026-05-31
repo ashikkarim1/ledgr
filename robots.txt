@@ -1,2 +1,46 @@
+# Ledgr Robots Configuration
+# Organization: Upcapital Global FZCO
+# Website: https://ledgr.ai
+
 User-agent: *
 Allow: /
+Allow: /assets/
+Allow: /index.html
+Allow: /reviews.html
+Allow: /accountants.html
+Allow: /pricing.html
+Allow: /resources.html
+Allow: /agents.html
+Allow: /demo.html
+Allow: /dashboard.html
+Allow: /onboarding.html
+Allow: /calculator.html
+Allow: /firms.html
+Allow: /blog.html
+Allow: /help.html
+Allow: /privacy.html
+
+# Disallow private/internal pages
+Disallow: /admin/
+Disallow: /internal/
+Disallow: /test/
+Disallow: /temp/
+Disallow: /*.pdf$
+Disallow: /*.json$
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://ledgr.ai/sitemap.xml
+Sitemap: https://ledgr.ai/sitemap-news.xml
+
+# Google-specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing-specific
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1

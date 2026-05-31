@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Create Your Ledgr Account</title>
+  <meta name="description" content="Create your Ledgr account and start your 14-day free trial instantly. No credit card required. Access real-time UAE accounting compliance, AI-supervised books, and transparent financial control." />
+  <meta property="og:title" content="Create Your Ledgr Account — Start Free Trial" />
+  <meta property="og:description" content="Join Ledgr and get 14 days free access to real-time accounting compliance, VAT filing, Corporate Tax tracking, and AI-supervised books." />
+  <meta property="og:image" content="https://ledgr.ai/assets/og-signup.png" />
+  <meta property="og:url" content="https://ledgr.ai/signup.html" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#FF5C00" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    .signup-container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .signup-card {
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .signup-header {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .signup-header h1 {
+      color: #191919;
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 10px 0;
+    }
+
+    .signup-header p {
+      color: #999999;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      color: #191919;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input {
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      color: #191919;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #FF5C00;
+      box-shadow: 0 0 0 3px rgba(255, 92, 0, 0.1);
+    }
+
+    .form-group input::placeholder {
+      color: #999999;
+    }
+
+    .signup-benefits {
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+
+    .signup-benefits ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 13px;
+      color: #4a4a4a;
+    }
+
+    .signup-benefits li {
+      padding: 5px 0;
+    }
+
+    .signup-benefits li:before {
+      content: "✓ ";
+      color: #FF5C00;
+      font-weight: 700;
+      margin-right: 8px;
+    }
+
+    .btn--signup {
+      background: linear-gradient(135deg, #FF5C00 0%, #ff7a33 100%);
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .btn--signup:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 92, 0, 0.3);
+    }
+
+    .btn--signup:active {
+      transform: translateY(0);
+    }
+
+    .signup-terms {
+      font-size: 12px;
+      color: #999999;
+      text-align: center;
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+
+    .signup-terms a {
+      color: #FF5C00;
+      text-decoration: none;
+    }
+
+    .signup-terms a:hover {
+      text-decoration: underline;
+    }
+
+    .trial-context {
+      background: #fff8f0;
+      border: 1px solid #ffdecc;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: #4a4a4a;
+    }
+
+    .trial-context strong {
+      color: #FF5C00;
+    }
+
+    .success-message {
+      background: #f0fdf4;
+      border: 2px solid #22c55e;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 20px 0;
+      color: #15803d;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+      display: none;
+    }
+
+    .error-message {
+      background: #fef2f2;
+      border: 2px solid #ef4444;
+      border-radius: 8px;
+      padding: 12px;
+      margin: 15px 0;
+      color: #991b1b;
+      font-size: 13px;
+      display: none;
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .nav {
+      background: transparent;
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://ledgr.ai",
+    "name": "Ledgr",
+    "description": "AI-supervised accounting platform for UAE businesses. Real-time compliance tracking, transparent pricing, and dedicated accountant support.",
+    "applicationCategory": "BusinessApplication",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "150"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "AED",
+      "name": "Free Trial"
+    }
+  }
+  </script>
+</head>
+<body style="background: #f9f9f9;">
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav__container">
+      <div class="nav__logo">
+        <a href="index.html">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <rect width="24" height="24" rx="4" fill="#FF5C00" />
+            <path d="M7 12L10 15L17 8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span>Ledgr</span>
+        </a>
+      </div>
+      <div class="nav__cta">
+        <a class="btn btn--dark" href="index.html">Back to Site</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="signup-container">
+    <div class="signup-card">
+      <div class="signup-header">
+        <h1>Create Your Account</h1>
+        <p>Join Ledgr and take control of your finances</p>
+      </div>
+
+      <div id="trial-context-display" class="trial-context" style="display: none;">
+        You've explored the trial. <strong>Ready to manage your real business?</strong> Create an account and import your data.
+      </div>
+
+      <div id="error-display" class="error-message"></div>
+      <div id="success-display" class="success-message">✓ Account created successfully! Redirecting...</div>
+
+      <form id="signup-form" class="signup-form" onsubmit="handleSignup(event)">
+        <div class="form-group">
+          <label for="company-name">Company Name</label>
+          <input
+            type="text"
+            id="company-name"
+            name="company-name"
+            placeholder="e.g., Ahmed's E-Commerce Shop"
+            required
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="your@business.ae"
+            required
+            autocomplete="email"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="At least 8 characters"
+            required
+            minlength="8"
+            autocomplete="new-password"
+          />
+        </div>
+
+        <div class="signup-benefits">
+          <ul>
+            <li>30-day money-back guarantee</li>
+            <li>No credit card required to start</li>
+            <li>Unlimited transactions in first 30 days</li>
+            <li>Free onboarding assistance</li>
+          </ul>
+        </div>
+
+        <button type="submit" class="btn--signup">Create Account</button>
+      </form>
+
+      <div class="signup-terms">
+        By signing up, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+        We respect your data and never share it with third parties.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Track signup source
+    function getURLParameter(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    // Show trial context if coming from trial
+    const trialSource = getURLParameter('source');
+    const daysUsed = getURLParameter('days_used') || '0';
+    
+    if (trialSource === 'trial') {
+      document.getElementById('trial-context-display').style.display = 'block';
+    }
+
+    // Track conversion
+    function trackConversion() {
+      const conversionData = {
+        source: trialSource || 'direct',
+        trial_days_used: parseInt(daysUsed),
+        timestamp: new Date().toISOString(),
+        trial_engaged: localStorage.getItem('ledgr_trial_engaged') === 'true'
+      };
+      
+      localStorage.setItem('ledgr_signup_source', JSON.stringify(conversionData));
+      localStorage.setItem('ledgr_conversion_completed', 'true');
+    }
+
+    function handleSignup(e) {
+      e.preventDefault();
+
+      const form = document.getElementById('signup-form');
+      const errorDisplay = document.getElementById('error-display');
+      const successDisplay = document.getElementById('success-display');
+      const submitBtn = form.querySelector('button[type="submit"]');
+
+      // Clear previous messages
+      errorDisplay.style.display = 'none';
+      errorDisplay.textContent = '';
+      successDisplay.style.display = 'none';
+
+      // Validate form
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const companyName = document.getElementById('company-name').value.trim();
+
+      if (!email || !password || !companyName) {
+        errorDisplay.textContent = 'Please fill in all fields';
+        errorDisplay.style.display = 'block';
+        return;
+      }
+
+      if (password.length < 8) {
+        errorDisplay.textContent = 'Password must be at least 8 characters';
+        errorDisplay.style.display = 'block';
+        return;
+      }
+
+      // Disable button
+      submitBtn.disabled = true;
+      const originalText = submitBtn.textContent;
+      submitBtn.innerHTML = '<span class="loading-spinner"></span>Creating account...';
+
+      // Simulate account creation
+      setTimeout(() => {
+        // Track conversion
+        trackConversion();
+
+        // Show success
+        form.style.display = 'none';
+        successDisplay.textContent = `✓ Welcome ${companyName}! Redirecting to your dashboard...`;
+        successDisplay.style.display = 'block';
+
+        // Redirect after 2 seconds
+        setTimeout(() => {
+          // In production, redirect to actual dashboard
+          window.location.href = 'index.html?action=dashboard&company=' + encodeURIComponent(companyName);
+        }, 2000);
+      }, 1200);
+    }
+
+    // Initialize
+    window.addEventListener('load', () => {
+      // Pre-fill email from trial if available
+      const trialEmail = localStorage.getItem('ledgr_trial_email');
+      if (trialEmail) {
+        document.getElementById('email').value = trialEmail;
+      }
+    });
+  </script>
+</body>
+</html>

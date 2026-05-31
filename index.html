@@ -3,16 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#f9f9f9" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0a0b0e" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#FF5C00" />
+    <meta name="color-scheme" content="light dark" />
     <title>Ledgr — The autonomous finance function for every UAE business</title>
     <meta
       name="description"
-      content="Ledgr is an AI-native accounting, VAT and Corporate Tax platform for the UAE. Bookkeeping, filings and payroll, handled end-to-end by supervised agents — at a fraction of the cost of a traditional firm."
+      content="Ledgr: AI-native accounting, VAT, and Corporate Tax platform for UAE businesses. Real-time compliance, transparent pricing, zero hidden fees. AI agents supervised by chartered accountants."
     />
-    <meta property="og:title" content="Ledgr — The autonomous finance function for every UAE business" />
-    <meta property="og:description" content="AI agents, supervised by chartered accountants. Compliant from day one of the FTA e-invoicing rollout." />
+    <meta property="og:title" content="Ledgr — Transparent Finance for Every UAE Business" />
+    <meta property="og:description" content="AI agents supervised by chartered accountants. Real-time VAT, Corporate Tax, and WPS tracking. One flat price, zero hidden fees." />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://ledgr.ai/assets/og-homepage.png" />
+    <meta property="og:url" content="https://ledgr.ai/" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='-apple-system,sans-serif' font-size='17' font-weight='600' fill='%23f9f9f9'%3EL%3C/text%3E%3C/svg%3E" />
     <link
       rel="preconnect"
@@ -25,6 +27,34 @@
     />
     <link rel="stylesheet" href="assets/tailwind-output.css" />
     <link rel="stylesheet" href="assets/styles.css" />
+    <link rel="sitemap" href="/sitemap.xml" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="google-site-verification" content="" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": ["Organization", "LocalBusiness", "FinancialService"],
+        "name": "Ledgr",
+        "alternateName": "Ledgr - UAE Accounting Directory",
+        "url": "https://ledgr.ai",
+        "logo": "https://ledgr.ai/assets/logo.png",
+        "description": "Ledgr is an honest directory of UAE accountants and accounting firms with verified reviews.",
+        "founder": {
+          "@type": "Organization",
+          "name": "Upcapital Global FZCO"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "Customer Service",
+          "email": "ceo@theupcapital.com"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Dubai",
+          "addressCountry": "AE"
+        }
+      }
+    </script>
   </head>
   <body>
     <a href="#main" class="skip">Skip to content</a>
@@ -47,7 +77,7 @@
         </nav>
 
         <div class="nav__cta">
-          <a class="btn btn--primary" href="#signin">Sign in</a>
+          <a class="btn btn--primary" href="trial.html">Start Free Trial</a>
           <a class="btn btn--dark" href="#waitlist">Join the waitlist</a>
         </div>
       </div>
@@ -68,11 +98,11 @@
               Never miss a VAT deadline. Your finances are audit-ready every quarter. Tax planning happens continuously, not in panic mode. AI agents handle the work; licensed professionals handle the decisions. One flat price, zero surprises.
             </p>
             <div class="hero__ctas">
-              <a class="btn btn--primary" href="#waitlist">
-                Get early access <span style="color: #ff9500; font-weight: 600;">(Limited to 50 founders)</span>
+              <a class="btn btn--primary" href="trial.html">
+                Start Your Free 14-Day Trial <span style="color: #ffbe99; font-weight: 600;">(No credit card)</span>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               </a>
-              <a class="btn btn--primary" href="dashboard.html">See the dashboard</a>
+              <a class="btn btn--dark" href="trial.html">Experience the Demo</a>
             </div>
           </div>
 
@@ -203,6 +233,1010 @@
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           Dashboard Component
+           Live financial metrics, agent activity, compliance status
+           ============================================================ -->
+      <section class="dashboard-section">
+        <div class="wrap">
+          <!-- Dashboard Header -->
+          <div class="dashboard-header reveal">
+            <div>
+              <span class="text-xs uppercase tracking-widest font-semibold text-primary-500">Live metrics</span>
+              <h2 class="section-title">Your financial command center.</h2>
+              <p class="dashboard-subtitle">Real-time insight into cash, tax, payroll, and compliance. Agents work 24/7 so you don't have to.</p>
+            </div>
+          </div>
+
+          <!-- View Switcher Tabs -->
+          <div class="dashboard-tabs" role="tablist" aria-label="Dashboard views">
+            <button class="dashboard-tab active" data-tab="dashboard" role="tab" aria-selected="true" aria-controls="dashboard-panel">
+              <span aria-hidden="true">📊</span> Dashboard
+            </button>
+            <button class="dashboard-tab" data-tab="sheets" role="tab" aria-selected="false" aria-controls="sheets-panel">
+              <span aria-hidden="true">📋</span> Working Sheets
+            </button>
+            <button class="dashboard-tab" data-tab="agents" role="tab" aria-selected="false" aria-controls="agents-panel">
+              <span aria-hidden="true">🤖</span> Agents
+            </button>
+            <button class="dashboard-tab" data-tab="compliance" role="tab" aria-selected="false" aria-controls="compliance-panel">
+              <span aria-hidden="true">✓</span> Compliance
+            </button>
+          </div>
+
+          <!-- Dashboard Panel -->
+          <div class="dashboard-panel active" id="dashboard-panel" role="tabpanel" aria-labelledby="dashboard-panel">
+            
+            <!-- Key Metrics Row -->
+            <div class="metrics-grid">
+              <!-- Cash Position Card -->
+              <div class="metric-card cash-card reveal" style="--d:0ms">
+                <div class="metric-header">
+                  <h3 class="metric-title">Cash Position</h3>
+                  <span class="metric-badge positive">↑ 4.2%</span>
+                </div>
+                <div class="metric-value">AED <span class="metric-number" data-metric="cash">482,318</span></div>
+                <div class="metric-meta">Updated <span class="time-ago">6m</span> ago</div>
+                <div class="metric-sparkline">
+                  <svg class="sparkline-chart" viewBox="0 0 80 30" preserveAspectRatio="none">
+                    <polyline points="0,15 5,12 10,14 15,10 20,11 25,8 30,10 35,5 40,7 45,3 50,6 55,2 60,5 65,1 70,4 75,0 80,2" 
+                              fill="none" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- VAT Status Card -->
+              <div class="metric-card vat-card reveal" style="--d:60ms">
+                <div class="metric-header">
+                  <h3 class="metric-title">VAT Q2 2025</h3>
+                  <span class="metric-badge filed">Filed early</span>
+                </div>
+                <div class="metric-value">AED <span class="metric-number" data-metric="vat">41,205</span></div>
+                <div class="metric-meta">Due <span class="deadline">15-Jul</span> (45 days)</div>
+                <div class="metric-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 62%;" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <span class="progress-text">62% of quarter</span>
+                </div>
+              </div>
+
+              <!-- Corporate Tax Estimate Card -->
+              <div class="metric-card tax-card reveal" style="--d:120ms">
+                <div class="metric-header">
+                  <h3 class="metric-title">Corp. Tax Estimate</h3>
+                  <span class="metric-badge warning">Above threshold</span>
+                </div>
+                <div class="metric-value">AED <span class="metric-number" data-metric="tax">19,840</span></div>
+                <div class="metric-meta">Annual projection: AED 235,000</div>
+                <div class="metric-detail">Threshold exceeded by AED 145,000 income</div>
+              </div>
+
+              <!-- Payroll Status Card -->
+              <div class="metric-card payroll-card reveal" style="--d:180ms">
+                <div class="metric-header">
+                  <h3 class="metric-title">Payroll Runway</h3>
+                  <span class="metric-badge healthy">Healthy</span>
+                </div>
+                <div class="metric-value"><span class="metric-number" data-metric="payroll">14.2</span> months</div>
+                <div class="metric-meta">18 employees · AED 284k/month</div>
+                <div class="metric-employees">
+                  <span class="employee-avatar">👤</span>
+                  <span class="employee-avatar">👤</span>
+                  <span class="employee-avatar">👤</span>
+                  <span class="employee-count">+15</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 90-Day Cash Forecast Chart -->
+            <div class="forecast-card reveal" style="--d:240ms">
+              <div class="forecast-header">
+                <div>
+                  <h3 class="forecast-title">90-Day Cash Forecast</h3>
+                  <p class="forecast-subtitle">Projected daily cash balance based on payroll & operational burn</p>
+                </div>
+                <div class="forecast-controls">
+                  <button class="forecast-btn" data-period="30" aria-pressed="false">30d</button>
+                  <button class="forecast-btn active" data-period="90" aria-pressed="true">90d</button>
+                  <button class="forecast-btn" data-period="180" aria-pressed="false">6m</button>
+                </div>
+              </div>
+              <div class="forecast-chart-container">
+                <canvas id="forecast-canvas" class="forecast-canvas" width="1000" height="300" aria-label="90-day cash forecast chart"></canvas>
+                <div class="forecast-loading" aria-hidden="true">
+                  <div class="spinner"></div>
+                </div>
+              </div>
+              <div class="forecast-legend">
+                <div class="legend-item">
+                  <span class="legend-color" style="background: var(--accent)"></span>
+                  <span>Projected balance</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-color" style="background: var(--ink-4)"></span>
+                  <span>Safety threshold (90 days)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bank Reconciliation & Agent Activity Row -->
+            <div class="dashboard-bottom-row">
+              <!-- Bank Reconciliation Progress -->
+              <div class="reconciliation-card reveal" style="--d:300ms">
+                <div class="recon-header">
+                  <h3 class="recon-title">Bank Reconciliation</h3>
+                  <span class="recon-status complete">95% Complete</span>
+                </div>
+                <div class="recon-progress">
+                  <div class="recon-bar">
+                    <div class="recon-fill" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+                <div class="recon-meta">
+                  <div class="recon-stat">
+                    <span class="stat-label">Matched</span>
+                    <span class="stat-value">3 banks</span>
+                  </div>
+                  <div class="recon-stat">
+                    <span class="stat-label">Pending</span>
+                    <span class="stat-value">12,400 AED</span>
+                  </div>
+                  <div class="recon-stat">
+                    <span class="stat-label">Last updated</span>
+                    <span class="stat-value">20-May</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Agent Activity Feed -->
+              <div class="activity-feed-card reveal" style="--d:360ms">
+                <div class="activity-header">
+                  <h3 class="activity-title">Agent Activity</h3>
+                  <span class="activity-meta">Last 4 hours</span>
+                </div>
+                <div class="activity-list" id="agent-activity">
+                  <div class="activity-item loading">
+                    <div class="activity-spinner"></div>
+                    <span>Loading agent activity...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Compliance Traffic Light Status -->
+            <div class="compliance-lights reveal" style="--d:420ms">
+              <h3 class="compliance-title">Compliance Status</h3>
+              <div class="lights-grid">
+                <div class="light-indicator vat-light">
+                  <div class="light-status compliant"></div>
+                  <div class="light-content">
+                    <h4>VAT</h4>
+                    <p>Compliant · Filed 11 days early</p>
+                    <span class="light-deadline">Next: 15-Jul (45d)</span>
+                  </div>
+                </div>
+
+                <div class="light-indicator payroll-light">
+                  <div class="light-status compliant"></div>
+                  <div class="light-content">
+                    <h4>Payroll (WPS)</h4>
+                    <p>Compliant · Automated filing</p>
+                    <span class="light-deadline">Next: 10-Jun (10d)</span>
+                  </div>
+                </div>
+
+                <div class="light-indicator tax-light">
+                  <div class="light-status compliant"></div>
+                  <div class="light-content">
+                    <h4>Corporate Tax</h4>
+                    <p>Filed 2024 · SBR threshold exceeded</p>
+                    <span class="light-deadline">Next: 31-Mar 2026 (274d)</span>
+                  </div>
+                </div>
+
+                <div class="light-indicator aml-light">
+                  <div class="light-status compliant"></div>
+                  <div class="light-content">
+                    <h4>AML/CFT</h4>
+                    <p>Compliant · JAFZ audited 10-May</p>
+                    <span class="light-deadline">Next audit: TBD</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Sheets, Agents, Compliance Panels (Placeholders) -->
+          <div class="dashboard-panel" id="sheets-panel" role="tabpanel" aria-labelledby="sheets-panel">
+            <!-- Working Sheets Sub-Tabs -->
+            <div style="display: flex; gap: 12px; margin-bottom: 32px; border-bottom: 2px solid #d9d9d9; flex-wrap: wrap;">
+              <button class="ws-tab-btn active" data-sheet="capture" style="padding: 14px 0; border: none; background: none; border-bottom: 3px solid #FF5C00; font-size: 14px; font-weight: 600; color: #191919; cursor: pointer; transition: all 0.3s; flex: 1; text-align: left; min-width: 150px;">
+                📸 Transaction Capture
+              </button>
+              <button class="ws-tab-btn" data-sheet="reconciliation" style="padding: 14px 0; border: none; background: none; color: #4a4a4a; border-bottom: 3px solid transparent; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s; flex: 1; text-align: left; min-width: 150px;">
+                🔍 Reconciliation
+              </button>
+              <button class="ws-tab-btn" data-sheet="invoices" style="padding: 14px 0; border: none; background: none; color: #4a4a4a; border-bottom: 3px solid transparent; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s; flex: 1; text-align: left; min-width: 150px;">
+                📄 Invoice Management
+              </button>
+            </div>
+
+            <!-- Transaction Capture Tab -->
+            <div class="ws-sheet" data-sheet="capture" style="display: block;">
+              <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 32px; margin-bottom: 48px;">
+                <div>
+                  <h3 style="margin: 0 0 20px 0; font-size: 16px; font-weight: 700; color: #191919;">New Transaction</h3>
+                  <form style="display: flex; flex-direction: column; gap: 16px;">
+                    <div>
+                      <label style="display: block; font-size: 12px; font-weight: 600; color: #4a4a4a; margin-bottom: 8px;">Date</label>
+                      <input type="date" style="width: 100%; padding: 10px 12px; border: 1px solid #d9d9d9; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                    </div>
+                    <div>
+                      <label style="display: block; font-size: 12px; font-weight: 600; color: #4a4a4a; margin-bottom: 8px;">Description</label>
+                      <input type="text" placeholder="e.g., Equipment purchase" style="width: 100%; padding: 10px 12px; border: 1px solid #d9d9d9; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                    </div>
+                    <div>
+                      <label style="display: block; font-size: 12px; font-weight: 600; color: #4a4a4a; margin-bottom: 8px;">Amount (AED)</label>
+                      <input type="number" placeholder="0.00" style="width: 100%; padding: 10px 12px; border: 1px solid #d9d9d9; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                    </div>
+                    <div>
+                      <label style="display: block; font-size: 12px; font-weight: 600; color: #4a4a4a; margin-bottom: 8px;">Category</label>
+                      <select style="width: 100%; padding: 10px 12px; border: 1px solid #d9d9d9; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                        <option>General Expense</option>
+                        <option>Cost of Goods</option>
+                        <option>Payroll</option>
+                        <option>Office Supplies</option>
+                      </select>
+                    </div>
+                    <button type="submit" style="padding: 12px 16px; background: #FF5C00; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; margin-top: 8px;">Record Transaction</button>
+                  </form>
+                </div>
+                <div>
+                  <h3 style="margin: 0 0 20px 0; font-size: 16px; font-weight: 700; color: #191919;\">Recent Captures (Last 7 days)</h3>
+                  <div style="border: 1px solid #d9d9d9; border-radius: 8px; overflow: hidden;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                      <thead>
+                        <tr style="background: #f9f9f9; border-bottom: 1px solid #e0e0e0;">
+                          <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #191919;">Date</th>
+                          <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #191919;">Description</th>
+                          <th style="padding: 12px 16px; text-align: right; font-weight: 600; color: #191919;">Amount</th>
+                          <th style="padding: 12px 16px; text-align: center; font-weight: 600; color: #191919;">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 16px; color: #191919;">31 May</td>
+                          <td style="padding: 12px 16px; color: #4a4a4a;">Office Rent</td>
+                          <td style="padding: 12px 16px; text-align: right; color: #191919; font-weight: 600;">AED 35,000</td>
+                          <td style="padding: 12px 16px; text-align: center;"><span style="display: inline-block; padding: 4px 8px; background: #e8f5e9; color: #22c55e; border-radius: 4px; font-weight: 600; font-size: 11px;">Posted</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 16px; color: #191919;">30 May</td>
+                          <td style="padding: 12px 16px; color: #4a4a4a;">Utilities</td>
+                          <td style="padding: 12px 16px; text-align: right; color: #191919; font-weight: 600;">AED 2,850</td>
+                          <td style="padding: 12px 16px; text-align: center;"><span style="display: inline-block; padding: 4px 8px; background: #e8f5e9; color: #22c55e; border-radius: 4px; font-weight: 600; font-size: 11px;">Posted</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 16px; color: #191919;">29 May</td>
+                          <td style="padding: 12px 16px; color: #4a4a4a;">Equipment Purchase</td>
+                          <td style="padding: 12px 16px; text-align: right; color: #191919; font-weight: 600;">AED 18,500</td>
+                          <td style="padding: 12px 16px; text-align: center;"><span style="display: inline-block; padding: 4px 8px; background: #fff3cd; color: #ff9500; border-radius: 4px; font-weight: 600; font-size: 11px;">Review</span></td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 12px 16px; color: #191919;">28 May</td>
+                          <td style="padding: 12px 16px; color: #4a4a4a;">Inventory Supply</td>
+                          <td style="padding: 12px 16px; text-align: right; color: #191919; font-weight: 600;">AED 12,300</td>
+                          <td style="padding: 12px 16px; text-align: center;"><span style="display: inline-block; padding: 4px 8px; background: #e8f5e9; color: #22c55e; border-radius: 4px; font-weight: 600; font-size: 11px;">Posted</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Reconciliation Tab -->
+            <div class="ws-sheet" data-sheet="reconciliation" style="display: none;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 32px;">
+                <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 20px; background: white;">
+                  <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;\">Reconciled</p>
+                  <p style="margin: 0; font-size: 28px; font-weight: 700; color: #191919;\">AED <span>485,240</span></p>
+                  <p style="margin: 4px 0 0 0; font-size: 12px; color: #4a4a4a;\">95% of total</p>
+                </div>
+                <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 20px; background: white;">
+                  <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;\">Pending</p>
+                  <p style="margin: 0; font-size: 28px; font-weight: 700; color: #FF5C00;\">AED <span>12,400</span></p>
+                  <p style="margin: 4px 0 0 0; font-size: 12px; color: #4a4a4a;\">Awaiting review</p>
+                </div>
+                <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 20px; background: white;">
+                  <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;\">Variance</p>
+                  <p style="margin: 0; font-size: 28px; font-weight: 700; color: #22c55e;\">AED <span>0</span></p>
+                  <p style="margin: 4px 0 0 0; font-size: 12px; color: #4a4a4a;\">Full reconciliation</p>
+                </div>
+              </div>
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white; overflow-x: auto;">
+                <h3 style="margin: 0 0 20px 0; font-size: 16px; font-weight: 700; color: #191919;\">Reconciliation Worksheet</h3>
+                <table style="width: 100%; border-collapse: collapse; font-size: 13px; min-width: 600px;">
+                  <thead>
+                    <tr style="background: #f9f9f9; border-bottom: 2px solid #e0e0e0;">
+                      <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #191919;\">Account</th>
+                      <th style="padding: 12px 16px; text-align: right; font-weight: 600; color: #191919;\">GL Balance</th>
+                      <th style="padding: 12px 16px; text-align: right; font-weight: 600; color: #191919;\">Bank Balance</th>
+                      <th style="padding: 12px 16px; text-align: right; font-weight: 600; color: #191919;\">Difference</th>
+                      <th style="padding: 12px 16px; text-align: center; font-weight: 600; color: #191919;\">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                      <td style="padding: 12px 16px; color: #191919; font-weight: 600;">Main Bank Account</td>
+                      <td style="padding: 12px 16px; text-align: right; color: #191919;">AED 482,318</td>
+                      <td style="padding: 12px 16px; text-align: right; color: #191919;">AED 482,318</td>
+                      <td style="padding: 12px 16px; text-align: right; color: #22c55e; font-weight: 600;">AED 0</td>
+                      <td style="padding: 12px 16px; text-align: center;\"><span style="display: inline-block; padding: 4px 8px; background: #e8f5e9; color: #22c55e; border-radius: 4px; font-weight: 600; font-size: 11px;\">✓ Matched</span></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                      <td style="padding: 12px 16px; color: #191919; font-weight: 600;\">Petty Cash</td>
+                      <td style="padding: 12px 16px; text-align: right; color: #191919;\">AED 8,920</td>
+                      <td style="padding: 12px 16px; text-align: right; color: #191919;\">AED 8,920</td>
+                      <td style="padding: 12px 16px; text-align: right; color: #22c55e; font-weight: 600;\">AED 0</td>
+                      <td style="padding: 12px 16px; text-align: center;\"><span style="display: inline-block; padding: 4px 8px; background: #e8f5e9; color: #22c55e; border-radius: 4px; font-weight: 600; font-size: 11px;\">✓ Matched</span></td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px 16px; color: #191919; font-weight: 600;\">Credit Card</td>
+                      <td style="padding: 12px 16px; text-align: right; color: #191919;\">AED 12,400</td>
+                      <td style="padding: 12px 16px; text-align: right; color: #191919;\">AED 12,400</td>
+                      <td style="padding: 12px 16px; text-align: right; color: #22c55e; font-weight: 600;\">AED 0</td>
+                      <td style="padding: 12px 16px; text-align: center;\"><span style="display: inline-block; padding: 4px 8px; background: #fff3cd; color: #ff9500; border-radius: 4px; font-weight: 600; font-size: 11px;\">Pending</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Invoice Management Tab -->
+            <div class="ws-sheet" data-sheet="invoices" style="display: none;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-bottom: 32px;">
+                <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 20px; background: white;">
+                  <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;\">Outstanding</p>
+                  <p style="margin: 0; font-size: 28px; font-weight: 700; color: #191919;\">AED <span>285,600</span></p>
+                  <p style="margin: 4px 0 0 0; font-size: 12px; color: #4a4a4a;\">34 days average</p>
+                </div>
+                <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 20px; background: white;">
+                  <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;\">Overdue</p>
+                  <p style="margin: 0; font-size: 28px; font-weight: 700; color: #ff405d;\">AED <span>45,200</span></p>
+                  <p style="margin: 4px 0 0 0; font-size: 12px; color: #4a4a4a;\">3 invoices past due</p>
+                </div>
+                <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 20px; background: white;">
+                  <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;\">Collections</p>
+                  <p style="margin: 0; font-size: 28px; font-weight: 700; color: #22c55e;\">98%</p>
+                  <p style="margin: 4px 0 0 0; font-size: 12px; color: #4a4a4a;\">Peppol enabled</p>
+                </div>
+              </div>
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white; overflow-x: auto;">
+                <h3 style="margin: 0 0 20px 0; font-size: 16px; font-weight: 700; color: #191919;\">Invoice Register (All Outstanding)</h3>
+                <table style="width: 100%; border-collapse: collapse; font-size: 13px; min-width: 700px;">
+                  <thead>
+                    <tr style="background: #f9f9f9; border-bottom: 2px solid #e0e0e0;">
+                      <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #191919;\">Invoice #</th>
+                      <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #191919;\">Customer</th>
+                      <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #191919;\">Issue Date</th>
+                      <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #191919;\">Due Date</th>
+                      <th style="padding: 12px 16px; text-align: right; font-weight: 600; color: #191919;\">Amount</th>
+                      <th style="padding: 12px 16px; text-align: center; font-weight: 600; color: #191919;\">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                      <td style="padding: 12px 16px; color: #FF5C00; font-weight: 600;\">INV-2025-0847</td>
+                      <td style="padding: 12px 16px; color: #191919;\">Gulf Trading Co.</td>
+                      <td style="padding: 12px 16px; color: #4a4a4a;\">15-May</td>
+                      <td style="padding: 12px 16px; color: #4a4a4a;\">15-Jun</td>
+                      <td style="padding: 12px 16px; text-align: right; color: #191919; font-weight: 600;\">AED 156,800</td>
+                      <td style="padding: 12px 16px; text-align: center;\"><span style="display: inline-block; padding: 4px 8px; background: #fff3cd; color: #ff9500; border-radius: 4px; font-weight: 600; font-size: 11px;\">Overdue</span></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                      <td style="padding: 12px 16px; color: #FF5C00; font-weight: 600;\">INV-2025-0846</td>
+                      <td style="padding: 12px 16px; color: #191919;\">Emirates Dist.</td>
+                      <td style="padding: 12px 16px; color: #4a4a4a;\">20-May</td>
+                      <td style="padding: 12px 16px; color: #4a4a4a;\">20-Jun</td>
+                      <td style="padding: 12px 16px; text-align: right; color: #191919; font-weight: 600;\">AED 89,700</td>
+                      <td style="padding: 12px 16px; text-align: center;\"><span style="display: inline-block; padding: 4px 8px; background: #e3f2fd; color: #2196f3; border-radius: 4px; font-weight: 600; font-size: 11px;\">Pending</span></td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px 16px; color: #FF5C00; font-weight: 600;\">INV-2025-0845</td>
+                      <td style="padding: 12px 16px; color: #191919;\">Al-Fardan Group</td>
+                      <td style="padding: 12px 16px; color: #4a4a4a;\">22-May</td>
+                      <td style="padding: 12px 16px; color: #4a4a4a;\">22-Jun</td>
+                      <td style="padding: 12px 16px; text-align: right; color: #191919; font-weight: 600;\">AED 39,100</td>
+                      <td style="padding: 12px 16px; text-align: center;\"><span style="display: inline-block; padding: 4px 8px; background: #e3f2fd; color: #2196f3; border-radius: 4px; font-weight: 600; font-size: 11px;\">Pending</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Working Sheets Tab Switching JavaScript -->
+            <script>
+              document.querySelectorAll('.ws-tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                  const sheet = btn.getAttribute('data-sheet');
+                  document.querySelectorAll('.ws-tab-btn').forEach(b => {
+                    b.style.borderBottomColor = 'transparent';
+                    b.style.color = '#4a4a4a';
+                  });
+                  btn.style.borderBottomColor = '#FF5C00';
+                  btn.style.color = '#191919';
+                  
+                  document.querySelectorAll('.ws-sheet').forEach(s => s.style.display = 'none');
+                  document.querySelector(`[data-sheet="${sheet}"]`).style.display = 'block';
+                });
+              });
+            </script>
+          </div>
+
+          <div class="dashboard-panel" id="agents-panel" role="tabpanel" aria-labelledby="agents-panel">
+            <!-- Agents View Toggle -->
+            <div style="display: flex; gap: 12px; margin-bottom: 32px; border-bottom: 2px solid #d9d9d9;">
+              <button class="agents-view-btn active" data-view="overview" style="padding: 14px 0; border: none; background: none; border-bottom: 3px solid #FF5C00; font-size: 14px; font-weight: 600; color: #191919; cursor: pointer; transition: all 0.3s; flex: 1; text-align: left; min-width: 150px;">
+                📊 Overview
+              </button>
+              <button class="agents-view-btn" data-view="timeline" style="padding: 14px 0; border: none; background: none; color: #4a4a4a; border-bottom: 3px solid transparent; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s; flex: 1; text-align: left; min-width: 150px;">
+                📈 Workflow Timeline
+              </button>
+            </div>
+
+            <!-- Agents Overview View -->
+            <div class="agents-view" data-view="overview" style="display: block;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 32px;">
+                <!-- Capture Agent Card -->
+                <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white;">
+                  <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+                    <div>
+                      <h3 style="margin: 0 0 4px 0; font-size: 16px; font-weight: 700; color: #191919;">📸 Capture Agent</h3>
+                      <p style="margin: 0; font-size: 12px; color: #999;">Transaction capture & categorization</p>
+                    </div>
+                    <span style="display: inline-block; padding: 6px 12px; background: #e8f5e9; color: #22c55e; border-radius: 6px; font-weight: 600; font-size: 11px;">ACTIVE</span>
+                  </div>
+                  <div style="margin: 20px 0; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                    <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Accuracy</p>
+                    <p style="margin: 0; font-size: 28px; font-weight: 700; color: #191919;">98.5%</p>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid #e0e0e0;">
+                    <div>
+                      <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Processed Today</p>
+                      <p style="margin: 0; font-size: 16px; font-weight: 700; color: #191919;">43 txns</p>
+                    </div>
+                    <div>
+                      <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Last Activity</p>
+                      <p style="margin: 0; font-size: 14px; font-weight: 600; color: #FF5C00;">4 in last hour</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- VAT Agent Card -->
+                <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white;">
+                  <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+                    <div>
+                      <h3 style="margin: 0 0 4px 0; font-size: 16px; font-weight: 700; color: #191919;">💰 VAT Agent</h3>
+                      <p style="margin: 0; font-size: 12px; color: #999;">VAT compliance & filing</p>
+                    </div>
+                    <span style="display: inline-block; padding: 6px 12px; background: #e8f5e9; color: #22c55e; border-radius: 6px; font-weight: 600; font-size: 11px;">ACTIVE</span>
+                  </div>
+                  <div style="margin: 20px 0; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                    <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Accuracy</p>
+                    <p style="margin: 0; font-size: 28px; font-weight: 700; color: #191919;">99.8%</p>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid #e0e0e0;">
+                    <div>
+                      <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Status</p>
+                      <p style="margin: 0; font-size: 14px; font-weight: 700; color: #22c55e;">Q2 Filed</p>
+                    </div>
+                    <div>
+                      <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Last Activity</p>
+                      <p style="margin: 0; font-size: 13px; font-weight: 600; color: #FF5C00;">11 days early</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Payroll Agent Card -->
+                <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white;">
+                  <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+                    <div>
+                      <h3 style="margin: 0 0 4px 0; font-size: 16px; font-weight: 700; color: #191919;">👥 Payroll Agent</h3>
+                      <p style="margin: 0; font-size: 12px; color: #999;">WPS & EOSB filing automation</p>
+                    </div>
+                    <span style="display: inline-block; padding: 6px 12px; background: #e8f5e9; color: #22c55e; border-radius: 6px; font-weight: 600; font-size: 11px;">ACTIVE</span>
+                  </div>
+                  <div style="margin: 20px 0; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                    <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Accuracy</p>
+                    <p style="margin: 0; font-size: 28px; font-weight: 700; color: #191919;">100%</p>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid #e0e0e0;">
+                    <div>
+                      <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Status</p>
+                      <p style="margin: 0; font-size: 14px; font-weight: 700; color: #22c55e;">Automated</p>
+                    </div>
+                    <div>
+                      <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Last Filed</p>
+                      <p style="margin: 0; font-size: 13px; font-weight: 600; color: #FF5C00;">16-May</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Revenue Agent Card -->
+                <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white;">
+                  <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+                    <div>
+                      <h3 style="margin: 0 0 4px 0; font-size: 16px; font-weight: 700; color: #191919;">🌐 Revenue Agent</h3>
+                      <p style="margin: 0; font-size: 12px; color: #999;">E-invoicing & Peppol processing</p>
+                    </div>
+                    <span style="display: inline-block; padding: 6px 12px; background: #e8f5e9; color: #22c55e; border-radius: 6px; font-weight: 600; font-size: 11px;">ACTIVE</span>
+                  </div>
+                  <div style="margin: 20px 0; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                    <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Accuracy</p>
+                    <p style="margin: 0; font-size: 28px; font-weight: 700; color: #191919;">99.2%</p>
+                  </div>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid #e0e0e0;">
+                    <div>
+                      <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Processed Today</p>
+                      <p style="margin: 0; font-size: 16px; font-weight: 700; color: #191919;">2 invoices</p>
+                    </div>
+                    <div>
+                      <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Last Activity</p>
+                      <p style="margin: 0; font-size: 13px; font-weight: 600; color: #FF5C00;">18-May</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Agent Summary Stats -->
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white;">
+                <h3 style="margin: 0 0 20px 0; font-size: 16px; font-weight: 700; color: #191919;">System Performance</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                  <div>
+                    <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Combined Accuracy</p>
+                    <p style="margin: 0; font-size: 24px; font-weight: 700; color: #191919;">99.4%</p>
+                  </div>
+                  <div>
+                    <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Total Processed (Today)</p>
+                    <p style="margin: 0; font-size: 24px; font-weight: 700; color: #191919;">49 items</p>
+                  </div>
+                  <div>
+                    <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Automation Rate</p>
+                    <p style="margin: 0; font-size: 24px; font-weight: 700; color: #22c55e;">100%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Agents Timeline View -->
+            <div class="agents-view" data-view="timeline" style="display: none;">
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white;">
+                <h3 style="margin: 0 0 24px 0; font-size: 16px; font-weight: 700; color: #191919;">Workflow Timeline - Last 48 Hours</h3>
+                <div style="position: relative; padding-left: 40px;">
+                  <!-- Timeline Item 1 -->
+                  <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 16px; height: 16px; background: #FF5C00; border: 3px solid white; border-radius: 50%; top: 4px;"></div>
+                    <div style="padding: 12px 16px; background: #f9f9f9; border-radius: 8px; border-left: 3px solid #FF5C00;">
+                      <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">Payroll Agent filed monthly WPS</p>
+                      <p style="margin: 0 0 8px 0; font-size: 12px; color: #4a4a4a;">18 employees, AED 284,000 total payroll, automated filing to EOSB</p>
+                      <span style="display: inline-block; font-size: 11px; color: #999;">31-May, 08:00 AM</span>
+                    </div>
+                  </div>
+
+                  <!-- Timeline Item 2 -->
+                  <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 16px; height: 16px; background: #FF5C00; border: 3px solid white; border-radius: 50%; top: 4px;"></div>
+                    <div style="padding: 12px 16px; background: #f9f9f9; border-radius: 8px; border-left: 3px solid #FF5C00;">
+                      <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">Capture Agent processed 43 transactions</p>
+                      <p style="margin: 0 0 8px 0; font-size: 12px; color: #4a4a4a;">Automatic categorization: Utilities, Office Rent, Equipment, Telecommunications, COGS</p>
+                      <span style="display: inline-block; font-size: 11px; color: #999;">31-May, 13:15 PM</span>
+                    </div>
+                  </div>
+
+                  <!-- Timeline Item 3 -->
+                  <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 16px; height: 16px; background: #FF5C00; border: 3px solid white; border-radius: 50%; top: 4px;"></div>
+                    <div style="padding: 12px 16px; background: #f9f9f9; border-radius: 8px; border-left: 3px solid #FF5C00;">
+                      <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">Revenue Agent processed e-invoices via Peppol</p>
+                      <p style="margin: 0 0 8px 0; font-size: 12px; color: #4a4a4a;">2 invoices sent to customers: Gulf Trading Co., Emirates Dist. — Real-time tracking enabled</p>
+                      <span style="display: inline-block; font-size: 11px; color: #999;">30-May, 16:42 PM</span>
+                    </div>
+                  </div>
+
+                  <!-- Timeline Item 4 -->
+                  <div style="margin-bottom: 32px; position: relative;">
+                    <div style="position: absolute; left: -32px; width: 16px; height: 16px; background: #22c55e; border: 3px solid white; border-radius: 50%; top: 4px;"></div>
+                    <div style="padding: 12px 16px; background: #f9f9f9; border-radius: 8px; border-left: 3px solid #22c55e;">
+                      <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">VAT Agent completed Q2 2025 filing</p>
+                      <p style="margin: 0 0 8px 0; font-size: 12px; color: #4a4a4a;">AED 41,205 liability calculated, filed 11 days before deadline. Next deadline: 15-Jul (45 days)</p>
+                      <span style="display: inline-block; font-size: 11px; color: #999;">30-May, 09:30 AM</span>
+                    </div>
+                  </div>
+
+                  <!-- Timeline Item 5 -->
+                  <div style="position: relative;">
+                    <div style="position: absolute; left: -32px; width: 16px; height: 16px; background: #FF5C00; border: 3px solid white; border-radius: 50%; top: 4px;"></div>
+                    <div style="padding: 12px 16px; background: #f9f9f9; border-radius: 8px; border-left: 3px solid #FF5C00;">
+                      <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">Capture Agent auto-reconciled 95% of bank feeds</p>
+                      <p style="margin: 0 0 8px 0; font-size: 12px; color: #4a4a4a;">3 banks matched. AED 12,400 flagged for manual review (credit card statements)</p>
+                      <span style="display: inline-block; font-size: 11px; color: #999;">29-May, 07:15 AM</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Agents View Switching Script -->
+            <script>
+              document.querySelectorAll('.agents-view-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                  const view = btn.getAttribute('data-view');
+                  document.querySelectorAll('.agents-view-btn').forEach(b => {
+                    b.style.borderBottomColor = 'transparent';
+                    b.style.color = '#4a4a4a';
+                  });
+                  btn.style.borderBottomColor = '#FF5C00';
+                  btn.style.color = '#191919';
+                  
+                  document.querySelectorAll('.agents-view').forEach(v => v.style.display = 'none');
+                  document.querySelector(`[data-view="${view}"]`).style.display = 'block';
+                });
+              });
+            </script>
+          </div>
+
+          <div class="dashboard-panel" id="compliance-panel" role="tabpanel" aria-labelledby="compliance-panel">
+            <!-- Compliance Sub-Tabs -->
+            <div style="display: flex; gap: 12px; margin-bottom: 32px; border-bottom: 2px solid #d9d9d9; flex-wrap: wrap;">
+              <button class="compliance-tab-btn active" data-compliance="vat" style="padding: 14px 0; border: none; background: none; border-bottom: 3px solid #FF5C00; font-size: 14px; font-weight: 600; color: #191919; cursor: pointer; transition: all 0.3s; flex: 1; text-align: left; min-width: 120px;">
+                💰 VAT
+              </button>
+              <button class="compliance-tab-btn" data-compliance="payroll" style="padding: 14px 0; border: none; background: none; color: #4a4a4a; border-bottom: 3px solid transparent; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s; flex: 1; text-align: left; min-width: 120px;">
+                👥 Payroll
+              </button>
+              <button class="compliance-tab-btn" data-compliance="tax" style="padding: 14px 0; border: none; background: none; color: #4a4a4a; border-bottom: 3px solid transparent; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s; flex: 1; text-align: left; min-width: 140px;">
+                📊 Corporate Tax
+              </button>
+              <button class="compliance-tab-btn" data-compliance="aml" style="padding: 14px 0; border: none; background: none; color: #4a4a4a; border-bottom: 3px solid transparent; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s; flex: 1; text-align: left; min-width: 120px;">
+                🔐 AML/CFT
+              </button>
+            </div>
+
+            <!-- VAT Compliance Tab -->
+            <div class="compliance-tab" data-compliance="vat" style="display: block;">
+              <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 32px;">
+                <!-- Status & Key Info -->
+                <div>
+                  <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white; margin-bottom: 24px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                      <div style="width: 24px; height: 24px; background: #22c55e; border-radius: 50%;"></div>
+                      <h3 style="margin: 0; font-size: 14px; font-weight: 700; color: #191919;">Status: Compliant</h3>
+                    </div>
+                    <div style="padding: 16px 0; border-top: 1px solid #e0e0e0;">
+                      <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Q2 Liability</p>
+                      <p style="margin: 0; font-size: 28px; font-weight: 700; color: #191919;">AED <span>41,205</span></p>
+                    </div>
+                    <div style="padding: 16px 0; border-top: 1px solid #e0e0e0;">
+                      <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Filing Status</p>
+                      <p style="margin: 0; font-size: 14px; font-weight: 700; color: #22c55e;">✓ Filed 11 days early</p>
+                    </div>
+                    <div style="padding: 16px 0; border-top: 1px solid #e0e0e0;">
+                      <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Next Deadline</p>
+                      <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 700; color: #191919;">15-Jul (45 days)</p>
+                      <p style="margin: 0; font-size: 11px; color: #999;">Q3 return due</p>
+                    </div>
+                  </div>
+                  <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 16px; background: white;">
+                    <h4 style="margin: 0 0 12px 0; font-size: 12px; font-weight: 700; color: #191919; text-transform: uppercase;">Certifications</h4>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                      <div style="padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #191919;">✓ FTA Registered</div>
+                      <div style="padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #191919;">✓ Peppol Ready</div>
+                      <div style="padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #191919;">✓ E-Invoicing Enabled</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- VAT Breakdown -->
+                <div>
+                  <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white;">
+                    <h3 style="margin: 0 0 20px 0; font-size: 16px; font-weight: 700; color: #191919;">Q2 2025 VAT Calculation</h3>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                      <tbody>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 0; color: #4a4a4a;">Output VAT (5%)</td>
+                          <td style="padding: 12px 0; text-align: right; color: #191919; font-weight: 600;">AED 67,420</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 0; color: #4a4a4a;">Input VAT Credit (5%)</td>
+                          <td style="padding: 12px 0; text-align: right; color: #191919; font-weight: 600;">AED (26,215)</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 0; color: #4a4a4a;">Reverse Charge</td>
+                          <td style="padding: 12px 0; text-align: right; color: #191919; font-weight: 600;">AED 0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 0; color: #4a4a4a;">Designated Zone Supplies</td>
+                          <td style="padding: 12px 0; text-align: right; color: #191919; font-weight: 600;">AED 0</td>
+                        </tr>
+                        <tr style="background: #f9f9f9; border-top: 2px solid #d9d9d9;">
+                          <td style="padding: 12px 0; color: #191919; font-weight: 700;">Net Liability</td>
+                          <td style="padding: 12px 0; text-align: right; color: #FF5C00; font-weight: 700; font-size: 14px;">AED 41,205</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Payroll Compliance Tab -->
+            <div class="compliance-tab" data-compliance="payroll" style="display: none;">
+              <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 32px;">
+                <!-- Status & Key Info -->
+                <div>
+                  <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white; margin-bottom: 24px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                      <div style="width: 24px; height: 24px; background: #22c55e; border-radius: 50%;"></div>
+                      <h3 style="margin: 0; font-size: 14px; font-weight: 700; color: #191919;">Status: Compliant</h3>
+                    </div>
+                    <div style="padding: 16px 0; border-top: 1px solid #e0e0e0;">
+                      <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Monthly Payroll</p>
+                      <p style="margin: 0; font-size: 28px; font-weight: 700; color: #191919;">AED <span>284,000</span></p>
+                    </div>
+                    <div style="padding: 16px 0; border-top: 1px solid #e0e0e0;">
+                      <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Employee Count</p>
+                      <p style="margin: 0; font-size: 14px; font-weight: 700; color: #191919;">18 employees</p>
+                    </div>
+                    <div style="padding: 16px 0; border-top: 1px solid #e0e0e0;">
+                      <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Next Deadline</p>
+                      <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 700; color: #191919;">10-Jun (10 days)</p>
+                      <p style="margin: 0; font-size: 11px; color: #999;">WPS filing due</p>
+                    </div>
+                  </div>
+                  <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 16px; background: white;">
+                    <h4 style="margin: 0 0 12px 0; font-size: 12px; font-weight: 700; color: #191919; text-transform: uppercase;">Certifications</h4>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                      <div style="padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #191919;">✓ WPS Automated</div>
+                      <div style="padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #191919;">✓ EOSB Connected</div>
+                      <div style="padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #191919;">✓ End-of-Service Enabled</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Payroll Details -->
+                <div>
+                  <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white; margin-bottom: 24px;">
+                    <h3 style="margin: 0 0 20px 0; font-size: 16px; font-weight: 700; color: #191919;">Payroll Composition</h3>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                      <tbody>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 0; color: #4a4a4a;">Base Salaries</td>
+                          <td style="padding: 12px 0; text-align: right; color: #191919; font-weight: 600;">AED 216,000</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 0; color: #4a4a4a;">Benefits & Allowances</td>
+                          <td style="padding: 12px 0; text-align: right; color: #191919; font-weight: 600;">AED 48,000</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 0; color: #4a4a4a;">Tax Withholding</td>
+                          <td style="padding: 12px 0; text-align: right; color: #191919; font-weight: 600;">AED (20,000)</td>
+                        </tr>
+                        <tr style="background: #f9f9f9; border-top: 2px solid #d9d9d9;">
+                          <td style="padding: 12px 0; color: #191919; font-weight: 700;">Net Monthly Cost</td>
+                          <td style="padding: 12px 0; text-align: right; color: #FF5C00; font-weight: 700; font-size: 14px;">AED 284,000</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white;">
+                    <h3 style="margin: 0 0 20px 0; font-size: 16px; font-weight: 700; color: #191919;">Filing Status</h3>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                      <div style="padding: 12px; background: #f9f9f9; border-radius: 8px; border-left: 3px solid #22c55e;">
+                        <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">May 2025 WPS Filing</p>
+                        <p style="margin: 0; font-size: 12px; color: #4a4a4a;">✓ Filed on-time via EOSB automation</p>
+                      </div>
+                      <div style="padding: 12px; background: #f9f9f9; border-radius: 8px; border-left: 3px solid #FF5C00;">
+                        <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">June 2025 WPS Filing (Pending)</p>
+                        <p style="margin: 0; font-size: 12px; color: #4a4a4a;">Due: 10-Jun (10 days) — Agent will file automatically</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Corporate Tax Compliance Tab -->
+            <div class="compliance-tab" data-compliance="tax" style="display: none;">
+              <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 32px;">
+                <!-- Status & Key Info -->
+                <div>
+                  <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white; margin-bottom: 24px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                      <div style="width: 24px; height: 24px; background: #22c55e; border-radius: 50%;"></div>
+                      <h3 style="margin: 0; font-size: 14px; font-weight: 700; color: #191919;">Status: Filed (2024)</h3>
+                    </div>
+                    <div style="padding: 16px 0; border-top: 1px solid #e0e0e0;">
+                      <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Annual Estimate</p>
+                      <p style="margin: 0; font-size: 28px; font-weight: 700; color: #191919;">AED <span>235,000</span></p>
+                    </div>
+                    <div style="padding: 16px 0; border-top: 1px solid #e0e0e0;">
+                      <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">SBR Status</p>
+                      <p style="margin: 0; font-size: 14px; font-weight: 700; color: #ff9500;">⚠ Above Threshold</p>
+                      <p style="margin: 4px 0 0 0; font-size: 11px; color: #999;">Income exceeds AED 375k</p>
+                    </div>
+                    <div style="padding: 16px 0; border-top: 1px solid #e0e0e0;">
+                      <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Next Deadline</p>
+                      <p style="margin: 0 0 4px 0; font-size: 16px; font-weight: 700; color: #191919;">31-Mar 2026</p>
+                      <p style="margin: 0; font-size: 11px; color: #999;">(274 days)</p>
+                    </div>
+                  </div>
+                  <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 16px; background: white;">
+                    <h4 style="margin: 0 0 12px 0; font-size: 12px; font-weight: 700; color: #191919; text-transform: uppercase;">Certifications</h4>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                      <div style="padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #191919;">✓ CT Registered</div>
+                      <div style="padding: 8px; background: #fff3cd; border-radius: 6px; font-size: 12px; color: #191919;">⚠ SBR Threshold Exceeded</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tax Details -->
+                <div>
+                  <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white; margin-bottom: 24px;">
+                    <h3 style="margin: 0 0 20px 0; font-size: 16px; font-weight: 700; color: #191919;">2025 Projection</h3>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                      <tbody>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 0; color: #4a4a4a;">Q1 Revenue</td>
+                          <td style="padding: 12px 0; text-align: right; color: #191919; font-weight: 600;">AED 485,200</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 0; color: #4a4a4a;">Q2 Revenue (Est.)</td>
+                          <td style="padding: 12px 0; text-align: right; color: #191919; font-weight: 600;">AED 520,000</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 0; color: #4a4a4a;">H1 Total</td>
+                          <td style="padding: 12px 0; text-align: right; color: #191919; font-weight: 600;">AED 1,005,200</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 0; color: #4a4a4a;">SBR Threshold</td>
+                          <td style="padding: 12px 0; text-align: right; color: #191919; font-weight: 600;">AED 375,000</td>
+                        </tr>
+                        <tr style="background: #f9f9f9; border-top: 2px solid #d9d9d9;">
+                          <td style="padding: 12px 0; color: #191919; font-weight: 700;">Full Year Estimate</td>
+                          <td style="padding: 12px 0; text-align: right; color: #FF5C00; font-weight: 700; font-size: 14px;">AED 235,000</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white;">
+                    <h3 style="margin: 0 0 20px 0; font-size: 16px; font-weight: 700; color: #191919;">Filing History</h3>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                      <div style="padding: 12px; background: #f9f9f9; border-radius: 8px; border-left: 3px solid #22c55e;">
+                        <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">2024 CT Filing</p>
+                        <p style="margin: 0; font-size: 12px; color: #4a4a4a;">✓ Filed on-time · Amount: AED 45,200</p>
+                      </div>
+                      <div style="padding: 12px; background: #f9f9f9; border-radius: 8px; border-left: 3px solid #FF5C00;">
+                        <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">2025 CT Filing (Next)</p>
+                        <p style="margin: 0; font-size: 12px; color: #4a4a4a;">Due: 31-Mar 2026 (274 days) — Preliminary estimate: AED 235,000</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- AML/CFT Compliance Tab -->
+            <div class="compliance-tab" data-compliance="aml" style="display: none;">
+              <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 32px;">
+                <!-- Status & Key Info -->
+                <div>
+                  <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white; margin-bottom: 24px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                      <div style="width: 24px; height: 24px; background: #22c55e; border-radius: 50%;"></div>
+                      <h3 style="margin: 0; font-size: 14px; font-weight: 700; color: #191919;">Status: Compliant</h3>
+                    </div>
+                    <div style="padding: 16px 0; border-top: 1px solid #e0e0e0;">
+                      <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Last JAFZA Audit</p>
+                      <p style="margin: 0; font-size: 14px; font-weight: 700; color: #191919;">10-May 2025</p>
+                    </div>
+                    <div style="padding: 16px 0; border-top: 1px solid #e0e0e0;">
+                      <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Transactions Screened</p>
+                      <p style="margin: 0; font-size: 14px; font-weight: 700; color: #191919;">48/48 (100%)</p>
+                    </div>
+                    <div style="padding: 16px 0; border-top: 1px solid #e0e0e0;">
+                      <p style="margin: 0 0 8px 0; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600;">Suspicious Activity</p>
+                      <p style="margin: 0; font-size: 14px; font-weight: 700; color: #22c55e;">✓ None Detected</p>
+                    </div>
+                  </div>
+                  <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 16px; background: white;">
+                    <h4 style="margin: 0 0 12px 0; font-size: 12px; font-weight: 700; color: #191919; text-transform: uppercase;">Certifications</h4>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                      <div style="padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #191919;">✓ AML Screening Active</div>
+                      <div style="padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #191919;">✓ JAFZ Compliant</div>
+                      <div style="padding: 8px; background: #f9f9f9; border-radius: 6px; font-size: 12px; color: #191919;">✓ UAE CFT Framework</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- AML Framework -->
+                <div>
+                  <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white; margin-bottom: 24px;">
+                    <h3 style="margin: 0 0 20px 0; font-size: 16px; font-weight: 700; color: #191919;">Compliance Framework</h3>
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                      <div style="padding: 12px; background: #f9f9f9; border-radius: 8px;">
+                        <p style="margin: 0 0 4px 0; font-size: 12px; font-weight: 700; color: #191919;">Transaction Screening</p>
+                        <p style="margin: 0; font-size: 12px; color: #4a4a4a;">Real-time screening against OFAC, UN sanctions, and JAFZA blacklists</p>
+                      </div>
+                      <div style="padding: 12px; background: #f9f9f9; border-radius: 8px;">
+                        <p style="margin: 0 0 4px 0; font-size: 12px; font-weight: 700; color: #191919;">Customer Due Diligence (CDD)</p>
+                        <p style="margin: 0; font-size: 12px; color: #4a4a4a;">Verified beneficiary ownership, business purpose, and source of funds</p>
+                      </div>
+                      <div style="padding: 12px; background: #f9f9f9; border-radius: 8px;">
+                        <p style="margin: 0 0 4px 0; font-size: 12px; font-weight: 700; color: #191919;">Suspicious Activity Reporting (SAR)</p>
+                        <p style="margin: 0; font-size: 12px; color: #4a4a4a;">Automated flagging & manual review process, none flagged this period</p>
+                      </div>
+                      <div style="padding: 12px; background: #f9f9f9; border-radius: 8px;">
+                        <p style="margin: 0 0 4px 0; font-size: 12px; font-weight: 700; color: #191919;">Record Keeping</p>
+                        <p style="margin: 0; font-size: 12px; color: #4a4a4a;">5-year transaction records maintained, JAFZA audit compliant</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: white;">
+                    <h3 style="margin: 0 0 20px 0; font-size: 16px; font-weight: 700; color: #191919;">Current Period Summary</h3>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                      <tbody>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 0; color: #4a4a4a;">Total Transactions</td>
+                          <td style="padding: 12px 0; text-align: right; color: #191919; font-weight: 600;">48</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 0; color: #4a4a4a;">Screened (OFAC)</td>
+                          <td style="padding: 12px 0; text-align: right; color: #191919; font-weight: 600;">✓ 48/48</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 0; color: #4a4a4a;">Hits on Sanctions List</td>
+                          <td style="padding: 12px 0; text-align: right; color: #22c55e; font-weight: 600;">0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e0e0e0;">
+                          <td style="padding: 12px 0; color: #4a4a4a;">Suspicious Activity Flags</td>
+                          <td style="padding: 12px 0; text-align: right; color: #22c55e; font-weight: 600;">0</td>
+                        </tr>
+                        <tr style="background: #f9f9f9; border-top: 2px solid #d9d9d9;">
+                          <td style="padding: 12px 0; color: #191919; font-weight: 700;">Compliance Rate</td>
+                          <td style="padding: 12px 0; text-align: right; color: #22c55e; font-weight: 700; font-size: 14px;">100%</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Compliance Tab Switching Script -->
+            <script>
+              document.querySelectorAll('.compliance-tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                  const tab = btn.getAttribute('data-compliance');
+                  document.querySelectorAll('.compliance-tab-btn').forEach(b => {
+                    b.style.borderBottomColor = 'transparent';
+                    b.style.color = '#4a4a4a';
+                  });
+                  btn.style.borderBottomColor = '#FF5C00';
+                  btn.style.color = '#191919';
+                  
+                  document.querySelectorAll('.compliance-tab').forEach(t => t.style.display = 'none');
+                  document.querySelector(`[data-compliance="${tab}"]`).style.display = 'block';
+                });
+              });
+            </script>
+          </div>
+
         </div>
       </section>
 
@@ -430,175 +1464,659 @@
         <div class="wrap">
           <div class="section-head reveal">
             <div>
-              <span class="text-xs uppercase tracking-widest font-semibold text-primary-500">Your finance department</span>
-              <h2 class="section-title">Meet your AI team. Licensed professionals for exceptions.</h2>
+              <span class="text-xs uppercase tracking-widest font-semibold text-primary-500">Autonomous finance operations</span>
+              <h2 class="section-title">AI agents working 24/7. Always compliant, never sleeping.</h2>
             </div>
             <p class="text-lg text-bg-700 leading-relaxed">
-              Ledgr organizes as an actual finance department. Each agent specializes in one function. 
-              They work autonomously and escalate to licensed accountants only for edge cases and legally-required approvals. 
-              The result: one licensed professional now supervises what previously required a team of five.
+              Four specialized agents handle 98%+ of finance operations autonomously. Each processes transactions in parallel, 
+              maintaining accuracy that exceeds manual work while operating 24/7 across UAE compliance systems (FTA, MOL, AMLREPORTING).
             </p>
           </div>
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 48px;">
-            <!-- CEO / Admin Agent -->
-            <div class="reveal" style="border: 1px solid #d9d9d9; border-radius: 8px; padding: 24px; background: white;">
-              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                <span style="font-size: 24px; font-weight: bold; color: #FF5C00;">👤</span>
-                <h3 style="margin: 0; font-size: 16px; font-weight: 600;">Office Manager</h3>
+          <!-- Agent Status Summary -->
+          <div style="background: white; border: 1px solid #d9d9d9; border-radius: 12px; padding: 32px; margin-top: 48px; margin-bottom: 40px;">
+            <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+              <div style="flex: 1; min-width: 250px;">
+                <p style="margin: 0 0 12px 0; font-size: 12px; font-weight: 600; color: #4a4a4a; text-transform: uppercase; letter-spacing: 0.5px;">System Status</p>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px rgba(34, 197, 94, 0.6); animation: pulse 2s infinite;"></span>
+                  <span style="font-size: 16px; font-weight: 600; color: #191919;">All systems operational</span>
+                </div>
               </div>
-              <p style="margin: 0; color: #4a4a4a; font-size: 14px; line-height: 1.6;">
-                Coordinates all agents. Routes requests. Ensures consistency across departments. 
-                Escalates to licensed professionals.
-              </p>
+              <div style="flex: 1; min-width: 250px;">
+                <p style="margin: 0 0 12px 0; font-size: 12px; font-weight: 600; color: #4a4a4a; text-transform: uppercase; letter-spacing: 0.5px;">Processing Today</p>
+                <p style="margin: 0; font-size: 20px; font-weight: 700; color: #FF5C00;"><span class="agents-processing-count">247</span> transactions</p>
+              </div>
+              <div style="flex: 1; min-width: 250px;">
+                <p style="margin: 0 0 12px 0; font-size: 12px; font-weight: 600; color: #4a4a4a; text-transform: uppercase; letter-spacing: 0.5px;">Uptime</p>
+                <p style="margin: 0; font-size: 20px; font-weight: 700; color: #191919;">99.98%</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- View Toggle -->
+          <div style="display: flex; gap: 12px; margin-bottom: 32px; justify-content: center;">
+            <button class="agents-view-toggle active" data-view="overview" style="padding: 10px 20px; border: 2px solid #FF5C00; background: #FF5C00; color: white; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+              Overview
+            </button>
+            <button class="agents-view-toggle" data-view="workflow" style="padding: 10px 20px; border: 2px solid #d9d9d9; background: white; color: #4a4a4a; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+              Workflow Timeline
+            </button>
+          </div>
+
+          <!-- OVERVIEW VIEW -->
+          <div class="agents-view-content" data-view="overview" style="display: block;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+              <!-- Capture Agent Card -->
+              <div class="agent-card reveal" style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 28px; background: white; cursor: pointer; transition: all 0.3s;" data-agent="capture">
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px;">
+                  <span style="font-size: 32px;">📸</span>
+                  <div style="width: 12px; height: 12px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px rgba(34, 197, 94, 0.6); animation: pulse 2s infinite;"></div>
+                </div>
+                <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 700; color: #191919;">Capture Agent</h3>
+                <p style="margin: 0 0 20px 0; font-size: 13px; color: #4a4a4a;">Transaction capture & categorization</p>
+                
+                <div style="border-top: 1px solid #e0e0e0; padding-top: 16px;">
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                    <div>
+                      <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Accuracy</p>
+                      <p style="margin: 0; font-size: 20px; font-weight: 700; color: #FF5C00;">98.5%</p>
+                    </div>
+                    <div>
+                      <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Processed</p>
+                      <p style="margin: 0; font-size: 20px; font-weight: 700; color: #191919;">43</p>
+                    </div>
+                  </div>
+                  <p style="margin: 0; font-size: 12px; color: #999;">Last activity: <span class="agent-last-activity">4 mins ago</span></p>
+                </div>
+              </div>
+
+              <!-- VAT Agent Card -->
+              <div class="agent-card reveal" style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 28px; background: white; cursor: pointer; transition: all 0.3s;" data-agent="vat">
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px;">
+                  <span style="font-size: 32px;">📊</span>
+                  <div style="width: 12px; height: 12px; border-radius: 50%; background: #f97316; box-shadow: 0 0 8px rgba(249, 115, 22, 0.6);"></div>
+                </div>
+                <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 700; color: #191919;">VAT Agent</h3>
+                <p style="margin: 0 0 20px 0; font-size: 13px; color: #4a4a4a;">VAT compliance & FTA filing</p>
+                
+                <div style="border-top: 1px solid #e0e0e0; padding-top: 16px;">
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                    <div>
+                      <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Accuracy</p>
+                      <p style="margin: 0; font-size: 20px; font-weight: 700; color: #FF5C00;">99.8%</p>
+                    </div>
+                    <div>
+                      <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Status</p>
+                      <p style="margin: 0; font-size: 14px; font-weight: 700; color: #191919;">Q2 Filed</p>
+                    </div>
+                  </div>
+                  <p style="margin: 0; font-size: 12px; color: #999;">Last activity: <span class="agent-last-activity">11 days early</span></p>
+                </div>
+              </div>
+
+              <!-- Payroll Agent Card -->
+              <div class="agent-card reveal" style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 28px; background: white; cursor: pointer; transition: all 0.3s;" data-agent="payroll">
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px;">
+                  <span style="font-size: 32px;">👥</span>
+                  <div style="width: 12px; height: 12px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px rgba(34, 197, 94, 0.6); animation: pulse 2s infinite;"></div>
+                </div>
+                <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 700; color: #191919;">Payroll Agent</h3>
+                <p style="margin: 0 0 20px 0; font-size: 13px; color: #4a4a4a;">WPS & EOSB filing automation</p>
+                
+                <div style="border-top: 1px solid #e0e0e0; padding-top: 16px;">
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                    <div>
+                      <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Accuracy</p>
+                      <p style="margin: 0; font-size: 20px; font-weight: 700; color: #FF5C00;">100%</p>
+                    </div>
+                    <div>
+                      <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Employees</p>
+                      <p style="margin: 0; font-size: 20px; font-weight: 700; color: #191919;">18</p>
+                    </div>
+                  </div>
+                  <p style="margin: 0; font-size: 12px; color: #999;">Last activity: <span class="agent-last-activity">5 mins ago</span></p>
+                </div>
+              </div>
+
+              <!-- Revenue Agent Card -->
+              <div class="agent-card reveal" style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 28px; background: white; cursor: pointer; transition: all 0.3s;" data-agent="revenue">
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px;">
+                  <span style="font-size: 32px;">💵</span>
+                  <div style="width: 12px; height: 12px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px rgba(34, 197, 94, 0.6); animation: pulse 2s infinite;"></div>
+                </div>
+                <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 700; color: #191919;">Revenue Agent</h3>
+                <p style="margin: 0 0 20px 0; font-size: 13px; color: #4a4a4a;">E-invoicing & Peppol integration</p>
+                
+                <div style="border-top: 1px solid #e0e0e0; padding-top: 16px;">
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                    <div>
+                      <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Accuracy</p>
+                      <p style="margin: 0; font-size: 20px; font-weight: 700; color: #FF5C00;">99.2%</p>
+                    </div>
+                    <div>
+                      <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Invoices</p>
+                      <p style="margin: 0; font-size: 20px; font-weight: 700; color: #191919;">28</p>
+                    </div>
+                  </div>
+                  <p style="margin: 0; font-size: 12px; color: #999;">Last activity: <span class="agent-last-activity">2 mins ago</span></p>
+                </div>
+              </div>
             </div>
 
-            <!-- CFO Agent -->
-            <div class="reveal" style="border: 1px solid #d9d9d9; border-radius: 8px; padding: 24px; background: white;">
-              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                <span style="font-size: 24px; font-weight: bold; color: #FF5C00;">💰</span>
-                <h3 style="margin: 0; font-size: 16px; font-weight: 600;">Chief Financial Officer</h3>
+            <!-- Agent Details Modal Placeholder -->
+            <div class="agent-details-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+              <div style="background: white; border-radius: 12px; padding: 40px; max-width: 500px; max-height: 80vh; overflow-y: auto;">
+                <h3 class="modal-agent-name" style="margin: 0 0 20px 0; font-size: 24px; font-weight: 700;"></h3>
+                <div class="modal-agent-content"></div>
+                <button class="close-modal" style="margin-top: 20px; padding: 10px 20px; background: #FF5C00; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Close</button>
               </div>
-              <p style="margin: 0; color: #4a4a4a; font-size: 14px; line-height: 1.6;">
-                Financial strategy and planning. Answers: "Can we hire 3 more employees?" "What if revenue drops 20%?" 
-                Uses your actual books to advise.
-              </p>
             </div>
+          </div>
 
-            <!-- Controller Agent -->
-            <div class="reveal" style="border: 1px solid #d9d9d9; border-radius: 8px; padding: 24px; background: white;">
-              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                <span style="font-size: 24px; font-weight: bold; color: #FF5C00;">📊</span>
-                <h3 style="margin: 0; font-size: 16px; font-weight: 600;">Finance Controller</h3>
+          <!-- WORKFLOW VIEW -->
+          <div class="agents-view-content" data-view="workflow" style="display: none;">
+            <div style="background: white; border: 1px solid #d9d9d9; border-radius: 12px; padding: 40px; margin-top: 20px;">
+              <h3 style="margin: 0 0 32px 0; font-size: 20px; font-weight: 700; color: #191919;">Real-time Processing Pipeline</h3>
+              
+              <!-- Workflow Example 1 -->
+              <div style="margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid #e0e0e0;">
+                <p style="margin: 0 0 16px 0; font-size: 13px; color: #999; font-weight: 600; text-transform: uppercase;">Invoice Processing</p>
+                <div style="display: flex; align-items: center; gap: 0; flex-wrap: wrap;">
+                  <div style="flex: 1; min-width: 120px; text-align: center; padding: 16px;">
+                    <p style="margin: 0 0 8px 0; font-size: 24px;">📧</p>
+                    <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">Invoice</p>
+                    <p style="margin: 0; font-size: 11px; color: #999;">Received</p>
+                  </div>
+                  <div style="width: 40px; height: 1px; background: #d9d9d9; position: relative;"><span style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); font-size: 12px; color: #999;">→</span></div>
+                  <div style="flex: 1; min-width: 120px; text-align: center; padding: 16px; background: #fff8f0; border-radius: 8px;">
+                    <p style="margin: 0 0 8px 0; font-size: 24px;">📸</p>
+                    <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">Capture</p>
+                    <p style="margin: 0; font-size: 11px; color: #FF5C00; font-weight: 600;">2.3s</p>
+                  </div>
+                  <div style="width: 40px; height: 1px; background: #d9d9d9; position: relative;"><span style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); font-size: 12px; color: #999;">→</span></div>
+                  <div style="flex: 1; min-width: 120px; text-align: center; padding: 16px;">
+                    <p style="margin: 0 0 8px 0; font-size: 24px;">🧮</p>
+                    <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">VAT Check</p>
+                    <p style="margin: 0; font-size: 11px; color: #FF5C00; font-weight: 600;">0.8s</p>
+                  </div>
+                  <div style="width: 40px; height: 1px; background: #d9d9d9; position: relative;"><span style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); font-size: 12px; color: #999;">→</span></div>
+                  <div style="flex: 1; min-width: 120px; text-align: center; padding: 16px;">
+                    <p style="margin: 0 0 8px 0; font-size: 24px;">✅</p>
+                    <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">Recorded</p>
+                    <p style="margin: 0; font-size: 11px; color: #22c55e; font-weight: 600;">Live</p>
+                  </div>
+                </div>
+                <p style="margin: 16px 0 0 0; font-size: 12px; color: #4a4a4a;">Total time: 3.1s | Accuracy: 98.5% | Status: 127 processed today</p>
               </div>
-              <p style="margin: 0; color: #4a4a4a; font-size: 14px; line-height: 1.6;">
-                Oversight and monitoring. Tracks cash flow, margins, burn rate, revenue concentration, tax exposure. 
-                Produces weekly executive summary.
-              </p>
-            </div>
 
-            <!-- Tax Agent -->
-            <div class="reveal" style="border: 1px solid #d9d9d9; border-radius: 8px; padding: 24px; background: white;">
-              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                <span style="font-size: 24px; font-weight: bold; color: #FF5C00;">📋</span>
-                <h3 style="margin: 0; font-size: 16px; font-weight: 600;">Tax Specialist</h3>
+              <!-- Workflow Example 2 -->
+              <div style="margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid #e0e0e0;">
+                <p style="margin: 0 0 16px 0; font-size: 13px; color: #999; font-weight: 600; text-transform: uppercase;">Payroll Processing</p>
+                <div style="display: flex; align-items: center; gap: 0; flex-wrap: wrap;">
+                  <div style="flex: 1; min-width: 120px; text-align: center; padding: 16px;">
+                    <p style="margin: 0 0 8px 0; font-size: 24px;">👥</p>
+                    <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">Employee Data</p>
+                    <p style="margin: 0; font-size: 11px; color: #999;">Input</p>
+                  </div>
+                  <div style="width: 40px; height: 1px; background: #d9d9d9; position: relative;"><span style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); font-size: 12px; color: #999;">→</span></div>
+                  <div style="flex: 1; min-width: 120px; text-align: center; padding: 16px; background: #fff8f0; border-radius: 8px;">
+                    <p style="margin: 0 0 8px 0; font-size: 24px;">⚙️</p>
+                    <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">Calculate</p>
+                    <p style="margin: 0; font-size: 11px; color: #FF5C00; font-weight: 600;">1.2s</p>
+                  </div>
+                  <div style="width: 40px; height: 1px; background: #d9d9d9; position: relative;"><span style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); font-size: 12px; color: #999;">→</span></div>
+                  <div style="flex: 1; min-width: 120px; text-align: center; padding: 16px;">
+                    <p style="margin: 0 0 8px 0; font-size: 24px;">📋</p>
+                    <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">WPS Filing</p>
+                    <p style="margin: 0; font-size: 11px; color: #FF5C00; font-weight: 600;">0.6s</p>
+                  </div>
+                  <div style="width: 40px; height: 1px; background: #d9d9d9; position: relative;"><span style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); font-size: 12px; color: #999;">→</span></div>
+                  <div style="flex: 1; min-width: 120px; text-align: center; padding: 16px;">
+                    <p style="margin: 0 0 8px 0; font-size: 24px;">✅</p>
+                    <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">Filed</p>
+                    <p style="margin: 0; font-size: 11px; color: #22c55e; font-weight: 600;">Automated</p>
+                  </div>
+                </div>
+                <p style="margin: 16px 0 0 0; font-size: 12px; color: #4a4a4a;">Total time: 2.0s | Accuracy: 100% | Status: Automated, filed on time</p>
               </div>
-              <p style="margin: 0; color: #4a4a4a; font-size: 14px; line-height: 1.6;">
-                Corporate Tax specialist. CT computation, Small Business Relief tracking, QFZP testing, 
-                Transfer pricing, Economic Substance, AML compliance.
-              </p>
-            </div>
 
-            <!-- VAT Specialist -->
-            <div class="reveal" style="border: 1px solid #d9d9d9; border-radius: 8px; padding: 24px; background: white;">
-              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                <span style="font-size: 24px; font-weight: bold; color: #FF5C00;">🧮</span>
-                <h3 style="margin: 0; font-size: 16px; font-weight: 600;">VAT Specialist</h3>
+              <!-- Workflow Example 3 -->
+              <div style="padding-bottom: 0;">
+                <p style="margin: 0 0 16px 0; font-size: 13px; color: #999; font-weight: 600; text-transform: uppercase;">Revenue Recognition</p>
+                <div style="display: flex; align-items: center; gap: 0; flex-wrap: wrap;">
+                  <div style="flex: 1; min-width: 120px; text-align: center; padding: 16px;">
+                    <p style="margin: 0 0 8px 0; font-size: 24px;">💰</p>
+                    <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">Invoice Issued</p>
+                    <p style="margin: 0; font-size: 11px; color: #999;">Peppol</p>
+                  </div>
+                  <div style="width: 40px; height: 1px; background: #d9d9d9; position: relative;"><span style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); font-size: 12px; color: #999;">→</span></div>
+                  <div style="flex: 1; min-width: 120px; text-align: center; padding: 16px; background: #fff8f0; border-radius: 8px;">
+                    <p style="margin: 0 0 8px 0; font-size: 24px;">📊</p>
+                    <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">Classify</p>
+                    <p style="margin: 0; font-size: 11px; color: #FF5C00; font-weight: 600;">0.5s</p>
+                  </div>
+                  <div style="width: 40px; height: 1px; background: #d9d9d9; position: relative;"><span style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); font-size: 12px; color: #999;">→</span></div>
+                  <div style="flex: 1; min-width: 120px; text-align: center; padding: 16px;">
+                    <p style="margin: 0 0 8px 0; font-size: 24px;">📈</p>
+                    <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">Record Revenue</p>
+                    <p style="margin: 0; font-size: 11px; color: #FF5C00; font-weight: 600;">0.3s</p>
+                  </div>
+                  <div style="width: 40px; height: 1px; background: #d9d9d9; position: relative;"><span style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); font-size: 12px; color: #999;">→</span></div>
+                  <div style="flex: 1; min-width: 120px; text-align: center; padding: 16px;">
+                    <p style="margin: 0 0 8px 0; font-size: 24px;">✅</p>
+                    <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 600; color: #191919;">Posted</p>
+                    <p style="margin: 0; font-size: 11px; color: #22c55e; font-weight: 600;">Live</p>
+                  </div>
+                </div>
+                <p style="margin: 16px 0 0 0; font-size: 12px; color: #4a4a4a;">Total time: 1.3s | Accuracy: 99.2% | Status: 42 invoices processed</p>
               </div>
-              <p style="margin: 0; color: #4a4a4a; font-size: 14px; line-height: 1.6;">
-                VAT specialist. Classification, reverse charge, designated zones, real estate rules, 
-                healthcare rules. Monitors registration thresholds.
-              </p>
-            </div>
-
-            <!-- Payroll Officer -->
-            <div class="reveal" style="border: 1px solid #d9d9d9; border-radius: 8px; padding: 24px; background: white;">
-              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                <span style="font-size: 24px; font-weight: bold; color: #FF5C00;">👥</span>
-                <h3 style="margin: 0; font-size: 16px; font-weight: 600;">Payroll Officer</h3>
-              </div>
-              <p style="margin: 0; color: #4a4a4a; font-size: 14px; line-height: 1.6;">
-                End-to-end payroll and WPS. Leave tracking, gratuity calculations, multi-emirate rules, 
-                MOHRE compliance. Automatic WPS filing.
-              </p>
-            </div>
-
-            <!-- Regulatory Officer -->
-            <div class="reveal" style="border: 1px solid #d9d9d9; border-radius: 8px; padding: 24px; background: white;">
-              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                <span style="font-size: 24px; font-weight: bold; color: #FF5C00;">⚖️</span>
-                <h3 style="margin: 0; font-size: 16px; font-weight: 600;">Regulatory Officer</h3>
-              </div>
-              <p style="margin: 0; color: #4a4a4a; font-size: 14px; line-height: 1.6;">
-                Monitors FTA, CT, MOHRE, free zone, AML regulatory changes. 
-                Alerts you automatically when rules change.
-              </p>
-            </div>
-
-            <!-- Audit Manager -->
-            <div class="reveal" style="border: 1px solid #d9d9d9; border-radius: 8px; padding: 24px; background: white;">
-              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                <span style="font-size: 24px; font-weight: bold; color: #FF5C00;">✅</span>
-                <h3 style="margin: 0; font-size: 16px; font-weight: 600;">Audit Manager</h3>
-              </div>
-              <p style="margin: 0; color: #4a4a4a; font-size: 14px; line-height: 1.6;">
-                Always audit-ready. Maintains 7+ year document retention. 
-                Produces supporting docs, filing history, and transaction trails on demand.
-              </p>
-            </div>
-
-            <!-- Collections Officer -->
-            <div class="reveal" style="border: 1px solid #d9d9d9; border-radius: 8px; padding: 24px; background: white;">
-              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                <span style="font-size: 24px; font-weight: bold; color: #FF5C00;">💳</span>
-                <h3 style="margin: 0; font-size: 16px; font-weight: 600;">Collections Officer</h3>
-              </div>
-              <p style="margin: 0; color: #4a4a4a; font-size: 14px; line-height: 1.6;">
-                Handles outstanding invoices. Sends email reminders, WhatsApp follow-ups, 
-                escalation sequences. Escalates only when human intervention needed.
-              </p>
-            </div>
-
-            <!-- Vendor Manager -->
-            <div class="reveal" style="border: 1px solid #d9d9d9; border-radius: 8px; padding: 24px; background: white;">
-              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                <span style="font-size: 24px; font-weight: bold; color: #FF5C00;">📦</span>
-                <h3 style="margin: 0; font-size: 16px; font-weight: 600;">Vendor Manager</h3>
-              </div>
-              <p style="margin: 0; color: #4a4a4a; font-size: 14px; line-height: 1.6;">
-                Supplier invoice handling, payment approvals, due date tracking, 
-                duplicate detection, compliance matching. Smart AP automation.
-              </p>
-            </div>
-
-            <!-- Support Manager -->
-            <div class="reveal" style="border: 1px solid #d9d9d9; border-radius: 8px; padding: 24px; background: white;">
-              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                <span style="font-size: 24px; font-weight: bold; color: #FF5C00;">🎯</span>
-                <h3 style="margin: 0; font-size: 16px; font-weight: 600;">Support Manager</h3>
-              </div>
-              <p style="margin: 0; color: #4a4a4a; font-size: 14px; line-height: 1.6;">
-                Tier 1 customer support. Answers questions, resolves errors, 
-                guides setup. Escalates complex issues to licensed reviewers.
-              </p>
-            </div>
-
-            <!-- Onboarding Officer -->
-            <div class="reveal" style="border: 1px solid #d9d9d9; border-radius: 8px; padding: 24px; background: white;">
-              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                <span style="font-size: 24px; font-weight: bold; color: #FF5C00;">🚀</span>
-                <h3 style="margin: 0; font-size: 16px; font-weight: 600;">Onboarding Officer</h3>
-              </div>
-              <p style="margin: 0; color: #4a4a4a; font-size: 14px; line-height: 1.6;">
-                New customer setup. Imports books, banks, payroll, prior VAT filings, 
-                historical tax records. Creates 15-minute onboarding plan.
-              </p>
-            </div>
-
-            <!-- Concierge Agent -->
-            <div class="reveal" style="border: 1px solid #d9d9d9; border-radius: 8px; padding: 24px; background: white;">
-              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                <span style="font-size: 24px; font-weight: bold; color: #FF5C00;">💬</span>
-                <h3 style="margin: 0; font-size: 16px; font-weight: 600;">Concierge (Izza)</h3>
-              </div>
-              <p style="margin: 0; color: #4a4a4a; font-size: 14px; line-height: 1.6;">
-                Your personal AI advisor. Answers business finance questions in English or Arabic. 
-                Uses your actual books and FTA references for reasoning.
-              </p>
             </div>
           </div>
         </div>
       </section>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           COMPLIANCE section
+           ============================================================ -->
+      <section id="compliance" style="background: white; padding: 80px 0;">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div>
+              <span class="text-xs uppercase tracking-widest font-semibold text-primary-500">Regulatory Automation</span>
+              <h2 class="section-title">Compliance as a continuous process, not a quarterly scramble.</h2>
+              <p style="margin-top: 16px; font-size: 16px; color: #4a4a4a; max-width: 600px;">Ledgr automates all four UAE compliance systems — VAT, Payroll, Corporate Tax, and AML — with real-time accuracy and zero missed deadlines.</p>
+            </div>
+          </div>
+
+          <!-- Compliance Sub-Tab Switcher -->
+          <div style="display: flex; gap: 12px; margin-bottom: 48px; justify-content: center; flex-wrap: wrap;">
+            <button class="compliance-tab-btn active" data-tab="vat" style="padding: 12px 24px; border: 2px solid #FF5C00; background: #FF5C00; color: white; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+              VAT Filing
+            </button>
+            <button class="compliance-tab-btn" data-tab="payroll" style="padding: 12px 24px; border: 2px solid #d9d9d9; background: white; color: #4a4a4a; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+              Payroll & WPS
+            </button>
+            <button class="compliance-tab-btn" data-tab="corporate-tax" style="padding: 12px 24px; border: 2px solid #d9d9d9; background: white; color: #4a4a4a; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+              Corporate Tax
+            </button>
+            <button class="compliance-tab-btn" data-tab="aml" style="padding: 12px 24px; border: 2px solid #d9d9d9; background: white; color: #4a4a4a; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+              AML Compliance
+            </button>
+          </div>
+
+          <!-- ======================== VAT FILING DASHBOARD ======================== -->
+          <div class="compliance-panel" data-panel="vat" style="display: block;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; margin-bottom: 40px;">
+              <!-- Status Card -->
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 32px; background: white;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+                  <h3 style="margin: 0; font-size: 18px; font-weight: 700; color: #191919;">Q2 2025 Filing</h3>
+                  <div style="width: 20px; height: 20px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 12px rgba(34, 197, 94, 0.6);"></div>
+                </div>
+                <p style="margin: 0 0 8px 0; font-size: 28px; font-weight: 700; color: #22c55e;">FILED ✓</p>
+                <p style="margin: 0 0 20px 0; font-size: 13px; color: #999;">Filed on 04-Jun (11 days early)</p>
+                <div style="background: #f0fdf4; border-left: 4px solid #22c55e; padding: 16px; border-radius: 6px;">
+                  <p style="margin: 0; font-size: 12px; color: #22c55e; font-weight: 600;">Status: COMPLIANT</p>
+                </div>
+              </div>
+
+              <!-- Filing Metrics -->
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 32px; background: white;">
+                <h3 style="margin: 0 0 24px 0; font-size: 18px; font-weight: 700; color: #191919;">Quarterly Breakdown</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                  <div>
+                    <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Output VAT</p>
+                    <p style="margin: 0; font-size: 22px; font-weight: 700; color: #191919;">AED 67,420</p>
+                  </div>
+                  <div>
+                    <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Input VAT</p>
+                    <p style="margin: 0; font-size: 22px; font-weight: 700; color: #191919;">AED 26,215</p>
+                  </div>
+                  <div style="border-top: 1px solid #e0e0e0; padding-top: 16px;">
+                    <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Reverse Charge</p>
+                    <p style="margin: 0; font-size: 22px; font-weight: 700; color: #191919;">AED 0</p>
+                  </div>
+                  <div style="border-top: 1px solid #e0e0e0; padding-top: 16px;">
+                    <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Net Payable</p>
+                    <p style="margin: 0; font-size: 22px; font-weight: 700; color: #FF5C00;">AED 41,205</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Accuracy Metrics -->
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 32px; background: white;">
+                <h3 style="margin: 0 0 24px 0; font-size: 18px; font-weight: 700; color: #191919;">Accuracy Badge</h3>
+                <div style="background: #fff8f0; border-radius: 8px; padding: 20px; border-left: 4px solid #FF5C00; margin-bottom: 16px;">
+                  <p style="margin: 0 0 8px 0; font-size: 24px; font-weight: 700; color: #FF5C00;">95.2%</p>
+                  <p style="margin: 0 0 8px 0; font-size: 12px; color: #4a4a4a; font-weight: 600;">Zero manual corrections</p>
+                  <p style="margin: 0; font-size: 11px; color: #999;">vs industry average: 87.3%</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Filing Timeline -->
+            <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 32px; background: white; margin-bottom: 32px;">
+              <h3 style="margin: 0 0 28px 0; font-size: 18px; font-weight: 700; color: #191919;">Filing History & Timeline</h3>
+              <div style="position: relative; padding-left: 32px;">
+                <!-- Q2 2025 -->
+                <div style="margin-bottom: 32px; position: relative;">
+                  <div style="position: absolute; left: -32px; top: 0; width: 12px; height: 12px; background: #22c55e; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 2px #d9d9d9;"></div>
+                  <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 700; color: #191919;">Q2 2025</p>
+                  <p style="margin: 0 0 4px 0; font-size: 13px; color: #4a4a4a;">AED 41,205 • Filed 04-Jun 2025 ✓</p>
+                  <p style="margin: 0; font-size: 12px; color: #22c55e; font-weight: 600;">11 days early</p>
+                </div>
+
+                <!-- Q1 2025 -->
+                <div style="margin-bottom: 32px; position: relative;">
+                  <div style="position: absolute; left: -32px; top: 0; width: 12px; height: 12px; background: #22c55e; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 2px #d9d9d9;"></div>
+                  <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 700; color: #191919;">Q1 2025</p>
+                  <p style="margin: 0 0 4px 0; font-size: 13px; color: #4a4a4a;">AED 38,900 • Filed 15-Apr 2025 ✓</p>
+                  <p style="margin: 0; font-size: 12px; color: #22c55e; font-weight: 600;">On time</p>
+                </div>
+
+                <!-- Q4 2024 -->
+                <div style="position: relative;">
+                  <div style="position: absolute; left: -32px; top: 0; width: 12px; height: 12px; background: #22c55e; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 2px #d9d9d9;"></div>
+                  <p style="margin: 0 0 4px 0; font-size: 13px; font-weight: 700; color: #191919;">Q4 2024</p>
+                  <p style="margin: 0 0 4px 0; font-size: 13px; color: #4a4a4a;">AED 45,200 • Filed 15-Jan 2025 ✓</p>
+                  <p style="margin: 0; font-size: 12px; color: #22c55e; font-weight: 600;">On time</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Next Deadline & Actions -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+                <p style="margin: 0 0 8px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Next Deadline</p>
+                <p style="margin: 0 0 8px 0; font-size: 28px; font-weight: 700; color: #FF5C00;" id="vat-countdown">45</p>
+                <p style="margin: 0; font-size: 12px; color: #4a4a4a;">days until Q3 filing (15-Jul-2025)</p>
+              </div>
+
+              <button onclick="downloadComplianceReport('vat')" style="padding: 16px; background: #FF5C00; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                📥 Download Report
+              </button>
+
+              <button onclick="emailComplianceSummary('vat')" style="padding: 16px; background: white; color: #FF5C00; border: 2px solid #FF5C00; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                📧 Email Summary
+              </button>
+            </div>
+          </div>
+
+          <!-- ======================== PAYROLL & WPS DASHBOARD ======================== -->
+          <div class="compliance-panel" data-panel="payroll" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; margin-bottom: 40px;">
+              <!-- WPS Status Card -->
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 32px; background: white;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+                  <h3 style="margin: 0; font-size: 18px; font-weight: 700; color: #191919;">WPS Status</h3>
+                  <div style="width: 20px; height: 20px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 12px rgba(34, 197, 94, 0.6);"></div>
+                </div>
+                <p style="margin: 0 0 8px 0; font-size: 28px; font-weight: 700; color: #22c55e;">AUTOMATED ✓</p>
+                <p style="margin: 0 0 20px 0; font-size: 13px; color: #999;">Filed on time for 6 consecutive months</p>
+                <div style="background: #f0fdf4; border-left: 4px solid #22c55e; padding: 16px; border-radius: 6px;">
+                  <p style="margin: 0; font-size: 12px; color: #22c55e; font-weight: 600;">Certification: MOL Certified Compliant</p>
+                </div>
+              </div>
+
+              <!-- Payroll Metrics -->
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 32px; background: white;">
+                <h3 style="margin: 0 0 24px 0; font-size: 18px; font-weight: 700; color: #191919;">Current Payroll</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                  <div>
+                    <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Employees</p>
+                    <p style="margin: 0; font-size: 28px; font-weight: 700; color: #191919;">18</p>
+                  </div>
+                  <div>
+                    <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Monthly Payroll</p>
+                    <p style="margin: 0; font-size: 22px; font-weight: 700; color: #191919;">AED 284k</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Certification -->
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 32px; background: white;">
+                <h3 style="margin: 0 0 24px 0; font-size: 18px; font-weight: 700; color: #191919;">Certifications</h3>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                  <div style="display: flex; align-items: center; gap: 8px; padding: 12px; background: #f0fdf4; border-radius: 6px;">
+                    <span style="font-size: 18px;">✓</span>
+                    <span style="font-size: 13px; color: #22c55e; font-weight: 600;">WPS Automated</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 8px; padding: 12px; background: #f0fdf4; border-radius: 6px;">
+                    <span style="font-size: 18px;">✓</span>
+                    <span style="font-size: 13px; color: #22c55e; font-weight: 600;">EOSB Connected</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Filing History -->
+            <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 32px; background: white; margin-bottom: 32px;">
+              <h3 style="margin: 0 0 24px 0; font-size: 18px; font-weight: 700; color: #191919;">Last 6 Months Filing Record</h3>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                <div style="padding: 16px; border: 1px solid #d9d9d9; border-radius: 8px; text-align: center;">
+                  <p style="margin: 0 0 4px 0; font-size: 12px; color: #999;">May 2025</p>
+                  <p style="margin: 0; font-size: 24px; color: #22c55e;">✓</p>
+                </div>
+                <div style="padding: 16px; border: 1px solid #d9d9d9; border-radius: 8px; text-align: center;">
+                  <p style="margin: 0 0 4px 0; font-size: 12px; color: #999;">April 2025</p>
+                  <p style="margin: 0; font-size: 24px; color: #22c55e;">✓</p>
+                </div>
+                <div style="padding: 16px; border: 1px solid #d9d9d9; border-radius: 8px; text-align: center;">
+                  <p style="margin: 0 0 4px 0; font-size: 12px; color: #999;">Mar 2025</p>
+                  <p style="margin: 0; font-size: 24px; color: #22c55e;">✓</p>
+                </div>
+                <div style="padding: 16px; border: 1px solid #d9d9d9; border-radius: 8px; text-align: center;">
+                  <p style="margin: 0 0 4px 0; font-size: 12px; color: #999;">Feb 2025</p>
+                  <p style="margin: 0; font-size: 24px; color: #22c55e;">✓</p>
+                </div>
+                <div style="padding: 16px; border: 1px solid #d9d9d9; border-radius: 8px; text-align: center;">
+                  <p style="margin: 0 0 4px 0; font-size: 12px; color: #999;">Jan 2025</p>
+                  <p style="margin: 0; font-size: 24px; color: #22c55e;">✓</p>
+                </div>
+                <div style="padding: 16px; border: 1px solid #d9d9d9; border-radius: 8px; text-align: center;">
+                  <p style="margin: 0 0 4px 0; font-size: 12px; color: #999;">Dec 2024</p>
+                  <p style="margin: 0; font-size: 24px; color: #22c55e;">✓</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Next Deadline & Actions -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+                <p style="margin: 0 0 8px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Next Deadline</p>
+                <p style="margin: 0 0 8px 0; font-size: 28px; font-weight: 700; color: #22c55e;" id="payroll-countdown">9</p>
+                <p style="margin: 0; font-size: 12px; color: #4a4a4a;">days until June filing (10-Jun-2025)</p>
+              </div>
+
+              <button onclick="downloadComplianceReport('payroll')" style="padding: 16px; background: #22c55e; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                📥 Download Report
+              </button>
+
+              <button onclick="emailComplianceSummary('payroll')" style="padding: 16px; background: white; color: #22c55e; border: 2px solid #22c55e; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                📧 Email Summary
+              </button>
+            </div>
+          </div>
+
+          <!-- ======================== CORPORATE TAX DASHBOARD ======================== -->
+          <div class="compliance-panel" data-panel="corporate-tax" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; margin-bottom: 40px;">
+              <!-- Status Card -->
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 32px; background: white;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+                  <h3 style="margin: 0; font-size: 18px; font-weight: 700; color: #191919;">FY 2025 Status</h3>
+                  <div style="width: 20px; height: 20px; border-radius: 50%; background: #f59e0b; box-shadow: 0 0 12px rgba(245, 158, 11, 0.6);"></div>
+                </div>
+                <p style="margin: 0 0 8px 0; font-size: 28px; font-weight: 700; color: #f59e0b;">MONITORED</p>
+                <p style="margin: 0 0 20px 0; font-size: 13px; color: #999;">Above SBR threshold | On-track for filing</p>
+                <div style="background: #fffbeb; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 6px;">
+                  <p style="margin: 0; font-size: 12px; color: #f59e0b; font-weight: 600;">Status: MONITORED</p>
+                </div>
+              </div>
+
+              <!-- Financial Metrics -->
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 32px; background: white;">
+                <h3 style="margin: 0 0 24px 0; font-size: 18px; font-weight: 700; color: #191919;">Financial Position</h3>
+                <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+                  <div>
+                    <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Estimated Income</p>
+                    <p style="margin: 0; font-size: 22px; font-weight: 700; color: #191919;">AED 520,000</p>
+                  </div>
+                  <div style="border-top: 1px solid #e0e0e0; padding-top: 16px;">
+                    <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Tax Estimate</p>
+                    <p style="margin: 0; font-size: 22px; font-weight: 700; color: #FF5C00;">AED 235,000</p>
+                  </div>
+                  <div style="border-top: 1px solid #e0e0e0; padding-top: 16px;">
+                    <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">SBR Threshold</p>
+                    <p style="margin: 0; font-size: 22px; font-weight: 700; color: #191919;">AED 375,000</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Threshold Status -->
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 32px; background: white;">
+                <h3 style="margin: 0 0 24px 0; font-size: 18px; font-weight: 700; color: #191919;">Threshold Analysis</h3>
+                <div style="background: #fffbeb; border-radius: 8px; padding: 20px; border-left: 4px solid #f59e0b;">
+                  <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: 600; color: #191919;">Exceeds SBR by</p>
+                  <p style="margin: 0; font-size: 24px; font-weight: 700; color: #f59e0b;">AED 145,000</p>
+                  <p style="margin: 0; font-size: 11px; color: #999; margin-top: 8px;">Corporate tax applies</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quarterly Forecasts -->
+            <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 32px; background: white; margin-bottom: 32px;">
+              <h3 style="margin: 0 0 24px 0; font-size: 18px; font-weight: 700; color: #191919;">Quarterly Tax Forecasts</h3>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px;">
+                <div style="padding: 20px; border: 1px solid #d9d9d9; border-radius: 8px; background: #f9f9f9;">
+                  <p style="margin: 0 0 4px 0; font-size: 12px; color: #999; font-weight: 600;">Q1 2025</p>
+                  <p style="margin: 0; font-size: 20px; font-weight: 700; color: #191919;">AED 58,750</p>
+                </div>
+                <div style="padding: 20px; border: 1px solid #d9d9d9; border-radius: 8px; background: #f9f9f9;">
+                  <p style="margin: 0 0 4px 0; font-size: 12px; color: #999; font-weight: 600;">Q2 2025</p>
+                  <p style="margin: 0; font-size: 20px; font-weight: 700; color: #191919;">AED 58,750</p>
+                </div>
+                <div style="padding: 20px; border: 1px solid #d9d9d9; border-radius: 8px; background: #f9f9f9;">
+                  <p style="margin: 0 0 4px 0; font-size: 12px; color: #999; font-weight: 600;">Q3 2025</p>
+                  <p style="margin: 0; font-size: 20px; font-weight: 700; color: #191919;">AED 58,750</p>
+                </div>
+                <div style="padding: 20px; border: 1px solid #d9d9d9; border-radius: 8px; background: #f9f9f9;">
+                  <p style="margin: 0 0 4px 0; font-size: 12px; color: #999; font-weight: 600;">Q4 2025</p>
+                  <p style="margin: 0; font-size: 20px; font-weight: 700; color: #191919;">AED 58,750</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Next Deadline & Actions -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+                <p style="margin: 0 0 8px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Next Deadline</p>
+                <p style="margin: 0 0 8px 0; font-size: 28px; font-weight: 700; color: #f59e0b;" id="corporate-countdown">235</p>
+                <p style="margin: 0; font-size: 12px; color: #4a4a4a;">days until FY filing (31-Jan-2026)</p>
+              </div>
+
+              <button onclick="downloadComplianceReport('corporate-tax')" style="padding: 16px; background: #f59e0b; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                📥 Download Report
+              </button>
+
+              <button onclick="emailComplianceSummary('corporate-tax')" style="padding: 16px; background: white; color: #f59e0b; border: 2px solid #f59e0b; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                📧 Email Summary
+              </button>
+            </div>
+          </div>
+
+          <!-- ======================== AML COMPLIANCE DASHBOARD ======================== -->
+          <div class="compliance-panel" data-panel="aml" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; margin-bottom: 40px;">
+              <!-- Risk Rating Card -->
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 32px; background: white;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+                  <h3 style="margin: 0; font-size: 18px; font-weight: 700; color: #191919;">Risk Rating</h3>
+                  <div style="width: 20px; height: 20px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 12px rgba(34, 197, 94, 0.6);"></div>
+                </div>
+                <p style="margin: 0 0 8px 0; font-size: 28px; font-weight: 700; color: #22c55e;">LOW RISK</p>
+                <p style="margin: 0 0 20px 0; font-size: 13px; color: #999;">All transactions monitored and screened</p>
+                <div style="background: #f0fdf4; border-left: 4px solid #22c55e; padding: 16px; border-radius: 6px;">
+                  <p style="margin: 0; font-size: 12px; color: #22c55e; font-weight: 600;">Status: COMPLIANT</p>
+                </div>
+              </div>
+
+              <!-- Transaction Metrics -->
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 32px; background: white;">
+                <h3 style="margin: 0 0 24px 0; font-size: 18px; font-weight: 700; color: #191919;">Transaction Monitoring</h3>
+                <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+                  <div>
+                    <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Last 30 Days</p>
+                    <p style="margin: 0; font-size: 22px; font-weight: 700; color: #191919;">1,247</p>
+                    <p style="margin: 0; font-size: 11px; color: #999;">transactions screened</p>
+                  </div>
+                  <div style="border-top: 1px solid #e0e0e0; padding-top: 16px;">
+                    <p style="margin: 0 0 4px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">SARs Filed</p>
+                    <p style="margin: 0; font-size: 22px; font-weight: 700; color: #22c55e;">0</p>
+                    <p style="margin: 0; font-size: 11px; color: #999;">Suspicious Activity Reports</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- False Positive Rate -->
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 32px; background: white;">
+                <h3 style="margin: 0 0 24px 0; font-size: 18px; font-weight: 700; color: #191919;">False Positive Rate</h3>
+                <div style="background: #f0fdf4; border-radius: 8px; padding: 20px; border-left: 4px solid #22c55e; margin-bottom: 16px;">
+                  <p style="margin: 0 0 8px 0; font-size: 24px; font-weight: 700; color: #22c55e;">0.1%</p>
+                  <p style="margin: 0; font-size: 12px; color: #4a4a4a;">vs industry average: 2.3%</p>
+                </div>
+                <p style="margin: 0; font-size: 11px; color: #999;">Ledgr achieves 23x lower false positive rate</p>
+              </div>
+            </div>
+
+            <!-- System Controls & Certifications -->
+            <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 32px; background: white; margin-bottom: 32px;">
+              <h3 style="margin: 0 0 24px 0; font-size: 18px; font-weight: 700; color: #191919;">System Controls & Certifications</h3>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                <div style="padding: 20px; border: 1px solid #d9d9d9; border-radius: 8px; background: white;">
+                  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <span style="font-size: 20px;">✓</span>
+                    <p style="margin: 0; font-size: 13px; font-weight: 600; color: #191919;">AML Screening Active</p>
+                  </div>
+                  <p style="margin: 0; font-size: 11px; color: #999;">Real-time transaction monitoring</p>
+                </div>
+                <div style="padding: 20px; border: 1px solid #d9d9d9; border-radius: 8px; background: white;">
+                  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <span style="font-size: 20px;">✓</span>
+                    <p style="margin: 0; font-size: 13px; font-weight: 600; color: #191919;">JAFZ Compliant</p>
+                  </div>
+                  <p style="margin: 0; font-size: 11px; color: #999;">Jebel Ali Free Zone certified</p>
+                </div>
+                <div style="padding: 20px; border: 1px solid #d9d9d9; border-radius: 8px; background: white;">
+                  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <span style="font-size: 20px;">✓</span>
+                    <p style="margin: 0; font-size: 13px; font-weight: 600; color: #191919;">AML Reporting Certified</p>
+                  </div>
+                  <p style="margin: 0; font-size: 11px; color: #999;">Audit trail & reporting ready</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Next Review & Actions -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+              <div style="border: 1px solid #d9d9d9; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+                <p style="margin: 0 0 8px 0; font-size: 11px; color: #999; text-transform: uppercase; font-weight: 600;">Last Audit</p>
+                <p style="margin: 0 0 8px 0; font-size: 18px; font-weight: 700; color: #191919;">10-May-2025</p>
+                <p style="margin: 0; font-size: 12px; color: #22c55e; font-weight: 600;">21 days ago</p>
+              </div>
+
+              <button onclick="downloadComplianceReport('aml')" style="padding: 16px; background: #22c55e; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                📥 Download Report
+              </button>
+
+              <button onclick="emailComplianceSummary('aml')" style="padding: 16px; background: white; color: #22c55e; border: 2px solid #22c55e; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                📧 Email Summary
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1008,243 +2526,7 @@
         </div>
       </section>
 
-      <!-- ============================================================
-           Pricing
-           ============================================================ -->
-      <section id="pricing">
-        <div class="wrap">
-          <div class="section-head reveal">
-            <div>
-              <span class="text-xs uppercase tracking-widest font-semibold text-primary-500">Pricing</span>
-              <h2 class="section-title">Plans for every stage. <em>No surprise fees.</em></h2>
-            </div>
-            <p class="text-lg text-bg-700 leading-relaxed">
-              Each plan is built around outcomes, not features. You're hiring a finance team — not buying software. Pricing is per legal entity and excludes 5% VAT. Pay month-to-month, no long-term contracts.
-            </p>
-          </div>
-
-          <div class="pricing pricing--5 reveal">
-            <article class="price is-featured">
-              <span class="price__badge">Only 50 available</span>
-              <div class="price__head">
-                <span class="price__name">Founder Early Access</span>
-                <span class="price__sub">Limited founding member tier. Get 50% lifetime discount on your chosen plan + 6 months free. First 50 UAE founders only.</span>
-              </div>
-              <div class="price__num">
-                <span class="currency">AED</span>
-                <span>50% off</span>
-                <small>/ lifetime</small>
-              </div>
-              <div class="price__divider"></div>
-              <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(255, 92, 0, 0.2); background: rgba(255, 92, 0, 0.05); padding: 16px; border-radius: 8px; margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px;">
-                <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; color: #FF5C00; margin: 0 0 8px 0;">What you're getting:</p>
-                <p style="font-size: 14px; color: #333; margin: 0; line-height: 1.6;">50% lifetime discount + 6 months free on any plan (Operate, Finance Department, CFO Office, or Enterprise) + Priority onboarding + Direct access to founding team</p>
-              </div>
-              <ul class="price__feats">
-                <li class="price__feat">Select any plan above and lock in 50% discount forever</li>
-                <li class="price__feat">6 months free service to cover migration and setup</li>
-                <li class="price__feat">No commitment. Cancel anytime after 6 months.</li>
-                <li class="price__feat">Direct Slack/WhatsApp channel with founders</li>
-                <li class="price__feat">Shape product roadmap. Your feedback drives development.</li>
-                <li class="price__feat">Lifetime priority support and onboarding</li>
-              </ul>
-              <a class="btn btn--accent price__cta" href="#waitlist" style="background: #FF5C00; border-color: #FF5C00; color: #fff; font-weight: 600;">Apply for founder access</a>
-              <p style="text-align: center; font-size: 12px; color: #999; margin-top: 12px; margin-bottom: 0;"><span style="color: #FF5C00; font-weight: 600;">38 spots remaining</span> — Apply now before they're gone</p>
-            </article>
-
-            <article class="price">
-              <span class="price__badge">Free</span>
-              <div class="price__head">
-                <span class="price__name">Launch</span>
-                <span class="price__sub">Get compliant from day one. No card required.</span>
-              </div>
-              <div class="price__num">
-                <span class="currency">AED</span>
-                <span>0</span>
-                <small>/ month</small>
-              </div>
-              <div class="price__divider"></div>
-              <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,0.1);">
-                <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; color: #666; margin: 0 0 8px 0;">Your team includes:</p>
-                <p style="font-size: 14px; color: #333; margin: 0; line-height: 1.6;">Office Manager, Onboarding Officer</p>
-              </div>
-              <ul class="price__feats">
-                <li class="price__feat">Bilingual invoicing — up to 50 invoices / month</li>
-                <li class="price__feat">Basic payroll for up to 10 employees</li>
-                <li class="price__feat">One legal entity, one bank feed</li>
-                <li class="price__feat">Izza assistant for FTA compliance guidance</li>
-                <li class="price__feat">Community support · 24-hour response</li>
-              </ul>
-              <a class="btn price__cta" href="#waitlist">Start free</a>
-            </article>
-
-            <article class="price">
-              <div class="price__head">
-                <span class="price__name">Operate</span>
-                <span class="price__sub">Keep books clean and tax compliant. For solo practitioners and small teams.</span>
-              </div>
-              <div class="price__num">
-                <span class="currency">AED</span>
-                <span>499</span>
-                <small>/ month</small>
-              </div>
-              <div class="price__divider"></div>
-              <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,0.1);">
-                <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; color: #666; margin: 0 0 8px 0;">Your team includes:</p>
-                <p style="font-size: 14px; color: #333; margin: 0; line-height: 1.6;">Office Manager, Finance Controller, Tax Specialist, VAT Specialist, Support Manager</p>
-              </div>
-              <ul class="price__feats">
-                <li class="price__feat">VAT returns prepared, reviewed and submitted</li>
-                <li class="price__feat">Corporate tax tracking and annual filings</li>
-                <li class="price__feat">Auto-categorisation and receipt OCR</li>
-                <li class="price__feat">Up to 200 transactions per month</li>
-                <li class="price__feat">Dedicated chartered accountant on WhatsApp · 4-hour SLA</li>
-              </ul>
-              <a class="btn price__cta" href="#waitlist">Get early access</a>
-            </article>
-
-            <article class="price is-featured">
-              <span class="price__badge">Most chosen</span>
-              <div class="price__head">
-                <span class="price__name">Finance Department</span>
-                <span class="price__sub">Outsource your entire finance function. For teams of 5–25 staff.</span>
-              </div>
-              <div class="price__num">
-                <span class="currency">AED</span>
-                <span>1,999</span>
-                <small>/ month</small>
-              </div>
-              <div class="price__divider"></div>
-              <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,0.1);">
-                <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; color: #666; margin: 0 0 8px 0;">Your team includes:</p>
-                <p style="font-size: 14px; color: #333; margin: 0; line-height: 1.6;">Office Manager, Finance Controller, CFO, Tax Specialist, VAT Specialist, Payroll Officer, Regulatory Officer, Audit Manager, Support Manager, Collections Officer</p>
-              </div>
-              <ul class="price__feats">
-                <li class="price__feat">Never miss a payroll deadline — WPS filed automatically for 25+ staff</li>
-                <li class="price__feat">VAT returns submitted 24 hours after period close</li>
-                <li class="price__feat">Continuous tax planning, not year-end scramble</li>
-                <li class="price__feat">AR management and automated collections reminders</li>
-                <li class="price__feat">Cash forecasting and CFO-level financial reporting</li>
-                <li class="price__feat">E-invoicing on Peppol network, ready for FTA mandate</li>
-                <li class="price__feat">24/7 Izza CFO chat · WhatsApp support with 2-hour SLA</li>
-              </ul>
-              <a class="btn btn--accent price__cta" href="#waitlist">Get early access</a>
-            </article>
-
-            <article class="price">
-              <div class="price__head">
-                <span class="price__name">CFO Office</span>
-                <span class="price__sub">Full-spectrum finance operating system. For groups, family offices and larger operations.</span>
-              </div>
-              <div class="price__num">
-                <span class="currency">AED</span>
-                <span>4,999</span>
-                <span style="font-size: 14px; color: #666;">+</span>
-                <small>/ month</small>
-              </div>
-              <div style="margin-top: 8px; font-size: 13px; color: #999;">Usage: +AED 500 per additional legal entity, +AED 300 per payroll user, +AED 0.10 per transaction over 50k</div>
-              <div class="price__divider"></div>
-              <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,0.1);">
-                <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; color: #666; margin: 0 0 8px 0;">Your team includes:</p>
-                <p style="font-size: 14px; color: #333; margin: 0; line-height: 1.6;">All agents: Office Manager, Finance Controller, Chief Financial Officer, Tax Specialist, VAT Specialist, Payroll Officer, Regulatory Officer, Audit Manager, Collections Officer, Vendor Manager, Support Manager, Onboarding Officer, Concierge</p>
-              </div>
-              <ul class="price__feats">
-                <li class="price__feat">Multi-entity consolidations with intercompany eliminations</li>
-                <li class="price__feat">Transfer pricing, Pillar 2 &amp; DMTT modelling for groups</li>
-                <li class="price__feat">Unlimited transactions and up to 5 legal entities</li>
-                <li class="price__feat">Quarterly board and investor-ready reporting</li>
-                <li class="price__feat">Integration with Xero, QuickBooks, or SAP Business One</li>
-                <li class="price__feat">Dedicated CFO oversight and quarterly strategy reviews</li>
-                <li class="price__feat">Named human accountant oversight on all filings</li>
-              </ul>
-              <a class="btn price__cta" href="mailto:ceo@theupcapital.com?subject=Ledgr%20CFO%20Office%20enquiry">Talk to us</a>
-            </article>
-
-            <article class="price">
-              <div class="price__head">
-                <span class="price__name">Enterprise</span>
-                <span class="price__sub">Custom solution for large groups, family offices, holdings and investment vehicles.</span>
-              </div>
-              <div class="price__num">
-                <span style="font-size: 20px; color: #666;">Custom pricing</span>
-              </div>
-              <div class="price__divider"></div>
-              <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,0.1);">
-                <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; color: #666; margin: 0 0 8px 0;">Includes all agents plus:</p>
-                <p style="font-size: 14px; color: #333; margin: 0; line-height: 1.6;">Unlimited entities, custom integrations, dedicated infrastructure</p>
-              </div>
-              <ul class="price__feats">
-                <li class="price__feat">Unlimited legal entities and organizational structures</li>
-                <li class="price__feat">Custom API integrations and white-label options</li>
-                <li class="price__feat">ADGM, DIFC, and offshore structure support</li>
-                <li class="price__feat">Executive dashboard and consolidated reporting</li>
-                <li class="price__feat">Dedicated implementation and support team</li>
-                <li class="price__feat">SLA guarantee and priority incident response</li>
-              </ul>
-              <a class="btn price__cta" href="mailto:ceo@theupcapital.com?subject=Ledgr%20Enterprise%20enquiry">Get in touch</a>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============================================================
-           Comparison
-           ============================================================ -->
-      <section>
-        <div class="wrap wrap--narrow">
-          <div class="section-head reveal" style="grid-template-columns:1fr;gap:18px">
-            <div>
-              <span class="text-xs uppercase tracking-widest font-semibold text-primary-500">What you get</span>
-              <h2 class="section-title">A finance department, not accounting software.</h2>
-            </div>
-            <p class="text-lg text-bg-700 leading-relaxed">The comparison below shows how Ledgr's Finance Department tier (AED 1,999) replaces traditional accounting firm services that typically cost AED 4,000–6,000 combined across bookkeeping, payroll, VAT and tax.</p>
-          </div>
-
-          <div class="compare reveal">
-            <div class="compare__row">
-              <span class="feature">—</span>
-              <span class="cell">Traditional setup</span>
-              <span class="cell is-strong">Ledgr Finance Department</span>
-            </div>
-            <div class="compare__row">
-              <span class="feature">Monthly cost</span>
-              <span class="cell is-dim">AED 1,000–1,500 (bookkeeping) + AED 800–1,200 (payroll) + AED 600–1,000 (VAT/tax) = AED 4,000–6,000</span>
-              <span class="cell is-strong">AED 1,999 · all-in</span>
-            </div>
-            <div class="compare__row">
-              <span class="feature">VAT filed on time</span>
-              <span class="cell is-dim">Submitted 2–4 weeks after period close (if submitted at all)</span>
-              <span class="cell is-strong">24 hours after period close, every time</span>
-            </div>
-            <div class="compare__row">
-              <span class="feature">Payroll processed by</span>
-              <span class="cell is-dim">Manual WPS file prep; you handle FTA submission</span>
-              <span class="cell is-strong">Automated WPS filing + EOSB submission</span>
-            </div>
-            <div class="compare__row">
-              <span class="feature">Support availability</span>
-              <span class="cell is-dim">Sporadic email; callback in 24–48 hours</span>
-              <span class="cell is-strong">Dedicated accountant on WhatsApp · 2-hour response</span>
-            </div>
-            <div class="compare__row">
-              <span class="feature">Tax planning happens</span>
-              <span class="cell is-dim">Once a year, in panic mode at tax deadline</span>
-              <span class="cell is-strong">Continuous · quarterly reviews, in-app insights</span>
-            </div>
-            <div class="compare__row">
-              <span class="feature">Cash forecast</span>
-              <span class="cell is-dim">You build spreadsheets; accountant reviews at meetings</span>
-              <span class="cell is-strong">Real-time AI forecast · CFO chat 24/7</span>
-            </div>
-            <div class="compare__row">
-              <span class="feature">Your relationship is with</span>
-              <span class="cell is-dim">A busy firm partner you meet twice a year</span>
-              <span class="cell is-strong">Named chartered accountant who knows your business</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      
       <!-- ============================================================
            Migration Speed
            ============================================================ -->
@@ -1596,6 +2878,944 @@
         </div>
       </div>
     </footer>
+
+    <!-- ============================================================
+         Working Sheets Dashboard
+         ============================================================ -->
+    <section id="working-sheets" class="working-sheets" style="display: none; padding: clamp(50px, 6vw, 90px) clamp(24px, 5vw, 80px);">
+      <div class="wrap">
+        <div class="app-top" style="margin-bottom: 32px;">
+          <div>
+            <h1>Working Sheets</h1>
+            <p class="sub">Capture, reconcile, and manage your financial transactions</p>
+          </div>
+        </div>
+
+        <!-- Tabs navigation -->
+        <div class="tabs ws-tabs" style="margin-bottom: 24px;">
+          <button class="ws-tab-btn is-active" data-tab="capture">
+            <span class="tab-icon">📥</span> Transaction Capture
+          </button>
+          <button class="ws-tab-btn" data-tab="reconciliation">
+            <span class="tab-icon">✓</span> Reconciliation
+          </button>
+          <button class="ws-tab-btn" data-tab="invoices">
+            <span class="tab-icon">📄</span> Invoice Management
+          </button>
+        </div>
+
+        <!-- TRANSACTION CAPTURE TAB -->
+        <div class="ws-tab-content is-active" data-tab="capture">
+          <div class="app-grid" style="margin-bottom: 28px;">
+            <!-- Recent transactions -->
+            <div class="card--lg">
+              <div class="card__head--row">
+                <div>
+                  <div class="card__title">Recent Transactions</div>
+                  <div class="card__sub">Last 5 captured by Capture Agent</div>
+                </div>
+                <button class="btn btn--sm" id="add-transaction-btn" style="height: 34px; padding: 0 12px; font-size: 13px;">Add Transaction</button>
+              </div>
+              <div class="ws-transactions-table-wrapper">
+                <table class="ws-transactions-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Description</th>
+                      <th>Amount</th>
+                      <th>Category</th>
+                      <th>Processing</th>
+                    </tr>
+                  </thead>
+                  <tbody id="capture-transactions">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Agent status -->
+            <div class="card--lg">
+              <div class="card__head--row">
+                <div>
+                  <div class="card__title">Agent Status</div>
+                  <div class="card__sub">Real-time processing</div>
+                </div>
+              </div>
+              <div id="agent-status-list" class="agent-log">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Category feedback -->
+          <div class="card--lg" id="category-feedback-card" style="display: none;">
+            <div class="card__title">Real-time Categorization</div>
+            <div id="category-feedback-content" style="margin-top: 12px;">
+              <!-- Feedback appears here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- RECONCILIATION TAB -->
+        <div class="ws-tab-content" data-tab="reconciliation" style="display: none;">
+          <div class="app-grid--3">
+            <!-- Reconciliation progress -->
+            <div class="card--lg">
+              <div class="card__title">Reconciliation Status</div>
+              <div style="margin-top: 16px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 13px; color: var(--ink-2);">Progress</span>
+                  <span style="font-family: var(--font-mono); font-weight: 500; color: var(--ink-1);" id="reconciliation-pct">95%</span>
+                </div>
+                <div style="height: 8px; background: var(--paper-2); border-radius: 99px; overflow: hidden;">
+                  <div style="height: 100%; width: 95%; background: var(--accent); border-radius: 99px;" id="reconciliation-bar"></div>
+                </div>
+                <div style="font-size: 12px; color: var(--ink-3); margin-top: 12px;">
+                  <div>Ledger Balance: <strong style="color: var(--ink-1); font-family: var(--font-mono);">AED 482,318</strong></div>
+                  <div style="margin-top: 6px;">Bank Balance: <strong style="color: var(--ink-1); font-family: var(--font-mono);">AED 481,450</strong></div>
+                  <div style="margin-top: 6px;">Difference: <strong style="color: var(--warn); font-family: var(--font-mono);">AED 868</strong></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="card--lg">
+              <div class="card__title">Reconciliation Timeline</div>
+              <div style="margin-top: 16px; font-size: 13px; display: flex; flex-direction: column; gap: 12px;">
+                <div>
+                  <div style="color: var(--ink-3); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;">Last Reconciled</div>
+                  <div style="color: var(--ink-1); font-weight: 500; margin-top: 4px;">20 May 2025</div>
+                </div>
+                <div style="border-top: 1px solid var(--line); padding-top: 12px;">
+                  <div style="color: var(--ink-3); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;">Next Scheduled</div>
+                  <div style="color: var(--ink-1); font-weight: 500; margin-top: 4px;">3 June 2025</div>
+                </div>
+                <div style="border-top: 1px solid var(--line); padding-top: 12px;">
+                  <div style="color: var(--ink-3); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;">Match Rate</div>
+                  <div style="color: var(--ink-1); font-weight: 500; margin-top: 4px;">95% matched</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Reconcile action -->
+            <div class="card--lg" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div class="card__title">Pending Items</div>
+                <div style="font-size: 36px; font-weight: 500; margin-top: 12px; color: var(--accent);" id="pending-count">12</div>
+                <div style="font-size: 12px; color: var(--ink-3); margin-top: 6px;">items awaiting review</div>
+              </div>
+              <button class="btn btn--primary" id="reconcile-btn" style="margin-top: auto;">Start Reconciliation</button>
+            </div>
+          </div>
+
+          <!-- Pending items list -->
+          <div class="card--lg" style="margin-top: 18px;">
+            <div class="card__title">Pending for Manual Review</div>
+            <div class="ws-pending-items" id="pending-items" style="margin-top: 16px;">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- INVOICE MANAGEMENT TAB -->
+        <div class="ws-tab-content" data-tab="invoices" style="display: none;">
+          <div class="app-grid--3">
+            <!-- AR aging -->
+            <div class="card--lg">
+              <div class="card__title">AR Aging</div>
+              <div style="margin-top: 16px;">
+                <div style="font-size: 28px; font-weight: 500; color: var(--ink-1);">34 days</div>
+                <div style="font-size: 12px; color: var(--ink-3); margin-top: 4px;">average days outstanding</div>
+                <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 12px;">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span style="color: var(--ink-2);">Current</span>
+                    <span style="font-family: var(--font-mono); color: var(--ink-1); font-weight: 500;">AED 240.4K</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span style="color: var(--ink-2);">31-60 days</span>
+                    <span style="font-family: var(--font-mono); color: var(--ink-1); font-weight: 500;">AED 32.1K</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--ink-2);">61+ days</span>
+                    <span style="font-family: var(--font-mono); color: var(--warn); font-weight: 500;">AED 13.1K</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Outstanding AR -->
+            <div class="card--lg">
+              <div class="card__title">Outstanding AR</div>
+              <div style="margin-top: 16px;">
+                <div style="font-size: 28px; font-weight: 500; color: var(--ink-1);">AED 285.6K</div>
+                <div style="font-size: 12px; color: var(--ink-3); margin-top: 4px;">total outstanding</div>
+                <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 12px;">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span style="color: var(--ink-2);">Invoices Sent</span>
+                    <span style="font-family: var(--font-mono); color: var(--ink-1); font-weight: 500;">28</span>
+                  </div>
+                  <div>
+                    <span style="color: var(--ink-2);">Awaiting Payment</span>
+                    <span style="font-family: var(--font-mono); color: var(--ink-1); font-weight: 500; display: block; margin-top: 2px;">AED 285.6K</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Overdue invoices -->
+            <div class="card--lg">
+              <div class="card__title">Overdue Invoices</div>
+              <div style="margin-top: 16px;">
+                <div style="font-size: 28px; font-weight: 500; color: var(--warn);">AED 45.2K</div>
+                <div style="font-size: 12px; color: var(--ink-3); margin-top: 4px;">12 invoices overdue</div>
+                <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line);">
+                  <button class="btn btn--sm" style="width: 100%; background: var(--warn); border-color: var(--warn); margin-bottom: 8px;">Send Reminders</button>
+                  <button class="btn btn--sm" style="width: 100%;">View Overdue List</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Invoice list with status -->
+          <div class="card--lg" style="margin-top: 18px;">
+            <div class="card__head--row">
+              <div>
+                <div class="card__title">Invoice Pipeline</div>
+                <div class="card__sub">Status indicators and details</div>
+              </div>
+            </div>
+            <div class="ws-invoices-table-wrapper" style="margin-top: 16px;">
+              <table class="ws-invoices-table">
+                <thead>
+                  <tr>
+                    <th>Invoice #</th>
+                    <th>Customer</th>
+                    <th>Amount</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Peppol</th>
+                  </tr>
+                </thead>
+                <tbody id="invoices-list">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- E-invoicing status -->
+          <div class="callout" style="margin-top: 18px;">
+            <div>
+              <strong>Peppol E-invoicing Status</strong>
+              <div style="margin-top: 6px; font-size: 13px; color: var(--ink-2);">Connected and active. 2 invoices transmitted this month.</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; color: var(--accent-2); font-weight: 500;">✓ Connected</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="assets/app.js" defer></script>
+    <script>
+      // Working Sheets initialization
+      window.addEventListener('DOMContentLoaded', function() {
+        initializeWorkingSheets();
+        initializeCompliance();
+      });
+
+      // ============================================================
+      // COMPLIANCE SECTION INITIALIZATION
+      // ============================================================
+      function initializeCompliance() {
+        // Set up compliance tab switching
+        setupComplianceTabSwitching();
+
+        // Initialize countdown timers
+        updateComplianceCountdowns();
+
+        // Update countdowns every minute
+        setInterval(updateComplianceCountdowns, 60000);
+      }
+
+      function setupComplianceTabSwitching() {
+        const tabButtons = document.querySelectorAll('.compliance-tab-btn');
+        const panels = document.querySelectorAll('.compliance-panel');
+
+        tabButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            const targetTab = this.getAttribute('data-tab');
+
+            // Remove active state from all buttons and panels
+            tabButtons.forEach(btn => {
+              btn.style.border = '2px solid #d9d9d9';
+              btn.style.background = 'white';
+              btn.style.color = '#4a4a4a';
+            });
+
+            panels.forEach(panel => {
+              panel.style.display = 'none';
+            });
+
+            // Set active state on clicked button and show corresponding panel
+            this.style.border = '2px solid #FF5C00';
+            this.style.background = '#FF5C00';
+            this.style.color = 'white';
+
+            const activePanel = document.querySelector('[data-panel="' + targetTab + '"]');
+            if (activePanel) {
+              activePanel.style.display = 'block';
+            }
+          });
+        });
+      }
+
+      function updateComplianceCountdowns() {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // VAT countdown: Q3 filing due 15-Jul-2025
+        const vatDeadline = new Date(2025, 6, 15); // July 15, 2025
+        const vatDays = Math.ceil((vatDeadline - today) / (1000 * 60 * 60 * 24));
+        const vatCountdown = document.getElementById('vat-countdown');
+        if (vatCountdown) {
+          vatCountdown.textContent = Math.max(0, vatDays);
+        }
+
+        // Payroll countdown: June filing due 10-Jun-2025
+        const payrollDeadline = new Date(2025, 5, 10); // June 10, 2025
+        const payrollDays = Math.ceil((payrollDeadline - today) / (1000 * 60 * 60 * 24));
+        const payrollCountdown = document.getElementById('payroll-countdown');
+        if (payrollCountdown) {
+          payrollCountdown.textContent = Math.max(0, payrollDays);
+        }
+
+        // Corporate Tax countdown: FY filing due 31-Jan-2026
+        const corpTaxDeadline = new Date(2026, 0, 31); // January 31, 2026
+        const corpTaxDays = Math.ceil((corpTaxDeadline - today) / (1000 * 60 * 60 * 24));
+        const corpTaxCountdown = document.getElementById('corporate-countdown');
+        if (corpTaxCountdown) {
+          corpTaxCountdown.textContent = Math.max(0, corpTaxDays);
+        }
+      }
+
+      function downloadComplianceReport(system) {
+        const reportName = {
+          'vat': 'VAT_Filing_Report_Q2_2025.pdf',
+          'payroll': 'Payroll_Compliance_Report_May_2025.pdf',
+          'corporate-tax': 'Corporate_Tax_Report_FY_2025.pdf',
+          'aml': 'AML_Compliance_Report_May_2025.pdf'
+        }[system] || 'Compliance_Report.pdf';
+
+        const message = `Downloading ${reportName}...`;
+        showComplianceNotification(message, 'download');
+
+        // Simulate file download by creating a data URI
+        setTimeout(() => {
+          const dataUri = 'data:application/pdf;base64,JVBERi0xLjQKJeLjz9MNCjEgMCBvYmo='; // Minimal valid PDF
+          const link = document.createElement('a');
+          link.href = dataUri;
+          link.download = reportName;
+          link.click();
+
+          showComplianceNotification(`✓ ${reportName} downloaded`, 'success');
+        }, 500);
+      }
+
+      function emailComplianceSummary(system) {
+        const emailForm = document.createElement('div');
+        emailForm.style.cssText = `
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: white;
+          border-radius: 12px;
+          padding: 40px;
+          box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+          z-index: 1000;
+          max-width: 400px;
+          width: 90%;
+        `;
+
+        const systemName = {
+          'vat': 'VAT Filing',
+          'payroll': 'Payroll Compliance',
+          'corporate-tax': 'Corporate Tax',
+          'aml': 'AML Compliance'
+        }[system] || 'Compliance';
+
+        emailForm.innerHTML = `
+          <h3 style="margin: 0 0 20px 0; font-size: 20px; font-weight: 700; color: #191919;">Email ${systemName} Summary</h3>
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 12px; color: #999; text-transform: uppercase; font-weight: 600; margin-bottom: 8px;">Email Address</label>
+            <input type="email" id="compliance-email-input" placeholder="your@email.com" style="width: 100%; padding: 12px; border: 1px solid #d9d9d9; border-radius: 6px; font-size: 14px; box-sizing: border-box; font-family: inherit;">
+          </div>
+          <div style="display: flex; gap: 12px;">
+            <button id="compliance-email-send" style="flex: 1; padding: 12px; background: #FF5C00; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.3s;">Send</button>
+            <button id="compliance-email-cancel" style="flex: 1; padding: 12px; background: #f0f0f0; color: #191919; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.3s;">Cancel</button>
+          </div>
+        `;
+
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0,0,0,0.5);
+          z-index: 999;
+        `;
+
+        document.body.appendChild(overlay);
+        document.body.appendChild(emailForm);
+
+        const emailInput = emailForm.querySelector('#compliance-email-input');
+        const sendBtn = emailForm.querySelector('#compliance-email-send');
+        const cancelBtn = emailForm.querySelector('#compliance-email-cancel');
+
+        emailInput.focus();
+
+        sendBtn.addEventListener('click', function() {
+          const email = emailInput.value.trim();
+          if (email && email.includes('@')) {
+            showComplianceNotification(`✓ ${systemName} summary sent to ${email}`, 'success');
+            overlay.remove();
+            emailForm.remove();
+          } else {
+            emailInput.style.borderColor = '#ff4444';
+            setTimeout(() => {
+              emailInput.style.borderColor = '#d9d9d9';
+            }, 1000);
+          }
+        });
+
+        cancelBtn.addEventListener('click', function() {
+          overlay.remove();
+          emailForm.remove();
+        });
+
+        emailInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            sendBtn.click();
+          }
+        });
+      }
+
+      function showComplianceNotification(message, type) {
+        const notification = document.createElement('div');
+        const bgColor = type === 'success' ? '#f0fdf4' : (type === 'download' ? '#fff8f0' : '#fff');
+        const textColor = type === 'success' ? '#22c55e' : (type === 'download' ? '#FF5C00' : '#191919');
+        const borderColor = type === 'success' ? '#22c55e' : (type === 'download' ? '#FF5C00' : '#d9d9d9');
+
+        notification.style.cssText = `
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background: ${bgColor};
+          border: 2px solid ${borderColor};
+          border-radius: 8px;
+          padding: 16px 24px;
+          font-size: 14px;
+          font-weight: 600;
+          color: ${textColor};
+          z-index: 2000;
+          animation: slideIn 0.3s ease-out;
+        `;
+
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+          notification.style.animation = 'slideOut 0.3s ease-out';
+          setTimeout(() => {
+            notification.remove();
+          }, 300);
+        }, 3000);
+      }
+
+      function initializeWorkingSheets() {
+        // Load financial data
+        fetch('demo-data/financial-dataset.json')
+          .then(response => response.json())
+          .then(data => {
+            populateCapturePage(data);
+            populateReconciliationPage(data);
+            populateInvoicesPage(data);
+            setupTabSwitching();
+            setupUserInteractions(data);
+          });
+      }
+
+      function populateCapturePage(data) {
+        const tbody = document.getElementById('capture-transactions');
+        tbody.innerHTML = '';
+
+        data.transactions.slice(0, 5).forEach((txn, idx) => {
+          const row = document.createElement('tr');
+          const confidenceScores = ['98.7%', '99.2%', '97.8%', '99.5%', '100%'];
+          const statuses = ['Categorized', 'Matched', 'Processing', 'Verified', 'Filed'];
+
+          row.innerHTML = `
+            <td><span class="ws-date">${new Date(txn.date).toLocaleDateString()}</span></td>
+            <td><span class="ws-desc">${txn.description}</span></td>
+            <td><span class="ws-amount ${txn.amount < 0 ? 'negative' : ''}">${txn.amount < 0 ? '−' : '+'}${Math.abs(txn.amount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span></td>
+            <td><span class="ws-category-tag">${txn.category}</span></td>
+            <td><span class="ws-confidence">${confidenceScores[idx]}</span> <span class="ws-status">${statuses[idx]}</span></td>
+          `;
+          tbody.appendChild(row);
+        });
+
+        // Populate agent status
+        const agentLog = document.getElementById('agent-status-list');
+        agentLog.innerHTML = '';
+
+        data.agents.active.forEach(agent => {
+          const agentEl = document.createElement('div');
+          agentEl.className = 'agent';
+          agentEl.innerHTML = `
+            <div class="agent__dot is-done">✓</div>
+            <div class="agent__body">
+              <div class="agent__title">${agent.name}</div>
+              <div class="agent__sub">${agent.function}</div>
+            </div>
+            <div class="agent__when">${agent.lastActivity}</div>
+          `;
+          agentLog.appendChild(agentEl);
+        });
+      }
+
+      function populateReconciliationPage(data) {
+        const reconcStatus = data.reconciliation;
+        document.getElementById('reconciliation-pct').textContent = reconcStatus.status;
+        document.getElementById('reconciliation-bar').style.width = (reconcStatus.matchRate * 100) + '%';
+        document.getElementById('pending-count').textContent = '12';
+
+        // Populate pending items
+        const pendingList = document.getElementById('pending-items');
+        pendingList.innerHTML = '';
+
+        const pendingItems = [
+          { ref: 'PND-001', amount: 340, date: '18 May', status: 'Unmatched', desc: 'Wire transfer - description unclear' },
+          { ref: 'PND-002', amount: 1240, date: '17 May', status: 'Variance', desc: 'Amount variance vs. invoice' },
+          { ref: 'PND-003', amount: 580, date: '16 May', status: 'Awaiting', desc: 'Awaiting supporting document' },
+          { ref: 'PND-004', amount: 2100, date: '15 May', status: 'Duplicate', desc: 'Possible duplicate entry' },
+          { ref: 'PND-005', amount: 445, date: '14 May', status: 'Unmatched', desc: 'No matching invoice found' },
+        ];
+
+        pendingItems.forEach(item => {
+          const itemEl = document.createElement('div');
+          itemEl.className = 'ws-pending-item';
+          itemEl.innerHTML = `
+            <div class="ws-pending-ref">${item.ref}</div>
+            <div class="ws-pending-details">
+              <div class="ws-pending-desc">${item.desc}</div>
+              <div class="ws-pending-date">${item.date}</div>
+            </div>
+            <div class="ws-pending-amount">AED ${item.amount.toLocaleString()}</div>
+            <div class="ws-pending-status ${item.status.toLowerCase().replace(' ', '-')}">${item.status}</div>
+            <button class="btn btn--sm" onclick="alert('Review: ' + this.parentElement.querySelector('.ws-pending-ref').textContent)">Review</button>
+          `;
+          pendingList.appendChild(itemEl);
+        });
+      }
+
+      function populateInvoicesPage(data) {
+        const invoiceData = data.invoices;
+        const tbody = document.getElementById('invoices-list');
+        tbody.innerHTML = '';
+
+        const sampleInvoices = [
+          { inv: 'INV-2501', customer: 'Al Mazaya Holding', amount: 42000, due: '18-Jun', status: 'Sent', peppol: '✓' },
+          { inv: 'INV-2500', customer: 'Gulf Trading LLC', amount: 18500, due: '11-Jun', status: 'Viewed', peppol: '✓' },
+          { inv: 'INV-2499', customer: 'Emirates Services', amount: 25300, due: '05-Jun', status: 'Sent', peppol: '✓' },
+          { inv: 'INV-2498', customer: 'Regional Supplies', amount: 8200, due: '31-May', status: 'Overdue', peppol: '⊘' },
+          { inv: 'INV-2497', customer: 'Local Contractor', amount: 12600, due: '28-May', status: 'Overdue', peppol: '⊘' },
+        ];
+
+        sampleInvoices.forEach(inv => {
+          const row = document.createElement('tr');
+          const isDraft = inv.status === 'Draft';
+          const isOverdue = inv.status === 'Overdue';
+
+          row.innerHTML = `
+            <td><strong style="font-family: var(--font-mono);">${inv.inv}</strong></td>
+            <td>${inv.customer}</td>
+            <td><span style="font-family: var(--font-mono); font-weight: 500;">AED ${inv.amount.toLocaleString()}</span></td>
+            <td style="font-size: 12px; color: ${isOverdue ? 'var(--warn)' : 'var(--ink-2)'};">${inv.due}</td>
+            <td><span class="ws-invoice-status ${inv.status.toLowerCase()}">${inv.status}</span></td>
+            <td style="text-align: center; font-size: 14px;">${inv.peppol}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      }
+
+      function setupTabSwitching() {
+        const tabBtns = document.querySelectorAll('.ws-tab-btn');
+        const tabContents = document.querySelectorAll('.ws-tab-content');
+
+        tabBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+            const tabName = this.getAttribute('data-tab');
+
+            // Remove active state from all
+            tabBtns.forEach(b => b.classList.remove('is-active'));
+            tabContents.forEach(c => c.classList.remove('is-active'));
+            c.style.display = 'none';
+
+            // Add active state to selected
+            this.classList.add('is-active');
+            const activeContent = document.querySelector(`.ws-tab-content[data-tab="${tabName}"]`);
+            activeContent.classList.add('is-active');
+            activeContent.style.display = 'block';
+          });
+        });
+      }
+
+      function setupUserInteractions(data) {
+        // Add Transaction button
+        document.getElementById('add-transaction-btn').addEventListener('click', function() {
+          alert('Add Transaction modal would open here.\n\nCapture agent would assist with:\n- Category suggestion\n- VAT classification\n- Supporting document OCR');
+        });
+
+        // Reconciliation button
+        document.getElementById('reconcile-btn').addEventListener('click', function() {
+          alert('Reconciliation started.\n\nMatching pending items against bank feed...\n\nCurrent status: 95% reconciled\nPending: 12 items for review');
+        });
+      }
+
+      // Show Working Sheets section when tab is active
+      function toggleWorkingSheets(show) {
+        const ws = document.getElementById('working-sheets');
+        if (ws) {
+          ws.style.display = show ? 'block' : 'none';
+        }
+      }
+
+      // ============================================================
+      // AGENTS SECTION REAL-TIME INTERACTIVITY
+      // ============================================================
+      
+      class AgentsManager {
+        constructor() {
+          this.agentData = {
+            capture: {
+              name: 'Capture Agent',
+              icon: '📸',
+              accuracy: 98.5,
+              processedToday: 43,
+              baseProcessedToday: 43,
+              lastActivityTime: Date.now() - 4 * 60000, // 4 mins ago
+              status: 'live', // 'live', 'processing', 'attention'
+              statusColor: '#22c55e'
+            },
+            vat: {
+              name: 'VAT Agent',
+              icon: '📊',
+              accuracy: 99.8,
+              processedToday: 'Q2 Filed',
+              lastActivityTime: Date.now() - 11 * 24 * 60000, // 11 days ago
+              status: 'processed',
+              statusColor: '#f97316'
+            },
+            payroll: {
+              name: 'Payroll Agent',
+              icon: '👥',
+              accuracy: 100,
+              processedToday: 18,
+              baseProcessedToday: 18,
+              lastActivityTime: Date.now() - 5 * 60000, // 5 mins ago
+              status: 'live',
+              statusColor: '#22c55e'
+            },
+            revenue: {
+              name: 'Revenue Agent',
+              icon: '💵',
+              accuracy: 99.2,
+              processedToday: 28,
+              baseProcessedToday: 28,
+              lastActivityTime: Date.now() - 2 * 60000, // 2 mins ago
+              status: 'live',
+              statusColor: '#22c55e'
+            }
+          };
+
+          this.totalProcessingCount = 247;
+          this.baseTotalProcessingCount = 247;
+          this.init();
+        }
+
+        init() {
+          this.setupViewToggle();
+          this.setupCardInteractions();
+          this.startRealTimeUpdates();
+        }
+
+        setupViewToggle() {
+          const toggleButtons = document.querySelectorAll('.agents-view-toggle');
+          const viewContents = document.querySelectorAll('.agents-view-content');
+
+          toggleButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+              const targetView = btn.getAttribute('data-view');
+
+              // Update button states
+              toggleButtons.forEach(b => {
+                if (b.getAttribute('data-view') === targetView) {
+                  b.classList.add('active');
+                  b.style.background = '#FF5C00';
+                  b.style.color = 'white';
+                  b.style.borderColor = '#FF5C00';
+                } else {
+                  b.classList.remove('active');
+                  b.style.background = 'white';
+                  b.style.color = '#4a4a4a';
+                  b.style.borderColor = '#d9d9d9';
+                }
+              });
+
+              // Update view contents
+              viewContents.forEach(content => {
+                if (content.getAttribute('data-view') === targetView) {
+                  content.style.display = 'block';
+                  // Trigger subtle fade-in
+                  content.style.opacity = '0';
+                  setTimeout(() => {
+                    content.style.transition = 'opacity 0.3s ease-in-out';
+                    content.style.opacity = '1';
+                  }, 10);
+                } else {
+                  content.style.display = 'none';
+                }
+              });
+            });
+          });
+        }
+
+        setupCardInteractions() {
+          const cards = document.querySelectorAll('.agent-card');
+
+          cards.forEach(card => {
+            card.addEventListener('click', () => {
+              const agentKey = card.getAttribute('data-agent');
+              this.showAgentDetails(agentKey);
+            });
+
+            card.addEventListener('mouseenter', () => {
+              card.style.boxShadow = '0 8px 24px rgba(0,0,0,0.1)';
+              card.style.transform = 'translateY(-2px)';
+            });
+
+            card.addEventListener('mouseleave', () => {
+              card.style.boxShadow = '0 1px 3px rgba(0,0,0,0.08)';
+              card.style.transform = 'translateY(0)';
+            });
+          });
+        }
+
+        showAgentDetails(agentKey) {
+          const agent = this.agentData[agentKey];
+          const modal = document.querySelector('.agent-details-modal');
+          const nameEl = modal.querySelector('.modal-agent-name');
+          const contentEl = modal.querySelector('.modal-agent-content');
+
+          nameEl.textContent = `${agent.icon} ${agent.name}`;
+
+          let activityMetrics = '';
+          if (typeof agent.processedToday === 'number') {
+            activityMetrics = `
+              <p><strong>Transactions processed today:</strong> ${agent.processedToday}</p>
+              <p><strong>Current accuracy:</strong> ${agent.accuracy}%</p>
+              <p><strong>System status:</strong> <span style="color: ${agent.statusColor};">●</span> ${agent.status}</p>
+            `;
+          } else {
+            activityMetrics = `
+              <p><strong>Status:</strong> ${agent.processedToday}</p>
+              <p><strong>Accuracy:</strong> ${agent.accuracy}%</p>
+              <p><strong>System status:</strong> <span style="color: ${agent.statusColor};">●</span> ${agent.status}</p>
+            `;
+          }
+
+          contentEl.innerHTML = `
+            <div style="line-height: 1.6;">
+              ${activityMetrics}
+              <hr style="margin: 16px 0; border: none; border-top: 1px solid #e0e0e0;">
+              <p style="font-size: 12px; color: #999;">
+                <strong>Last activity:</strong> ${this.formatTimeAgo(agent.lastActivityTime)}<br>
+                <strong>Continuous availability:</strong> 24/7 across all UAE compliance systems
+              </p>
+              <button class="close-modal" style="margin-top: 16px; padding: 10px 20px; background: #FF5C00; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Close</button>
+            </div>
+          `;
+
+          modal.style.display = 'flex';
+
+          const closeBtn = modal.querySelector('.close-modal');
+          closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+          });
+
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+              modal.style.display = 'none';
+            }
+          });
+        }
+
+        startRealTimeUpdates() {
+          // Update timestamps every 10 seconds
+          setInterval(() => {
+            this.updateTimestamps();
+          }, 10000);
+
+          // Update transaction counts every 3-8 seconds (realistic variation)
+          setInterval(() => {
+            this.updateTransactionCounts();
+          }, this.randomInterval(3000, 8000));
+
+          // Update system status summary every 2 seconds
+          setInterval(() => {
+            this.updateStatusSummary();
+          }, 2000);
+        }
+
+        updateTimestamps() {
+          Object.keys(this.agentData).forEach(agentKey => {
+            const agent = this.agentData[agentKey];
+            const selector = `[data-agent="${agentKey}"] .agent-last-activity`;
+            const el = document.querySelector(selector);
+
+            if (el) {
+              if (agentKey === 'vat') {
+                el.textContent = this.calculateDaysAgo(agent.lastActivityTime);
+              } else {
+                el.textContent = this.formatTimeAgo(agent.lastActivityTime);
+              }
+            }
+          });
+        }
+
+        updateTransactionCounts() {
+          // Simulate realistic transaction processing
+          const activeAgents = ['capture', 'payroll', 'revenue'];
+          
+          activeAgents.forEach(agentKey => {
+            const agent = this.agentData[agentKey];
+            if (typeof agent.processedToday === 'number' && Math.random() > 0.6) {
+              // 40% chance per update cycle
+              const increment = Math.floor(Math.random() * 3) + 1; // Add 1-3 transactions
+              agent.processedToday += increment;
+              this.totalProcessingCount += increment;
+
+              // Update UI with animation
+              const selector = `[data-agent="${agentKey}"] [style*="font-size: 20px"]`;
+              const els = document.querySelectorAll(selector);
+              els.forEach(el => {
+                if (el.textContent.includes(agent.processedToday - increment)) {
+                  this.animateCounterUpdate(el, agent.processedToday - increment, agent.processedToday);
+                }
+              });
+            }
+          });
+
+          // Update total processing count
+          const processingEl = document.querySelector('.agents-processing-count');
+          if (processingEl && processingEl.textContent !== String(this.totalProcessingCount)) {
+            this.animateCounterUpdate(processingEl, parseInt(processingEl.textContent), this.totalProcessingCount);
+          }
+        }
+
+        animateCounterUpdate(element, oldValue, newValue) {
+          const duration = 300; // 300ms animation
+          const startTime = Date.now();
+          const startValue = oldValue;
+          const difference = newValue - oldValue;
+
+          const animate = () => {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const currentValue = Math.floor(startValue + difference * progress);
+
+            element.textContent = currentValue;
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            }
+          };
+
+          animate();
+        }
+
+        updateStatusSummary() {
+          // Simulate occasional status changes (rare, but realistic)
+          if (Math.random() > 0.95) {
+            const statusEl = document.querySelector('[style*="All systems operational"]');
+            if (statusEl && statusEl.parentElement.querySelector('[style*="animation"]')) {
+              // Already pulsing, no change needed
+            }
+          }
+        }
+
+        formatTimeAgo(timestamp) {
+          const now = Date.now();
+          const seconds = Math.floor((now - timestamp) / 1000);
+          const minutes = Math.floor(seconds / 60);
+          const hours = Math.floor(minutes / 60);
+          const days = Math.floor(hours / 24);
+
+          if (seconds < 60) {
+            return 'just now';
+          } else if (minutes < 60) {
+            return `${minutes} min${minutes > 1 ? 's' : ''} ago`;
+          } else if (hours < 24) {
+            return `${hours} hr${hours > 1 ? 's' : ''} ago`;
+          } else if (days < 7) {
+            return `${days} day${days > 1 ? 's' : ''} ago`;
+          } else {
+            return Math.floor(days / 7) + ' week' + (Math.floor(days / 7) > 1 ? 's' : '') + ' ago';
+          }
+        }
+
+        calculateDaysAgo(timestamp) {
+          const now = Date.now();
+          const days = Math.floor((now - timestamp) / (24 * 60 * 60 * 1000));
+
+          if (days === 0) {
+            return 'today';
+          } else if (days === 1) {
+            return 'yesterday';
+          } else if (days < 30) {
+            return `${days} days ago`;
+          } else {
+            return `${Math.floor(days / 7)} weeks ago`;
+          }
+        }
+
+        randomInterval(min, max) {
+          return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+      }
+
+      // Initialize agents manager when DOM is ready
+      document.addEventListener('DOMContentLoaded', () => {
+        new AgentsManager();
+      });
+
+      // Fallback if DOMContentLoaded has already fired
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          if (!window.agentsManagerInitialized) {
+            new AgentsManager();
+            window.agentsManagerInitialized = true;
+          }
+        });
+      } else {
+        if (!window.agentsManagerInitialized) {
+          new AgentsManager();
+          window.agentsManagerInitialized = true;
+        }
+      }
+    </script>
 
     <script src="assets/app.js" defer></script>
   </body>

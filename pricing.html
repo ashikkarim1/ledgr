@@ -4,16 +4,62 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Ledgr · Pricing — Four plans, no surprise fees</title>
-    <meta name="description" content="Four Ledgr plans from free to scale. Every UAE entity gets books, VAT, Corporate Tax, e-invoicing and a named chartered accountant on WhatsApp." />
+    <meta name="description" content="Four Ledgr pricing plans from free to enterprise-scale. No hidden fees. Every plan includes books, VAT, Corporate Tax, e-invoicing, and a named chartered accountant on WhatsApp. Free tier requires no credit card." />
+    <meta property="og:title" content="Ledgr Pricing — Four Plans, Zero Hidden Fees" />
+    <meta property="og:description" content="Transparent pricing for UAE businesses. Starter free plan, Solo, Team, and Enterprise tiers. All include real-time compliance tracking and AI-supervised accounting." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ledgr.ai/pricing.html" />
+    <meta property="og:image" content="https://ledgr.ai/assets/og-pricing.png" />
+    <meta name="theme-color" content="#FF5C00" />
+    <meta name="color-scheme" content="light dark" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='-apple-system,sans-serif' font-size='17' font-weight='600' fill='%23f9f9f9'%3EL%3C/text%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/tailwind-output.css" />
     <link rel="stylesheet" href="assets/styles.css" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "PriceSpecification",
+      "priceCurrency": "AED",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Starter - Free",
+          "description": "A free home for new businesses. No card required.",
+          "price": "0",
+          "priceCurrency": "AED"
+        },
+        {
+          "@type": "Offer",
+          "name": "Solo",
+          "description": "Freelancers & free-zone consultants under AED 800k revenue.",
+          "price": "299",
+          "priceCurrency": "AED",
+          "billingDuration": "P1M"
+        },
+        {
+          "@type": "Offer",
+          "name": "Growth",
+          "description": "SMEs with 5–25 staff and AED 1–8M revenue.",
+          "price": "1499",
+          "priceCurrency": "AED",
+          "billingDuration": "P1M"
+        },
+        {
+          "@type": "Offer",
+          "name": "Scale",
+          "description": "Multi-entity operators with AED 8–50M revenue.",
+          "price": "4999",
+          "priceCurrency": "AED",
+          "billingDuration": "P1M"
+        }
+      ]
+    }
+    </script>
   </head>
-  <body>
-    <header class="nav" id="nav">
+  <body>    <header class="nav" id="nav">
       <div class="wrap nav__inner">
         <a class="brand" href="index.html">
           <span class="brand__mark" aria-hidden="true">L</span>
@@ -69,20 +115,16 @@
             <span>Cancel anytime · your data exports cleanly</span>
           </div>
         </div>
-      </section>
-
-      <!-- Plan cards -->
+      </section>      <!-- Plan cards -->
       <section class="tight" style="padding-top:16px">
         <div class="max-w-7xl mx-auto px-6">
+          <div style="text-align:center;margin-bottom:40px;font-size:18px;font-weight:600;color:var(--ink-1)">Coming Soon</div>
           <div class="pricing pricing--4 reveal">
             <article class="price">
               <span class="price__badge">Free</span>
               <div class="price__head">
                 <span class="price__name">Starter</span>
                 <span class="price__sub">A free home for new businesses. No card required.</span>
-              </div>
-              <div class="price__num">
-                <span>Coming soon</span>
               </div>
               <div class="price__divider"></div>
               <ul class="price__feats">
@@ -100,9 +142,6 @@
                 <span class="price__name">Solo</span>
                 <span class="price__sub">Freelancers &amp; free-zone consultants under AED&nbsp;800k revenue.</span>
               </div>
-              <div class="price__num">
-                <span>Coming soon</span>
-              </div>
               <div class="price__divider"></div>
               <ul class="price__feats">
                 <li class="price__feat">Everything in Starter</li>
@@ -115,14 +154,10 @@
               <button class="btn price__cta" type="button" data-plan="Solo" data-interest-modal>I'm interested</button>
             </article>
 
-            <article class="price is-featured">
-              <span class="price__badge">Most chosen</span>
+            <article class="price">
               <div class="price__head">
                 <span class="price__name">Growth</span>
                 <span class="price__sub">SMEs with 5–25 staff and AED&nbsp;1–8M revenue.</span>
-              </div>
-              <div class="price__num">
-                <span>Coming soon</span>
               </div>
               <div class="price__divider"></div>
               <ul class="price__feats">
@@ -141,9 +176,6 @@
                 <span class="price__name">Scale</span>
                 <span class="price__sub">Multi-entity operators with AED&nbsp;8–50M revenue.</span>
               </div>
-              <div class="price__num">
-                <span>Coming soon</span>
-              </div>
               <div class="price__divider"></div>
               <ul class="price__feats">
                 <li class="price__feat">Everything in Growth</li>
@@ -157,9 +189,7 @@
             </article>
           </div>
         </div>
-      </section>
-
-      <!-- Feature matrix -->
+      </section>      <!-- Feature matrix -->
       <section>
         <div class="max-w-7xl mx-auto px-6">
           <div class="section-head reveal">
@@ -173,10 +203,10 @@
           <div class="matrix reveal">
             <div class="matrix__row matrix__head">
               <span class="feature"></span>
-              <span class="plan"><span class="name">Starter</span><span class="price">Coming soon</span></span>
-              <span class="plan"><span class="name">Solo</span><span class="price">Coming soon</span></span>
-              <span class="plan"><span class="name">Growth</span><span class="price">Coming soon</span></span>
-              <span class="plan"><span class="name">Scale</span><span class="price">Coming soon</span></span>
+              <span class="plan"><span class="name">Starter</span></span>
+              <span class="plan"><span class="name">Solo</span></span>
+              <span class="plan"><span class="name">Growth</span></span>
+              <span class="plan"><span class="name">Scale</span></span>
             </div>
 
             <div class="matrix__group">Books &amp; invoicing</div>
@@ -214,9 +244,7 @@
               <span class="cell is-no">—</span>
               <span class="cell is-yes"></span>
               <span class="cell is-yes"></span>
-            </div>
-
-            <div class="matrix__group">Tax &amp; compliance</div>
+            </div>            <div class="matrix__group">Tax &amp; compliance</div>
             <div class="matrix__row">
               <span class="feature">VAT 201 quarterly return · filed to EmaraTax</span>
               <span class="cell">Draft only</span>
@@ -281,9 +309,7 @@
               <span class="cell is-no">—</span>
               <span class="cell is-no">—</span>
               <span class="cell is-yes"></span>
-            </div>
-
-            <div class="matrix__group">E-invoicing &amp; integrations</div>
+            </div>            <div class="matrix__group">E-invoicing &amp; integrations</div>
             <div class="matrix__row">
               <span class="feature">Peppol endpoint · UAE 5-corner model</span>
               <span class="cell">Shared</span>
@@ -373,9 +399,7 @@
             saves 10%. Pricing is per legal entity and excludes 5% VAT.
           </p>
         </div>
-      </section>
-
-      <!-- FAQ -->
+      </section>      <!-- FAQ -->
       <section>
         <div class="wrap wrap--narrow">
           <div class="section-head reveal" style="grid-template-columns:1fr;gap:18px">
@@ -420,9 +444,7 @@
             </details>
           </div>
         </div>
-      </section>
-
-      <!-- Closing CTA -->
+      </section>      <!-- Closing CTA -->
       <section class="cta">
         <div class="wrap between" style="align-items:flex-start;gap:32px;flex-wrap:wrap">
           <div style="max-width:520px">
@@ -472,9 +494,7 @@
           <button class="modal__close" id="modal-close" type="button" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:24px;cursor:pointer;color:var(--ink-3);">×</button>
         </div>
       </div>
-    </main>
-
-    <footer class="foot">
+    </main>    <footer class="foot">
       <div class="max-w-7xl mx-auto px-6">
         <div class="foot__grid">
           <div>

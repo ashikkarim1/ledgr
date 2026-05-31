@@ -3,9 +3,40 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#f9f9f9" media="(prefers-color-scheme: light)" />
     <title>Live Demo — Ledgr Finance Dashboard</title>
-    <meta name="description" content="See Ledgr in action. Interactive demo of how AI agents handle your finances in real-time." />
+    <meta name="description" content="See Ledgr in action. Interactive dashboard demo showing AI agents managing UAE accounting, VAT compliance, and Corporate Tax in real-time." />
+    <meta property="og:title" content="Live Demo — Ledgr AI Finance Dashboard" />
+    <meta property="og:description" content="Watch Ledgr's six AI financial agents work together to manage your accounting, filings, and compliance automatically." />
+    <meta property="og:image" content="https://ledgr.ai/assets/og-demo.png" />
+    <meta property="og:url" content="https://ledgr.ai/demo.html" />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#FF5C00" />
+    <meta name="color-scheme" content="light dark" />
+    <!-- GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX', {
+        'page_path': '/demo.html'
+      });
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Live Demo — Ledgr Finance Dashboard",
+        "description": "Interactive demo of Ledgr's AI-native accounting platform. See how AI agents manage UAE accounting, VAT, and Corporate Tax compliance in real-time.",
+        "url": "https://ledgr.ai/demo.html",
+        "image": "https://ledgr.ai/assets/og-demo.png",
+        "publisher": {
+          "@type": "Organization",
+          "@name": "Ledgr",
+          "url": "https://ledgr.ai"
+        }
+      }
+    </script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='-apple-system,sans-serif' font-size='17' font-weight='600' fill='%23fbfaf7'%3EL%3C/text%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -68,20 +99,21 @@
       }
 
       .demo-section {
-        margin-bottom: 48px;
+        margin-bottom: 64px;
       }
 
       .demo-section__title {
         font-size: 24px;
         font-weight: 700;
         color: var(--ink-1);
-        margin: 0 0 24px 0;
+        margin: 0 0 12px 0;
       }
 
       .demo-section__subtitle {
         font-size: 14px;
         color: var(--ink-3);
         margin: 0 0 32px 0;
+        line-height: 1.6;
       }
 
       .cta-buttons {
@@ -125,6 +157,7 @@
         border-radius: var(--radius);
         overflow: hidden;
         box-shadow: 0 24px 80px -20px rgba(10, 10, 15, 0.18);
+        margin-bottom: 48px;
       }
 
       .demo-frame__bar {
@@ -179,9 +212,189 @@
         background: var(--paper);
       }
 
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        margin-bottom: 48px;
+      }
+
+      .feature-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 24px;
+        transition: all 0.2s ease;
+      }
+
+      .feature-card:hover {
+        border-color: var(--accent);
+        box-shadow: 0 8px 24px rgba(255, 92, 0, 0.1);
+      }
+
+      .feature-card__icon {
+        width: 40px;
+        height: 40px;
+        background: var(--accent-soft);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+      }
+
+      .feature-card__title {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--ink-1);
+        margin: 0 0 12px 0;
+      }
+
+      .feature-card__text {
+        font-size: 14px;
+        color: var(--ink-2);
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      .agent-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 48px;
+      }
+
+      .agent-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 20px;
+        border-left: 4px solid var(--accent);
+      }
+
+      .agent-card__name {
+        font-weight: 700;
+        color: var(--ink-1);
+        margin: 0 0 8px 0;
+        font-size: 15px;
+      }
+
+      .agent-card__role {
+        font-size: 12px;
+        color: var(--accent);
+        font-weight: 600;
+        text-transform: uppercase;
+        margin: 0 0 12px 0;
+      }
+
+      .agent-card__description {
+        font-size: 13px;
+        color: var(--ink-2);
+        line-height: 1.5;
+        margin: 0 0 12px 0;
+      }
+
+      .agent-card__tasks {
+        font-size: 12px;
+        color: var(--ink-3);
+      }
+
+      .agent-card__tasks li {
+        margin-bottom: 4px;
+      }
+
+      .tabs {
+        display: flex;
+        gap: 4px;
+        margin-bottom: 24px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .tab {
+        padding: 12px 16px;
+        background: none;
+        border: none;
+        border-bottom: 2px solid transparent;
+        cursor: pointer;
+        color: var(--ink-3);
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.2s ease;
+      }
+
+      .tab:hover {
+        color: var(--ink-1);
+      }
+
+      .tab.active {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+      }
+
+      .stat-box {
+        background: linear-gradient(135deg, var(--accent-soft) 0%, #ffe9cc 100%);
+        border-radius: 8px;
+        padding: 24px;
+        text-align: center;
+      }
+
+      .stat-box__value {
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--accent);
+        margin: 0 0 8px 0;
+      }
+
+      .stat-box__label {
+        font-size: 13px;
+        color: var(--ink-2);
+        margin: 0;
+      }
+
+      .highlight-box {
+        background: #fffaf0;
+        border-left: 4px solid var(--accent);
+        padding: 20px;
+        border-radius: 4px;
+        margin-bottom: 32px;
+      }
+
+      .highlight-box h4 {
+        margin: 0 0 12px 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--ink-1);
+      }
+
+      .highlight-box p {
+        margin: 0;
+        font-size: 14px;
+        color: var(--ink-2);
+        line-height: 1.6;
+      }
+
       @media (max-width: 768px) {
         .demo-frame__iframe {
           height: 60vh;
+        }
+        .demo-header__left {
+          flex-direction: column;
+          align-items: flex-start;
         }
       }
     </style>
@@ -206,17 +419,230 @@
 
       <!-- Content -->
       <div class="demo-content">
+        <!-- Introduction Section -->
         <div class="demo-section">
-          <h2 class="demo-section__title">Your AI Finance Team at Work</h2>
-          <p class="demo-section__subtitle">Watch as our agents handle real financial workflows, collaborate seamlessly, and keep everything audit-ready. Switch between Business Overview and Finance Operations to see different perspectives of the same data.</p>
+          <h2 class="demo-section__title">Your Finance Function, Reimagined</h2>
+          <p class="demo-section__subtitle">Ledgr combines AI agents with chartered accountant supervision to handle bookkeeping, tax planning, VAT compliance, and strategic financial guidance. Below you'll see a full working dashboard managing real financial workflows.</p>
+
+          <div class="highlight-box">
+            <h4>What You're About to See:</h4>
+            <p>This is a full-featured demo account. Navigate through the platform as if it's your own company. Try different tabs, drill into transactions, and see how the six AI agents collaborate to keep everything organized, compliant, and transparent. All data in this demo is anonymized and randomized.</p>
+          </div>
 
           <div class="cta-buttons">
-            <button class="cta-button primary" onclick="scrollToDashboard()">Start Demo</button>
-            <button class="cta-button" onclick="alert('Learn more about our agents and how they work together to manage your finances.')">Learn More</button>
-            <button class="cta-button" onclick="alert('Questions? Email us at hello@ledgr.ae')">Contact Us</button>
+            <button class="cta-button primary" onclick="scrollToDashboard()">Start Interactive Demo</button>
+            <a href="coming-soon.html" class="cta-button">Get Early Access</a>
+            <button class="cta-button" onclick="downloadDemoGuide()">Download Demo Guide (PDF)</button>
           </div>
         </div>
 
+        <!-- Key Capabilities Section -->
+        <div class="demo-section">
+          <h2 class="demo-section__title">Platform Capabilities at a Glance</h2>
+          <p class="demo-section__subtitle">Explore what makes Ledgr different from traditional accounting software</p>
+
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="2" style="width: 24px; height: 24px;">
+                  <circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>
+                  <path d="M12 2v20M2 12h20"/>
+                </svg>
+              </div>
+              <h3 class="feature-card__title">Real-Time VAT Tracking</h3>
+              <p class="feature-card__text">Automatic VAT categorization. Live compliance status. Never miss a filing deadline. Audit trail from transaction to return.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="2" style="width: 24px; height: 24px;">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              </div>
+              <h3 class="feature-card__title">Tax Planning Intelligence</h3>
+              <p class="feature-card__text">Proactive tax optimization. FX risk monitoring. Multi-entity strategies. Your accountant always has the best picture.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="2" style="width: 24px; height: 24px;">
+                  <path d="M12 2v20M2 12h20M5 9l7-7 7 7M5 15l7 7 7-7"/>
+                </svg>
+              </div>
+              <h3 class="feature-card__title">FTA e-Invoicing Ready</h3>
+              <p class="feature-card__text">Integrated with Zatca/FTA e-invoicing. Automatic invoice transformation. No separate portal. Native compliance.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="2" style="width: 24px; height: 24px;">
+                  <path d="M20 21H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h4l2-3h4l2 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
+              </div>
+              <h3 class="feature-card__title">Multi-Currency & FX</h3>
+              <p class="feature-card__text">Automatic FX revaluation. Operational, translation, and transaction risk tracking. Real-time spot rates.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="2" style="width: 24px; height: 24px;">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="8.5" cy="7" r="4"/>
+                  <path d="M20 8v6M23 11h-6"/>
+                </svg>
+              </div>
+              <h3 class="feature-card__title">WPS & Payroll</h3>
+              <p class="feature-card__text">Automated Wage Protection System filings. Payroll accrual. Employee records. Compliance by default.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="2" style="width: 24px; height: 24px;">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+              </div>
+              <h3 class="feature-card__title">Third-Party Integrations</h3>
+              <p class="feature-card__text">Bank feeds. Expense trackers. CRM sync. Open API. Build what you need on top of Ledgr.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Agents Section -->
+        <div class="demo-section">
+          <h2 class="demo-section__title">Meet the Six AI Agents</h2>
+          <p class="demo-section__subtitle">Specialized financial agents, each supervised by a licensed accountant</p>
+
+          <div class="agent-grid">
+            <div class="agent-card">
+              <div class="agent-card__role">Agent 1</div>
+              <h3 class="agent-card__name">Bookkeeper</h3>
+              <p class="agent-card__description">Ingests transactions, categorizes expenses, reconciles accounts, and maintains the general ledger.</p>
+              <div class="agent-card__tasks">
+                <strong style="font-size: 11px; color: #999;">Typical tasks:</strong>
+                <ul style="margin: 4px 0 0 0; padding-left: 16px;">
+                  <li>Transaction classification</li>
+                  <li>Bank reconciliation</li>
+                  <li>Account balance updates</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="agent-card">
+              <div class="agent-card__role">Agent 2</div>
+              <h3 class="agent-card__name">VAT Specialist</h3>
+              <p class="agent-card__description">Tracks VAT across all transactions, identifies filing obligations, and prepares VAT returns in real-time.</p>
+              <div class="agent-card__tasks">
+                <strong style="font-size: 11px; color: #999;">Typical tasks:</strong>
+                <ul style="margin: 4px 0 0 0; padding-left: 16px;">
+                  <li>VAT categorization</li>
+                  <li>Return calculation</li>
+                  <li>Compliance alerts</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="agent-card">
+              <div class="agent-card__role">Agent 3</div>
+              <h3 class="agent-card__name">Tax Planner</h3>
+              <p class="agent-card__description">Identifies tax optimization opportunities, tracks deductions, and flags strategic decisions needing human judgment.</p>
+              <div class="agent-card__tasks">
+                <strong style="font-size: 11px; color: #999;">Typical tasks:</strong>
+                <ul style="margin: 4px 0 0 0; padding-left: 16px;">
+                  <li>Deduction optimization</li>
+                  <li>Entity strategy analysis</li>
+                  <li>Planning recommendations</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="agent-card">
+              <div class="agent-card__role">Agent 4</div>
+              <h3 class="agent-card__name">Payroll & Compliance</h3>
+              <p class="agent-card__description">Manages WPS filings, calculates payroll accruals, and ensures labor law compliance across all geographies.</p>
+              <div class="agent-card__tasks">
+                <strong style="font-size: 11px; color: #999;">Typical tasks:</strong>
+                <ul style="margin: 4px 0 0 0; padding-left: 16px;">
+                  <li>WPS submissions</li>
+                  <li>Payroll accrual</li>
+                  <li>Regulatory tracking</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="agent-card">
+              <div class="agent-card__role">Agent 5</div>
+              <h3 class="agent-card__name">FX & Treasury</h3>
+              <p class="agent-card__description">Revalues foreign currency holdings, identifies translation and transaction FX risk, and recommends hedging strategies.</p>
+              <div class="agent-card__tasks">
+                <strong style="font-size: 11px; color: #999;">Typical tasks:</strong>
+                <ul style="margin: 4px 0 0 0; padding-left: 16px;">
+                  <li>FX revaluation</li>
+                  <li>Risk analysis</li>
+                  <li>Hedging alerts</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="agent-card">
+              <div class="agent-card__role">Agent 6</div>
+              <h3 class="agent-card__name">Reporting & Audit</h3>
+              <p class="agent-card__description">Produces financial statements, audit trails, and compliance reports. Keeps everything verifiable and audit-ready.</p>
+              <div class="agent-card__tasks">
+                <strong style="font-size: 11px; color: #999;">Typical tasks:</strong>
+                <ul style="margin: 4px 0 0 0; padding-left: 16px;">
+                  <li>Statement generation</li>
+                  <li>Audit trail tracking</li>
+                  <li>Compliance reporting</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Metrics Section -->
+        <div class="demo-section">
+          <h2 class="demo-section__title">What Teams Love About Ledgr</h2>
+          <p class="demo-section__subtitle">Real outcomes from early users</p>
+
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-box__value">85%</div>
+              <div class="stat-box__label">Time saved on manual entry & reconciliation</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box__value">100%</div>
+              <div class="stat-box__label">VAT compliance (zero missed filings)</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box__value">24hrs</div>
+              <div class="stat-box__label">Books audit-ready after month-end</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box__value">1 Price</div>
+              <div class="stat-box__label">No per-transaction fees or hidden costs</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Demo Section -->
+        <div class="demo-section">
+          <h2 class="demo-section__title">Live Interactive Dashboard</h2>
+          <p class="demo-section__subtitle">Navigate through the demo account below. Try switching between different views (Overview, Operations, Financials, Compliance, Transparency). Click into transactions, explore agent insights, and see how everything connects.</p>
+
+          <div class="highlight-box">
+            <h4>Navigation Tips:</h4>
+            <p>Use the navigation tabs at the top of the dashboard. Each section shows a different perspective on the same financial data. Try clicking into specific transactions or agents to see the audit trail and decision logic behind every entry.</p>
+          </div>
+
+          <div class="cta-buttons">
+            <button class="cta-button primary" onclick="scrollToDashboard()">Jump to Dashboard</button>
+            <a href="coming-soon.html" class="cta-button">Request Early Access</a>
+          </div>
+        </div>
+
+        <!-- Embedded Dashboard -->
         <div class="demo-frame">
           <div class="demo-frame__bar">
             <div class="traffic">
@@ -224,9 +650,55 @@
               <span></span>
               <span></span>
             </div>
-            <span>ledgr.ae / dashboard · Demo Account</span>
+            <span>ledgr.ae / dashboard · Demo Account · Interactive Exploration</span>
           </div>
           <iframe id="demoFrame" class="demo-frame__iframe" src="dashboard.html"></iframe>
+        </div>
+
+        <!-- FAQ Section for Demo -->
+        <div class="demo-section">
+          <h2 class="demo-section__title">Common Questions About the Demo</h2>
+
+          <div style="display: grid; gap: 16px; margin-bottom: 48px;">
+            <details style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px; cursor: pointer;">
+              <summary style="font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                Is this a real live system or a simulation?
+                <span style="color: #FF5C00;">+</span>
+              </summary>
+              <p style="margin-top: 12px; color: #666; line-height: 1.6;">This is a fully functional demo running the same codebase as the live platform. All data is anonymized and randomized for privacy. The agents, reports, and calculations are real—you're seeing actual AI decision-making in action.</p>
+            </details>
+
+            <details style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px; cursor: pointer;">
+              <summary style="font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                Can I edit transactions or change data in the demo?
+                <span style="color: #FF5C00;">+</span>
+              </summary>
+              <p style="margin-top: 12px; color: #666; line-height: 1.6;">This demo is read-only to preserve the integrity of the sample data. When you get early access, you'll have full edit permissions, undo capability, and all the collaboration features you'd expect from a modern platform.</p>
+            </details>
+
+            <details style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px; cursor: pointer;">
+              <summary style="font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                What happens when I upgrade from the demo?
+                <span style="color: #FF5C00;">+</span>
+              </summary>
+              <p style="margin-top: 12px; color: #666; line-height: 1.6;">When you start with Ledgr, we'll help you import your existing data, configure your entity structure, connect your bank accounts, and set up integration with any existing tools. Your onboarding is hands-on—your assigned accountant will walk you through everything.</p>
+            </details>
+
+            <details style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px; cursor: pointer;">
+              <summary style="font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                How long does it take to set up my own account?
+                <span style="color: #FF5C00;">+</span>
+              </summary>
+              <p style="margin-top: 12px; color: #666; line-height: 1.6;">Setup typically takes 5-7 business days for small to mid-market firms. We handle the technical side (integrations, entity configuration, compliance setup). You focus on providing your historical data and connecting your banking. Your accountant coordinates everything.</p>
+            </details>
+          </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="demo-section" style="text-align: center; padding: 40px; background: linear-gradient(135deg, #ffdecc 0%, #ffe9ec 100%); border-radius: 8px;">
+          <h2 class="demo-section__title">Ready to Transform Your Finance Function?</h2>
+          <p class="demo-section__subtitle">Get early access and be among the first to launch with Ledgr in Q3 2026.</p>
+          <a href="coming-soon.html" class="cta-button primary" style="display: inline-block; margin-top: 20px;">Join the Waitlist</a>
         </div>
       </div>
     </div>
@@ -237,12 +709,34 @@
 
       function scrollToDashboard() {
         document.getElementById('demoFrame').scrollIntoView({ behavior: 'smooth' });
+        gtag('event', 'demo_cta_click', {
+          'action': 'scroll_to_dashboard'
+        });
+      }
+
+      function downloadDemoGuide() {
+        alert('Demo Guide PDF coming soon! Check back closer to launch.');
       }
 
       // Ensure demo mode is set when iframe loads
       document.getElementById('demoFrame').onload = function() {
         this.contentWindow.localStorage.setItem('ledgr-demo-mode', 'true');
       };
+
+      // GA4 event tracking
+      document.querySelectorAll('a[href="coming-soon.html"]').forEach(link => {
+        link.addEventListener('click', function() {
+          gtag('event', 'demo_to_waitlist', {
+            'source': 'demo_page'
+          });
+        });
+      });
+
+      // Track demo engagement
+      gtag('event', 'page_view', {
+        'page_title': 'Demo - Interactive Dashboard',
+        'page_path': '/demo.html'
+      });
     </script>
   </body>
 </html>

@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Ledgr Free Trial - Enterprise Financial Control</title>
+  <meta name="description" content="Start your 14-day free Ledgr trial. No credit card required. Real-time UAE accounting compliance, AI-supervised books, and transparent pricing. Access VAT filing, Corporate Tax tracking, and e-invoicing instantly." />
+  <meta property="og:title" content="Ledgr Free Trial — 14 Days, No Credit Card Required" />
+  <meta property="og:description" content="Experience real-time financial control with Ledgr. 14-day free trial includes all features: books, VAT, Corporate Tax, e-invoicing, and a named accountant on WhatsApp." />
+  <meta property="og:image" content="https://ledgr.ai/assets/og-trial.png" />
+  <meta property="og:url" content="https://ledgr.ai/trial.html" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#FF5C00" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    * { box-sizing: border-box; }
+    body { background: #f9f9f9; margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    
+    .nav-trial {
+      background: white;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 0 20px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .nav-trial .logo { font-weight: 700; font-size: 18px; color: #191919; }
+    
+    .countdown-bar {
+      background: linear-gradient(90deg, #FF5C00 0%, #ff7a33 100%);
+      color: white;
+      padding: 12px 20px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .countdown-bar.warning { background: linear-gradient(90deg, #ff405d 0%, #ff6b7a 100%); }
+    
+    .trial-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+    
+    .trial-hero {
+      background: linear-gradient(135deg, #FF5C00 0%, #ff7a33 100%);
+      color: white;
+      padding: 60px 40px;
+      border-radius: 12px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    
+    .trial-hero h1 {
+      font-size: 42px;
+      margin: 0 0 15px 0;
+      font-weight: 700;
+    }
+    
+    .trial-hero p {
+      font-size: 18px;
+      margin: 0;
+      opacity: 0.95;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .company-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+    
+    .company-header h2 {
+      margin: 0;
+      font-size: 24px;
+      color: #FF5C00;
+    }
+    
+    .company-header p {
+      margin: 5px 0 0 0;
+      color: #999999;
+      font-size: 14px;
+    }
+    
+    .header-meta {
+      text-align: right;
+      font-size: 13px;
+      color: #999999;
+    }
+    
+    .header-meta strong { color: #191919; }
+    
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #e0e0e0;
+      background: white;
+      padding: 0 20px;
+      border-radius: 8px 8px 0 0;
+    }
+    
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 16px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #999999;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+    }
+    
+    .tab-btn.active {
+      color: #FF5C00;
+      border-bottom-color: #FF5C00;
+    }
+    
+    .tab-content {
+      display: none;
+      background: white;
+      padding: 30px;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    
+    .tab-content.active { display: block; }
+    
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .kpi-card {
+      background: #f9f9f9;
+      padding: 24px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+    }
+    
+    .kpi-card .label {
+      font-size: 12px;
+      color: #999999;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .kpi-card .value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #FF5C00;
+      margin: 0;
+    }
+    
+    .kpi-card .subtext {
+      font-size: 12px;
+      color: #4a4a4a;
+      margin-top: 8px;
+    }
+    
+    /* Data tables */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 30px 0;
+    }
+    
+    .data-table th {
+      background: #f9f9f9;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 13px;
+      color: #191919;
+      border-bottom: 2px solid #e0e0e0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .data-table td {
+      padding: 16px 12px;
+      border-bottom: 1px solid #e0e0e0;
+      font-size: 14px;
+      color: #4a4a4a;
+    }
+    
+    .data-table tr:hover { background: #fafafa; }
+    
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .status-badge.complete { background: #ffdecc; color: #FF5C00; }
+    .status-badge.pending { background: #ffebcc; color: #cc4a00; }
+    .status-badge.alert { background: #ffdecc; color: #92400e; }
+    .status-badge.override { background: #e0e7ff; color: #3730a3; }
+    
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #191919;
+      margin: 40px 0 20px 0;
+      border-bottom: 2px solid #FF5C00;
+      padding-bottom: 10px;
+    }
+    
+    .insight-box {
+      background: linear-gradient(135deg, #ffdecc 0%, #ffe9ec 100%);
+      border-left: 4px solid #FF5C00;
+      padding: 20px;
+      border-radius: 6px;
+      margin: 20px 0;
+      font-size: 14px;
+      color: #4a4a4a;
+    }
+    
+    .insight-box strong { color: #191919; }
+    
+    .p-and-l {
+      background: white;
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+    
+    .p-and-l-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #e0e0e0;
+      font-size: 14px;
+    }
+    
+    .p-and-l-row.total {
+      font-weight: 700;
+      border-bottom: 2px solid #191919;
+      border-top: 2px solid #191919;
+      padding: 16px 0;
+      margin-top: 10px;
+    }
+    
+    .p-and-l-row .label { color: #4a4a4a; }
+    .p-and-l-row .value { font-weight: 600; color: #191919; }
+    .p-and-l-row.positive .value { color: #22c55e; }
+    .p-and-l-row.negative .value { color: #ef4444; }
+    
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin: 30px 0;
+    }
+    
+    @media (max-width: 900px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .trial-hero { padding: 40px 20px; }
+      .trial-hero h1 { font-size: 32px; }
+    }
+    
+    .cta-section {
+      background: linear-gradient(135deg, #FF5C00 0%, #ff7a33 100%);
+      color: white;
+      padding: 50px 40px;
+      border-radius: 12px;
+      text-align: center;
+      margin-top: 60px;
+    }
+    
+    .cta-section h3 {
+      font-size: 28px;
+      margin: 0 0 15px 0;
+      font-weight: 700;
+    }
+    
+    .cta-section p {
+      font-size: 16px;
+      margin: 0 0 30px 0;
+      opacity: 0.95;
+    }
+    
+    .btn-signup {
+      background: white;
+      color: #FF5C00;
+      border: none;
+      padding: 16px 40px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-signup:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Offer",
+    "name": "Ledgr 14-Day Free Trial",
+    "description": "No credit card required. Includes real-time UAE accounting compliance, AI-supervised books, VAT filing, Corporate Tax tracking, e-invoicing, and dedicated accountant support.",
+    "price": "0",
+    "priceCurrency": "AED",
+    "availability": "https://schema.org/InStock",
+    "url": "https://ledgr.ai/trial.html",
+    "offerCount": 1000,
+    "validFrom": "2026-05-31",
+    "validThrough": "2026-06-14"
+  }
+  </script>
+</head>
+<body>
+  <!-- Navigation -->
+  <div class="countdown-bar" id="countdown-display">
+    Your free trial is active: 14 days remaining
+  </div>
+  
+  <div class="nav-trial">
+    <div class="logo">
+      <span style="color: #FF5C00;">◆</span> Ledgr Enterprise Trial
+    </div>
+    <a href="index.html" style="color: #FF5C00; text-decoration: none; font-weight: 600; font-size: 14px;">← Back to Site</a>
+  </div>
+
+  <div class="trial-container">
+    <!-- Hero -->
+    <div class="trial-hero">
+      <h1>Enterprise Financial Control</h1>
+      <p>See exactly how Ledgr transforms your business finances. Every transaction categorized. Every compliance deadline met. Full transparency, always.</p>
+    </div>
+
+    <!-- Company Header -->
+    <div class="company-header">
+      <div>
+        <h2>Ahmed's E-Commerce Shop</h2>
+        <p>📍 Dubai, UAE | FZ-LLC | Fiscal Year: Jan-Dec 2025</p>
+      </div>
+      <div class="header-meta">
+        <div><strong>Trial Period:</strong> 14 Days</div>
+        <div><strong>Data Freshness:</strong> Real-time</div>
+      </div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('overview')">📊 Overview</button>
+      <button class="tab-btn" onclick="switchTab('operations')">⚙️ Operations</button>
+      <button class="tab-btn" onclick="switchTab('financials')">💰 Financials</button>
+      <button class="tab-btn" onclick="switchTab('compliance')">✓ Compliance</button>
+      <button class="tab-btn" onclick="switchTab('transparency')">🔍 Transparency</button>
+    </div>
+
+    <!-- TAB 1: OVERVIEW -->
+    <div id="overview" class="tab-content active">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="label">Current Cash Position</div>
+          <div class="value">AED 156,850</div>
+          <div class="subtext">↑ 12% from last month</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Monthly Revenue (YTD Avg)</div>
+          <div class="value">AED 284,500</div>
+          <div class="subtext">Invoiced + Received</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Monthly Expenses (YTD Avg)</div>
+          <div class="value">AED 118,200</div>
+          <div class="subtext">Paid + Accrued</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Net Profit Margin</div>
+          <div class="value">58.4%</div>
+          <div class="subtext">Industry avg: 24%</div>
+        </div>
+      </div>
+
+      <div class="insight-box">
+        <strong>💡 Insight:</strong> Your cash flow is healthy. You have 62 days of operating capital in reserve. Ledgr forecasts you'll maintain this through Q2 based on current growth trajectory.
+      </div>
+
+      <div class="section-title">Recent Transactions (Last 7 Days)</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>May 30, 2025</td>
+            <td>Invoice #INV-2025-0847 - Client payment received</td>
+            <td>Revenue</td>
+            <td style="color: #22c55e; font-weight: 600;">+ AED 45,200</td>
+            <td><span class="status-badge complete">Recorded</span></td>
+          </tr>
+          <tr>
+            <td>May 29, 2025</td>
+            <td>Supplier payment - Inventory (Ali Trading LLC)</td>
+            <td>COGS</td>
+            <td style="color: #ef4444; font-weight: 600;">- AED 28,500</td>
+            <td><span class="status-badge complete">Cleared</span></td>
+          </tr>
+          <tr>
+            <td>May 28, 2025</td>
+            <td>Monthly facility rental - Jebel Ali Warehouse</td>
+            <td>Rent & Facilities</td>
+            <td style="color: #ef4444; font-weight: 600;">- AED 12,000</td>
+            <td><span class="status-badge complete">Cleared</span></td>
+          </tr>
+          <tr>
+            <td>May 27, 2025</td>
+            <td>Employee salaries - Monthly payroll (8 staff)</td>
+            <td>Payroll</td>
+            <td style="color: #ef4444; font-weight: 600;">- AED 38,400</td>
+            <td><span class="status-badge complete">Cleared</span></td>
+          </tr>
+          <tr>
+            <td>May 26, 2025</td>
+            <td>Utilities - DEWA electricity & water</td>
+            <td>Utilities</td>
+            <td style="color: #ef4444; font-weight: 600;">- AED 3,200</td>
+            <td><span class="status-badge complete">Cleared</span></td>
+          </tr>
+          <tr>
+            <td>May 25, 2025</td>
+            <td>Invoice #INV-2025-0846 - Partial payment received</td>
+            <td>Revenue</td>
+            <td style="color: #22c55e; font-weight: 600;">+ AED 18,750</td>
+            <td><span class="status-badge pending">Pending Reconciliation</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TAB 2: OPERATIONS -->
+    <div id="operations" class="tab-content">
+      <div class="section-title">Invoice Management & Collection Status</div>
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="label">Outstanding Invoices</div>
+          <div class="value">12</div>
+          <div class="subtext">Total value: AED 184,500</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Average Days Outstanding</div>
+          <div class="value">32 days</div>
+          <div class="subtext">↑ 5 days from last month</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Collection Rate (YTD)</div>
+          <div class="value">94.2%</div>
+          <div class="subtext">UAE average: 78%</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">At-Risk Amount</div>
+          <div class="value">AED 42,000</div>
+          <div class="subtext">Overdue >30 days</div>
+        </div>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Invoice #</th>
+            <th>Client</th>
+            <th>Issued</th>
+            <th>Amount</th>
+            <th>Days Outstanding</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>INV-2025-0847</td>
+            <td>Global Trade Partners LLC</td>
+            <td>May 20, 2025</td>
+            <td>AED 45,200</td>
+            <td>10 days</td>
+            <td><span class="status-badge complete">Paid</span></td>
+          </tr>
+          <tr>
+            <td>INV-2025-0846</td>
+            <td>Emirates Distribution Co</td>
+            <td>May 15, 2025</td>
+            <td>AED 38,500</td>
+            <td>15 days</td>
+            <td><span class="status-badge complete">Paid (Partial)</span></td>
+          </tr>
+          <tr>
+            <td>INV-2025-0845</td>
+            <td>Al Mansouri Trading</td>
+            <td>May 8, 2025</td>
+            <td>AED 52,000</td>
+            <td>22 days</td>
+            <td><span class="status-badge pending">Due Soon</span></td>
+          </tr>
+          <tr>
+            <td>INV-2025-0843</td>
+            <td>Gulf Express Logistics</td>
+            <td>April 20, 2025</td>
+            <td>AED 28,500</td>
+            <td>41 days</td>
+            <td><span class="status-badge alert">OVERDUE</span></td>
+          </tr>
+          <tr>
+            <td>INV-2025-0841</td>
+            <td>Strategic Partners FZ-LLC</td>
+            <td>April 15, 2025</td>
+            <td>AED 13,500</td>
+            <td>46 days</td>
+            <td><span class="status-badge alert">OVERDUE - Escalate</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="section-title">Employee & Payroll Overview</div>
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="label">Active Employees</div>
+          <div class="value">8</div>
+          <div class="subtext">2 full-time managers, 6 operations</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Monthly Payroll</div>
+          <div class="value">AED 38,400</div>
+          <div class="subtext">Avg salary: AED 4,800</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">WPS Status</div>
+          <div class="value">100%</div>
+          <div class="subtext">All staff registered & updated</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Benefits Accrual</div>
+          <div class="value">AED 12,800</div>
+          <div class="subtext">End-of-service liability</div>
+        </div>
+      </div>
+
+      <div class="insight-box">
+        <strong>⚠️ Action Item:</strong> Two invoices are overdue >30 days. Ledgr recommends follow-up calls to Gulf Express Logistics (INV-0843) and Strategic Partners (INV-0841). We can automatically draft collection emails.
+      </div>
+    </div>
+
+    <!-- TAB 3: FINANCIALS -->
+    <div id="financials" class="tab-content">
+      <div class="section-title">Profit & Loss Statement (YTD: Jan 1 - May 31, 2025)</div>
+      
+      <div class="p-and-l">
+        <div class="p-and-l-row">
+          <span class="label"><strong>REVENUE</strong></span>
+          <span class="value"></span>
+        </div>
+        
+        <div class="p-and-l-row positive">
+          <span class="label">Sales Revenue (Invoiced)</span>
+          <span class="value">AED 1,422,500</span>
+        </div>
+        
+        <div class="p-and-l-row">
+          <span class="label"><strong>COST OF GOODS SOLD</strong></span>
+          <span class="value"></span>
+        </div>
+        
+        <div class="p-and-l-row negative">
+          <span class="label">Inventory / Direct Costs</span>
+          <span class="value">- AED 591,000</span>
+        </div>
+        
+        <div class="p-and-l-row">
+          <span class="label"><strong>GROSS PROFIT</strong></span>
+          <span class="value" style="color: #22c55e;">AED 831,500 (58.4%)</span>
+        </div>
+        
+        <div class="p-and-l-row">
+          <span class="label"><strong>OPERATING EXPENSES</strong></span>
+          <span class="value"></span>
+        </div>
+        
+        <div class="p-and-l-row negative">
+          <span class="label">Salary & Payroll (8 staff)</span>
+          <span class="value">- AED 192,000</span>
+        </div>
+        
+        <div class="p-and-l-row negative">
+          <span class="label">Rent & Facilities</span>
+          <span class="value">- AED 60,000</span>
+        </div>
+        
+        <div class="p-and-l-row negative">
+          <span class="label">Utilities & Maintenance</span>
+          <span class="value">- AED 16,200</span>
+        </div>
+        
+        <div class="p-and-l-row negative">
+          <span class="label">Marketing & Business Development</span>
+          <span class="value">- AED 24,500</span>
+        </div>
+        
+        <div class="p-and-l-row negative">
+          <span class="label">Professional Fees (Accounting, Legal)</span>
+          <span class="value">- AED 8,500</span>
+        </div>
+        
+        <div class="p-and-l-row negative">
+          <span class="label">Insurance & Permits</span>
+          <span class="value">- AED 12,000</span>
+        </div>
+        
+        <div class="p-and-l-row">
+          <span class="label"><strong>EBITDA</strong></span>
+          <span class="value" style="color: #22c55e;">AED 517,800 (36.4%)</span>
+        </div>
+        
+        <div class="p-and-l-row negative">
+          <span class="label">Depreciation (Equipment & Fixtures)</span>
+          <span class="value">- AED 6,800</span>
+        </div>
+        
+        <div class="p-and-l-row">
+          <span class="label"><strong>OPERATING PROFIT (EBIT)</strong></span>
+          <span class="value" style="color: #22c55e;">AED 511,000 (35.9%)</span>
+        </div>
+        
+        <div class="p-and-l-row">
+          <span class="label"><strong>FINANCING & TAXES</strong></span>
+          <span class="value"></span>
+        </div>
+        
+        <div class="p-and-l-row negative">
+          <span class="label">Interest Expense (Bank Facility)</span>
+          <span class="value">- AED 8,500</span>
+        </div>
+        
+        <div class="p-and-l-row">
+          <span class="label"><strong>PROFIT BEFORE TAX</strong></span>
+          <span class="value" style="color: #22c55e;">AED 502,500 (35.3%)</span>
+        </div>
+        
+        <div class="p-and-l-row total positive">
+          <span class="label"><strong>NET PROFIT (after Corp Tax 0%)*</strong></span>
+          <span class="value">AED 502,500</span>
+        </div>
+      </div>
+      
+      <div style="font-size: 12px; color: #999999; margin-top: 10px;">
+        * As FZ-LLC in Free Zone, corporate tax rate is 0% on profits. Standard rate in UAE mainland is 0% on first AED 375,000 profit.
+      </div>
+
+      <div class="grid-2" style="margin-top: 40px;">
+        <div>
+          <div class="section-title">Cash Flow Forecast (Next 6 Months)</div>
+          <div class="p-and-l">
+            <div class="p-and-l-row">
+              <span class="label">Current Cash Position</span>
+              <span class="value">AED 156,850</span>
+            </div>
+            <div class="p-and-l-row positive">
+              <span class="label">Projected Inflows (June)</span>
+              <span class="value">+ AED 284,500</span>
+            </div>
+            <div class="p-and-l-row negative">
+              <span class="label">Projected Outflows (June)</span>
+              <span class="value">- AED 142,700</span>
+            </div>
+            <div class="p-and-l-row total positive">
+              <span class="label"><strong>June 30 Forecast</strong></span>
+              <span class="value">AED 298,650</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-title">Tax Planning (FY 2025)</div>
+          <div class="p-and-l">
+            <div class="p-and-l-row">
+              <span class="label">Corporate Income Tax</span>
+              <span class="value">AED 0</span>
+            </div>
+            <div class="p-and-l-row">
+              <span class="label">VAT Liability (5%)</span>
+              <span class="value">AED 71,125</span>
+            </div>
+            <div class="p-and-l-row alert">
+              <span class="label">Withholding Tax (if applicable)</span>
+              <span class="value">TBD</span>
+            </div>
+            <div class="p-and-l-row total">
+              <span class="label"><strong>Total Tax Liability (Est.)</strong></span>
+              <span class="value">AED 71,125</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-box">
+        <strong>📊 Analysis:</strong> Your business is highly profitable (35.3% net margin). Cash position is strong with 62 days of operating capital. Tax position is optimal as FZ-LLC. Key focus: Reduce outstanding invoice cycle from 32 days to <25 days to unlock additional AED 100k+ cash.
+      </div>
+    </div>
+
+    <!-- TAB 4: COMPLIANCE -->
+    <div id="compliance" class="tab-content">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="label">VAT Filing Status</div>
+          <div class="value">100%</div>
+          <div class="subtext">All returns filed on time</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Corporate Tax Deadline</div>
+          <div class="value">180 Days</div>
+          <div class="subtext">Filing deadline: Dec 31, 2025</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">WPS Compliance</div>
+          <div class="value">100%</div>
+          <div class="subtext">All 8 staff registered & current</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Document Audit Score</div>
+          <div class="value">94%</div>
+          <div class="subtext">Ledgr auto-classification</div>
+        </div>
+      </div>
+
+      <div class="section-title">VAT Returns (Monthly Schedule)</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Period</th>
+            <th>Filing Deadline</th>
+            <th>Status</th>
+            <th>Input VAT</th>
+            <th>Output VAT</th>
+            <th>Net Payable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>January 2025</td>
+            <td>Feb 15, 2025</td>
+            <td><span class="status-badge complete">Filed</span></td>
+            <td>AED 11,200</td>
+            <td>AED 14,500</td>
+            <td>AED 3,300</td>
+          </tr>
+          <tr>
+            <td>February 2025</td>
+            <td>Mar 15, 2025</td>
+            <td><span class="status-badge complete">Filed</span></td>
+            <td>AED 12,400</td>
+            <td>AED 15,200</td>
+            <td>AED 2,800</td>
+          </tr>
+          <tr>
+            <td>March 2025</td>
+            <td>Apr 15, 2025</td>
+            <td><span class="status-badge complete">Filed</span></td>
+            <td>AED 10,800</td>
+            <td>AED 14,800</td>
+            <td>AED 4,000</td>
+          </tr>
+          <tr>
+            <td>April 2025</td>
+            <td>May 15, 2025</td>
+            <td><span class="status-badge complete">Filed</span></td>
+            <td>AED 13,200</td>
+            <td>AED 16,100</td>
+            <td>AED 2,900</td>
+          </tr>
+          <tr>
+            <td>May 2025</td>
+            <td>Jun 15, 2025</td>
+            <td><span class="status-badge pending">Due in 15 days</span></td>
+            <td>AED 12,100</td>
+            <td>AED 15,625</td>
+            <td>AED 3,525</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="section-title">Documents Organization & Audit Trail</div>
+      <div class="insight-box">
+        <strong>✓ Ledgr automatically organizes:</strong> Invoices (issued & received), receipts, bank statements, payroll records, VAT certificates, insurance documents, and all compliance certificates. Every document is timestamped, tagged with transaction category, and linked to P&L accounts. Audit-ready in seconds.
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="label">Total Documents Indexed</div>
+          <div class="value">847</div>
+          <div class="subtext">YTD 2025</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Documents Auto-Categorized</div>
+          <div class="value">825</div>
+          <div class="subtext">97.4% accuracy rate</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Manual Review Needed</div>
+          <div class="value">22</div>
+          <div class="subtext">2.6% of total</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Audit Readiness</div>
+          <div class="value">100%</div>
+          <div class="subtext">Full compliance trail</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: TRANSPARENCY -->
+    <div id="transparency" class="tab-content">
+      <div style="background: linear-gradient(135deg, #ffdecc 0%, #ffe9ec 100%); border-left: 4px solid #FF5C00; padding: 30px; border-radius: 8px; margin-bottom: 30px;">
+        <h3 style="margin: 0 0 15px 0; font-size: 20px; color: #FF5C00;">Why Transparency Matters in UAE</h3>
+        <p style="margin: 0; color: #4a4a4a; line-height: 1.6;">
+          Ledgr believes business in the UAE requires complete financial honesty. Every transaction is recorded, categorized, and auditable in real-time. No hiding revenue. No delayed expense recording. No surprise tax liabilities. This trial shows you exactly what Ledgr reveals to you, to your accountants, and to tax authorities—because we believe transparency builds trust and protects your business.
+        </p>
+      </div>
+
+      <div class="section-title">What You See in Ledgr</div>
+
+      <div class="grid-2">
+        <div>
+          <h4 style="color: #FF5C00; margin-top: 0;">Real-Time Data</h4>
+          <ul style="color: #4a4a4a; line-height: 1.8;">
+            <li>✓ Every transaction recorded within 24 hours</li>
+            <li>✓ Bank reconciliation status visible</li>
+            <li>✓ Outstanding invoice aging reports</li>
+            <li>✓ Daily cash position forecasts</li>
+            <li>✓ YTD profit & loss, live updated</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color: #FF5C00; margin-top: 0;">Compliance Visibility</h4>
+          <ul style="color: #4a4a4a; line-height: 1.8;">
+            <li>✓ VAT liability calculated automatically</li>
+            <li>✓ Corporate tax position clear by month-end</li>
+            <li>✓ WPS payroll status integrated</li>
+            <li>✓ Withholding tax requirements flagged</li>
+            <li>✓ All documents audit-trail linked</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top: 40px;">Pricing Transparency</div>
+      <p style="color: #4a4a4a; font-size: 15px; margin-bottom: 20px;">
+        Ledgr pricing is simple. One flat fee per month, based on your business size. No hidden charges. No "per-transaction" fees. No surprise penalties.
+      </p>
+      
+      <div class="p-and-l">
+        <div class="p-and-l-row">
+          <span class="label"><strong>For Ahmed's E-Commerce Shop</strong></span>
+          <span class="value"></span>
+        </div>
+        <div class="p-and-l-row">
+          <span class="label">Monthly Ledgr Subscription</span>
+          <span class="value"><strong>AED 1,950/month</strong></span>
+        </div>
+        <div class="p-and-l-row">
+          <span class="label">Annual Cost</span>
+          <span class="value"><strong>AED 23,400/year</strong></span>
+        </div>
+        <div class="p-and-l-row" style="background: #f9f9f9;">
+          <span class="label" style="font-size: 13px; color: #999999;">Includes: All transactions, VAT reporting, payroll integration, document organization, audit readiness, tax planning, compliance calendar</span>
+          <span class="value"></span>
+        </div>
+      </div>
+
+      <div class="insight-box" style="background: linear-gradient(135deg, #e0e7ff 0%, #eef2ff 100%); border-left-color: #3730a3;">
+        <strong style="color: #3730a3;">💡 Cost Benefit:</strong> At your current revenue level (AED 1.4M+ annually), Ledgr saves you AED 18,000-22,000/year in manual accounting, spreadsheet errors, and compliance penalties. Plus: better cash position visibility = faster invoice collection and improved profit margins.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CTA Section -->
+  <div class="trial-container">
+    <div class="cta-section">
+      <h3>Ready to Transform Your Financial Control?</h3>
+      <p>This trial shows real data, real complexity, and real solutions. Your data is yours alone and deleted after 14 days.</p>
+      <button class="btn-signup" onclick="triggerSignup()">Create Your Live Account Now</button>
+      <p style="font-size: 12px; margin-top: 20px; opacity: 0.8;">No credit card required. Access your real data within 15 minutes of signup.</p>
+    </div>
+  </div>
+
+  <script>
+    function switchTab(tabName) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      
+      // Show selected tab
+      document.getElementById(tabName).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function initializeTrial() {
+      const trialStartDate = localStorage.getItem('ledgr_trial_start');
+      const today = new Date();
+      
+      if (!trialStartDate) {
+        localStorage.setItem('ledgr_trial_start', today.toISOString());
+        localStorage.setItem('ledgr_trial_viewed', 'true');
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 60000);
+    }
+
+    function updateCountdown() {
+      const trialStartDate = new Date(localStorage.getItem('ledgr_trial_start'));
+      const today = new Date();
+      const daysRemaining = 14 - Math.floor((today - trialStartDate) / (1000 * 60 * 60 * 24));
+      
+      const countdownDisplay = document.getElementById('countdown-display');
+      
+      if (daysRemaining > 3) {
+        countdownDisplay.textContent = `Your free trial is active: ${daysRemaining} days remaining`;
+        countdownDisplay.classList.remove('warning');
+      } else if (daysRemaining > 0) {
+        countdownDisplay.textContent = `⚠️ Your trial expires in ${daysRemaining} days. Create your account now to keep this data.`;
+        countdownDisplay.classList.add('warning');
+      } else {
+        countdownDisplay.textContent = `⚠️ Trial expired. Create an account to restore your data and continue.`;
+        countdownDisplay.classList.add('warning');
+      }
+    }
+
+    function triggerSignup() {
+      const trialDaysUsed = calculateDaysUsed();
+      localStorage.setItem('ledgr_conversion_attempt', 'true');
+      localStorage.setItem('ledgr_trial_days_used', trialDaysUsed);
+      localStorage.setItem('ledgr_trial_engaged', 'true');
+      
+      window.location.href = 'signup.html?source=trial&days_used=' + trialDaysUsed;
+    }
+
+    function calculateDaysUsed() {
+      const trialStartDate = new Date(localStorage.getItem('ledgr_trial_start'));
+      const today = new Date();
+      return Math.floor((today - trialStartDate) / (1000 * 60 * 60 * 24));
+    }
+
+    window.addEventListener('load', () => {
+      initializeTrial();
+    });
+
+    document.addEventListener('click', () => {
+      localStorage.setItem('ledgr_trial_engaged', 'true');
+    });
+  </script>
+</body>
+</html>

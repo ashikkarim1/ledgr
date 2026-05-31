@@ -1,0 +1,88 @@
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "Organization",
+    "LocalBusiness",
+    "FinancialService"
+  ],
+  "name": "Ledgr",
+  "alternateName": "Ledgr - UAE Accounting Reviews",
+  "url": "https://ledgr.ai",
+  "logo": "https://ledgr.ai/assets/logo.png",
+  "description": "Ledgr is an honest directory of UAE accountants and accounting firms. Read verified reviews from real businesses and discover trusted accounting partners.",
+  "foundingDate": "2024",
+  "founder": {
+    "@type": "Organization",
+    "name": "Upcapital Global FZCO",
+    "email": "ceo@theupcapital.com"
+  },
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "Upcapital Global FZCO",
+    "url": "https://theupcapital.com",
+    "email": "ceo@theupcapital.com"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "Customer Service",
+    "email": "ceo@theupcapital.com",
+    "availableLanguage": [
+      "en",
+      "ar"
+    ]
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "JAFZA",
+    "addressLocality": "Dubai",
+    "addressRegion": "Dubai",
+    "postalCode": "0",
+    "addressCountry": "AE"
+  },
+  "areaServed": [
+    {
+      "@type": "State",
+      "name": "Dubai"
+    },
+    {
+      "@type": "State",
+      "name": "Abu Dhabi"
+    },
+    {
+      "@type": "State",
+      "name": "Sharjah"
+    },
+    {
+      "@type": "State",
+      "name": "United Arab Emirates"
+    }
+  ],
+  "serviceType": [
+    "Accounting Review Platform",
+    "Accounting Firm Directory",
+    "Business Reviews",
+    "Financial Services Directory"
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/company/ledgr",
+    "https://twitter.com/ledgr",
+    "https://www.instagram.com/ledgr"
+  ],
+  "knowsAbout": [
+    "Accounting",
+    "UAE Accounting Firms",
+    "Business Reviews",
+    "Financial Services",
+    "Accounting Standards"
+  ],
+  "slogan": "The honest directory of UAE accountants",
+  "image": [
+    "https://ledgr.ai/assets/og-image.png",
+    "https://ledgr.ai/assets/hero-image.png"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "250"
+  }
+}

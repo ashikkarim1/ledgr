@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#FF5C00" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Feedback Dashboard — Ledgr</title>
+    <meta name="description" content="View and analyze user feedback submissions for Ledgr product enhancements." />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/tailwind-output.css" />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <style>
+      body {
+        background: var(--paper);
+      }
+
+      .dashboard-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 24px;
+      }
+
+      .dashboard-header {
+        margin-bottom: 40px;
+        border-bottom: 1px solid var(--ink-4);
+        padding-bottom: 24px;
+      }
+
+      .dashboard-header h1 {
+        font-size: 32px;
+        font-weight: 600;
+        color: var(--ink-1);
+        margin: 0 0 8px 0;
+      }
+
+      .dashboard-header p {
+        color: var(--ink-3);
+        margin: 0;
+      }
+
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+      }
+
+      .metric-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: var(--shadow-1);
+        border: 1px solid var(--ink-4);
+      }
+
+      .metric-card h3 {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--ink-3);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin: 0 0 8px 0;
+      }
+
+      .metric-card .value {
+        font-size: 28px;
+        font-weight: 600;
+        color: #FF5C00;
+      }
+
+      .metric-card .subtext {
+        font-size: 12px;
+        color: var(--ink-3);
+        margin-top: 8px;
+      }
+
+      .controls {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .controls input,
+      .controls select {
+        padding: 10px 14px;
+        border: 1px solid var(--ink-4);
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 14px;
+      }
+
+      .controls button {
+        padding: 10px 16px;
+        background: #FF5C00;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .controls button:hover {
+        background: #cc4a00;
+        box-shadow: var(--shadow-2);
+      }
+
+      .controls button.secondary {
+        background: white;
+        color: #FF5C00;
+        border: 1px solid #FF5C00;
+      }
+
+      .controls button.secondary:hover {
+        background: #fff5f0;
+      }
+
+      .feedback-list {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow-1);
+        border: 1px solid var(--ink-4);
+      }
+
+      .feedback-item {
+        border-bottom: 1px solid var(--ink-4);
+        padding: 20px;
+        transition: all 0.2s ease;
+      }
+
+      .feedback-item:last-child {
+        border-bottom: none;
+      }
+
+      .feedback-item:hover {
+        background: var(--paper);
+      }
+
+      .feedback-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .feedback-email {
+        font-weight: 500;
+        color: var(--ink-1);
+      }
+
+      .feedback-badges {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        background: var(--paper);
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--ink-2);
+      }
+
+      .badge.type {
+        background: #ffdecc;
+        color: #cc4a00;
+      }
+
+      .badge.rating {
+        background: #fff8f4;
+        color: #FF5C00;
+      }
+
+      .feedback-message {
+        color: var(--ink-2);
+        line-height: 1.6;
+        margin-bottom: 12px;
+        font-size: 14px;
+      }
+
+      .feedback-meta {
+        display: flex;
+        gap: 20px;
+        font-size: 12px;
+        color: var(--ink-3);
+        flex-wrap: wrap;
+      }
+
+      .feedback-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .feedback-actions button {
+        padding: 8px 12px;
+        font-size: 12px;
+        background: white;
+        color: #FF5C00;
+        border: 1px solid #FF5C00;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .feedback-actions button:hover {
+        background: #fff5f0;
+      }
+
+      .empty-state {
+        padding: 60px 24px;
+        text-align: center;
+        color: var(--ink-3);
+      }
+
+      .empty-state h3 {
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--ink-2);
+        margin-bottom: 8px;
+      }
+
+      .rating-stars {
+        color: #FF5C00;
+        letter-spacing: 2px;
+      }
+
+      @media (max-width: 600px) {
+        .dashboard-container {
+          padding: 24px 16px;
+        }
+
+        .dashboard-header h1 {
+          font-size: 24px;
+        }
+
+        .controls {
+          flex-direction: column;
+        }
+
+        .controls input,
+        .controls select,
+        .controls button {
+          width: 100%;
+        }
+
+        .feedback-header {
+          flex-direction: column;
+        }
+
+        .feedback-badges {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- Header -->
+      <div class="dashboard-header">
+        <h1>Feedback Dashboard</h1>
+        <p>Real-time insights from trial users</p>
+      </div>
+
+      <!-- Metrics -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <h3>Total Feedback</h3>
+          <div class="value" id="totalFeedback">0</div>
+          <div class="subtext">submissions</div>
+        </div>
+        <div class="metric-card">
+          <h3>Avg. Rating</h3>
+          <div class="value" id="avgRating">—</div>
+          <div class="subtext">/5.0 stars</div>
+        </div>
+        <div class="metric-card">
+          <h3>Most Common Type</h3>
+          <div class="value" id="commonType" style="font-size: 16px">—</div>
+          <div class="subtext" id="commonTypeCount"></div>
+        </div>
+        <div class="metric-card">
+          <h3>Unique Users</h3>
+          <div class="value" id="uniqueUsers">0</div>
+          <div class="subtext">emails</div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search feedback by email or message..."
+          style="flex: 1; min-width: 200px"
+        />
+        <select id="typeFilter">
+          <option value="">All Types</option>
+          <option value="Bug Report">🐛 Bug Report</option>
+          <option value="Feature Request">✨ Feature Request</option>
+          <option value="Enhancement Suggestion">💡 Enhancement Suggestion</option>
+          <option value="General Feedback">👍 General Feedback</option>
+        </select>
+        <select id="ratingFilter">
+          <option value="">All Ratings</option>
+          <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+          <option value="4">⭐⭐⭐⭐ (4)</option>
+          <option value="3">⭐⭐⭐ (3)</option>
+          <option value="2">⭐⭐ (2)</option>
+          <option value="1">⭐ (1)</option>
+        </select>
+        <button id="exportBtn">📥 Export CSV</button>
+        <button class="secondary" id="refreshBtn">🔄 Refresh</button>
+      </div>
+
+      <!-- Feedback List -->
+      <div class="feedback-list" id="feedbackList">
+        <div class="empty-state">
+          <h3>No feedback yet</h3>
+          <p>Feedback from trial users will appear here.</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const STORAGE_KEY = 'ledgr_feedback_submissions';
+
+      // Load and display feedback
+      function loadFeedback() {
+        const feedback = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        renderFeedback(feedback);
+        updateMetrics(feedback);
+      }
+
+      // Render feedback items
+      function renderFeedback(feedbackList) {
+        const container = document.getElementById('feedbackList');
+
+        if (feedbackList.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <h3>No feedback yet</h3>
+              <p>Feedback from trial users will appear here.</p>
+            </div>
+          `;
+          return;
+        }
+
+        // Apply filters
+        const typeFilter = document.getElementById('typeFilter').value;
+        const ratingFilter = document.getElementById('ratingFilter').value;
+        const searchInput = document.getElementById('searchInput').value.toLowerCase();
+
+        const filtered = feedbackList.filter(fb => {
+          const typeMatch = !typeFilter || fb.type === typeFilter;
+          const ratingMatch = !ratingFilter || fb.rating === parseInt(ratingFilter);
+          const searchMatch = !searchInput || 
+            fb.email.toLowerCase().includes(searchInput) || 
+            fb.message.toLowerCase().includes(searchInput);
+          return typeMatch && ratingMatch && searchMatch;
+        });
+
+        if (filtered.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <h3>No feedback matches filters</h3>
+              <p>Try adjusting your search criteria.</p>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = filtered.map(fb => {
+          const date = new Date(fb.timestamp).toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+
+          return `
+            <div class="feedback-item">
+              <div class="feedback-header">
+                <span class="feedback-email">${escapeHtml(fb.email)}</span>
+                <div class="feedback-badges">
+                  <span class="badge type">${escapeHtml(fb.type)}</span>
+                  <span class="badge rating">
+                    <span class="rating-stars">${'★'.repeat(fb.rating)}${'☆'.repeat(5-fb.rating)}</span>
+                  </span>
+                </div>
+              </div>
+              <div class="feedback-message">${escapeHtml(fb.message)}</div>
+              <div class="feedback-meta">
+                <span>📅 ${date}</span>
+                <span>📄 ${escapeHtml(fb.page || 'unknown')}</span>
+              </div>
+              <div class="feedback-actions">
+                <button onclick="copyEmail('${fb.email}')">📋 Copy Email</button>
+                <button onclick="deleteFeedback('${fb.id}')">🗑️ Delete</button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Update metrics
+      function updateMetrics(feedbackList) {
+        if (feedbackList.length === 0) {
+          document.getElementById('totalFeedback').textContent = '0';
+          document.getElementById('avgRating').textContent = '—';
+          document.getElementById('commonType').textContent = '—';
+          document.getElementById('uniqueUsers').textContent = '0';
+          return;
+        }
+
+        // Total feedback
+        document.getElementById('totalFeedback').textContent = feedbackList.length;
+
+        // Average rating
+        const avgRating = (feedbackList.reduce((sum, fb) => sum + fb.rating, 0) / feedbackList.length).toFixed(1);
+        document.getElementById('avgRating').textContent = avgRating;
+
+        // Most common type
+        const typeCounts = {};
+        feedbackList.forEach(fb => {
+          typeCounts[fb.type] = (typeCounts[fb.type] || 0) + 1;
+        });
+        const commonType = Object.entries(typeCounts).sort((a, b) => b[1] - a[1])[0];
+        document.getElementById('commonType').textContent = commonType[0].split(' ')[0];
+        document.getElementById('commonTypeCount').textContent = `${commonType[1]} submissions`;
+
+        // Unique users
+        const uniqueEmails = new Set(feedbackList.map(fb => fb.email)).size;
+        document.getElementById('uniqueUsers').textContent = uniqueEmails;
+      }
+
+      // Delete feedback
+      function deleteFeedback(id) {
+        if (!confirm('Delete this feedback item?')) return;
+
+        let feedback = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        feedback = feedback.filter(fb => fb.id !== id);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(feedback));
+
+        loadFeedback();
+      }
+
+      // Copy email to clipboard
+      function copyEmail(email) {
+        navigator.clipboard.writeText(email);
+        alert('Email copied: ' + email);
+      }
+
+      // Escape HTML
+      function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      // Export to CSV
+      function exportToCSV() {
+        const feedback = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        if (feedback.length === 0) {
+          alert('No feedback to export');
+          return;
+        }
+
+        const headers = ['ID', 'Email', 'Type', 'Rating', 'Message', 'Page', 'Timestamp'];
+        const rows = feedback.map(fb => [
+          fb.id,
+          fb.email,
+          fb.type,
+          fb.rating,
+          '"' + fb.message.replace(/"/g, '""') + '"',
+          fb.page,
+          fb.timestamp
+        ]);
+
+        const csv = [headers, ...rows].map(row => row.join(',')).join('\n');
+
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `ledgr-feedback-${new Date().toISOString().split('T')[0]}.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      // Event listeners
+      document.getElementById('typeFilter').addEventListener('change', loadFeedback);
+      document.getElementById('ratingFilter').addEventListener('change', loadFeedback);
+      document.getElementById('searchInput').addEventListener('input', loadFeedback);
+      document.getElementById('exportBtn').addEventListener('click', exportToCSV);
+      document.getElementById('refreshBtn').addEventListener('click', loadFeedback);
+
+      // Initial load
+      loadFeedback();
+      setInterval(loadFeedback, 5000); // Auto-refresh every 5 seconds
+    </script>
+  </body>
+</html>

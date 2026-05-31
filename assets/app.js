@@ -487,6 +487,16 @@ const AuthModule = (() => {
     onScroll();
   }
 
+  /* ---------- Dashboard header scroll effect ---------- */
+  const dashboardHeader = document.querySelector(".dashboard__header");
+  if (dashboardHeader) {
+    const onScroll = () => {
+      dashboardHeader.classList.toggle("is-scrolled", window.scrollY > 8);
+    };
+    document.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
   /* ---------- Active navigation highlight ---------- */
   const setActiveNav = () => {
     const navLinks = document.querySelectorAll('.nav__links a');
@@ -1760,5 +1770,1545 @@ const StepProgressSync = (() => {
     syncProgressOnStepChange,
     updateProgressRail,
     updateStepIndicators,
+  };
+})();
+
+/* ============================================================
+   DASHBOARD MODULE
+   Live metrics, 90-day forecast chart, agent activity feed,
+   compliance status, bank reconciliation
+   ============================================================ */
+const DashboardModule = (() => {
+  let financialData = null;
+  let forecastChart = null;
+  const activityAgents = ['Capture', 'VAT', 'Payroll', 'Revenue'];
+  let activityUpdateInterval = null;
+
+  /**
+   * Load financial data from JSON file
+   */
+  async function loadFinancialData() {
+    try {
+      const response = await fetch('/demo-data/financial-dataset.json');
+      if (!response.ok) throw new Error('Failed to load financial data');
+      financialData = await response.json();
+      console.log('[Dashboard] Financial data loaded:', financialData);
+      return financialData;
+    } catch (error) {
+      console.error('[Dashboard] Error loading financial data:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Update metric card values from financial data
+   */
+  function updateMetrics() {
+    if (!financialData) return;
+
+    const metrics = {
+      cash: financialData.cash.onHand,
+      vat: financialData.vat.amountDue,
+      tax: financialData.tax.ctEstimate,
+      payroll: 14.2, // runway months
+    };
+
+    Object.entries(metrics).forEach(([key, value]) => {
+      const el = document.querySelector(`[data-metric="${key}"]`);
+      if (el) {
+        const displayValue = typeof value === 'number' 
+          ? value.toLocaleString('en-AE', { minimumFractionDigits: 0, maximumFractionDigits: 1 })
+          : value;
+        el.textContent = displayValue;
+      }
+    });
+
+    console.log('[Dashboard] Metrics updated');
+  }
+
+  /**
+   * Draw 90-day cash forecast chart with Canvas
+   */
+  function drawForecastChart() {
+    if (!financialData) return;
+
+    const canvas = document.getElementById('forecast-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    
+    // Set canvas size
+    const container = canvas.parentElement;
+    const width = container.offsetWidth;
+    const height = container.offsetHeight;
+    
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    
+    ctx.scale(dpr, dpr);
+
+    const data = financialData.cash.forecastNext90Days;
+    const padding = { top: 40, right: 40, bottom: 40, left: 60 };
+    const chartWidth = width - padding.left - padding.right;
+    const chartHeight = height - padding.top - padding.bottom;
+
+    // Calculate data range
+    const minVal = Math.min(...data);
+    const maxVal = Math.max(...data);
+    const range = maxVal - minVal;
+    const yMin = Math.floor((minVal - range * 0.1) / 10000) * 10000;
+    const yMax = Math.ceil((maxVal + range * 0.1) / 10000) * 10000;
+
+    // Draw background grid
+    ctx.strokeStyle = '#e0e0e0';
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i <= 4; i++) {
+      const y = padding.top + (chartHeight / 4) * i;
+      ctx.beginPath();
+      ctx.moveTo(padding.left, y);
+      ctx.lineTo(width - padding.right, y);
+      ctx.stroke();
+    }
+
+    // Draw axes
+    ctx.strokeStyle = '#191919';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(padding.left, padding.top);
+    ctx.lineTo(padding.left, height - padding.bottom);
+    ctx.lineTo(width - padding.right, height - padding.bottom);
+    ctx.stroke();
+
+    // Draw chart area (fill)
+    ctx.fillStyle = 'rgba(255, 92, 0, 0.08)';
+    ctx.beginPath();
+    ctx.moveTo(padding.left, height - padding.bottom);
+
+    data.forEach((val, idx) => {
+      const x = padding.left + (chartWidth / (data.length - 1)) * idx;
+      const y = height - padding.bottom - ((val - yMin) / (yMax - yMin)) * chartHeight;
+      if (idx === 0) {
+        ctx.lineTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    });
+
+    ctx.lineTo(width - padding.right, height - padding.bottom);
+    ctx.closePath();
+    ctx.fill();
+
+    // Draw chart line
+    ctx.strokeStyle = '#FF5C00';
+    ctx.lineWidth = 2.5;
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+
+    data.forEach((val, idx) => {
+      const x = padding.left + (chartWidth / (data.length - 1)) * idx;
+      const y = height - padding.bottom - ((val - yMin) / (yMax - yMin)) * chartHeight;
+      if (idx === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    });
+
+    ctx.stroke();
+
+    // Draw safety threshold line (90-day runway)
+    const safetyThreshold = financialData.payroll.monthlyPayroll * 3;
+    const thresholdY = height - padding.bottom - ((safetyThreshold - yMin) / (yMax - yMin)) * chartHeight;
+    ctx.strokeStyle = '#d9d9d9';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(padding.left, thresholdY);
+    ctx.lineTo(width - padding.right, thresholdY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Draw axis labels
+    ctx.fillStyle = '#4a4a4a';
+    ctx.font = '12px Inter, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+
+    for (let i = 0; i <= 4; i++) {
+      const val = yMin + ((yMax - yMin) / 4) * i;
+      const y = padding.top + (chartHeight / 4) * i;
+      ctx.fillText(`${Math.round(val / 1000)}k`, padding.left - 12, y);
+    }
+
+    // Draw x-axis day markers
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    [0, Math.floor(data.length / 3), Math.floor((data.length * 2) / 3), data.length - 1].forEach((idx) => {
+      if (idx >= 0 && idx < data.length) {
+        const x = padding.left + (chartWidth / (data.length - 1)) * idx;
+        const day = idx + 1;
+        ctx.fillText(`Day ${day}`, x, height - padding.bottom + 12);
+      }
+    });
+
+    console.log('[Dashboard] Forecast chart drawn');
+  }
+
+  /**
+   * Generate realistic agent activity entries
+   */
+  function generateAgentActivity() {
+    const activities = [
+      {
+        agent: 'Capture',
+        icon: '📄',
+        description: 'Processed 4 transactions in last hour',
+        time: '5m ago',
+      },
+      {
+        agent: 'VAT',
+        icon: '✓',
+        description: 'Filed Q2 return 11 days early',
+        time: '2d ago',
+      },
+      {
+        agent: 'Payroll',
+        icon: '💼',
+        description: 'Automated WPS filing to EOSB',
+        time: '16-May',
+      },
+      {
+        agent: 'Revenue',
+        icon: '💰',
+        description: 'E-invoiced 42k AED via Peppol',
+        time: '18-May',
+      },
+    ];
+
+    return activities[Math.floor(Math.random() * activities.length)];
+  }
+
+  /**
+   * Update agent activity feed with rotating entries
+   */
+  function updateActivityFeed() {
+    const feed = document.getElementById('agent-activity');
+    if (!feed) return;
+
+    const activity = generateAgentActivity();
+    const item = document.createElement('div');
+    item.className = 'activity-item';
+    
+    const agentType = activity.agent.toLowerCase().replace(/\s+/g, '');
+    item.innerHTML = `
+      <div class="activity-icon ${agentType}">${activity.icon}</div>
+      <div class="activity-text">
+        <span class="activity-agent">${activity.agent} Agent</span>
+        <div class="activity-description">${activity.description}</div>
+      </div>
+      <span class="activity-time">${activity.time}</span>
+    `;
+
+    feed.insertBefore(item, feed.firstChild);
+
+    // Keep only 4 most recent activities
+    while (feed.children.length > 4) {
+      feed.removeChild(feed.lastChild);
+    }
+
+    console.log('[Dashboard] Activity feed updated');
+  }
+
+  /**
+   * Initialize agent activity update loop
+   */
+  function startActivityUpdates() {
+    updateActivityFeed();
+    
+    if (activityUpdateInterval) clearInterval(activityUpdateInterval);
+    
+    activityUpdateInterval = setInterval(() => {
+      updateActivityFeed();
+    }, Math.random() * 5000 + 10000); // 10-15 second intervals
+
+    console.log('[Dashboard] Activity update loop started');
+  }
+
+  /**
+   * Initialize dashboard tabs functionality
+   */
+  function initTabs() {
+    const tabs = document.querySelectorAll('.dashboard-tab');
+    const panels = document.querySelectorAll('.dashboard-panel');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const tabName = tab.getAttribute('data-tab');
+
+        // Update tabs
+        tabs.forEach((t) => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        // Update panels
+        panels.forEach((panel) => {
+          panel.classList.remove('active');
+        });
+        const activePanel = document.getElementById(`${tabName}-panel`);
+        if (activePanel) {
+          activePanel.classList.add('active');
+        }
+
+        // Redraw chart if switching to dashboard tab
+        if (tabName === 'dashboard') {
+          setTimeout(drawForecastChart, 100);
+        }
+
+        console.log(`[Dashboard] Tab switched to: ${tabName}`);
+      });
+    });
+  }
+
+  /**
+   * Initialize period button functionality on forecast chart
+   */
+  function initForecastPeriods() {
+    const buttons = document.querySelectorAll('.forecast-btn');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        buttons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const period = btn.getAttribute('data-period');
+        console.log(`[Dashboard] Forecast period changed to: ${period} days`);
+        // In production, would reload data for different period
+      });
+    });
+  }
+
+  /**
+   * Animate metric cards on scroll
+   */
+  function initMetricAnimations() {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.metric-card').forEach((el) => {
+        el.classList.add('is-in');
+      });
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('.metric-card, .forecast-card, .reconciliation-card, .activity-feed-card, .compliance-lights').forEach((el) => {
+      io.observe(el);
+    });
+  }
+
+  /**
+   * Initialize responsive chart resizing
+   */
+  function initChartResize() {
+    let resizeTimeout;
+
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        if (document.querySelector('.dashboard-panel.active')) {
+          drawForecastChart();
+        }
+      }, 250);
+    });
+  }
+
+  /**
+   * Main initialization function
+   */
+  async function init() {
+    console.log('[Dashboard] Initializing module...');
+
+    // Load data
+    const data = await loadFinancialData();
+    if (!data) {
+      console.error('[Dashboard] Failed to load financial data, stopping initialization');
+      return;
+    }
+
+    // Update metrics
+    updateMetrics();
+
+    // Draw chart
+    setTimeout(drawForecastChart, 200);
+
+    // Start activity updates
+    startActivityUpdates();
+
+    // Initialize interactions
+    initTabs();
+    initForecastPeriods();
+    initMetricAnimations();
+    initChartResize();
+
+    console.log('[Dashboard] Module initialized successfully');
+  }
+
+  // Auto-initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    setTimeout(init, 0);
+  }
+
+  // Expose public API
+  return {
+    init,
+    updateMetrics,
+    drawForecastChart,
+    updateActivityFeed,
+    startActivityUpdates,
+  };
+})();
+
+
+/**
+ * ============================================================
+ * Feedback System Module
+ * ============================================================
+ * Handles user feedback collection, GA4 event tracking,
+ * localStorage persistence, and feedback dashboard
+ */
+
+const FeedbackSystem = (() => {
+  // Configuration
+  const STORAGE_KEY = 'ledgr_feedback_submissions';
+  const FEEDBACK_TYPES = [
+    'Bug Report',
+    'Feature Request',
+    'Enhancement Suggestion',
+    'General Feedback'
+  ];
+
+  // Initialize feedback system
+  function init() {
+    createFeedbackButton();
+    createFeedbackModal();
+    attachEventListeners();
+    console.log('[Feedback] System initialized');
+  }
+
+  // Create floating feedback button
+  function createFeedbackButton() {
+    if (document.querySelector('.feedback-button')) return;
+
+    const button = document.createElement('button');
+    button.className = 'feedback-button';
+    button.textContent = '💬';
+    button.title = 'Send Feedback';
+    button.setAttribute('aria-label', 'Send feedback');
+
+    document.body.appendChild(button);
+  }
+
+  // Create feedback modal structure
+  function createFeedbackModal() {
+    if (document.querySelector('.feedback-modal-overlay')) return;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'feedback-modal-overlay';
+    overlay.id = 'feedbackModalOverlay';
+
+    overlay.innerHTML = `
+      <div class="feedback-modal">
+        <div class="feedback-modal-header">
+          <h2>Send us your feedback</h2>
+          <button class="feedback-modal-close" aria-label="Close feedback modal">&times;</button>
+        </div>
+        <form class="feedback-form" id="feedbackForm">
+          <div class="feedback-success" id="feedbackSuccess">
+            ✓ Thank you! Your feedback helps us improve Ledgr.
+          </div>
+
+          <div class="feedback-form-group">
+            <label for="feedbackEmail">Email</label>
+            <input
+              type="email"
+              id="feedbackEmail"
+              name="email"
+              placeholder="your@email.com"
+              required
+            />
+            <span class="feedback-form-error" id="emailError"></span>
+          </div>
+
+          <div class="feedback-form-group">
+            <label for="feedbackType">Feedback Type</label>
+            <select id="feedbackType" name="type" required>
+              <option value="">Select type...</option>
+              <option value="Bug Report">🐛 Bug Report</option>
+              <option value="Feature Request">✨ Feature Request</option>
+              <option value="Enhancement Suggestion">💡 Enhancement Suggestion</option>
+              <option value="General Feedback">👍 General Feedback</option>
+            </select>
+            <span class="feedback-form-error" id="typeError"></span>
+          </div>
+
+          <div class="feedback-form-group">
+            <label>Satisfaction Rating</label>
+            <div class="feedback-rating">
+              <button type="button" class="feedback-star" data-rating="1" title="Poor">★</button>
+              <button type="button" class="feedback-star" data-rating="2" title="Fair">★</button>
+              <button type="button" class="feedback-star" data-rating="3" title="Good">★</button>
+              <button type="button" class="feedback-star" data-rating="4" title="Very Good">★</button>
+              <button type="button" class="feedback-star" data-rating="5" title="Excellent">★</button>
+              <span class="feedback-rating-value" id="ratingValue">-</span>
+            </div>
+            <input type="hidden" id="feedbackRating" name="rating" value="0" />
+            <span class="feedback-form-error" id="ratingError"></span>
+          </div>
+
+          <div class="feedback-form-group">
+            <label for="feedbackMessage">Message</label>
+            <textarea
+              id="feedbackMessage"
+              name="message"
+              placeholder="Tell us what you think... (min 10 characters)"
+              required
+            ></textarea>
+            <span class="feedback-form-error" id="messageError"></span>
+          </div>
+
+          <button type="submit" class="feedback-form-submit">Send Feedback</button>
+        </form>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+  }
+
+  // Attach event listeners
+  function attachEventListeners() {
+    // Open modal
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.feedback-button')) {
+        openModal();
+      }
+    });
+
+    // Close modal
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.feedback-modal-close') || e.target.id === 'feedbackModalOverlay') {
+        closeModal();
+      }
+    });
+
+    // Star rating
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.feedback-star')) {
+        e.preventDefault();
+        const rating = e.target.getAttribute('data-rating');
+        selectRating(parseInt(rating));
+      }
+    });
+
+    // Form submission
+    const form = document.getElementById('feedbackForm');
+    if (form) {
+      form.addEventListener('submit', handleFormSubmit);
+    }
+
+    // Escape key to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.getElementById('feedbackModalOverlay').classList.contains('active')) {
+        closeModal();
+      }
+    });
+  }
+
+  // Open modal
+  function openModal() {
+    const overlay = document.getElementById('feedbackModalOverlay');
+    if (overlay) {
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('feedbackEmail').focus();
+    }
+  }
+
+  // Close modal
+  function closeModal() {
+    const overlay = document.getElementById('feedbackModalOverlay');
+    if (overlay) {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      resetForm();
+    }
+  }
+
+  // Select star rating
+  function selectRating(rating) {
+    document.getElementById('feedbackRating').value = rating;
+    document.getElementById('ratingValue').textContent = rating + '/5';
+
+    document.querySelectorAll('.feedback-star').forEach((star) => {
+      const starRating = parseInt(star.getAttribute('data-rating'));
+      if (starRating <= rating) {
+        star.classList.add('active');
+      } else {
+        star.classList.remove('active');
+      }
+    });
+
+    clearError('ratingError');
+  }
+
+  // Validate form
+  function validateForm() {
+    let isValid = true;
+
+    // Email validation
+    const email = document.getElementById('feedbackEmail').value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      showError('emailError', 'Email is required');
+      isValid = false;
+    } else if (!emailRegex.test(email)) {
+      showError('emailError', 'Please enter a valid email');
+      isValid = false;
+    } else {
+      clearError('emailError');
+    }
+
+    // Type validation
+    const type = document.getElementById('feedbackType').value;
+    if (!type) {
+      showError('typeError', 'Please select a feedback type');
+      isValid = false;
+    } else {
+      clearError('typeError');
+    }
+
+    // Rating validation
+    const rating = document.getElementById('feedbackRating').value;
+    if (!rating || rating === '0') {
+      showError('ratingError', 'Please select a satisfaction rating');
+      isValid = false;
+    } else {
+      clearError('ratingError');
+    }
+
+    // Message validation
+    const message = document.getElementById('feedbackMessage').value.trim();
+    if (!message) {
+      showError('messageError', 'Please share your feedback');
+      isValid = false;
+    } else if (message.length < 10) {
+      showError('messageError', 'Please provide at least 10 characters');
+      isValid = false;
+    } else {
+      clearError('messageError');
+    }
+
+    return isValid;
+  }
+
+  // Show form error
+  function showError(errorId, message) {
+    const errorEl = document.getElementById(errorId);
+    if (errorEl) {
+      errorEl.textContent = message;
+      const group = errorEl.closest('.feedback-form-group');
+      if (group) group.classList.add('error');
+    }
+  }
+
+  // Clear form error
+  function clearError(errorId) {
+    const errorEl = document.getElementById(errorId);
+    if (errorEl) {
+      errorEl.textContent = '';
+      const group = errorEl.closest('.feedback-form-group');
+      if (group) group.classList.remove('error');
+    }
+  }
+
+  // Handle form submission
+  function handleFormSubmit(e) {
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
+    const email = document.getElementById('feedbackEmail').value.trim();
+    const type = document.getElementById('feedbackType').value;
+    const rating = parseInt(document.getElementById('feedbackRating').value);
+    const message = document.getElementById('feedbackMessage').value.trim();
+
+    const feedback = {
+      id: generateId(),
+      email,
+      type,
+      rating,
+      message,
+      page: window.location.pathname,
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent
+    };
+
+    // Save to localStorage
+    saveFeedback(feedback);
+
+    // Fire GA4 event
+    fireFeedbackEvent(feedback);
+
+    // Show success message
+    showSuccessMessage();
+
+    // Reset form after delay
+    setTimeout(() => {
+      closeModal();
+    }, 2000);
+  }
+
+  // Save feedback to localStorage
+  function saveFeedback(feedback) {
+    let submissions = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    submissions.push(feedback);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(submissions));
+
+    // Also save individual feedback by email
+    const emailKey = `ledgr_feedback_${feedback.email}`;
+    let userFeedback = JSON.parse(localStorage.getItem(emailKey) || '[]');
+    userFeedback.push(feedback);
+    localStorage.setItem(emailKey, JSON.stringify(userFeedback));
+
+    console.log('[Feedback] Saved:', feedback.id);
+  }
+
+  // Fire GA4 event
+  function fireFeedbackEvent(feedback) {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'user_feedback_submitted', {
+        'feedback_type': feedback.type,
+        'satisfaction_rating': feedback.rating,
+        'page_source': feedback.page,
+        'user_email': feedback.email
+      });
+      console.log('[Feedback] GA4 event fired');
+    }
+  }
+
+  // Show success message
+  function showSuccessMessage() {
+    const successEl = document.getElementById('feedbackSuccess');
+    if (successEl) {
+      successEl.classList.add('show');
+      setTimeout(() => {
+        successEl.classList.remove('show');
+      }, 4000);
+    }
+  }
+
+  // Reset form
+  function resetForm() {
+    const form = document.getElementById('feedbackForm');
+    if (form) {
+      form.reset();
+      document.getElementById('feedbackRating').value = '0';
+      document.getElementById('ratingValue').textContent = '-';
+      document.querySelectorAll('.feedback-star').forEach(star => star.classList.remove('active'));
+      clearError('emailError');
+      clearError('typeError');
+      clearError('ratingError');
+      clearError('messageError');
+    }
+  }
+
+  // Generate unique ID
+  function generateId() {
+    return 'fb_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  }
+
+  // Get all feedback (for dashboard)
+  function getAllFeedback() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  }
+
+  // Get feedback by email
+  function getFeedbackByEmail(email) {
+    return JSON.parse(localStorage.getItem(`ledgr_feedback_${email}`) || '[]');
+  }
+
+  // Delete feedback
+  function deleteFeedback(feedbackId) {
+    let submissions = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    submissions = submissions.filter(f => f.id !== feedbackId);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(submissions));
+  }
+
+  // Clear all feedback
+  function clearAllFeedback() {
+    if (confirm('Are you sure you want to clear all feedback? This cannot be undone.')) {
+      localStorage.setItem(STORAGE_KEY, '[]');
+      console.log('[Feedback] All feedback cleared');
+    }
+  }
+
+  // Auto-initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    setTimeout(init, 0);
+  }
+
+  // Expose public API
+  return {
+    init,
+    getAllFeedback,
+    getFeedbackByEmail,
+    deleteFeedback,
+    clearAllFeedback,
+    openModal,
+    closeModal
+  };
+})();
+
+
+/* ============================================================================
+   FEEDBACK INTELLIGENCE SYSTEM - Advanced Widget & Collection
+   ============================================================================ */
+
+const FeedbackIntelligence = (() => {
+  const STORAGE_KEY = 'ledgr_feedback_intelligence';
+  const TOTAL_QUESTIONS = 4;
+  let currentQuestion = 0;
+  let formData = {};
+  let isWidgetOpen = false;
+
+  // Context-aware question templates per page
+  const QUESTION_TEMPLATES = {
+    '/': {
+      // Homepage
+      context: 'Welcome to Ledgr',
+      questions: [
+        {
+          id: 'interest',
+          type: 'dropdown',
+          label: 'What interests you most about Ledgr?',
+          hint: 'Help us understand your priority',
+          options: [
+            'VAT compliance automation',
+            'Real-time reporting',
+            'Multi-currency support',
+            'AI-powered insights',
+            'Transparent pricing',
+            'Regulatory compliance',
+            "Don't know yet"
+          ]
+        }
+      ]
+    },
+    '/pricing.html': {
+      context: 'Exploring our pricing',
+      questions: [
+        {
+          id: 'pricing-clarity',
+          type: 'rating',
+          label: 'How clear is our pricing structure?',
+          hint: '1 = Confusing, 5 = Very Clear'
+        },
+        {
+          id: 'pricing-value',
+          type: 'dropdown',
+          label: 'What would make pricing even better?',
+          hint: 'Select the most important factor',
+          options: [
+            'Lower monthly cost',
+            'Pay-per-transaction option',
+            'Annual discount',
+            'Free trial',
+            'More features included',
+            'Transparent add-on pricing'
+          ]
+        }
+      ]
+    },
+    '/demo.html': {
+      context: 'Viewing our demo',
+      questions: [
+        {
+          id: 'demo-clarity',
+          type: 'rating',
+          label: 'How clear was the demo?',
+          hint: '1 = Confusing, 5 = Crystal Clear'
+        },
+        {
+          id: 'demo-features',
+          type: 'checkboxes',
+          label: 'Which features caught your interest?',
+          hint: 'Select all that apply',
+          options: [
+            'Real-time VAT tracking',
+            'Automated compliance updates',
+            'Multi-currency FX handling',
+            'Regulatory reporting',
+            'Financial dashboards',
+            'AI-powered insights'
+          ]
+        }
+      ]
+    },
+    '/reviews.html': {
+      context: 'Reading customer reviews',
+      questions: [
+        {
+          id: 'reviews-trust',
+          type: 'rating',
+          label: 'How much do these reviews influence your decision?',
+          hint: '1 = Not at all, 5 = Very much'
+        }
+      ]
+    },
+    '/calculator.html': {
+      context: 'Using our calculator',
+      questions: [
+        {
+          id: 'calculator-helpful',
+          type: 'rating',
+          label: 'Did the calculator help you understand your savings?',
+          hint: '1 = Not helpful, 5 = Very helpful'
+        }
+      ]
+    },
+    'default': {
+      context: 'Thank you for exploring Ledgr',
+      questions: [
+        {
+          id: 'overall-interest',
+          type: 'rating',
+          label: 'How interested are you in Ledgr?',
+          hint: '1 = Not interested, 5 = Very interested'
+        },
+        {
+          id: 'main-need',
+          type: 'dropdown',
+          label: 'What is your main business need?',
+          hint: 'Help us tailor our product',
+          options: [
+            'VAT compliance',
+            'Tax planning',
+            'Financial reporting',
+            'Multi-currency management',
+            'Regulatory compliance',
+            'Time savings',
+            'Cost reduction'
+          ]
+        }
+      ]
+    }
+  };
+
+  // Get context-aware questions for current page
+  function getContextualQuestions() {
+    const path = window.location.pathname;
+    const template = QUESTION_TEMPLATES[path] || QUESTION_TEMPLATES.default;
+    return template.questions;
+  }
+
+  // Initialize widget on page load
+  function init() {
+    createWidget();
+    attachEventListeners();
+    updateFeedbackCounter();
+  }
+
+  // Create the widget HTML structure
+  function createWidget() {
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'feedback-intelligence-toggle';
+    toggleBtn.id = 'feedback-toggle-btn';
+    toggleBtn.innerHTML = '💬';
+    toggleBtn.title = 'Share feedback to help us improve';
+    document.body.appendChild(toggleBtn);
+
+    const widget = document.createElement('div');
+    widget.className = 'feedback-intelligence-widget';
+    widget.id = 'feedback-widget';
+    widget.innerHTML = `
+      <div class="feedback-intelligence-content" id="feedback-content">
+        <!-- Form Section -->
+        <div id="feedback-form-container">
+          <div class="feedback-widget-header">
+            <h3 class="feedback-widget-title">Help Shape Ledgr</h3>
+            <p class="feedback-widget-subtitle">Your feedback directly shapes our roadmap</p>
+          </div>
+
+          <div class="feedback-progress-section">
+            <div class="feedback-progress-label">
+              <span>Progress</span>
+              <span id="progress-text">0 of 4</span>
+            </div>
+            <div class="feedback-progress-bar">
+              <div class="feedback-progress-fill" id="progress-fill"></div>
+            </div>
+          </div>
+
+          <div class="feedback-context-message" id="context-message">
+            Thank you for exploring Ledgr. Your insights help us build better.
+          </div>
+
+          <div class="feedback-social-proof">
+            <span class="feedback-social-proof-number" id="feedback-count">2,847</span> users have shared feedback. Join them →
+          </div>
+
+          <form class="feedback-form-section" id="feedback-form">
+            <!-- Questions will be injected here -->
+          </form>
+
+          <div class="feedback-form-actions">
+            <button type="button" class="feedback-btn feedback-btn-cancel" id="feedback-cancel-btn">Close</button>
+            <button type="submit" class="feedback-btn feedback-btn-submit" id="feedback-submit-btn" disabled>Next</button>
+          </div>
+        </div>
+
+        <!-- Success State -->
+        <div class="feedback-success-state" id="feedback-success-state">
+          <div class="feedback-success-icon">✓</div>
+          <h3 class="feedback-success-title">Thank you!</h3>
+          <p class="feedback-success-message">Your feedback is being analyzed and will directly influence our product decisions.</p>
+          <div class="feedback-success-cta">← Close & Continue Exploring</div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(widget);
+
+    // Render initial questions
+    renderQuestion(0);
+  }
+
+  // Render question at specific index
+  function renderQuestion(index) {
+    const questions = getContextualQuestions();
+    if (index >= questions.length) {
+      // All questions done, show submit button
+      document.getElementById('feedback-submit-btn').textContent = 'Submit Feedback';
+      document.getElementById('feedback-submit-btn').disabled = formData.notes ? false : true;
+      return;
+    }
+
+    const question = questions[index];
+    const form = document.getElementById('feedback-form');
+    
+    // Clear existing questions
+    form.innerHTML = '';
+    
+    // Add rating question for the final one (always include rating)
+    if (index === questions.length - 1 && !question.type.includes('rating')) {
+      form.innerHTML += renderQuestion_Rating('overall-satisfaction', 'Overall, how satisfied are you with Ledgr?', '1 = Not satisfied, 5 = Very satisfied');
+    }
+
+    // Render current question
+    form.innerHTML += renderQuestionHTML(question);
+
+    // Update progress
+    currentQuestion = index;
+    updateProgress();
+  }
+
+  // Render question HTML based on type
+  function renderQuestionHTML(question) {
+    switch (question.type) {
+      case 'rating':
+        return renderQuestion_Rating(question.id, question.label, question.hint);
+      case 'dropdown':
+        return renderQuestion_Dropdown(question.id, question.label, question.hint, question.options);
+      case 'checkboxes':
+        return renderQuestion_Checkboxes(question.id, question.label, question.hint, question.options);
+      case 'textarea':
+        return renderQuestion_Textarea(question.id, question.label, question.hint);
+      default:
+        return '';
+    }
+  }
+
+  function renderQuestion_Rating(id, label, hint) {
+    return `
+      <div class="feedback-question-item">
+        <label class="feedback-question-label">${label}</label>
+        <div class="feedback-question-hint">${hint}</div>
+        <div class="feedback-rating-scale" data-question="${id}">
+          ${[1, 2, 3, 4, 5].map(num => `<span class="feedback-star" data-value="${num}">★</span>`).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  function renderQuestion_Dropdown(id, label, hint, options) {
+    return `
+      <div class="feedback-question-item">
+        <label class="feedback-question-label">${label}</label>
+        <div class="feedback-question-hint">${hint}</div>
+        <select class="feedback-select" data-question="${id}" id="select-${id}">
+          <option value="">— Select an option —</option>
+          ${options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+        </select>
+      </div>
+    `;
+  }
+
+  function renderQuestion_Checkboxes(id, label, hint, options) {
+    return `
+      <div class="feedback-question-item">
+        <label class="feedback-question-label">${label}</label>
+        <div class="feedback-question-hint">${hint}</div>
+        <div class="feedback-checkbox-group" data-question="${id}">
+          ${options.map((opt, idx) => `
+            <label class="feedback-checkbox-item">
+              <input type="checkbox" class="feedback-checkbox-input" value="${opt}" data-checkbox-idx="${idx}">
+              <span class="feedback-checkbox-label">${opt}</span>
+            </label>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  function renderQuestion_Textarea(id, label, hint) {
+    return `
+      <div class="feedback-question-item">
+        <label class="feedback-question-label">${label}</label>
+        <div class="feedback-question-hint">${hint}</div>
+        <textarea class="feedback-textarea" data-question="${id}" id="textarea-${id}" placeholder="Share your thoughts... (min 10 characters)"></textarea>
+        <div class="feedback-char-count"><span id="char-count-${id}">0</span> / 500</div>
+      </div>
+    `;
+  }
+
+  // Update progress indicator
+  function updateProgress() {
+    const questions = getContextualQuestions();
+    const percentage = ((currentQuestion + 1) / (questions.length + 1)) * 100;
+    document.getElementById('progress-fill').style.width = percentage + '%';
+    document.getElementById('progress-text').textContent = `${currentQuestion + 1} of ${TOTAL_QUESTIONS}`;
+  }
+
+  // Attach all event listeners
+  function attachEventListeners() {
+    const toggleBtn = document.getElementById('feedback-toggle-btn');
+    const cancelBtn = document.getElementById('feedback-cancel-btn');
+    const submitBtn = document.getElementById('feedback-submit-btn');
+    const form = document.getElementById('feedback-form');
+
+    // Toggle widget open/close
+    toggleBtn.addEventListener('click', toggleWidget);
+    cancelBtn.addEventListener('click', closeWidget);
+
+    // Form submission
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      handleFormNavigation();
+    });
+
+    // Question type event listeners (delegated)
+    form.addEventListener('change', (e) => {
+      collectFormData(e.target);
+      updateSubmitButton();
+    });
+
+    // Textarea character counter
+    form.addEventListener('input', (e) => {
+      if (e.target.classList.contains('feedback-textarea')) {
+        const id = e.target.dataset.question;
+        const count = e.target.value.length;
+        const countEl = document.getElementById(`char-count-${id}`);
+        if (countEl) countEl.textContent = Math.min(count, 500);
+      }
+    });
+
+    // Success state CTA
+    const successCta = document.querySelector('.feedback-success-cta');
+    if (successCta) {
+      successCta.addEventListener('click', closeWidget);
+    }
+  }
+
+  // Toggle widget visibility
+  function toggleWidget() {
+    if (isWidgetOpen) {
+      closeWidget();
+    } else {
+      openWidget();
+    }
+  }
+
+  function openWidget() {
+    const widget = document.getElementById('feedback-widget');
+    const toggleBtn = document.getElementById('feedback-toggle-btn');
+    widget.classList.add('open');
+    toggleBtn.classList.add('open');
+    isWidgetOpen = true;
+  }
+
+  function closeWidget() {
+    const widget = document.getElementById('feedback-widget');
+    const toggleBtn = document.getElementById('feedback-toggle-btn');
+    widget.classList.remove('open');
+    toggleBtn.classList.remove('open');
+    isWidgetOpen = false;
+    // Reset form
+    resetForm();
+  }
+
+  // Collect form data from inputs
+  function collectFormData(target) {
+    const questionId = target.dataset.question;
+    
+    if (target.classList.contains('feedback-star')) {
+      // Rating
+      formData[questionId] = parseInt(target.dataset.value);
+      // Visual feedback
+      const stars = target.parentElement.querySelectorAll('.feedback-star');
+      stars.forEach((star, idx) => {
+        if (idx < parseInt(target.dataset.value)) {
+          star.classList.add('active');
+        } else {
+          star.classList.remove('active');
+        }
+      });
+    } else if (target.classList.contains('feedback-select')) {
+      // Dropdown
+      formData[questionId] = target.value;
+    } else if (target.classList.contains('feedback-checkbox-input')) {
+      // Checkboxes
+      if (!formData[questionId]) formData[questionId] = [];
+      if (target.checked) {
+        formData[questionId].push(target.value);
+      } else {
+        formData[questionId] = formData[questionId].filter(v => v !== target.value);
+      }
+    } else if (target.classList.contains('feedback-textarea')) {
+      // Textarea (limit to 500 chars)
+      formData[questionId] = target.value.substring(0, 500);
+      target.value = formData[questionId];
+    }
+  }
+
+  // Update submit button state
+  function updateSubmitButton() {
+    const btn = document.getElementById('feedback-submit-btn');
+    const questions = getContextualQuestions();
+    
+    // Check if current question is answered
+    const currentQ = questions[currentQuestion];
+    let isAnswered = false;
+    
+    if (currentQ) {
+      isAnswered = formData[currentQ.id] !== undefined && formData[currentQ.id] !== '';
+    } else {
+      // Final step - need notes
+      isAnswered = formData.notes && formData.notes.length >= 10;
+    }
+    
+    btn.disabled = !isAnswered;
+  }
+
+  // Handle form navigation (next/prev questions)
+  function handleFormNavigation() {
+    const questions = getContextualQuestions();
+    
+    // If on last question, submit feedback
+    if (currentQuestion >= questions.length - 1) {
+      submitFeedback();
+      return;
+    }
+
+    // Move to next question
+    currentQuestion++;
+    renderQuestion(currentQuestion);
+  }
+
+  // Submit feedback
+  function submitFeedback() {
+    const feedback = {
+      id: 'fb_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+      timestamp: new Date().toISOString(),
+      page: window.location.pathname,
+      url: window.location.href,
+      data: { ...formData },
+      metadata: {
+        userAgent: navigator.userAgent,
+        viewport: { width: window.innerWidth, height: window.innerHeight },
+        sessionId: getOrCreateSessionId()
+      }
+    };
+
+    // Save to localStorage
+    saveFeedback(feedback);
+
+    // Fire GA4 event
+    fireFeedbackEvent(feedback);
+
+    // Show success state
+    showSuccessState();
+  }
+
+  // Save feedback to localStorage
+  function saveFeedback(feedback) {
+    let allFeedback = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    allFeedback.push(feedback);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(allFeedback));
+
+    // Also save to indexed by session
+    const sessionId = feedback.metadata.sessionId;
+    const sessionKey = `${STORAGE_KEY}_session_${sessionId}`;
+    let sessionFeedback = JSON.parse(localStorage.getItem(sessionKey) || '[]');
+    sessionFeedback.push(feedback.id);
+    localStorage.setItem(sessionKey, JSON.stringify(sessionFeedback));
+  }
+
+  // Fire GA4 event
+  function fireFeedbackEvent(feedback) {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'user_feedback_submitted', {
+        'feedback_id': feedback.id,
+        'page_source': feedback.page,
+        'session_id': feedback.metadata.sessionId,
+        'rating': feedback.data['overall-satisfaction'] || 0,
+        'event_category': 'engagement'
+      });
+    }
+  }
+
+  // Show success state
+  function showSuccessState() {
+    const formContainer = document.getElementById('feedback-form-container');
+    const successState = document.getElementById('feedback-success-state');
+    formContainer.style.display = 'none';
+    successState.classList.add('show');
+    updateFeedbackCounter();
+  }
+
+  // Reset form to initial state
+  function resetForm() {
+    currentQuestion = 0;
+    formData = {};
+    const formContainer = document.getElementById('feedback-form-container');
+    const successState = document.getElementById('feedback-success-state');
+    formContainer.style.display = 'block';
+    successState.classList.remove('show');
+    renderQuestion(0);
+  }
+
+  // Update feedback counter display
+  function updateFeedbackCounter() {
+    const allFeedback = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    const count = allFeedback.length;
+    const displayCount = Math.max(2847 + count, 2847); // Start from 2,847
+    document.getElementById('feedback-count').textContent = displayCount.toLocaleString();
+  }
+
+  // Get or create session ID
+  function getOrCreateSessionId() {
+    let sessionId = sessionStorage.getItem('ledgr_session_id');
+    if (!sessionId) {
+      sessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      sessionStorage.setItem('ledgr_session_id', sessionId);
+    }
+    return sessionId;
+  }
+
+  // Public API
+  function getAllFeedback() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  }
+
+  function getFeedbackBySession(sessionId) {
+    const sessionKey = `${STORAGE_KEY}_session_${sessionId}`;
+    const feedbackIds = JSON.parse(localStorage.getItem(sessionKey) || '[]');
+    const allFeedback = getAllFeedback();
+    return allFeedback.filter(fb => feedbackIds.includes(fb.id));
+  }
+
+  function deleteFeedback(feedbackId) {
+    let allFeedback = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    allFeedback = allFeedback.filter(fb => fb.id !== feedbackId);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(allFeedback));
+  }
+
+  function clearAllFeedback() {
+    localStorage.removeItem(STORAGE_KEY);
+    // Clear all session keys
+    const keys = Object.keys(localStorage);
+    keys.forEach(key => {
+      if (key.startsWith(STORAGE_KEY + '_session_')) {
+        localStorage.removeItem(key);
+      }
+    });
+  }
+
+  // ===== PHASE 5: EMAIL DIGEST & NOTIFICATIONS =====
+
+  // Generate and store weekly email digest
+  function generateWeeklyDigest() {
+    const allFeedback = getAllFeedback();
+    const digest = FeedbackAnalyzer.generateEmailDigest(allFeedback, 7);
+    
+    // Store digest in localStorage with timestamp
+    const digests = JSON.parse(localStorage.getItem('ledgr_email_digests') || '[]');
+    digests.push({
+      id: 'digest_' + Date.now(),
+      timestamp: new Date().toISOString(),
+      weekOf: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+      subject: digest.subject,
+      html: digest.html,
+      sent: false
+    });
+    
+    localStorage.setItem('ledgr_email_digests', JSON.stringify(digests));
+    console.log('[Feedback] Weekly digest generated', digest.subject);
+    
+    return digest;
+  }
+
+  // Send digest via webhook or email service
+  function sendDigest(digestId, emailService) {
+    const digests = JSON.parse(localStorage.getItem('ledgr_email_digests') || '[]');
+    const digest = digests.find(d => d.id === digestId);
+    
+    if (!digest) {
+      console.error('Digest not found:', digestId);
+      return Promise.reject('Digest not found');
+    }
+
+    // Use webhooks to send
+    const webhooks = FeedbackAnalyzer.getWebhooks();
+    const emailWebhook = webhooks.find(w => w.events.includes('email_digest'));
+    
+    if (emailWebhook) {
+      return FeedbackAnalyzer.sendToWebhook(emailWebhook, {
+        type: 'email_digest',
+        subject: digest.subject,
+        html: digest.html,
+        recipientEmail: emailService || 'admin@ledgr.io'
+      }, 'email_digest').then(() => {
+        // Mark as sent
+        digest.sent = true;
+        digest.sentAt = new Date().toISOString();
+        localStorage.setItem('ledgr_email_digests', JSON.stringify(digests));
+        console.log('[Feedback] Digest sent:', digestId);
+        return { success: true, digestId };
+      });
+    }
+
+    return Promise.reject('No email webhook configured');
+  }
+
+  // Get all generated digests
+  function getDigests() {
+    return JSON.parse(localStorage.getItem('ledgr_email_digests') || '[]');
+  }
+
+  // Schedule weekly digest (called on init)
+  function scheduleWeeklyDigest() {
+    // Check if digest was already generated this week
+    const lastDigest = JSON.parse(localStorage.getItem('ledgr_last_digest_date') || 'null');
+    const today = new Date().toISOString().split('T')[0];
+    
+    if (lastDigest !== today) {
+      // Generate digest every Monday
+      const now = new Date();
+      if (now.getDay() === 1) { // Monday
+        generateWeeklyDigest();
+        localStorage.setItem('ledgr_last_digest_date', today);
+      }
+    }
+  }
+
+  // Admin notification: Show banner when new feedback arrives
+  function notifyAdminNewFeedback(feedback) {
+    // Only notify if multiple submissions in last hour
+    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+    const allFeedback = getAllFeedback();
+    const recentCount = allFeedback.filter(fb => 
+      new Date(fb.timestamp) > oneHourAgo
+    ).length;
+
+    if (recentCount >= 5) {
+      const notification = {
+        id: 'notif_' + Date.now(),
+        type: 'batch_feedback',
+        count: recentCount,
+        message: `${recentCount} new feedback submissions in the last hour!`,
+        timestamp: new Date().toISOString(),
+        actionUrl: '/admin/feedback-intelligence.html'
+      };
+
+      // Store notification
+      const notifications = JSON.parse(localStorage.getItem('ledgr_admin_notifications') || '[]');
+      notifications.push(notification);
+      localStorage.setItem('ledgr_admin_notifications', JSON.stringify(notifications));
+
+      // Trigger webhook
+      const webhooks = FeedbackAnalyzer.getWebhooks();
+      webhooks.forEach(wh => {
+        if (wh.events.includes('admin_notification')) {
+          FeedbackAnalyzer.sendToWebhook(wh, notification, 'admin_notification');
+        }
+      });
+    }
+  }
+
+  // Get admin notifications
+  function getAdminNotifications() {
+    return JSON.parse(localStorage.getItem('ledgr_admin_notifications') || '[]');
+  }
+
+  // Clear admin notification
+  function clearAdminNotification(notificationId) {
+    const notifications = JSON.parse(localStorage.getItem('ledgr_admin_notifications') || '[]');
+    const filtered = notifications.filter(n => n.id !== notificationId);
+    localStorage.setItem('ledgr_admin_notifications', JSON.stringify(filtered));
+  }
+
+  // ===== END PHASE 5 =====
+
+  // Auto-initialize
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    setTimeout(init, 0);
+  }
+
+  return {
+    init,
+    getAllFeedback,
+    getFeedbackBySession,
+    deleteFeedback,
+    clearAllFeedback,
+    openWidget,
+    closeWidget,
+    // Phase 5 additions
+    generateWeeklyDigest,
+    sendDigest,
+    getDigests,
+    scheduleWeeklyDigest,
+    notifyAdminNewFeedback,
+    getAdminNotifications,
+    clearAdminNotification
   };
 })();

@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#FF5C00" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Ledgr Coming Soon — The Transparent Finance Function for UAE Business</title>
+    <meta name="description" content="Ledgr is launching Q3 2026. AI-native accounting, VAT, and Corporate Tax platform for UAE businesses with real-time compliance and honest pricing. No hidden fees. No surprises." />
+    <meta property="og:title" content="Ledgr Coming Soon — Transparent Finance for UAE Business" />
+    <meta property="og:description" content="AI agents + chartered accountants. Real-time VAT, Corporate Tax, WPS tracking. Honest pricing with zero commission hidden in fine print." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://ledgr.ai/assets/og-coming-soon.png" />
+    <meta property="og:url" content="https://ledgr.ai/coming-soon.html" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="google-site-verification" content="" />
+    <!-- GA4 with UTM capture -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX', {
+        'page_path': '/coming-soon.html',
+        'custom_map': {
+          'dimension1': 'company_name',
+          'dimension2': 'signup_source',
+          'dimension3': 'current_tech_stack',
+          'dimension4': 'primary_pain_point',
+          'dimension5': 'desired_feature'
+        }
+      });
+      
+      // Capture UTM parameters
+      function captureUTM() {
+        const params = new URLSearchParams(window.location.search);
+        const utm = {
+          source: params.get('utm_source') || 'direct',
+          medium: params.get('utm_medium') || 'direct',
+          campaign: params.get('utm_campaign') || 'organic',
+          content: params.get('utm_content') || null,
+          term: params.get('utm_term') || null
+        };
+        sessionStorage.setItem('utm_params', JSON.stringify(utm));
+        return utm;
+      }
+      captureUTM();
+    </script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='-apple-system,sans-serif' font-size='17' font-weight='600' fill='%23f9f9f9'%3EL%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/tailwind-output.css" />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <style>
+      .form-section {
+        display: none;
+      }
+      .form-section.active {
+        display: block;
+      }
+      .form-section-header {
+        margin-bottom: 24px;
+        border-bottom: 2px solid #FF5C00;
+        padding-bottom: 12px;
+      }
+      .form-progress {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 32px;
+      }
+      .form-progress-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #e0e0e0;
+        transition: all 0.3s ease;
+      }
+      .form-progress-dot.active {
+        background: #FF5C00;
+        width: 24px;
+        border-radius: 4px;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #191919;
+        font-size: 14px;
+      }
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid #d9d9d9;
+        border-radius: 6px;
+        font-family: inherit;
+        font-size: 14px;
+        transition: border-color 0.2s ease;
+      }
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: #FF5C00;
+        box-shadow: 0 0 0 3px rgba(255, 92, 0, 0.1);
+      }
+      .form-group textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+      .form-group small {
+        display: block;
+        margin-top: 6px;
+        color: #999;
+        font-size: 12px;
+      }
+      .form-buttons {
+        display: flex;
+        gap: 12px;
+        justify-content: space-between;
+        margin-top: 32px;
+      }
+      .btn-secondary {
+        padding: 12px 24px;
+        border: 1px solid #d9d9d9;
+        background: white;
+        color: #191919;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .btn-secondary:hover {
+        background: #f9f9f9;
+        border-color: #191919;
+      }
+      .checkbox-group {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .checkbox-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .checkbox-item input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+      }
+      .checkbox-item label {
+        margin: 0;
+        font-weight: 400;
+        cursor: pointer;
+      }
+      .multi-select {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .multi-select-option {
+        padding: 8px 16px;
+        border: 1px solid #d9d9d9;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background: white;
+      }
+      .multi-select-option:hover {
+        border-color: #FF5C00;
+      }
+      .multi-select-option.selected {
+        background: #FF5C00;
+        color: white;
+        border-color: #FF5C00;
+      }
+      .form-container {
+        max-width: 600px;
+        margin: 40px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      }
+      .success-message {
+        display: none;
+        text-align: center;
+        padding: 40px 20px;
+      }
+      .success-message.show {
+        display: block;
+      }
+      .success-icon {
+        width: 60px;
+        height: 60px;
+        background: #ffdecc;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+      }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ComingSoonEvent",
+        "name": "Ledgr - Autonomous Finance Function for UAE Business",
+        "description": "Ledgr is an AI-native accounting, VAT, and Corporate Tax platform launching in Q3 2026. Real-time compliance, transparent pricing, and chartered accountant supervision.",
+        "startDate": "2026-07-01",
+        "endDate": "2026-09-30",
+        "url": "https://ledgr.ai",
+        "image": "https://ledgr.ai/assets/og-coming-soon.png",
+        "organizer": {
+          "@type": "Organization",
+          "name": "Ledgr",
+          "url": "https://ledgr.ai"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <header class="nav" id="nav">
+      <div class="wrap nav__inner">
+        <a class="brand" href="index.html">
+          <span class="brand__mark" aria-hidden="true">L</span>
+          <span>Ledgr</span>
+        </a>
+        <div class="nav__cta">
+          <a class="btn btn--primary" href="#waitlist">Get Early Access</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" style="min-height: 80vh; display: flex; align-items: center;">
+        <div class="wrap">
+          <div class="hero__head reveal" style="max-width: 700px;">
+            <span class="text-xs uppercase tracking-widest font-semibold text-primary-500">Launching Q3 2026</span>
+            <h1 class="text-5xl md:text-6xl font-bold leading-tight" style="margin-top: 24px;">
+              The <em>honest</em> finance function your UAE business deserves.
+            </h1>
+            <p class="text-lg text-secondary-600 leading-relaxed" style="margin-top: 20px; margin-bottom: 30px;">
+              No hidden fees. No commission buried in the fine print. Real-time compliance with VAT, Corporate Tax, and WPS. AI agents supervised by chartered accountants. One flat price. Total transparency.
+            </p>
+            <a class="btn btn--primary" href="#waitlist-form" style="display: inline-block;">Get Early Access</a>
+          </div>
+
+          <!-- Features Grid -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-top: 80px;">
+            <div class="reveal" style="--d:100ms;">
+              <div style="width: 48px; height: 48px; background: #ffdecc; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="2" style="width: 24px; height: 24px;"><path d="M12 2v20M2 12h20"/></svg>
+              </div>
+              <h3 style="font-weight: 600; margin-bottom: 8px;">Transparency First</h3>
+              <p style="color: #666; font-size: 14px; line-height: 1.6;">No hidden fees. No per-transaction charges. No commission concealed in pricing. What you see is what you pay.</p>
+            </div>
+
+            <div class="reveal" style="--d:120ms;">
+              <div style="width: 48px; height: 48px; background: #ffdecc; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="2" style="width: 24px; height: 24px;"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              </div>
+              <h3 style="font-weight: 600; margin-bottom: 8px;">Real-Time Compliance</h3>
+              <p style="color: #666; font-size: 14px; line-height: 1.6;">VAT, Corporate Tax, and WPS tracked live. Never miss a deadline. Your books are audit-ready every quarter.</p>
+            </div>
+
+            <div class="reveal" style="--d:140ms;">
+              <div style="width: 48px; height: 48px; background: #ffdecc; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="2" style="width: 24px; height: 24px;"><path d="M12 2 2 7v10c0 5 10 11 10 11s10-6 10-11V7Z"/></svg>
+              </div>
+              <h3 style="font-weight: 600; margin-bottom: 8px;">AI + Accountant Supervision</h3>
+              <p style="color: #666; font-size: 14px; line-height: 1.6;">AI agents handle the work. Licensed professionals make the decisions. Best of both worlds.</p>
+            </div>
+
+            <div class="reveal" style="--d:160ms;">
+              <div style="width: 48px; height: 48px; background: #ffdecc; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="2" style="width: 24px; height: 24px;"><path d="M3 5h18v14H3z"/><path d="M3 9h18"/></svg>
+              </div>
+              <h3 style="font-weight: 600; margin-bottom: 8px;">FTA e-Invoicing Ready</h3>
+              <p style="color: #666; font-size: 14px; line-height: 1.6;">Built for Federal Tax Authority compliance from day one. No guessing. No late-stage panic.</p>
+            </div>
+
+            <div class="reveal" style="--d:180ms;">
+              <div style="width: 48px; height: 48px; background: #ffdecc; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="2" style="width: 24px; height: 24px;"><path d="M4 12a8 8 0 1 0 16 0 8 8 0 0 0-16 0"/><path d="M12 8v4l3 2"/></svg>
+              </div>
+              <h3 style="font-weight: 600; margin-bottom: 8px;">Enterprise-Grade Control</h3>
+              <p style="color: #666; font-size: 14px; line-height: 1.6;">Dashboard detail that rivals legacy financial software. Real data. Real control. Real peace of mind.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Waitlist Form Section -->
+      <section id="waitlist-form" style="padding: 80px 0; background: #f9f9f9;">
+        <div class="form-container">
+          <h2 style="text-align: center; margin-bottom: 8px; font-size: 28px; font-weight: 700;">Join the Ledgr Waitlist</h2>
+          <p style="text-align: center; color: #666; margin-bottom: 32px;">Help us build the platform that fits your business. Just a few questions (all optional).</p>
+          
+          <div id="formContent">
+            <!-- Form Progress -->
+            <div class="form-progress">
+              <div class="form-progress-dot active" id="progress-1"></div>
+              <div class="form-progress-dot" id="progress-2"></div>
+              <div class="form-progress-dot" id="progress-3"></div>
+            </div>
+
+            <!-- Section 1: Basic Info -->
+            <div class="form-section active" id="section-1">
+              <div class="form-section-header">
+                <h3 style="margin: 0; font-size: 18px; font-weight: 600;">Step 1: Your Details</h3>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required placeholder="your@company.com" />
+              </div>
+
+              <div class="form-group">
+                <label for="company">Company Name (Optional)</label>
+                <input type="text" id="company" name="company" placeholder="E.g., Acme Trading LLC" />
+              </div>
+
+              <div class="form-group">
+                <label for="name">Your Name (Optional)</label>
+                <input type="text" id="name" name="name" placeholder="Your full name" />
+              </div>
+
+              <div class="form-group">
+                <label for="role">Your Role (Optional)</label>
+                <select id="role" name="role">
+                  <option value="">Select your role</option>
+                  <option value="cfo">CFO / Finance Director</option>
+                  <option value="accountant">Accountant / Senior Accountant</option>
+                  <option value="finance_manager">Finance Manager</option>
+                  <option value="operations">Operations Manager</option>
+                  <option value="founder">Founder / Business Owner</option>
+                  <option value="ceo">CEO / General Manager</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-buttons">
+                <div></div>
+                <button class="btn btn--primary" onclick="nextSection(1)">Next</button>
+              </div>
+            </div>
+
+            <!-- Section 2: Current Setup -->
+            <div class="form-section" id="section-2">
+              <div class="form-section-header">
+                <h3 style="margin: 0; font-size: 18px; font-weight: 600;">Step 2: Your Current Setup</h3>
+              </div>
+
+              <div class="form-group">
+                <label>What accounting system are you using now? (Optional)</label>
+                <small>Select all that apply</small>
+                <div class="multi-select" id="currentTech">
+                  <div class="multi-select-option" data-value="manual">Manual Spreadsheets</div>
+                  <div class="multi-select-option" data-value="xero">Xero</div>
+                  <div class="multi-select-option" data-value="quickbooks">QuickBooks</div>
+                  <div class="multi-select-option" data-value="tally">Tally ERP</div>
+                  <div class="multi-select-option" data-value="sap">SAP</div>
+                  <div class="multi-select-option" data-value="oracle">Oracle NetSuite</div>
+                  <div class="multi-select-option" data-value="wave">Wave</div>
+                  <div class="multi-select-option" data-value="sage">Sage</div>
+                  <div class="multi-select-option" data-value="freshbooks">FreshBooks</div>
+                  <div class="multi-select-option" data-value="other">Other / Custom</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>What's your #1 pain point with current accounting? (Optional)</label>
+                <select id="painpoint" name="painpoint">
+                  <option value="">Select your biggest challenge</option>
+                  <option value="manual_entry">Too much manual data entry</option>
+                  <option value="compliance">Keeping up with tax/VAT compliance</option>
+                  <option value="reporting">Getting accurate financial reports</option>
+                  <option value="integration">Integrating multiple systems</option>
+                  <option value="cost">Cost of current solution</option>
+                  <option value="time">Time spent on accounting</option>
+                  <option value="visibility">Lack of real-time visibility</option>
+                  <option value="expert_team">Need expert accountants</option>
+                  <option value="audit_ready">Getting audit-ready books</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-buttons">
+                <button class="btn-secondary" onclick="prevSection(2)">Back</button>
+                <button class="btn btn--primary" onclick="nextSection(2)">Next</button>
+              </div>
+            </div>
+
+            <!-- Section 3: Preferences -->
+            <div class="form-section" id="section-3">
+              <div class="form-section-header">
+                <h3 style="margin: 0; font-size: 18px; font-weight: 600;">Step 3: What You're Looking For</h3>
+              </div>
+
+              <div class="form-group">
+                <label>Which feature would be most valuable for your firm? (Optional)</label>
+                <small>Select the top 3 priorities</small>
+                <div class="checkbox-group">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="feature-realtime" name="feature" value="Real-time VAT tracking" />
+                    <label for="feature-realtime">Real-time VAT tracking & filing</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="feature-tax" name="feature" value="Automated tax planning" />
+                    <label for="feature-tax">Automated tax planning & optimization</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="feature-fx" name="feature" value="FX & multi-currency management" />
+                    <label for="feature-fx">FX & multi-currency management</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="feature-invoicing" name="feature" value="FTA e-invoicing integration" />
+                    <label for="feature-invoicing">FTA e-invoicing (Zatca) integration</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="feature-payroll" name="feature" value="WPS & payroll automation" />
+                    <label for="feature-payroll">WPS & payroll automation</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="feature-api" name="feature" value="API & third-party integrations" />
+                    <label for="feature-api">API & third-party integrations</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="feature-audit" name="feature" value="Audit-ready reporting" />
+                    <label for="feature-audit">Audit-ready reporting & trails</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="feature-team" name="feature" value="Dedicated accountant access" />
+                    <label for="feature-team">Dedicated accountant access (WhatsApp/email)</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="comments">Anything else you'd like us to know? (Optional)</label>
+                <textarea id="comments" name="comments" placeholder="E.g., your industry, company size, timeline, specific requirements..."></textarea>
+              </div>
+
+              <div class="form-buttons">
+                <button class="btn-secondary" onclick="prevSection(3)">Back</button>
+                <button class="btn btn--primary" onclick="submitForm()">Get Early Access</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Success Message -->
+          <div class="success-message" id="successMessage">
+            <div class="success-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="2" style="width: 32px; height: 32px;">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 8px;">You're on the list!</h3>
+            <p style="color: #666; margin-bottom: 24px;">We'll notify you as soon as Ledgr launches in Q3 2026. Early users get founder pricing and priority support.</p>
+            <a class="btn btn--primary" href="index.html">Return Home</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section style="padding: 80px 0; background: white;">
+        <div class="wrap">
+          <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 60px; text-align: center;">Why Ledgr Is Different</h2>
+          
+          <div style="max-width: 700px; margin: 0 auto; display: grid; gap: 24px;">
+            <details style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px; cursor: pointer;">
+              <summary style="font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                How much does Ledgr cost?
+                <span style="color: #FF5C00;">+</span>
+              </summary>
+              <p style="margin-top: 12px; color: #666; line-height: 1.6;">Ledgr pricing is simple and transparent. A single flat monthly fee covers bookkeeping, VAT filing, Corporate Tax planning, and a named chartered accountant on WhatsApp. Pricing details are available during your free 14-day trial.</p>
+            </details>
+
+            <details style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px; cursor: pointer;">
+              <summary style="font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                Is there a hidden fee or commission?
+                <span style="color: #FF5C00;">+</span>
+              </summary>
+              <p style="margin-top: 12px; color: #666; line-height: 1.6;">Absolutely not. Ledgr has one price, shown upfront. No per-transaction fees. No commission hidden in calculations. No surprise charges. Your agreement is with us directly, not through a middleman.</p>
+            </details>
+
+            <details style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px; cursor: pointer;">
+              <summary style="font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                Why AI + accountants, not just AI or just accountants?
+                <span style="color: #FF5C00;">+</span>
+              </summary>
+              <p style="margin-top: 12px; color: #666; line-height: 1.6;">AI is fast and accurate at routine work. But VAT planning, tax strategy, and financial decisions require human judgment and accountability. Ledgr pairs AI agents with licensed professionals so you get speed, accuracy, and professional judgment.</p>
+            </details>
+
+            <details style="border: 1px solid #e0e0e0; border-radius: 6px; padding: 20px; cursor: pointer;">
+              <summary style="font-weight: 600; display: flex; justify-content: space-between; align-items: center;">
+                When can I start using Ledgr?
+                <span style="color: #FF5C00;">+</span>
+              </summary>
+              <p style="margin-top: 12px; color: #666; line-height: 1.6;">Ledgr launches in Q3 2026. Sign up for early access above and we'll notify you the moment we open to new users. Early users get founder pricing and priority support.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer style="background: #1a1a1a; color: #fff; padding: 60px 0; margin-top: 60px;">
+      <div class="wrap">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
+          <div>
+            <h4 style="font-weight: 600; margin-bottom: 12px;">Product</h4>
+            <ul style="list-style: none; padding: 0;">
+              <li><a href="#" style="color: #ccc; text-decoration: none; font-size: 14px;">Pricing</a></li>
+              <li><a href="#" style="color: #ccc; text-decoration: none; font-size: 14px;">Platform</a></li>
+              <li><a href="#" style="color: #ccc; text-decoration: none; font-size: 14px;">Security</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="font-weight: 600; margin-bottom: 12px;">Company</h4>
+            <ul style="list-style: none; padding: 0;">
+              <li><a href="#" style="color: #ccc; text-decoration: none; font-size: 14px;">About</a></li>
+              <li><a href="#" style="color: #ccc; text-decoration: none; font-size: 14px;">Contact</a></li>
+              <li><a href="#" style="color: #ccc; text-decoration: none; font-size: 14px;">Blog</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="font-weight: 600; margin-bottom: 12px;">Legal</h4>
+            <ul style="list-style: none; padding: 0;">
+              <li><a href="#" style="color: #ccc; text-decoration: none; font-size: 14px;">Privacy</a></li>
+              <li><a href="#" style="color: #ccc; text-decoration: none; font-size: 14px;">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+        <div style="border-top: 1px solid #333; padding-top: 20px; text-align: center; font-size: 12px; color: #999;">
+          <p>&copy; 2026 Ledgr. All rights reserved. Upcapital Global FZCO.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Multi-select functionality
+      document.querySelectorAll('.multi-select-option').forEach(option => {
+        option.addEventListener('click', function() {
+          this.classList.toggle('selected');
+        });
+      });
+
+      // Form navigation
+      function nextSection(current) {
+        const emailInput = document.getElementById('email');
+        if (current === 1 && !emailInput.value) {
+          alert('Please enter your email address');
+          return;
+        }
+        document.getElementById('section-' + current).classList.remove('active');
+        document.getElementById('section-' + (current + 1)).classList.add('active');
+        updateProgress(current + 1);
+      }
+
+      function prevSection(current) {
+        document.getElementById('section-' + current).classList.remove('active');
+        document.getElementById('section-' + (current - 1)).classList.add('active');
+        updateProgress(current - 1);
+      }
+
+      function updateProgress(step) {
+        for (let i = 1; i <= 3; i++) {
+          const dot = document.getElementById('progress-' + i);
+          if (i <= step) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        }
+      }
+
+      function submitForm() {
+        const email = document.getElementById('email').value;
+        const company = document.getElementById('company').value;
+        const name = document.getElementById('name').value;
+        const role = document.getElementById('role').value;
+        
+        // Get selected tech
+        const techStack = Array.from(document.querySelectorAll('#currentTech .multi-select-option.selected'))
+          .map(e => e.dataset.value)
+          .join(', ');
+        
+        const painpoint = document.getElementById('painpoint').value;
+        
+        // Get selected features
+        const features = Array.from(document.querySelectorAll('input[name="feature"]:checked'))
+          .map(e => e.value)
+          .join(', ');
+        
+        const comments = document.getElementById('comments').value;
+        const utm = JSON.parse(sessionStorage.getItem('utm_params') || '{}');
+
+        // Store in localStorage
+        const waitlistData = {
+          email,
+          company,
+          name,
+          role,
+          techStack,
+          painpoint,
+          features,
+          comments,
+          signup_date: new Date().toISOString(),
+          utm_source: utm.source,
+          utm_medium: utm.medium,
+          utm_campaign: utm.campaign,
+          utm_content: utm.content,
+          utm_term: utm.term
+        };
+
+        localStorage.setItem('ledgr_waitlist_' + email, JSON.stringify(waitlistData));
+        localStorage.setItem('ledgr_waitlist_submissions', 
+          JSON.stringify([
+            ...(JSON.parse(localStorage.getItem('ledgr_waitlist_submissions') || '[]')),
+            waitlistData
+          ])
+        );
+
+        // GA4 event
+        gtag('event', 'waitlist_signup', {
+          'company_name': company,
+          'signup_source': utm.source,
+          'current_tech_stack': techStack,
+          'primary_pain_point': painpoint,
+          'desired_feature': features
+        });
+
+        // Show success
+        document.getElementById('formContent').classList.add('hidden');
+        document.getElementById('successMessage').classList.add('show');
+        document.getElementById('formContent').style.display = 'none';
+      }
+    </script>
+  </body>
+</html>

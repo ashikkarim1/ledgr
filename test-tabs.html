@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tab Test</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 20px;
+    }
+    
+    .tab {
+      padding: 8px 16px;
+      border: none;
+      background: #e0e0e0;
+      color: #333;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    
+    .tab:hover {
+      background: #d0d0d0;
+    }
+    
+    .tab.is-active {
+      background: #FF5C00;
+      color: white;
+    }
+    
+    .content {
+      display: none;
+      padding: 20px;
+      background: white;
+      border-radius: 4px;
+      border: 1px solid #e0e0e0;
+    }
+    
+    .content.is-active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tab Switching Test</h1>
+  
+  <div class="tabs" role="tablist">
+    <button class="tab is-active" data-tab="overview" role="tab">Business Overview</button>
+    <button class="tab" data-tab="operations" role="tab">Finance Operations</button>
+  </div>
+  
+  <div id="overviewTab" class="content is-active">
+    <h2>Business Overview</h2>
+    <p>This is the Business Overview content. Click the other tab to switch.</p>
+  </div>
+  
+  <div id="operationsTab" class="content">
+    <h2>Finance Operations</h2>
+    <p>This is the Finance Operations content. Click the other tab to switch back.</p>
+  </div>
+  
+  <script>
+    console.log('Tab Test: Script loaded');
+    
+    const tabButtons = document.querySelectorAll('.tab');
+    console.log('Found', tabButtons.length, 'tab buttons');
+    
+    tabButtons.forEach((button, index) => {
+      console.log('Setting up tab', index, ':', button.getAttribute('data-tab'));
+      
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const tabName = this.getAttribute('data-tab');
+        console.log('Tab clicked:', tabName);
+        
+        // Remove active from all tabs
+        tabButtons.forEach(btn => {
+          btn.classList.remove('is-active');
+        });
+        
+        // Remove active from all content
+        const allContent = document.querySelectorAll('.content');
+        allContent.forEach(content => {
+          content.classList.remove('is-active');
+        });
+        
+        // Add active to clicked tab
+        this.classList.add('is-active');
+        
+        // Show corresponding content
+        const contentId = tabName + 'Tab';
+        const targetContent = document.getElementById(contentId);
+        console.log('Looking for content:', contentId, '- Found:', !!targetContent);
+        
+        if (targetContent) {
+          targetContent.classList.add('is-active');
+          console.log('✓ Tab switched to:', tabName);
+        }
+      });
+    });
+    
+    console.log('Tab switching initialized');
+  </script>
+</body>
+</html>

@@ -38,8 +38,7 @@ class ChatWidget {
 
   init() {
     this.loadSessions();
-    this.setupKeyboardShortcuts();
-    this.setupTouchListeners();
+    // setupKeyboardShortcuts and setupTouchListeners are not defined - removed calls
   }
 
   mount(selector) {
