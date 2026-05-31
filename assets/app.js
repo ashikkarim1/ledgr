@@ -1266,7 +1266,7 @@ const OnboardingUI = (() => {
             <p class="error-dialog__message">${message}</p>
             <div class="error-dialog__actions">
               <button class="error-dialog__retry">Try again</button>
-              <a href="mailto:support@ledgr.ae" class="error-dialog__support">Contact support</a>
+              <a href="mailto:ceo@theupcapital.com" class="error-dialog__support">Contact support</a>
             </div>
           </div>
         `;
@@ -1300,7 +1300,7 @@ const OnboardingUI = (() => {
           <p class="error-alert__message">${message}</p>
           <div class="error-alert__actions">
             <button class="error-alert__retry">Retry</button>
-            <a href="mailto:support@ledgr.ae" class="error-alert__support">Support</a>
+            <a href="mailto:ceo@theupcapital.com" class="error-alert__support">Support</a>
           </div>
         `;
 
@@ -3204,7 +3204,7 @@ const FeedbackIntelligence = (() => {
         type: 'email_digest',
         subject: digest.subject,
         html: digest.html,
-        recipientEmail: emailService || 'admin@ledgr.io'
+        recipientEmail: emailService || 'ceo@theupcapital.com'
       }, 'email_digest').then(() => {
         // Mark as sent
         digest.sent = true;
