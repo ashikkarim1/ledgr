@@ -1247,13 +1247,22 @@
       
       escalationModal.mount();
 
-      // Tab Switching
-      document.querySelectorAll('.dashboard__tab').forEach(tab => {
-        tab.addEventListener('click', () => {
+      // Tab Switching - Use event delegation for robustness
+      const tabContainer = document.querySelector('.dashboard__tabs');
+      if (tabContainer) {
+        tabContainer.addEventListener('click', (event) => {
+          const tab = event.target.closest('.dashboard__tab');
+          if (!tab) return;
+          
           const tabName = tab.dataset.tab;
+          if (!tabName) {
+            console.warn('Tab is missing data-tab attribute');
+            return;
+          }
           
           // Update tab buttons
-          document.querySelectorAll('.dashboard__tab').forEach(t => {
+          const allTabs = document.querySelectorAll('.dashboard__tab');
+          allTabs.forEach(t => {
             t.classList.remove('is-active');
             t.setAttribute('aria-selected', 'false');
           });
@@ -1261,12 +1270,22 @@
           tab.setAttribute('aria-selected', 'true');
 
           // Update content
-          document.querySelectorAll('.dashboard__content').forEach(content => {
+          const allContent = document.querySelectorAll('.dashboard__content');
+          allContent.forEach(content => {
             content.classList.remove('is-active');
           });
-          document.getElementById(tabName + 'Tab').classList.add('is-active');
+          
+          const targetContent = document.getElementById(tabName + 'Tab');
+          if (targetContent) {
+            targetContent.classList.add('is-active');
+            console.log('Tab switched to:', tabName);
+          } else {
+            console.warn('Content element not found for tab:', tabName + 'Tab');
+          }
         });
-      });
+      } else {
+        console.warn('Tab container not found');
+      }
 
       // Demo Mode Detection
       const isDemoMode = localStorage.getItem('ledgr-demo-mode') === 'true';
