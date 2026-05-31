@@ -10,8 +10,8 @@ on:
 env:
   AWS_REGION: us-east-1
   REGISTRY: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com
-  FRONTEND_IMAGE: ledgr/frontend
-  BACKEND_IMAGE: ledgr/backend
+  FRONTEND_IMAGE: ledgr-frontend
+  BACKEND_IMAGE: ledgr-backend
 
 jobs:
   code-quality:
