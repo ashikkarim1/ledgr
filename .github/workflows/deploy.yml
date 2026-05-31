@@ -173,20 +173,27 @@ jobs:
       - name: Output image tags
         id: image
         run: |
-          echo "frontend=${{ env.REGISTRY }}/${{ env.FRONTEND_IMAGE }}:${{ github.sha }}" >> $GITHUB_OUTPUT
-          echo "backend=${{ env.REGISTRY }}/${{ env.BACKEND_IMAGE }}:${{ github.sha }}" >> $GITHUB_OUTPUT
+          echo "frontend=${{ env.FRONTEND_IMAGE }}:${{ github.sha }}" >> $GITHUB_OUTPUT
+          echo "backend=${{ env.BACKEND_IMAGE }}:${{ github.sha }}" >> $GITHUB_OUTPUT
+          echo "registry=${{ env.REGISTRY }}" >> $GITHUB_OUTPUT
 
   security-scan:
     name: Container Security Scan
     runs-on: ubuntu-latest
     needs: build
     env:
-      FRONTEND_IMAGE_REF: ${{ needs.build.outputs.frontend-image }}
-      BACKEND_IMAGE_REF: ${{ needs.build.outputs.backend-image }}
+      REGISTRY: ${{ needs.build.outputs.registry }}
+      FRONTEND_IMAGE_TAG: ${{ needs.build.outputs.frontend-image }}
+      BACKEND_IMAGE_TAG: ${{ needs.build.outputs.backend-image }}
     
     steps:
-      - name: Debug - Print build outputs
+      - name: Reconstruct image URIs
+        id: image-uris
         run: |
+          FRONTEND_IMAGE_REF="${REGISTRY}/${FRONTEND_IMAGE_TAG}"
+          BACKEND_IMAGE_REF="${REGISTRY}/${BACKEND_IMAGE_TAG}"
+          echo "frontend-image=${FRONTEND_IMAGE_REF}" >> $GITHUB_OUTPUT
+          echo "backend-image=${BACKEND_IMAGE_REF}" >> $GITHUB_OUTPUT
           echo "Frontend image: ${FRONTEND_IMAGE_REF}"
           echo "Backend image: ${BACKEND_IMAGE_REF}"
       
@@ -194,7 +201,7 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'image'
-          scan-ref: ${{ env.FRONTEND_IMAGE_REF }}
+          scan-ref: ${{ steps.image-uris.outputs.frontend-image }}
           format: 'sarif'
           output: 'trivy-frontend-results.sarif'
       
@@ -202,7 +209,7 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'image'
-          scan-ref: ${{ env.BACKEND_IMAGE_REF }}
+          scan-ref: ${{ steps.image-uris.outputs.backend-image }}
           format: 'sarif'
           output: 'trivy-backend-results.sarif'
       
