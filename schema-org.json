@@ -1,88 +1,148 @@
 {
   "@context": "https://schema.org",
-  "@type": [
-    "Organization",
-    "LocalBusiness",
-    "FinancialService"
-  ],
-  "name": "Ledgr",
-  "alternateName": "Ledgr - UAE Accounting Reviews",
-  "url": "https://ledgr.ai",
-  "logo": "https://ledgr.ai/assets/logo.png",
-  "description": "Ledgr is an honest directory of UAE accountants and accounting firms. Read verified reviews from real businesses and discover trusted accounting partners.",
-  "foundingDate": "2024",
-  "founder": {
-    "@type": "Organization",
-    "name": "Upcapital Global FZCO",
-    "email": "ceo@theupcapital.com"
-  },
-  "parentOrganization": {
-    "@type": "Organization",
-    "name": "Upcapital Global FZCO",
-    "url": "https://theupcapital.com",
-    "email": "ceo@theupcapital.com"
-  },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "Customer Service",
-    "email": "ceo@theupcapital.com",
-    "availableLanguage": [
-      "en",
-      "ar"
-    ]
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "JAFZA",
-    "addressLocality": "Dubai",
-    "addressRegion": "Dubai",
-    "postalCode": "0",
-    "addressCountry": "AE"
-  },
-  "areaServed": [
+  "@graph": [
     {
-      "@type": "State",
-      "name": "Dubai"
+      "@type": ["Organization", "LocalBusiness", "FinancialService"],
+      "@id": "https://www.ledgr.ae/#organization",
+      "name": "Ledgr",
+      "alternateName": "Ledgr - Groundbreaking AI Accounting for UAE",
+      "url": "https://www.ledgr.ae",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.ledgr.ae/assets/logo.png",
+        "width": 200,
+        "height": 200
+      },
+      "description": "Groundbreaking AI accounting platform that eliminates UAE finance gaps. Rock solid 99.9% accuracy. Audit-ready compliance for FTA, VAT, payroll, e-invoicing. Fully digital team supervised by licensed accountants.",
+      "foundingDate": "2024",
+      "foundingLocation": {
+        "@type": "Place",
+        "name": "Dubai, United Arab Emirates"
+      },
+      "founder": {
+        "@type": "Organization",
+        "name": "Upcapital Global FZCO",
+        "email": "ceo@theupcapital.com",
+        "url": "https://theupcapital.com"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "telephone": "+971-058-592-6050",
+        "email": "ceo@theupcapital.com",
+        "availableLanguage": ["en", "ar"]
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Building A1, Dubai Digital Park",
+        "addressLocality": "Dubai Silicon Oasis",
+        "addressRegion": "Dubai",
+        "addressCountry": "AE",
+        "postalCode": "000000"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Arab Emirates"
+      },
+      "serviceType": [
+        "AI Accounting Software",
+        "Compliance Automation",
+        "Digital Finance Management",
+        "FTA Compliance",
+        "VAT Automation",
+        "Payroll Processing"
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/company/ledgr",
+        "https://twitter.com/ledgr",
+        "https://www.instagram.com/ledgr"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "500",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "knowsAbout": [
+        "Artificial Intelligence",
+        "Accounting Automation",
+        "UAE Compliance",
+        "FTA Enforcement",
+        "VAT Processing",
+        "Payroll Management",
+        "E-Invoicing",
+        "Tax Planning",
+        "Financial Compliance"
+      ]
     },
     {
-      "@type": "State",
-      "name": "Abu Dhabi"
+      "@type": "SoftwareApplication",
+      "@id": "https://www.ledgr.ae/#software",
+      "name": "Ledgr - AI Finance Platform",
+      "description": "Groundbreaking AI accounting and compliance platform. Eliminates finance gaps with rock solid 99.9% accuracy. Enterprise-grade processing for FTA, VAT, payroll, reconciliation, e-invoicing, and tax planning. Fully digital team supervised by chartered accountants.",
+      "url": "https://www.ledgr.ae",
+      "applicationCategory": "BusinessApplication",
+      "softwareVersion": "1.0",
+      "releaseDate": "2024",
+      "operatingSystem": ["Web"],
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "AED",
+        "price": "Contact for pricing",
+        "priceValidUntil": "2026-12-31",
+        "availability": "https://schema.org/InStock"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Upcapital Global FZCO",
+        "url": "https://theupcapital.com"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "500",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "featureList": [
+        "99.9% accuracy processing",
+        "FTA compliance automation",
+        "VAT reporting automation",
+        "Payroll management",
+        "Real-time reconciliation",
+        "E-invoicing compliance",
+        "Tax planning assistance",
+        "Chartered accountant supervision",
+        "24/7 AI agent availability",
+        "Audit-ready compliance"
+      ],
+      "screenshot": "https://www.ledgr.ae/assets/hero-image.png",
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Arab Emirates"
+      }
     },
     {
-      "@type": "State",
-      "name": "Sharjah"
-    },
-    {
-      "@type": "State",
-      "name": "United Arab Emirates"
+      "@type": "LocalBusiness",
+      "@id": "https://www.ledgr.ae/#localbusiness",
+      "name": "Ledgr - Dubai Office",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Building A1, Dubai Digital Park",
+        "addressLocality": "Dubai Silicon Oasis",
+        "addressRegion": "Dubai",
+        "addressCountry": "AE"
+      },
+      "telephone": "+971-058-592-6050",
+      "email": "ceo@theupcapital.com",
+      "url": "https://www.ledgr.ae",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
     }
-  ],
-  "serviceType": [
-    "Accounting Review Platform",
-    "Accounting Firm Directory",
-    "Business Reviews",
-    "Financial Services Directory"
-  ],
-  "sameAs": [
-    "https://www.linkedin.com/company/ledgr",
-    "https://twitter.com/ledgr",
-    "https://www.instagram.com/ledgr"
-  ],
-  "knowsAbout": [
-    "Accounting",
-    "UAE Accounting Firms",
-    "Business Reviews",
-    "Financial Services",
-    "Accounting Standards"
-  ],
-  "slogan": "The honest directory of UAE accountants",
-  "image": [
-    "https://ledgr.ai/assets/og-image.png",
-    "https://ledgr.ai/assets/hero-image.png"
-  ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "reviewCount": "250"
-  }
+  ]
 }
