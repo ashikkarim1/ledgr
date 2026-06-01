@@ -400,22 +400,36 @@
     </style>
   </head>
   <body>
-    <div class="demo-container">
-      <!-- Header -->
-      <div class="demo-header">
-        <div class="demo-header__inner">
-          <div class="demo-header__left">
-            <h1 class="demo-header__title">See Ledgr in Action</h1>
-            <span class="demo-badge">Live Demo</span>
-          </div>
-          <a href="index.html" class="demo-nav-back">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M19 12H5M12 19l-7-7 7-7"/>
-            </svg>
-            Back
-          </a>
+    <header class="nav" id="nav">
+      <div class="wrap nav__inner">
+        <a class="brand" href="index.html">
+          <span class="brand__mark" aria-hidden="true">L</span>
+          <span>Ledgr</span>
+        </a>
+
+        <nav class="nav__links" aria-label="Primary">
+          <a href="index.html#platform">Platform</a>
+          <a href="agents.html">AI Agents</a>
+          <a href="demo.html#top" aria-current="page">See Demo</a>
+          <a href="resources.html">Resources</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="accountants.html">Accountants</a>
+          <a href="reviews.html">Reviews</a>
+        </nav>
+
+        <div class="nav__cta">
+          <a class="btn btn--primary" href="trial.html">Start Free Trial</a>
+          <a class="btn btn--dark" href="index.html#waitlist">Join the waitlist</a>
         </div>
+        <button class="nav__menu-toggle" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
+    </header>
+
+    <div class="demo-container">
 
       <!-- Content -->
       <div class="demo-content">

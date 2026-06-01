@@ -188,6 +188,11 @@ p {
   color: var(--ink-2);
 }
 
+.value-prop-highlight {
+  color: var(--accent);
+  font-weight: 700;
+}
+
 .lede {
   font-size: clamp(16px, 1.25vw, 19px);
   line-height: 1.55;
@@ -432,6 +437,13 @@ section + section {
 .nav__cta .btn--dark:hover {
   background: #000;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.nav__cta .btn--dark:active,
+.nav__cta .btn--dark:focus,
+.nav__cta .btn--dark.is-active {
+  background: var(--ink-1);
+  color: #fff;
 }
 
 /* Mobile: show hamburger, hide nav links by default */
@@ -5776,8 +5788,8 @@ section + section {
 
 .waitlist .input,
 .waitlist .select {
-  background-color: transparent;
-  border-color: color-mix(in srgb, var(--paper) 18%, transparent);
+  background-color: color-mix(in srgb, var(--paper) 8%, transparent);
+  border-color: color-mix(in srgb, var(--paper) 35%, transparent);
   color: var(--paper);
 }
 
@@ -5789,6 +5801,7 @@ section + section {
 .waitlist .select:focus {
   border-color: var(--paper);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--paper) 12%, transparent);
+  background-color: color-mix(in srgb, var(--paper) 12%, transparent);
 }
 
 .waitlist .select {
@@ -5796,6 +5809,14 @@ section + section {
   background-repeat: no-repeat;
   background-position: right 12px center;
   background-size: 10px 6px;
+  background-color: color-mix(in srgb, var(--paper) 8%, transparent);
+  position: relative;
+  z-index: 10;
+}
+
+.waitlist .select:hover {
+  background-color: color-mix(in srgb, var(--paper) 12%, transparent);
+  border-color: color-mix(in srgb, var(--paper) 40%, transparent);
 }
 
 .waitlist__submit {
@@ -7347,6 +7368,94 @@ section + section {
   .success-screen__title {
     font-size: 22px;
   }
+}
+
+/* ============================================================
+   INTEGRATION SECTION
+   Global connectivity, features, and capabilities overview
+   ============================================================ */
+
+.integration-section {
+  padding: clamp(48px, 8vw, 96px) 0;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 3%, transparent) 0%, transparent 100%);
+  position: relative;
+}
+
+.integration-header {
+  text-align: center;
+  margin-bottom: clamp(48px, 8vw, 80px);
+}
+
+.section-subtitle {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin-top: 12px;
+}
+
+.integration-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-bottom: clamp(48px, 8vw, 80px);
+}
+
+.integration-card {
+  padding: 28px;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--line);
+  background: var(--surface);
+  transition: all 0.3s var(--ease);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.integration-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 12%, transparent);
+  transform: translateY(-2px);
+}
+
+.integration-icon {
+  font-size: 32px;
+  line-height: 1;
+  height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.integration-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-1);
+  margin: 0;
+}
+
+.integration-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+.integration-cta {
+  text-align: center;
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 6%, transparent) 0%, color-mix(in srgb, var(--accent) 2%, transparent) 100%);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.integration-cta p {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink-1);
+  margin: 0;
 }
 
 /* ============================================================
