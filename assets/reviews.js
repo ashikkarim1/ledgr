@@ -1016,7 +1016,7 @@
         <span style="display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink-2)"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)"></span> ${escapeHtml(
           auth.name.split(/\s+/)[0]
         )}</span>
-        <a class="btn btn--primary" href="index.html#waitlist">Join the waitlist</a>
+        <a class="btn btn--dark" href="index.html#waitlist">Join the waitlist</a>
       `;
       $("#signout-btn").addEventListener("click", () => setAuth(null));
     } else {
@@ -1025,8 +1025,8 @@
         "Sign in with your Ledgr account to leave a review for any firm you've worked with.";
       actions.innerHTML = `<button class="btn btn--primary" type="button" data-open-signin>Sign in to review</button>`;
       navAuth.innerHTML = `
-        <a class="btn btn--ghost" href="#" data-open-signin>Sign in</a>
-        <a class="btn btn--primary" href="index.html#waitlist">Join the waitlist</a>
+        <a class="btn btn--primary" href="trial.html">Start Free Trial</a>
+        <a class="btn btn--dark" href="index.html#waitlist">Join the waitlist</a>
       `;
     }
 
