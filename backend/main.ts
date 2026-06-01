@@ -5,6 +5,10 @@
 
 import dotenv from 'dotenv';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Load environment variables
 dotenv.config({ path: path.join(__dirname, '..', '.env') });
@@ -45,12 +49,14 @@ async function start(): Promise<void> {
     );
 
     // Start server
-    const port = parseInt(process.env.PORT || '3000', 10);
-    const server = app.listen(port, () => {
-      console.log(`Server running on http://localhost:${port}`);
-      console.log(`Health check: http://localhost:${port}/v1/health`);
-      console.log(`Integration endpoints: http://localhost:${port}/v1/integrations`);
-      console.log(`Webhook endpoints: http://localhost:${port}/v1/webhooks`);
+    const port = parseInt(process.env.PORT || '3001', 10);
+    const host = process.env.HOST || '127.0.0.1';
+    const server = app.listen(port, host, () => {
+      const url = host === '0.0.0.0' ? `http://localhost:${port}` : `http://${host}:${port}`;
+      console.log(`Server running on ${url}`);
+      console.log(`Health check: ${url}/v1/health`);
+      console.log(`Integration endpoints: ${url}/v1/integrations`);
+      console.log(`Webhook endpoints: ${url}/v1/webhooks`);
     });
 
     // Graceful shutdown
@@ -99,7 +105,7 @@ async function start(): Promise<void> {
 }
 
 // Start the application
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   start();
 }
 
