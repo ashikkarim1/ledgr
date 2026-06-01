@@ -150,14 +150,14 @@ You have 3 options. **Railway (Option A) is fastest**, but all three integrate w
 
 **Your Docker image is already built** in GitHub Container Registry:
 ```
-ghcr.io/<your-username>/ledgr/backend:latest
+ghcr.io/ashikkarim1/ledgr/backend:latest
 ```
 
 **Steps:**
 
 1. Pull the image from GitHub Container Registry:
    ```bash
-   docker pull ghcr.io/<your-username>/ledgr/backend:latest
+   docker pull ghcr.io/ashikkarim1/ledgr/backend:latest
    ```
 
 2. Deploy to your server (AWS, GCP, DigitalOcean, etc.):
@@ -167,7 +167,7 @@ ghcr.io/<your-username>/ledgr/backend:latest
      -e DATABASE_URL="postgresql://..." \
      -e JWT_SECRET="..." \
      -e NODE_ENV="production" \
-     ghcr.io/<your-username>/ledgr/backend:latest
+     ghcr.io/ashikkarim1/ledgr/backend:latest
    ```
 
 3. Note your server URL and update frontend (see Step 4)

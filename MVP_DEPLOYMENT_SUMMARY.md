@@ -114,7 +114,7 @@ gh secret set VERCEL_PROJECT_ID --body "your_project_id"
 
 #### Option C: Self-Hosted (Docker)
 ```
-Your Docker image: ghcr.io/<username>/ledgr/backend:latest
+Your Docker image: ghcr.io/ashikkarim1/ledgr/backend:latest
 Deploy to your server with environment variables
 Get public URL
 ```

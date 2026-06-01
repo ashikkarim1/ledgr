@@ -93,7 +93,7 @@ gh secret set VERCEL_PROJECT_ID --body "project_id_here"
 
 ```
 Docker image available:
-ghcr.io/<your-username>/ledgr/backend:latest
+ghcr.io/ashikkarim1/ledgr/backend:latest
 
 1. Deploy image to your server
 2. Set environment variables
