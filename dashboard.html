@@ -578,8 +578,28 @@
           const uploadedJobs = JSON.parse(localStorage.getItem('uploaded_jobs') || '[]');
           
           if (uploadedJobs.length === 0) {
-            // Show empty state
-            updateDashboardWithData([], []);
+            // Show demo data for visitors without real data
+            const demoTransactions = [
+              { description: 'Invoice INV-2024-0847 from Emirates General Trading', category: 'Accounts Payable', amount: 45500, status: 'approved' },
+              { description: 'Invoice INV-2024-0848 from Skyline Tech Solutions', category: 'Accounts Payable', amount: 28300, status: 'approved' },
+              { description: 'Customer Invoice from Al Masaood Group', category: 'Accounts Receivable', amount: 125000, status: 'approved' },
+              { description: 'Customer Invoice from Gulf Properties LLC', category: 'Accounts Receivable', amount: 87500, status: 'pending' },
+              { description: 'Payroll Processing - June 2024', category: 'Payroll', amount: 245000, status: 'approved' },
+              { description: 'Bank Reconciliation - June 2024', category: 'Reconciliation', amount: 0, status: 'approved' },
+              { description: 'VAT Return Filing - Q2 2024', category: 'Tax Compliance', amount: 156000, status: 'approved' },
+              { description: 'FX Revaluation - USD Holdings', category: 'Multi-Currency', amount: 45200, status: 'approved' }
+            ];
+            
+            const demoStats = {
+              ap: { processed: 247, pending: 12 },
+              ar: { processed: 189, pending: 24 },
+              rec: { reconciled: 156, variance: 2.3 },
+              tax: { items: 84, alerts: 2 },
+              payroll: { employees: 42, period: 'June 2024' },
+              gl: { accounts: 156, posted: 3847 }
+            };
+            
+            updateDashboardWithData(demoTransactions, demoStats);
             return;
           }
 
