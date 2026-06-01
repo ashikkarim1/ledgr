@@ -3335,4 +3335,15 @@ const FeedbackIntelligence = (() => {
       return false;
     }
   }, true);
+
+  // Disable partner sign-on CTAs (Q2 2026 release - collecting feedback before go-live)
+  document.addEventListener('click', function(e) {
+    const partnerLink = e.target.closest('a[href="#"], a[href="accountants.html#apply"]');
+    if (partnerLink) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('[Ledgr] Partner CTA disabled - partner program launching Q3 2026');
+      return false;
+    }
+  }, true);
 })();

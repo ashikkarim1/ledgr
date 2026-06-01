@@ -10111,3 +10111,37 @@ a[href="trial.html"]:focus {
   color: #8a8a8a !important;
   transform: none !important;
 }
+
+/* ============================================================
+   Disable Partner Sign-On CTAs (Q2 2026 Release)
+   ============================================================ */
+
+/* Disable partner sign-in and apply links */
+a[href="#"], a[href="accountants.html#apply"] {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
+a[href="#"]:hover, a[href="#"]:focus,
+a[href="accountants.html#apply"]:hover,
+a[href="accountants.html#apply"]:focus {
+  opacity: 0.5 !important;
+  text-decoration: none !important;
+}
+
+/* Style the disabled partner buttons */
+.btn[href="#"],
+.btn[href="accountants.html#apply"] {
+  background-color: #d0d0d0 !important;
+  color: #8a8a8a !important;
+  border-color: #d0d0d0 !important;
+  opacity: 0.6 !important;
+}
+
+.btn[href="#"]:hover,
+.btn[href="accountants.html#apply"]:hover {
+  background-color: #d0d0d0 !important;
+  color: #8a8a8a !important;
+  transform: none !important;
+}
