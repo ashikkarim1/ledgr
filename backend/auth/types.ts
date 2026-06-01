@@ -64,6 +64,10 @@ export interface User {
   settings?: UserSettings;
   two_factor_enabled: boolean;
   two_factor_secret?: string; // TOTP secret (encrypted)
+  // Trial-related fields
+  trial_started_at?: Date;
+  trial_ends_at?: Date;
+  trial_status?: 'active' | 'expired' | 'upgraded' | 'cancelled';
 }
 
 export interface UserSettings {

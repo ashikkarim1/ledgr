@@ -1956,6 +1956,13 @@ const DashboardModule = (() => {
     });
 
     console.log('[Dashboard] Forecast chart drawn');
+
+    // Hide the loading spinner now that chart is drawn
+    const loadingSpinner = document.querySelector('.forecast-loading');
+    if (loadingSpinner) {
+      loadingSpinner.classList.add('hidden');
+      console.log('[Dashboard] Forecast loading spinner hidden');
+    }
   }
 
   /**
@@ -2142,31 +2149,38 @@ const DashboardModule = (() => {
    * Main initialization function
    */
   async function init() {
-    console.log('[Dashboard] Initializing module...');
+    try {
+      console.log('[Dashboard] Initializing module...');
 
-    // Load data
-    const data = await loadFinancialData();
-    if (!data) {
-      console.error('[Dashboard] Failed to load financial data, stopping initialization');
-      return;
+      // Load data
+      const data = await loadFinancialData();
+      if (!data) {
+        console.error('[Dashboard] Failed to load financial data, stopping initialization');
+        return;
+      }
+
+      // Update metrics
+      updateMetrics();
+
+      // Draw chart
+      await new Promise(resolve => setTimeout(() => {
+        drawForecastChart();
+        resolve();
+      }, 200));
+
+      // Start activity updates
+      startActivityUpdates();
+
+      // Initialize interactions
+      initTabs();
+      initForecastPeriods();
+      initMetricAnimations();
+      initChartResize();
+
+      console.log('[Dashboard] Module initialized successfully');
+    } catch (error) {
+      console.error('[Dashboard] Initialization error:', error);
     }
-
-    // Update metrics
-    updateMetrics();
-
-    // Draw chart
-    setTimeout(drawForecastChart, 200);
-
-    // Start activity updates
-    startActivityUpdates();
-
-    // Initialize interactions
-    initTabs();
-    initForecastPeriods();
-    initMetricAnimations();
-    initChartResize();
-
-    console.log('[Dashboard] Module initialized successfully');
   }
 
   // Auto-initialize when DOM is ready
@@ -3311,4 +3325,14 @@ const FeedbackIntelligence = (() => {
     getAdminNotifications,
     clearAdminNotification
   };
+
+  // Disable 14-day trial links site-wide (waiting on feedback)
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('a[href="trial.html"]')) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('[Ledgr] Trial CTA disabled - waiting on user feedback before launch');
+      return false;
+    }
+  }, true);
 })();

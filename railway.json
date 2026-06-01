@@ -1,0 +1,42 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "nixpacks"
+  },
+  "deploy": {
+    "startCommand": "cd backend && npm run start",
+    "restartPolicyType": "on_failure",
+    "restartPolicyMaxRetries": 5
+  },
+  "plugins": {
+    "postgres": {
+      "version": "latest"
+    }
+  },
+  "env": {
+    "NODE_ENV": {
+      "default": "production"
+    },
+    "PORT": {
+      "default": "3000"
+    },
+    "JWT_SECRET": {
+      "default": ""
+    },
+    "SESSION_SECRET": {
+      "default": ""
+    },
+    "ANTHROPIC_API_KEY": {
+      "default": ""
+    },
+    "STRIPE_API_KEY": {
+      "default": ""
+    },
+    "STRIPE_WEBHOOK_SECRET": {
+      "default": ""
+    },
+    "CORS_ORIGIN": {
+      "default": "https://www.ledgr.ae"
+    }
+  }
+}

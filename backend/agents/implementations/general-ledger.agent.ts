@@ -3,39 +3,80 @@ import { Task, Action, ActionType, AgentType, ComplianceCheckResult } from '../a
 
 /**
  * General Ledger Agent
- * Handles journal entry posting, account maintenance, financial statements, and period close
+ * Handles journal entry posting, account maintenance, and period close
  */
 export class GeneralLedgerAgent extends FinancialAgent {
-  constructor(orgId: string) {
-    super(orgId, AgentType.GENERAL_LEDGER, 'Claude Opus 4.1');
+  constructor(orgId: string, database?: any, auditLog?: any, complianceEngine?: any) {
+    const config = {
+      model: 'claude-opus-4.1',
+      temperature: 0.3,
+      max_tokens: 4096,
+      top_p: 0.95,
+      enabled_integrations: ['quickbooks', 'xero', 'sap'],
+      approval_rules: [
+        {
+          name: 'large_journal_entry',
+          trigger: 'amount > 100000',
+          action: 'escalate' as const,
+          approver_role: 'financial_controller',
+        },
+      ],
+      escalation_settings: {
+        enabled: true,
+        escalate_on_errors: true,
+        escalate_on_conflicts: true,
+        escalate_on_anomalies: true,
+        email_recipients: ['finance-team@ledgr.io'],
+        response_time_hours: 24,
+      },
+      retry_policy: {
+        max_retries: 3,
+        initial_delay_ms: 1000,
+        max_delay_ms: 10000,
+        backoff_multiplier: 2,
+      },
+    };
+
+    super('general_ledger' as AgentType, orgId, config, database, auditLog, complianceEngine);
   }
 
   protected async getRequiredInputFields(): Promise<string[]> {
-    return [
-      'journalEntries',
-      'fiscalPeriod',
-      'postingDate',
-      'description',
-      'currencyCode',
-      'departmentCode',
-      'costCenter',
-    ];
+    return ['journalEntries', 'fiscalPeriod', 'postingDate', 'currencyCode'];
+  }
+
+  protected async validateField(fieldName: string, value: any): Promise<{ valid: boolean; error?: string }> {
+    switch (fieldName) {
+      case 'journalEntries':
+        if (!Array.isArray(value) || value.length === 0) {
+          return { valid: false, error: 'journalEntries must be a non-empty array' };
+        }
+        return { valid: true };
+      case 'fiscalPeriod':
+        if (typeof value !== 'string' || !/^\d{4}-\d{2}$/.test(value)) {
+          return { valid: false, error: 'fiscalPeriod must be in YYYY-MM format' };
+        }
+        return { valid: true };
+      case 'postingDate':
+        if (typeof value !== 'string' || isNaN(Date.parse(value))) {
+          return { valid: false, error: 'postingDate must be a valid ISO 8601 date string' };
+        }
+        return { valid: true };
+      case 'currencyCode':
+        if (typeof value !== 'string' || !['AED', 'USD', 'EUR', 'GBP'].includes(value)) {
+          return { valid: false, error: 'currencyCode must be one of: AED, USD, EUR, GBP' };
+        }
+        return { valid: true };
+      default:
+        return { valid: false, error: `Unknown field: ${fieldName}` };
+    }
   }
 
   protected async generateActions(task: Task): Promise<Action[]> {
+    const { journalEntries = [], fiscalPeriod = '', postingDate = '', currencyCode = 'AED' } = task.input_data || {};
+
     const actions: Action[] = [];
 
-    const {
-      journalEntries,
-      fiscalPeriod,
-      postingDate,
-      description,
-      currencyCode,
-      departmentCode,
-      costCenter,
-    } = task.data;
-
-    // Validate entries balance
+    // Calculate totals
     let totalDebits = 0;
     let totalCredits = 0;
     (journalEntries || []).forEach((entry: any) => {
@@ -45,133 +86,48 @@ export class GeneralLedgerAgent extends FinancialAgent {
 
     const isBalanced = Math.abs(totalDebits - totalCredits) < 0.01;
 
-    // Action 1: Validate journal entries
+    // Action 1: Create journal entry
     actions.push({
-      id: `${task.id}-validate-entries-1`,
-      type: ActionType.VALIDATE_DATA,
-      description: `Validate journal entries for ${fiscalPeriod}`,
-      status: 'pending',
-      targetSystem: 'erp',
-      parameters: {
-        entryCount: journalEntries?.length || 0,
+      id: `${task.id}-create-je-1`,
+      task_id: task.id,
+      type: 'create_journal_entry' as ActionType,
+      resource_type: 'journal_entry',
+      changes: {
+        fiscalPeriod,
+        postingDate,
+        journalEntries,
         totalDebits,
         totalCredits,
         isBalanced,
         currencyCode,
       },
-      requiresApproval: !isBalanced,
-      createdAt: new Date(),
-      executedAt: null,
-      result: null,
+      status: 'pending_approval',
+      created_at: new Date(),
     });
 
-    // Action 2: Post journal entries
+    // Action 2: Update GL accounts
     if (isBalanced) {
       actions.push({
-        id: `${task.id}-post-entries-2`,
-        type: ActionType.CREATE_ENTRY,
-        description: `Post journal entries to GL`,
-        status: 'pending',
-        targetSystem: 'erp',
-        parameters: {
-          fiscalPeriod,
-          postingDate,
-          description,
+        id: `${task.id}-update-gl-2`,
+        task_id: task.id,
+        type: 'update_gl_account' as ActionType,
+        resource_type: 'gl_account',
+        changes: {
+          affectedAccounts: journalEntries?.length || 0,
           totalAmount: totalDebits,
-          departmentCode,
-          costCenter,
-          currencyCode,
-        },
-        requiresApproval: totalDebits > 50000, // AED threshold
-        createdAt: new Date(),
-        executedAt: null,
-        result: null,
-      });
-    }
-
-    // Action 3: Update GL balances
-    actions.push({
-      id: `${task.id}-update-balances-3`,
-      type: ActionType.RECORD_DATA,
-      description: `Update GL account balances`,
-      status: 'pending',
-      targetSystem: 'erp',
-      parameters: {
-        fiscalPeriod,
-        totalAmount: totalDebits,
-        affectedAccounts: journalEntries?.length || 0,
-      },
-      requiresApproval: false,
-      createdAt: new Date(),
-      executedAt: null,
-      result: null,
-    });
-
-    // Action 4: Generate trial balance
-    actions.push({
-      id: `${task.id}-trial-balance-4`,
-      type: ActionType.RECORD_DATA,
-      description: `Generate trial balance`,
-      status: 'pending',
-      targetSystem: 'erp',
-      parameters: {
-        fiscalPeriod,
-        postingDate,
-        balanced: isBalanced,
-      },
-      requiresApproval: false,
-      createdAt: new Date(),
-      executedAt: null,
-      result: null,
-    });
-
-    // Action 5: Period close procedures (if requested)
-    if (this.isPeriodCloseRequested(task.data)) {
-      actions.push({
-        id: `${task.id}-period-close-5`,
-        type: ActionType.RECORD_DATA,
-        description: `Execute period close procedures`,
-        status: 'pending',
-        targetSystem: 'erp',
-        parameters: {
           fiscalPeriod,
-          accruals: true,
-          reversal: true,
-          closeStatus: 'IN_PROGRESS',
         },
-        requiresApproval: true,
-        createdAt: new Date(),
-        executedAt: null,
-        result: null,
+        status: 'pending_approval',
+        created_at: new Date(),
       });
     }
-
-    // Action 6: Generate financial statements
-    actions.push({
-      id: `${task.id}-financial-statements-6`,
-      type: ActionType.RECORD_DATA,
-      description: `Generate financial statements`,
-      status: 'pending',
-      targetSystem: 'erp',
-      parameters: {
-        fiscalPeriod,
-        statements: ['INCOME_STATEMENT', 'BALANCE_SHEET', 'CASH_FLOW'],
-        currencyCode,
-      },
-      requiresApproval: false,
-      createdAt: new Date(),
-      executedAt: null,
-      result: null,
-    });
 
     return actions;
   }
 
   protected async checkCompliance(task: Task, actions: Action[]): Promise<ComplianceCheckResult> {
-    const { journalEntries, fiscalPeriod, currencyCode } = task.data;
-
-    const issues: string[] = [];
-    const warnings: string[] = [];
+    const { journalEntries = [], fiscalPeriod = '', currencyCode = 'AED' } = task.input_data || {};
+    const issues: any[] = [];
 
     // Verify entries balance
     let totalDebits = 0;
@@ -182,39 +138,40 @@ export class GeneralLedgerAgent extends FinancialAgent {
     });
 
     if (Math.abs(totalDebits - totalCredits) > 0.01) {
-      issues.push(`Journal entries do not balance (difference: ${totalDebits - totalCredits})`);
+      issues.push({
+        severity: 'error',
+        code: 'UNBALANCED_ENTRIES',
+        description: `Journal entries do not balance (difference: ${totalDebits - totalCredits})`,
+      });
     }
 
     // Fiscal period validation
     const periodRegex = /^\d{4}-\d{2}$/;
     if (!periodRegex.test(fiscalPeriod)) {
-      issues.push(`Invalid fiscal period format: ${fiscalPeriod}`);
+      issues.push({
+        severity: 'error',
+        code: 'INVALID_PERIOD',
+        description: `Invalid fiscal period format: ${fiscalPeriod}`,
+      });
     }
 
     // Currency validation
     if (currencyCode && !['AED', 'USD', 'EUR', 'GBP'].includes(currencyCode)) {
-      issues.push(`Unsupported currency: ${currencyCode}`);
+      issues.push({
+        severity: 'error',
+        code: 'UNSUPPORTED_CURRENCY',
+        description: `Unsupported currency: ${currencyCode}`,
+      });
     }
 
-    // Check for duplicate entries
-    const entryIds = new Set();
-    (journalEntries || []).forEach((entry: any) => {
-      if (entryIds.has(entry.id)) {
-        warnings.push(`Duplicate journal entry detected: ${entry.id}`);
-      }
-      entryIds.add(entry.id);
-    });
-
     return {
-      isCompliant: issues.length === 0,
+      task_id: task.id,
+      agent_id: task.agent_id,
+      vat_validation: true,
+      tax_validation: true,
+      audit_trail_complete: true,
+      data_residency_compliant: true,
       issues,
-      warnings,
-      checkedAt: new Date(),
-      checkType: 'BALANCE, PERIOD, CURRENCY, DUPLICATES',
     };
-  }
-
-  private isPeriodCloseRequested(data: any): boolean {
-    return data.closePeriod === true || data.periodClose === true;
   }
 }

@@ -9,7 +9,8 @@
 
 export type BillingPeriod = 'monthly' | 'annual';
 export type SubscriptionStatus = 'active' | 'past_due' | 'paused' | 'canceled' | 'incomplete' | 'incomplete_expired';
-export type PlanTier = 'starter' | 'professional' | 'enterprise';
+export type PlanTier = 'starter' | 'professional' | 'enterprise' | 'free_trial';
+export type TrialStatus = 'active' | 'expired' | 'upgraded' | 'cancelled';
 
 export interface SubscriptionTierConfig {
   tier: PlanTier;
@@ -22,6 +23,19 @@ export interface SubscriptionTierConfig {
     maxAgents: number;
     storage: number; // MB
     supportLevel: 'basic' | 'priority' | 'dedicated';
+  };
+}
+
+export interface TrialTierConfig {
+  tier: 'free_trial';
+  name: string;
+  description: string;
+  durationDays: number; // 14 days
+  features: {
+    maxUsers: number; // 1
+    maxDocuments: number; // 5
+    maxAgentExecutions: number; // 10
+    storage: number; // MB (e.g., 100)
   };
 }
 
@@ -41,15 +55,54 @@ export interface Subscription {
   pausedAt?: Date;
   autoRenew: boolean;
   usageOverrides?: UsageOverrides;
+  // Trial-specific fields
+  trialStatus?: TrialStatus;
+  trialStartDate?: Date;
+  trialEndDate?: Date;
+  trialUsage?: TrialUsage;
   createdAt: Date;
   updatedAt: Date;
   metadata?: Record<string, string>;
+}
+
+export interface TrialUsage {
+  documentsUsed: number;
+  maxDocuments: number;
+  agentExecutionsUsed: number;
+  maxAgentExecutions: number;
+  usersAdded: number;
+  maxUsers: number;
+  lastResetDate: Date;
+  daysRemaining: number;
 }
 
 export interface UsageOverrides {
   maxUsers?: number;
   maxAgents?: number;
   maxDataUsageGB?: number;
+}
+
+// =====================================================
+// FREE TRIAL TYPES
+// =====================================================
+
+export interface TrialUsageStatus {
+  metric: 'documents' | 'agent_executions' | 'users';
+  currentUsage: number;
+  limit: number;
+  percentage: number;
+  status: 'available' | 'approaching_limit' | 'at_limit';
+  message: string;
+}
+
+export interface TrialStatusResponse {
+  isActive: boolean;
+  trialStatus: TrialStatus;
+  startDate?: Date;
+  endDate?: Date;
+  daysRemaining?: number;
+  usage: TrialUsageStatus[];
+  upgradePromptMessage?: string;
 }
 
 // =====================================================

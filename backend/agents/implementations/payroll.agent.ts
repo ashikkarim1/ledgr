@@ -1,25 +1,46 @@
 import { FinancialAgent } from '../agent-framework';
-import { Task, Action, ActionType, AgentType, ComplianceCheckResult } from '../agent-types';
+import { Task, Action, ActionType } from '../agent-types';
+import { v4 as uuidv4 } from 'uuid';
 
 /**
  * Payroll Agent
- * Handles payroll processing, tax withholding, benefits administration, and labor law compliance
+ * Processes payroll runs, calculates taxes, deductions, and generates payment instructions
  */
 export class PayrollAgent extends FinancialAgent {
-  constructor(orgId: string) {
-    super(orgId, AgentType.PAYROLL, 'Claude Opus 4.1');
+  constructor(orgId: string, database?: any, auditLog?: any, complianceEngine?: any) {
+    const config = {
+      model: 'claude-opus-4-1',
+      temperature: 0.1,
+      max_tokens: 2048,
+      top_p: 0.9,
+      enabled_integrations: [],
+      approval_rules: [],
+      escalation_settings: {
+        enabled: true,
+        escalate_on_errors: true,
+        escalate_on_conflicts: true,
+        escalate_on_anomalies: true,
+        email_recipients: [],
+        response_time_hours: 24,
+      },
+      retry_policy: {
+        max_retries: 3,
+        initial_delay_ms: 1000,
+        max_delay_ms: 10000,
+        backoff_multiplier: 2,
+      },
+    };
+    super('payroll', orgId, config, database || {}, auditLog || {}, complianceEngine || {});
   }
 
   protected async getRequiredInputFields(): Promise<string[]> {
     return [
       'payrollPeriod',
-      'employeeCount',
-      'totalGrossSalary',
-      'taxableIncome',
-      'withholding',
-      'benefits',
+      'employees',
+      'baseSalary',
       'deductions',
-      'currencyCode',
+      'taxRate',
+      'paymentMethod',
     ];
   }
 
@@ -27,173 +48,51 @@ export class PayrollAgent extends FinancialAgent {
     const actions: Action[] = [];
 
     const {
-      payrollPeriod,
-      employeeCount,
-      totalGrossSalary,
-      taxableIncome,
-      withholding,
-      benefits,
-      deductions,
-      currencyCode,
-    } = task.data;
+      payrollPeriod = '2024-01',
+      employees = [],
+      baseSalary = 0,
+      deductions = {},
+      taxRate = 0.05,
+      paymentMethod = 'bank_transfer',
+    } = task.input_data || {};
 
-    // Action 1: Validate payroll data
+    // Action 1: Process payroll
     actions.push({
-      id: `${task.id}-validate-payroll-1`,
-      type: ActionType.VALIDATE_DATA,
-      description: `Validate payroll for period ${payrollPeriod}`,
-      status: 'pending',
-      targetSystem: 'erp',
-      parameters: {
+      id: uuidv4(),
+      task_id: task.id,
+      type: 'process_payroll' as ActionType,
+      resource_type: 'payroll_run',
+      changes: {
         payrollPeriod,
-        employeeCount,
-        totalGrossSalary,
-        taxableIncome,
-        currencyCode,
+        employees,
+        baseSalary,
+        deductions,
+        taxRate,
+        paymentMethod,
+        status: 'pending',
       },
-      requiresApproval: false,
-      createdAt: new Date(),
-      executedAt: null,
-      result: null,
-    });
-
-    // Action 2: Calculate withholding tax
-    actions.push({
-      id: `${task.id}-calculate-withholding-2`,
-      type: ActionType.VALIDATE_DATA,
-      description: `Calculate employee withholding tax`,
-      status: 'pending',
-      targetSystem: 'erp',
-      parameters: {
-        taxableIncome,
-        withholdingRate: 0.05, // UAE standard
-        totalWithholding: taxableIncome * 0.05,
-        currencyCode,
-      },
-      requiresApproval: false,
-      createdAt: new Date(),
-      executedAt: null,
-      result: null,
-    });
-
-    // Action 3: Post payroll GL entries
-    const netPayment = totalGrossSalary - withholding - deductions;
-
-    actions.push({
-      id: `${task.id}-post-payroll-3`,
-      type: ActionType.CREATE_ENTRY,
-      description: `Post payroll GL entries`,
-      status: 'pending',
-      targetSystem: 'erp',
-      parameters: {
-        payrollExpense: totalGrossSalary,
-        wagePayableAccount: '2200',
-        wagePayableAmount: netPayment,
-        withholdingTaxPayable: withholding,
-        benefitsPayable: benefits,
-        currencyCode,
-      },
-      requiresApproval: totalGrossSalary > 100000, // Large payroll
-      createdAt: new Date(),
-      executedAt: null,
-      result: null,
-    });
-
-    // Action 4: Generate payslips
-    actions.push({
-      id: `${task.id}-generate-payslips-4`,
-      type: ActionType.RECORD_DATA,
-      description: `Generate employee payslips`,
-      status: 'pending',
-      targetSystem: 'erp',
-      parameters: {
-        payrollPeriod,
-        employeeCount,
-        payslipFormat: 'PDF',
-        includeDeductions: true,
-      },
-      requiresApproval: false,
-      createdAt: new Date(),
-      executedAt: null,
-      result: null,
-    });
-
-    // Action 5: Schedule wage payment
-    actions.push({
-      id: `${task.id}-schedule-payment-5`,
-      type: ActionType.SCHEDULE_PAYMENT,
-      description: `Schedule wage payment`,
-      status: 'pending',
-      targetSystem: 'erp',
-      parameters: {
-        amount: netPayment,
-        paymentDate: this.calculatePaymentDate(payrollPeriod),
-        paymentMethod: 'bank_transfer',
-        currencyCode,
-      },
-      requiresApproval: false,
-      createdAt: new Date(),
-      executedAt: null,
-      result: null,
-    });
-
-    // Action 6: File withholding tax
-    actions.push({
-      id: `${task.id}-file-withholding-6`,
-      type: ActionType.SUBMIT_COMPLIANCE,
-      description: `File withholding tax with authorities`,
-      status: 'pending',
-      targetSystem: 'tax_authority',
-      parameters: {
-        payrollPeriod,
-        totalWithholding: taxableIncome * 0.05,
-        employeeCount,
-      },
-      requiresApproval: false,
-      createdAt: new Date(),
-      executedAt: null,
-      result: null,
+      status: 'pending_approval',
+      created_at: new Date(),
     });
 
     return actions;
   }
 
-  protected async checkCompliance(task: Task, actions: Action[]): Promise<ComplianceCheckResult> {
-    const { totalGrossSalary, employeeCount, currencyCode } = task.data;
-
-    const issues: string[] = [];
-    const warnings: string[] = [];
-
-    // Minimum wage check (UAE minimum)
-    const minimumWagePerMonth = 2000; // AED
-    const avgSalaryPerEmployee = totalGrossSalary / employeeCount;
-
-    if (avgSalaryPerEmployee < minimumWagePerMonth) {
-      issues.push(`Average salary below UAE minimum wage`);
+  protected async validateField(
+    fieldName: string,
+    value: any
+  ): Promise<{ valid: boolean; error?: string }> {
+    switch (fieldName) {
+      case 'payrollPeriod':
+        return { valid: /^\d{4}-\d{2}$/.test(value as string) };
+      case 'baseSalary':
+        return { valid: typeof value === 'number' && value >= 0 };
+      case 'taxRate':
+        return { valid: typeof value === 'number' && value >= 0 && value <= 1 };
+      case 'employees':
+        return { valid: Array.isArray(value) };
+      default:
+        return { valid: true };
     }
-
-    // Currency validation
-    if (currencyCode && !['AED', 'USD'].includes(currencyCode)) {
-      warnings.push(`Non-standard payroll currency: ${currencyCode}`);
-    }
-
-    return {
-      isCompliant: issues.length === 0,
-      issues,
-      warnings,
-      checkedAt: new Date(),
-      checkType: 'MINIMUM_WAGE, CURRENCY, LABOR_LAW',
-    };
-  }
-
-  private calculatePaymentDate(payrollPeriod: string): string {
-    // Schedule payment for last day of following month
-    const [year, month] = payrollPeriod.split('-');
-    const nextMonth = parseInt(month) + 1;
-    const nextYear = nextMonth > 12 ? parseInt(year) + 1 : year;
-    const adjustedMonth = nextMonth > 12 ? 1 : nextMonth;
-
-    const lastDay = new Date(parseInt(nextYear), adjustedMonth, 0).getDate();
-    return `${nextYear}-${String(adjustedMonth).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
   }
 }

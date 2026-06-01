@@ -6,6 +6,7 @@ import { QuickBooksIntegration } from './quickbooks';
 import { XeroIntegration } from './xero';
 import { FreshBooksIntegration } from './freshbooks';
 import { PlaidIntegration } from './plaid';
+import { WafeqIntegration } from './wafeq-integration';
 import { SyncScheduler } from './sync-scheduler';
 import { IntegrationSetup, SyncJob } from './integration-types';
 
@@ -127,6 +128,9 @@ export class IntegrationManager implements IntegrationFactory {
       
       case 'plaid':
         integration = new PlaidIntegration(integrationId, orgId);
+        break;
+      case 'wafeq':
+        integration = new WafeqIntegration(integrationId, orgId);
         break;
       
       default:
@@ -395,7 +399,7 @@ export class IntegrationManager implements IntegrationFactory {
 
     return {
       totalIntegrations: this.integrations.size,
-      integrationsBy Type: byType,
+      integrationsByType: byType,
       activeSchedules: schedulerStats.scheduled,
       queueSize: schedulerStats.queueSize,
       processingCount: schedulerStats.processing

@@ -18,7 +18,7 @@ export class TaskExecutionEngine {
   private database: any;
   private agentRegistry: Map<string, FinancialAgent> = new Map();
   private maxConcurrentTasks: number = 10;
-  private executionInterval: NodeJS.Timer | null = null;
+  private executionInterval: NodeJS.Timeout | null = null;
 
   constructor(database: any) {
     this.database = database;

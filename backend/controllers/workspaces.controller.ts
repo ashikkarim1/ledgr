@@ -11,6 +11,7 @@ import {
   WorkspaceDetails,
   WorkspaceMember,
 } from "../response-types";
+import { checkTrialUserLimit, getTrialInfo } from "../lib/db-helpers";
 
 /**
  * POST /v1/workspaces
@@ -72,6 +73,7 @@ export const createWorkspace = asyncHandler(async (req: Request, res: Response) 
       country,
       currency: currency || "AED",
       created_at: new Date().toISOString(),
+      created_by: user.user_id,
       role: "admin",
     },
     meta: {
@@ -114,7 +116,7 @@ export const listWorkspaces = asyncHandler(async (req: Request, res: Response) =
         page,
         limit,
         total,
-        pages: Math.ceil(total / limit),
+        has_more: offset + limit < total,
       },
     },
     errors: null,
@@ -238,18 +240,29 @@ export const inviteMember = asyncHandler(async (req: Request, res: Response) => 
     throw ApiErrors.unauthorized("Authentication required");
   }
 
-  // Verify user is workspace admin
-  const userRole = await getUserWorkspaceRole(user.user_id, workspace_id);
-  if (userRole !== "admin") {
-    throw ApiErrors.forbidden("Only workspace admins can invite members");
-  }
-
   if (!email || !role) {
     throw ApiErrors.invalidRequest("Email and role are required");
   }
 
   if (!["admin", "accountant", "viewer"].includes(role)) {
     throw ApiErrors.validation("role", "Invalid role");
+  }
+
+  // Check trial user limit BEFORE permission check
+  const trialInfo = await getTrialInfo(workspace_id);
+  if (trialInfo && trialInfo.plan === "free_trial") {
+    const userLimitCheck = await checkTrialUserLimit(workspace_id);
+    if (!userLimitCheck.allowed) {
+      throw ApiErrors.conflict(
+        `User limit exceeded (${userLimitCheck.current}/${userLimitCheck.limit} concurrent user for free trial)`
+      );
+    }
+  }
+
+  // Verify user is workspace admin (after trial check)
+  const userRole = await getUserWorkspaceRole(user.user_id, workspace_id);
+  if (userRole !== "admin") {
+    throw ApiErrors.forbidden("Only workspace admins can invite members");
   }
 
   // Check if user exists
@@ -353,7 +366,7 @@ export const listMembers = asyncHandler(async (req: Request, res: Response) => {
         page,
         limit,
         total,
-        pages: Math.ceil(total / limit),
+        has_more: offset + limit < total,
       },
     },
     errors: null,

@@ -7,8 +7,8 @@ import { Request, Response } from "express";
 import { ApiErrors, asyncHandler } from "../middleware/error-handler";
 import {
   ApiResponse,
-  DashboardData,
-  Account,
+  FinancialDashboard,
+  ChartOfAccountsItem,
   Transaction,
 } from "../response-types";
 
@@ -18,14 +18,14 @@ import {
  */
 export const getDashboard = asyncHandler(async (req: Request, res: Response) => {
   const user = (req as any).user;
-  const { workspace_id } = req.query;
+  const workspace_id = (req as any).workspace_id || req.query.workspace_id;
 
   if (!user) {
     throw ApiErrors.unauthorized("Authentication required");
   }
 
   if (!workspace_id) {
-    throw ApiErrors.invalidRequest("workspace_id is required");
+    throw ApiErrors.invalidRequest("Missing workspace or user context");
   }
 
   // Verify access
@@ -40,7 +40,7 @@ export const getDashboard = asyncHandler(async (req: Request, res: Response) => 
     throw ApiErrors.notFound("Dashboard data not found");
   }
 
-  const response: ApiResponse<DashboardData> = {
+  const response: ApiResponse<FinancialDashboard> = {
     success: true,
     data: dashboard,
     meta: {
@@ -60,14 +60,15 @@ export const getDashboard = asyncHandler(async (req: Request, res: Response) => 
  */
 export const listAccounts = asyncHandler(async (req: Request, res: Response) => {
   const user = (req as any).user;
-  const { workspace_id, account_type, currency } = req.query;
+  const workspace_id = (req as any).workspace_id || req.query.workspace_id;
+  const { account_type, currency } = req.query;
 
   if (!user) {
     throw ApiErrors.unauthorized("Authentication required");
   }
 
   if (!workspace_id) {
-    throw ApiErrors.invalidRequest("workspace_id is required");
+    throw ApiErrors.invalidRequest("Missing workspace or user context");
   }
 
   // Verify access
@@ -91,7 +92,7 @@ export const listAccounts = asyncHandler(async (req: Request, res: Response) => 
     offset
   );
 
-  const response: ApiResponse<Account[]> = {
+  const response: ApiResponse<ChartOfAccountsItem[]> = {
     success: true,
     data: accounts,
     meta: {
@@ -102,7 +103,7 @@ export const listAccounts = asyncHandler(async (req: Request, res: Response) => 
         page,
         limit,
         total,
-        pages: Math.ceil(total / limit),
+        has_more: offset + limit < total,
       },
     },
     errors: null,
@@ -192,7 +193,7 @@ export const listTransactions = asyncHandler(async (req: Request, res: Response)
         page,
         limit,
         total,
-        pages: Math.ceil(total / limit),
+        has_more: offset + limit < total,
       },
     },
     errors: null,
@@ -268,12 +269,14 @@ export const createTransaction = asyncHandler(async (req: Request, res: Response
     success: true,
     data: {
       transaction_id,
-      account_id,
+      account_from: account_id,
+      account_to: account_id, // TODO: Implement double-entry accounting with contra-account
       description,
       amount: parseFloat(amount),
       currency: currency || "AED",
       date: date as string,
-      category,
+      status: "draft",
+      tags: category ? [category] : [],
       created_at: new Date().toISOString(),
     },
     meta: {
@@ -346,8 +349,24 @@ function generateId(prefix: string): string {
  */
 
 async function userHasWorkspaceAccess(userId: string, workspaceId: string): Promise<boolean> {
-  // TODO: Check workspace_members table
-  return false;
+  try {
+    const { getDbPool } = await import("../lib/db-helpers");
+    const pool = getDbPool();
+
+    // Check if user belongs to workspace by checking their organization_id
+    const query = `
+      SELECT id
+      FROM users
+      WHERE id = $1 AND organization_id = $2 AND deleted_at IS NULL
+      LIMIT 1
+    `;
+
+    const result = await pool.query(query, [userId, workspaceId]);
+    return result.rows.length > 0;
+  } catch (error) {
+    console.error(`[userHasWorkspaceAccess] Error checking access for user ${userId} on workspace ${workspaceId}:`, error);
+    return false;
+  }
 }
 
 async function fetchDashboardData(workspaceId: string): Promise<DashboardData | null> {

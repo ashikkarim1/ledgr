@@ -130,7 +130,7 @@ export abstract class FinancialAgent {
    * Generate actions (invoices, payments, JEs) that agent would like to create
    * Actions are NOT executed immediately - queued for approval
    */
-  protected abstract async generateActions(task: Task): Promise<Action[]>;
+  protected abstract generateActions(task: Task): Promise<Action[]>;
 
   /**
    * Get required input fields for this agent type
@@ -331,7 +331,7 @@ export abstract class FinancialAgent {
       7 // Last 7 days
     );
 
-    const correctCount = recentFeedback.filter((f) =>
+    const correctCount = recentFeedback.filter((f: AgentFeedback) =>
       ['correct', 'partial'].includes(f.feedback_type)
     ).length;
 
@@ -565,22 +565,22 @@ export class DefaultAgentFactory implements AgentFactory {
     // Dynamically import agent implementations
     switch (type) {
       case 'accounts_payable':
-        const { AccountsPayableAgent } = await import('./agents/ap-agent');
+        const { AccountsPayableAgent } = await import('./implementations/accounts-payable.agent');
         return AccountsPayableAgent;
       case 'accounts_receivable':
-        const { AccountsReceivableAgent } = await import('./agents/ar-agent');
+        const { AccountsReceivableAgent } = await import('./implementations/accounts-receivable.agent');
         return AccountsReceivableAgent;
       case 'reconciliation':
-        const { ReconciliationAgent } = await import('./agents/reconciliation-agent');
+        const { ReconciliationAgent } = await import('./implementations/reconciliation.agent');
         return ReconciliationAgent;
       case 'tax':
-        const { TaxAgent } = await import('./agents/tax-agent');
+        const { TaxAgent } = await import('./implementations/tax.agent');
         return TaxAgent;
       case 'payroll':
-        const { PayrollAgent } = await import('./agents/payroll-agent');
+        const { PayrollAgent } = await import('./implementations/payroll.agent');
         return PayrollAgent;
       case 'general_ledger':
-        const { GeneralLedgerAgent } = await import('./agents/gl-agent');
+        const { GeneralLedgerAgent } = await import('./implementations/general-ledger.agent');
         return GeneralLedgerAgent;
       default:
         throw new Error(`Unknown agent type: ${type}`);

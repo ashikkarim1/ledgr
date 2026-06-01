@@ -1,0 +1,201 @@
+{
+  "company": {
+    "name": "Hilal Trading FZ-LLC",
+    "zone": "JAFZA, Dubai",
+    "filingType": "JAFZ Licensed Trading Company",
+    "employeeCount": 18,
+    "fiscalYear": "2025",
+    "currency": "AED"
+  },
+  "period": {
+    "year": 2025,
+    "quarter": "Q2",
+    "month": "May",
+    "startDate": "2025-04-01",
+    "endDate": "2025-06-30",
+    "monthEndDate": "2025-05-31"
+  },
+  "cash": {
+    "onHand": 482318,
+    "weeklyChange": 4.2,
+    "weeklyChangeAbsolute": 20000,
+    "lastWeekAmount": 462318,
+    "forecastNext90Days": [
+      480000, 485000, 490000, 495000, 498000,
+      502000, 505000, 510000, 512000, 515000,
+      520000, 518000, 522000, 525000, 530000
+    ]
+  },
+  "vat": {
+    "dueDateQ2": "2025-07-15",
+    "amountDue": 41205,
+    "status": "Filed 11 days early",
+    "Q2Progress": 0.62,
+    "quarterlyBreakdown": {
+      "output": 67420,
+      "input": -26215,
+      "reverseCharge": 0,
+      "designatedZone": 0,
+      "netLiability": 41205
+    },
+    "filingHistory": [
+      { "period": "Q1 2025", "amount": 38900, "status": "Filed on time", "date": "2025-04-15" },
+      { "period": "Q4 2024", "amount": 45200, "status": "Filed on time", "date": "2025-01-15" }
+    ]
+  },
+  "tax": {
+    "ctEstimate": 19840,
+    "status": "Above SBR threshold",
+    "threshold": 375000,
+    "estimatedIncome": 520000,
+    "thresholdExceeded": true,
+    "quarterlyProjection": 78500,
+    "annualProjection": 235000
+  },
+  "payroll": {
+    "runway": "14.2 months",
+    "burnRate": 33500,
+    "monthlyPayroll": 284000,
+    "employees": 18,
+    "nextWPSDeadline": "2025-06-10",
+    "wpsStatus": "Automated - Filed on time"
+  },
+  "transactions": [
+    {
+      "id": "TXN-20250521-001",
+      "date": "2025-05-21",
+      "description": "Etisalat e& — fibre & mobile, May",
+      "source": "Bank - ENBD",
+      "amount": -1242.00,
+      "category": "Telecommunications",
+      "vat": "5% VAT",
+      "matched": true,
+      "invoice": "INV-2410",
+      "agent": "Capture agent",
+      "timeAgo": "4 in last hour"
+    },
+    {
+      "id": "TXN-20250519-001",
+      "date": "2025-05-19",
+      "description": "DEWA — Business Bay office",
+      "source": "Bank - Mashreq",
+      "amount": -3818.40,
+      "category": "Utilities",
+      "vat": "5% VAT",
+      "ocr": true,
+      "slipAttached": true,
+      "agent": "OCR agent",
+      "confidence": "98%"
+    },
+    {
+      "id": "TXN-20250518-001",
+      "date": "2025-05-18",
+      "description": "Al Mazaya Holding — consulting retainer",
+      "source": "Bank - Stripe",
+      "amount": 42000.00,
+      "category": "Revenue - designated zone",
+      "designatedZone": true,
+      "eInvoice": "via Peppol",
+      "agent": "Revenue agent"
+    },
+    {
+      "id": "TXN-20250517-001",
+      "date": "2025-05-17",
+      "description": "RAK Customs Clearance - Air freight Feb shipment",
+      "source": "Bank - FAB",
+      "amount": -8950.00,
+      "category": "COGS - Freight",
+      "vat": "0% (import)",
+      "agent": "Category agent",
+      "matched": true,
+      "invoice": "CSD-2025-512"
+    },
+    {
+      "id": "TXN-20250516-001",
+      "date": "2025-05-16",
+      "description": "Payroll - 18 employees + benefits",
+      "source": "Internal - Payroll",
+      "amount": -284000.00,
+      "category": "Payroll",
+      "breakdown": "Salaries: 216000, Benefits: 48000, Withholding: 20000",
+      "wpsStatus": "Filed with EOSB",
+      "agent": "Payroll agent",
+      "automated": true
+    }
+  ],
+  "reconciliation": {
+    "status": "95% reconciled",
+    "pending": 12400,
+    "lastReconciled": "2025-05-20",
+    "bankFeeds": 3,
+    "matchRate": 0.95
+  },
+  "invoices": {
+    "outstandingAR": 285600,
+    "avgDaysOutstanding": 34,
+    "overdue": 45200,
+    "invoicesSent": 28,
+    "invoicesOverdue": 3,
+    "eInvoicingReady": true,
+    "peppol": "Connected"
+  },
+  "agents": {
+    "active": [
+      {
+        "name": "Capture Agent",
+        "function": "Transaction capture & categorization",
+        "lastActivity": "4 in last hour",
+        "accuracy": 98.5,
+        "processedToday": 43
+      },
+      {
+        "name": "VAT Agent",
+        "function": "VAT compliance & filing",
+        "lastActivity": "Filed Q2 11 days early",
+        "accuracy": 99.8,
+        "processedToday": "Q2 complete"
+      },
+      {
+        "name": "Payroll Agent",
+        "function": "WPS & EOSB filing",
+        "lastActivity": "Filed on 16-May",
+        "accuracy": 100,
+        "processedToday": "Automated"
+      },
+      {
+        "name": "Revenue Agent",
+        "function": "E-invoicing & Peppol",
+        "lastActivity": "18-May",
+        "accuracy": 99.2,
+        "processedToday": 2
+      }
+    ]
+  },
+  "compliance": {
+    "vat": {
+      "status": "Compliant",
+      "nextDeadline": "2025-07-15",
+      "filingsDue": 0,
+      "daysUntilDeadline": 45,
+      "certifications": ["FTA Registered", "Peppol Ready"]
+    },
+    "payroll": {
+      "status": "Compliant",
+      "nextDeadline": "2025-06-10",
+      "filingsDue": 1,
+      "daysUntilDeadline": 10,
+      "certifications": ["WPS Automated", "EOSB Connected"]
+    },
+    "corporateTax": {
+      "status": "Filed (2024)",
+      "nextDeadline": "2026-03-31",
+      "amountPaid": 45200,
+      "certifications": ["CT Registered", "SBR Threshold Exceeded"]
+    },
+    "aml": {
+      "status": "Compliant",
+      "lastAudit": "2025-05-10",
+      "certifications": ["AML Screening Active", "JAFZ Compliant"]
+    }
+  }
+}

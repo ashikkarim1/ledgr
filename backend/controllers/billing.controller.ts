@@ -18,14 +18,14 @@ import {
  */
 export const getSubscription = asyncHandler(async (req: Request, res: Response) => {
   const user = (req as any).user;
-  const { workspace_id } = req.query;
+  const workspace_id = (req as any).workspace_id || req.query.workspace_id;
 
   if (!user) {
     throw ApiErrors.unauthorized("Authentication required");
   }
 
   if (!workspace_id) {
-    throw ApiErrors.invalidRequest("workspace_id is required");
+    throw ApiErrors.invalidRequest("Missing workspace or user context");
   }
 
   // Verify access
@@ -34,9 +34,10 @@ export const getSubscription = asyncHandler(async (req: Request, res: Response) 
     throw ApiErrors.forbidden("No access to this workspace");
   }
 
-  // Verify user is workspace admin
+  // Verify user is workspace admin or trial user
   const userRole = await getUserWorkspaceRole(user.user_id, workspace_id as string);
-  if (userRole !== "admin") {
+  // Allow trial users and admins to view billing
+  if (userRole && userRole !== "admin" && user.trial_plan === null) {
     throw ApiErrors.forbidden("Only workspace admins can view billing");
   }
 
@@ -348,18 +349,78 @@ function calculateNextBillingDate(billingCycle: string): Date {
  */
 
 async function userHasWorkspaceAccess(userId: string, workspaceId: string): Promise<boolean> {
-  // TODO: Check workspace_members table
-  return false;
+  try {
+    const { getDbPool } = await import("../lib/db-helpers");
+    const pool = getDbPool();
+
+    // Check if user belongs to workspace by checking their organization_id
+    const query = `
+      SELECT id
+      FROM users
+      WHERE id = $1 AND organization_id = $2 AND deleted_at IS NULL
+      LIMIT 1
+    `;
+
+    const result = await pool.query(query, [userId, workspaceId]);
+    return result.rows.length > 0;
+  } catch (error) {
+    console.error(`[userHasWorkspaceAccess] Error checking access for user ${userId} on workspace ${workspaceId}:`, error);
+    return false;
+  }
 }
 
 async function getUserWorkspaceRole(userId: string, workspaceId: string): Promise<string | null> {
-  // TODO: Query database
-  return null;
+  try {
+    const { getDbPool } = await import("../lib/db-helpers");
+    const pool = getDbPool();
+
+    // Query user roles in workspace
+    const query = `
+      SELECT r.name
+      FROM user_roles ur
+      LEFT JOIN roles r ON ur.role_id = r.id
+      WHERE ur.user_id = $1 AND ur.organization_id = $2
+      LIMIT 1
+    `;
+
+    const result = await pool.query(query, [userId, workspaceId]);
+    if (result.rows.length === 0) {
+      // Check users table for admin role flag
+      const userQuery = `
+        SELECT id FROM users WHERE id = $1 AND organization_id = $2 AND deleted_at IS NULL
+      `;
+      const userResult = await pool.query(userQuery, [userId, workspaceId]);
+      return userResult.rows.length > 0 ? "member" : null;
+    }
+    return result.rows[0]?.name || "member";
+  } catch (error) {
+    console.error(`[getUserWorkspaceRole] Error getting role for user ${userId} on workspace ${workspaceId}:`, error);
+    return null;
+  }
 }
 
 async function fetchSubscription(workspaceId: string): Promise<Subscription | null> {
-  // TODO: Query database
-  return null;
+  const { getSubscriptionByWorkspace } = await import("../lib/db-helpers");
+  const subscription = await getSubscriptionByWorkspace(workspaceId);
+  
+  if (!subscription) {
+    return null;
+  }
+
+  return {
+    subscription_id: subscription.id,
+    workspace_id: subscription.organization_id,
+    plan: subscription.plan,
+    status: subscription.status,
+    trial_end_date: subscription.trial_end_date?.toISOString(),
+    current_period_start: subscription.current_period_start?.toISOString(),
+    current_period_end: subscription.current_period_end?.toISOString(),
+    amount_per_cycle: subscription.amount_per_cycle || 0,
+    currency: subscription.currency || 'AED',
+    billing_interval: 'monthly',
+    created_at: subscription.created_at?.toISOString(),
+    updated_at: subscription.updated_at?.toISOString(),
+  };
 }
 
 async function fetchPlan(planId: string) {

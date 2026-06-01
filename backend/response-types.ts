@@ -22,6 +22,7 @@ export interface PaginationMeta {
   total: number;
   limit: number;
   offset?: number;
+  page?: number;
   cursor?: string;
   next_offset?: number;
   has_more: boolean;
@@ -76,6 +77,13 @@ export interface LoginResponse {
   refresh_token: string;
   token_expires_in: number;
   role: UserRole;
+  trial?: {
+    status: string;
+    plan: string;
+    days_remaining: number;
+    trial_started_at?: string;
+    trial_ends_at?: string;
+  } | null;
 }
 
 export interface RefreshRequest {
@@ -104,6 +112,7 @@ export interface JWTPayload {
   email: string;
   role: UserRole;
   scope: string[]; // Permissions
+  trial_status?: string; // Trial status (active, expired, upgraded, etc.)
   exp: number; // Expiration time (Unix)
   iat: number; // Issued at (Unix)
   sub: string; // Subject (user_id)
@@ -133,18 +142,42 @@ export interface Workspace {
   workspace_id: string;
   name: string;
   industry: string;
+  country?: string;
+  currency?: string;
   vat_registration_number?: string;
   tax_id?: string;
-  fiscal_year_end: string; // MM-DD
-  members_count: number;
+  fiscal_year_end?: string; // MM-DD
+  fiscal_year_start?: string; // MM-DD
+  members_count?: number;
   created_at: string;
   created_by: string;
+  role?: string;
+  // Trial-related fields
+  plan?: 'free_trial' | 'free' | 'professional' | 'enterprise';
+  trial_status?: 'active' | 'expired' | 'upgraded' | 'cancelled';
+  trial_start_date?: string; // ISO 8601
+  trial_end_date?: string; // ISO 8601
+  trial_days_remaining?: number;
 }
 
 export interface WorkspaceDetails extends Workspace {
-  members: WorkspaceMember[];
-  subscription_id: string;
-  plan: "free" | "professional" | "enterprise";
+  members?: WorkspaceMember[];
+  subscription_id?: string;
+  plan?: "free_trial" | "free" | "professional" | "enterprise";
+  trial_usage?: {
+    documents_used: number;
+    documents_limit: number;
+    agent_executions_used: number;
+    agent_executions_limit: number;
+    users_added: number;
+    users_limit: number;
+  };
+  stats?: {
+    transactions_count: number;
+    agents_count: number;
+    documents_count: number;
+    team_members_count: number;
+  };
 }
 
 export interface WorkspaceMember {

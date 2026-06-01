@@ -1,24 +1,45 @@
 import { FinancialAgent } from '../agent-framework';
-import { Task, Action, ActionType, AgentType, ComplianceCheckResult } from '../agent-types';
+import { Task, Action, ActionType } from '../agent-types';
+import { v4 as uuidv4 } from 'uuid';
 
 /**
  * Reconciliation Agent
- * Handles bank reconciliation, GL reconciliation, variance investigation, and reporting
+ * Matches transactions between different accounts and systems
  */
 export class ReconciliationAgent extends FinancialAgent {
-  constructor(orgId: string) {
-    super(orgId, AgentType.RECONCILIATION, 'Claude Opus 4.1');
+  constructor(orgId: string, database?: any, auditLog?: any, complianceEngine?: any) {
+    const config = {
+      model: 'claude-opus-4-1',
+      temperature: 0.1,
+      max_tokens: 2048,
+      top_p: 0.9,
+      enabled_integrations: [],
+      approval_rules: [],
+      escalation_settings: {
+        enabled: true,
+        escalate_on_errors: true,
+        escalate_on_conflicts: true,
+        escalate_on_anomalies: true,
+        email_recipients: [],
+        response_time_hours: 24,
+      },
+      retry_policy: {
+        max_retries: 3,
+        initial_delay_ms: 1000,
+        max_delay_ms: 10000,
+        backoff_multiplier: 2,
+      },
+    };
+    super('reconciliation', orgId, config, database || {}, auditLog || {}, complianceEngine || {});
   }
 
   protected async getRequiredInputFields(): Promise<string[]> {
     return [
-      'bankStatementDate',
-      'bankBalance',
-      'glAccountCode',
-      'glBalance',
-      'transactionList',
-      'bankName',
-      'currencyCode',
+      'accountId',
+      'statementDate',
+      'statementBalance',
+      'systemBalance',
+      'transactions',
     ];
   }
 
@@ -26,148 +47,50 @@ export class ReconciliationAgent extends FinancialAgent {
     const actions: Action[] = [];
 
     const {
-      bankStatementDate,
-      bankBalance,
-      glAccountCode,
-      glBalance,
-      transactionList,
-      bankName,
-      currencyCode,
-    } = task.data;
+      accountId = 'ACC-001',
+      statementDate = new Date().toISOString(),
+      statementBalance = 0,
+      systemBalance = 0,
+      transactions = [],
+    } = task.input_data || {};
 
-    const variance = bankBalance - glBalance;
-
-    // Action 1: Match transactions
+    // Action 1: Reconcile account
     actions.push({
-      id: `${task.id}-match-transactions-1`,
-      type: ActionType.VALIDATE_DATA,
-      description: `Match bank transactions with GL entries`,
-      status: 'pending',
-      targetSystem: 'erp',
-      parameters: {
-        bankStatementDate,
-        transactionCount: transactionList?.length || 0,
-        bankName,
+      id: uuidv4(),
+      task_id: task.id,
+      type: 'reconcile_account' as ActionType,
+      resource_type: 'reconciliation',
+      changes: {
+        accountId,
+        statementDate,
+        statementBalance,
+        systemBalance,
+        transactions,
+        variance: statementBalance - systemBalance,
+        status: 'pending_review',
       },
-      requiresApproval: false,
-      createdAt: new Date(),
-      executedAt: null,
-      result: null,
-    });
-
-    // Action 2: Identify outstanding items
-    actions.push({
-      id: `${task.id}-identify-outstanding-2`,
-      type: ActionType.VALIDATE_DATA,
-      description: `Identify outstanding checks and deposits`,
-      status: 'pending',
-      targetSystem: 'erp',
-      parameters: {
-        bankBalance,
-        glBalance,
-        variance,
-        statementDate: bankStatementDate,
-      },
-      requiresApproval: false,
-      createdAt: new Date(),
-      executedAt: null,
-      result: null,
-    });
-
-    // Action 3: Investigate variance (if > tolerance)
-    if (Math.abs(variance) > 100) { // AED 100 tolerance
-      actions.push({
-        id: `${task.id}-investigate-variance-3`,
-        type: ActionType.VALIDATE_DATA,
-        description: `Investigate variance of ${variance}`,
-        status: 'pending',
-        targetSystem: 'erp',
-        parameters: {
-          variance,
-          tolerance: 100,
-          actionRequired: true,
-        },
-        requiresApproval: true, // Always requires approval for material variances
-        createdAt: new Date(),
-        executedAt: null,
-        result: null,
-      });
-    }
-
-    // Action 4: Post reconciling entries
-    if (Math.abs(variance) > 0 && Math.abs(variance) <= 100) {
-      actions.push({
-        id: `${task.id}-post-entries-4`,
-        type: ActionType.CREATE_ENTRY,
-        description: `Post reconciling entries`,
-        status: 'pending',
-        targetSystem: 'erp',
-        parameters: {
-          glAccount: glAccountCode,
-          amount: variance,
-          description: 'Bank reconciliation adjustment',
-          currencyCode,
-          statementDate: bankStatementDate,
-        },
-        requiresApproval: false,
-        createdAt: new Date(),
-        executedAt: null,
-        result: null,
-      });
-    }
-
-    // Action 5: Generate reconciliation report
-    actions.push({
-      id: `${task.id}-generate-report-5`,
-      type: ActionType.RECORD_DATA,
-      description: `Generate bank reconciliation report`,
-      status: 'pending',
-      targetSystem: 'erp',
-      parameters: {
-        statementDate: bankStatementDate,
-        bankName,
-        bankBalance,
-        glBalance,
-        variance,
-        status: Math.abs(variance) === 0 ? 'RECONCILED' : 'PENDING_APPROVAL',
-      },
-      requiresApproval: false,
-      createdAt: new Date(),
-      executedAt: null,
-      result: null,
+      status: 'pending_approval',
+      created_at: new Date(),
     });
 
     return actions;
   }
 
-  protected async checkCompliance(task: Task, actions: Action[]): Promise<ComplianceCheckResult> {
-    const { bankBalance, glBalance, currencyCode } = task.data;
-
-    const issues: string[] = [];
-    const warnings: string[] = [];
-
-    const variance = bankBalance - glBalance;
-
-    // Tolerance check
-    if (Math.abs(variance) > 1000) {
-      issues.push(`Variance of ${variance} exceeds acceptable tolerance`);
+  protected async validateField(
+    fieldName: string,
+    value: any
+  ): Promise<{ valid: boolean; error?: string }> {
+    switch (fieldName) {
+      case 'accountId':
+        return { valid: typeof value === 'string' && value.length > 0 };
+      case 'statementBalance':
+        return { valid: typeof value === 'number' };
+      case 'systemBalance':
+        return { valid: typeof value === 'number' };
+      case 'transactions':
+        return { valid: Array.isArray(value) };
+      default:
+        return { valid: true };
     }
-
-    if (Math.abs(variance) > 100 && Math.abs(variance) <= 1000) {
-      warnings.push(`Material variance of ${variance} requires investigation`);
-    }
-
-    // Currency validation
-    if (currencyCode && !['AED', 'USD', 'EUR', 'GBP'].includes(currencyCode)) {
-      issues.push(`Unsupported currency: ${currencyCode}`);
-    }
-
-    return {
-      isCompliant: issues.length === 0,
-      issues,
-      warnings,
-      checkedAt: new Date(),
-      checkType: 'VARIANCE_TOLERANCE, CURRENCY',
-    };
   }
 }

@@ -5,6 +5,7 @@
  */
 
 import crypto from 'crypto';
+import { randomBytes, createCipheriv, createDecipheriv } from 'crypto';
 import {
   OAuthToken,
   OAuthFlowState,
@@ -41,13 +42,13 @@ export class TokenEncryption {
   }
 
   encrypt(data: OAuthToken): string {
-    const iv = crypto.randomBytes(16);
-    const cipher = crypto.createCipheriv(this.algorithm, this.encryptionKey, iv);
+    const iv = randomBytes(16);
+    const cipher = createCipheriv(this.algorithm, this.encryptionKey, iv);
 
     let encrypted = cipher.update(JSON.stringify(data), 'utf8', 'hex');
     encrypted += cipher.final('hex');
 
-    const authTag = cipher.getAuthTag();
+    const authTag = (cipher as any).getAuthTag();
     return `${iv.toString('hex')}:${authTag.toString('hex')}:${encrypted}`;
   }
 
@@ -56,8 +57,8 @@ export class TokenEncryption {
     const iv = Buffer.from(ivHex, 'hex');
     const authTag = Buffer.from(authTagHex, 'hex');
 
-    const decipher = crypto.createDecipheriv(this.algorithm, this.encryptionKey, iv);
-    decipher.setAuthTag(authTag);
+    const decipher = createDecipheriv(this.algorithm, this.encryptionKey, iv);
+    (decipher as any).setAuthTag(authTag);
 
     let decrypted = decipher.update(encrypted, 'hex', 'utf8');
     decrypted += decipher.final('utf8');
@@ -320,11 +321,11 @@ export abstract class BaseIntegration implements IIntegrationService {
   // ========================================================================
 
   protected generateState(): string {
-    return crypto.randomBytes(32).toString('hex');
+    return randomBytes(32).toString('hex');
   }
 
   protected generateCodeVerifier(): string {
-    return crypto.randomBytes(32).toString('base64url');
+    return randomBytes(32).toString('base64url');
   }
 
   protected generateCodeChallenge(codeVerifier: string): string {

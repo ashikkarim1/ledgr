@@ -17,15 +17,16 @@ import { ReconciliationAgent } from './reconciliation.agent';
 import { TaxAgent } from './tax.agent';
 import { PayrollAgent } from './payroll.agent';
 import { GeneralLedgerAgent } from './general-ledger.agent';
-import { AgentType, FinancialAgent as IFinancialAgent } from '../agent-types';
+import { AgentType } from '../agent-types';
+import { FinancialAgent } from '../agent-framework';
 
-export const AGENT_IMPLEMENTATIONS: Record<AgentType, typeof IFinancialAgent> = {
-  [AgentType.ACCOUNTS_PAYABLE]: AccountsPayableAgent as any,
-  [AgentType.ACCOUNTS_RECEIVABLE]: AccountsReceivableAgent as any,
-  [AgentType.RECONCILIATION]: ReconciliationAgent as any,
-  [AgentType.TAX]: TaxAgent as any,
-  [AgentType.PAYROLL]: PayrollAgent as any,
-  [AgentType.GENERAL_LEDGER]: GeneralLedgerAgent as any,
+export const AGENT_IMPLEMENTATIONS: Record<AgentType, new (orgId: string, database?: any, auditLog?: any, complianceEngine?: any) => FinancialAgent> = {
+  'accounts_payable': AccountsPayableAgent,
+  'accounts_receivable': AccountsReceivableAgent,
+  'reconciliation': ReconciliationAgent,
+  'tax': TaxAgent,
+  'payroll': PayrollAgent,
+  'general_ledger': GeneralLedgerAgent,
 };
 
 /**
@@ -34,7 +35,7 @@ export const AGENT_IMPLEMENTATIONS: Record<AgentType, typeof IFinancialAgent> = 
  * @param orgId The organization ID for isolation
  * @returns An instance of the requested agent type
  */
-export function createAgent(agentType: AgentType, orgId: string): IFinancialAgent {
+export function createAgent(agentType: AgentType, orgId: string): FinancialAgent {
   const AgentClass = AGENT_IMPLEMENTATIONS[agentType];
   if (!AgentClass) {
     throw new Error(`Unknown agent type: ${agentType}`);

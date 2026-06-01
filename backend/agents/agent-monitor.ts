@@ -12,6 +12,7 @@ import {
   TaskExecutionStats,
   CostBreakdown,
   Agent,
+  AgentType,
 } from './agent-types';
 
 // ============================================================================
@@ -24,7 +25,7 @@ export class AgentMonitor {
   private healthChecks: Map<string, AgentHealthStatus> = new Map();
   private alerts: AgentAlert[] = [];
   private metrics: Map<string, AgentMetrics> = new Map();
-  private monitoringInterval: NodeJS.Timer | null = null;
+  private monitoringInterval: NodeJS.Timeout | null = null;
 
   // Alert thresholds
   private readonly THRESHOLDS = {
@@ -108,6 +109,24 @@ export class AgentMonitor {
     await this.evaluateHealthThresholds(agent, health);
 
     return health;
+  }
+
+  /**
+   * Get the last successful task for an agent
+   */
+  private getLastSuccessfulTask(tasks: any[]): Date | undefined {
+    const successful = tasks.filter((t: any) => t.status === 'completed');
+    if (successful.length === 0) return undefined;
+    return new Date(Math.max(...successful.map((t: any) => new Date(t.completed_at).getTime())));
+  }
+
+  /**
+   * Get the last failure for an agent
+   */
+  private getLastFailure(tasks: any[]): any | undefined {
+    const failed = tasks.filter((t: any) => t.status === 'failed');
+    if (failed.length === 0) return undefined;
+    return failed[failed.length - 1].error;
   }
 
   /**
@@ -270,7 +289,7 @@ export class AgentMonitor {
     const breakdown: CostBreakdown = {
       org_id: orgId,
       period,
-      agent_costs: {},
+      agent_costs: {} as Record<string, number>,
       total_usd: 0,
       tokens_used: 0,
       billable_tasks: 0,
@@ -279,9 +298,10 @@ export class AgentMonitor {
     for (const agent of agents) {
       const tasks = await this.database.getAgentTasksSince(agent.id, period);
       const cost = this.calculateCost(tasks);
-      const tokens = tasks.reduce((sum, t) => sum + (t.execution_metadata?.tokens_used || 0), 0);
+      const tokens = tasks.reduce((sum: number, t: any) => sum + (t.execution_metadata?.tokens_used || 0), 0);
 
-      breakdown.agent_costs[agent.type] = (breakdown.agent_costs[agent.type] || 0) + cost;
+      const agentType = agent.type as AgentType;
+      breakdown.agent_costs[agentType] = (breakdown.agent_costs[agentType] || 0) + cost;
       breakdown.total_usd += cost;
       breakdown.tokens_used += tokens;
       breakdown.billable_tasks += tasks.length;
@@ -467,8 +487,8 @@ export class AgentMonitor {
       metrics,
       recent_tasks: tasks.slice(0, 10),
       anomalies,
-      7_day_trend: await this.getPerformanceTrend(agentId, 7),
-      30_day_trend: await this.getPerformanceTrend(agentId, 30),
+      "7_day_trend": await this.getPerformanceTrend(agentId, 7),
+      "30_day_trend": await this.getPerformanceTrend(agentId, 30),
     };
   }
 

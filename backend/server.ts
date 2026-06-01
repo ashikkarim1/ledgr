@@ -14,6 +14,12 @@ import morgan from "morgan";
 import { authMiddleware, optionalAuthMiddleware, requireRole, workspaceIsolation } from "./middleware/auth-middleware";
 import { errorHandler, asyncHandler } from "./middleware/error-handler";
 import { rateLimiter, requestLogger, startRateLimitCleanup } from "./middleware/rate-limiter";
+import {
+  checkDocumentLimit,
+  checkExecutionLimit,
+  checkUserLimit,
+  checkTrialExpired,
+} from "./middleware/trial-limits";
 
 // Controllers
 import * as authController from "./controllers/auth.controller";
@@ -24,16 +30,23 @@ import * as helpController from "./controllers/help.controller";
 import * as billingController from "./controllers/billing.controller";
 import * as integrationsController from "./controllers/integrations.controller";
 import * as auditController from "./controllers/audit.controller";
+import * as wafeqController from "./controllers/wafeq.controller";
+import * as trialUpgradeController from "./controllers/trial-upgrade.controller";
 
 // Routes
 import { createIntegrationRoutes, createWebhookRoutes } from "./routes/integrations";
+import { createDocumentsRoutes } from "./routes/documents";
 
 // Integration Manager
 import { IntegrationManager } from "./integrations/integration-factory";
 import { PersistentIntegrationManager } from "./integrations/integration-manager";
 
+// Jobs
+import { startTrialExpiryJob } from "./jobs/trial-expiry";
+
 // Database
 import { Pool } from "pg";
+import { setDbPool } from "./lib/db-helpers";
 
 // Types
 import { ApiResponse, HealthCheckResponse } from "./response-types";
@@ -46,6 +59,11 @@ export function createApp(
   dbPool?: Pool
 ): express.Application {
   const app = express();
+
+  // Initialize database pool for db-helpers
+  if (dbPool) {
+    setDbPool(dbPool);
+  }
 
   // Initialize integration manager if not provided
   let manager: IntegrationManager | PersistentIntegrationManager;
@@ -106,6 +124,7 @@ export function createApp(
    */
 
   app.post("/v1/auth/signup", publicLimiter, authController.signup);
+  app.post("/v1/auth/signup-trial", publicLimiter, authController.signupTrial);
   app.post("/v1/auth/login", publicLimiter, authController.login);
   app.post("/v1/auth/refresh", publicLimiter, authController.refresh);
   app.post("/v1/auth/logout", authMiddleware, authController.logout);
@@ -152,6 +171,8 @@ export function createApp(
     "/v1/workspaces/:workspace_id/members",
     authMiddleware,
     workspaceIsolation,
+    checkTrialExpired,
+    checkUserLimit,
     workspacesController.inviteMember
   );
 
@@ -228,6 +249,8 @@ export function createApp(
   app.post(
     "/v1/agents/:agent_id/execute",
     authMiddleware,
+    checkTrialExpired,
+    checkExecutionLimit,
     agentsController.executeAgent
   );
 
@@ -295,12 +318,29 @@ export function createApp(
 
   /**
    * ==========================================
+   * DOCUMENT & AI AGENT ROUTES
+   * ==========================================
+   */
+
+  // Mount document processing routes
+  app.use("/v1/documents", authMiddleware, checkTrialExpired, checkDocumentLimit, createDocumentsRoutes());
+
+  /**
+   * ==========================================
    * INTEGRATION ROUTES
    * ==========================================
    */
 
   // Mount integration management routes
   app.use("/v1/integrations", authMiddleware, createIntegrationRoutes(manager));
+
+
+  // Wafeq Integration Routes (UAE accounting ERP)
+  // File-based CSV import for GL accounts, customers, and transactions
+  app.post('/v1/integrations/wafeq/import', authMiddleware, wafeqController.importGLAccounts);
+  app.post('/v1/integrations/wafeq/import-customers', authMiddleware, wafeqController.importCustomers);
+  app.get('/v1/integrations/wafeq/status', authMiddleware, wafeqController.getStatus);
+  app.get('/v1/integrations/wafeq/export-template', authMiddleware, wafeqController.getGLTemplate);
 
   // Mount webhook routes (no auth required for webhooks with signature verification)
   app.use("/v1/webhooks", createWebhookRoutes(manager));
@@ -322,7 +362,7 @@ export function createApp(
   app.post(
     "/v1/billing/subscription/upgrade",
     authMiddleware,
-    billingController.upgradeSubscription
+    trialUpgradeController.upgradeTrialSubscription
   );
 
   // List invoices
@@ -461,6 +501,11 @@ export function startServer(
   // Start rate limit cleanup
   startRateLimitCleanup(60);
 
+  // Start trial expiry cron job
+  if (dbPool) {
+    startTrialExpiryJob(dbPool);
+  }
+
   const server = app.listen(port, () => {
     console.log(`Ledgr API Server running on port ${port}`);
     console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
@@ -486,7 +531,9 @@ export function startServer(
 }
 
 // Start server if running directly
-if (require.main === module) {
-  const port = parseInt(process.env.PORT || "3000", 10);
-  startServer(port);
-}
+
+// Start server if running directly (disabled - use startServer() elsewhere)
+// if (require.main === module) {
+//   const port = parseInt(process.env.PORT || "3000", 10);
+//   startServer(port);
+// }

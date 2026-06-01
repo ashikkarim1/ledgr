@@ -10,6 +10,7 @@ import {
   Agent,
   AgentExecution,
 } from "../response-types";
+import { checkTrialExecutionLimit, getTrialInfo } from "../lib/db-helpers";
 
 /**
  * GET /v1/agents
@@ -150,6 +151,17 @@ export const executeAgent = asyncHandler(async (req: Request, res: Response) => 
     const missingParams = agent.required_parameters.filter((p: string) => !parameters?.[p]);
     if (missingParams.length > 0) {
       throw ApiErrors.validation("parameters", `Missing required parameters: ${missingParams.join(", ")}`);
+    }
+  }
+
+  // Check trial agent execution limit
+  const trialInfo = await getTrialInfo(workspace_id);
+  if (trialInfo && trialInfo.plan === "free_trial") {
+    const execLimitCheck = await checkTrialExecutionLimit(workspace_id);
+    if (!execLimitCheck.allowed) {
+      throw ApiErrors.conflict(
+        `Agent execution limit exceeded (${execLimitCheck.current}/${execLimitCheck.limit} executions per month for free trial)`
+      );
     }
   }
 

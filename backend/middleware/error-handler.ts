@@ -29,11 +29,12 @@ export function errorHandler(
   res: Response,
   next: NextFunction
 ) {
-  const requestId = req.headers["x-request-id"] || generateRequestId();
+  const requestIdHeader = req.headers["x-request-id"];
+  const requestId = typeof requestIdHeader === "string" ? requestIdHeader : generateRequestId();
   const timestamp = new Date().toISOString();
 
   let status = 500;
-  let code = ErrorCodes.INTERNAL_ERROR;
+  let code: string = ErrorCodes.INTERNAL_ERROR;
   let message = "An unexpected error occurred";
   let errors: ApiError[] = [];
 
@@ -99,7 +100,7 @@ export function errorHandler(
     data: null,
     meta: {
       timestamp,
-      request_id: requestId as string,
+      request_id: requestId,
       version: "v1",
     },
     errors: errors.map((e) => ({
