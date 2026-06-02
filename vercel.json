@@ -3,6 +3,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "outputDirectory": ".",
+  "buildCommand": "npm run build",
   "headers": [
     {
       "source": "/assets/(.*)",
@@ -18,10 +19,5 @@
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
       ]
     }
-  ],
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs20.x"
-    }
-  }
+  ]
 }
