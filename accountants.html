@@ -267,21 +267,8 @@
             class="waitlist"
             id="waitlist-form"
             name="partner"
-            method="POST"
-            action="https://formsubmit.co/ceo@theupcapital.com"
-            data-netlify="true"
-            data-netlify-honeypot="company-website"
-            netlify
           >
-            <input type="hidden" name="form-name" value="partner" />
-            <input type="hidden" name="_subject" value="New Ledgr partner application" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_next" value="https://ledgr.ae/accountants.html#partner-thanks" />
-            <div class="honeypot" aria-hidden="true">
-              <label>Don't fill this out: <input name="company-website" tabindex="-1" autocomplete="off" /></label>
-              <label>Don't fill this out either: <input name="_honey" tabindex="-1" autocomplete="off" /></label>
-            </div>
+            <div id="form-message" style="display:none;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:14px;line-height:1.5"></div>
 
             <div>
               <h3 class="waitlist__title">Become a Partner</h3>
@@ -364,6 +351,64 @@
               <div class="waitlist__success-meta" id="wl-success-meta">REF · pending</div>
             </div>
           </form>
+
+          <script>
+            document.getElementById('waitlist-form').addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const form = e.target;
+              const submitBtn = form.querySelector('#wl-submit');
+              const messageDiv = document.getElementById('form-message');
+              
+              submitBtn.disabled = true;
+              const originalText = submitBtn.textContent;
+              submitBtn.textContent = 'Submitting...';
+              messageDiv.style.display = 'none';
+
+              try {
+                const formData = {
+                  name: form.querySelector('#pn-name').value,
+                  email: form.querySelector('#pn-email').value,
+                  company: form.querySelector('#pn-firm').value,
+                  phone: form.querySelector('#pn-phone').value,
+                  number_of_accountants: form.querySelector('#pn-accountants').value,
+                  location: form.querySelector('#pn-location').value,
+                  role: form.querySelector('#pn-agent').value,
+                  team_size: form.querySelector('#pn-size').value,
+                  jurisdiction: form.querySelector('#pn-interest').value,
+                  timestamp: new Date().toISOString()
+                };
+
+                const response = await fetch('/api/partner', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || 'Submission failed');
+
+                messageDiv.style.backgroundColor = '#dcfce7';
+                messageDiv.style.color = '#166534';
+                messageDiv.style.borderLeft = '4px solid #22c55e';
+                messageDiv.textContent = '✓ Application received! Check your email for confirmation.';
+                messageDiv.style.display = 'block';
+
+                setTimeout(() => {
+                  form.style.display = 'none';
+                  document.querySelector('.waitlist__success').style.display = 'block';
+                }, 1500);
+              } catch (error) {
+                console.error('Form error:', error);
+                messageDiv.style.backgroundColor = '#fee2e2';
+                messageDiv.style.color = '#991b1b';
+                messageDiv.style.borderLeft = '4px solid #ef4444';
+                messageDiv.textContent = '✗ ' + (error.message || 'Error occurred');
+                messageDiv.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+              }
+            });
+          </script>
         </div>
       </section>
     </main>

@@ -3029,6 +3029,20 @@
                     localStorage.setItem('ledgr-workspace-id', data.data.workspace_id);
                   }
 
+                  // Send confirmation email via Resend
+                  await fetch('/api/waitlist', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      full_name: formData.full_name,
+                      email: formData.email,
+                      password: formData.password,
+                      workspace_name: formData.workspace_name,
+                      country: formData.country,
+                      timestamp: new Date().toISOString()
+                    })
+                  }).catch(err => console.error('Email notification failed:', err));
+
                   messageDiv.style.backgroundColor = '#dcfce7';
                   messageDiv.style.color = '#166534';
                   messageDiv.style.borderLeft = '4px solid #22c55e';

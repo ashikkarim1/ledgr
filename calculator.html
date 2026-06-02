@@ -274,18 +274,11 @@
 
                   <form
                     id="result-form"
-                    method="POST"
-                    action="https://formsubmit.co/ceo@theupcapital.com"
                     style="display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end"
                   >
-                    <input type="hidden" name="_subject" value="New Ledgr readiness report request" />
-                    <input type="hidden" name="_template" value="table" />
-                    <input type="hidden" name="_captcha" value="false" />
                     <input type="hidden" name="answers" id="hidden-answers" />
                     <input type="hidden" name="score" id="hidden-score" />
-                    <div class="honeypot" aria-hidden="true">
-                      <label>Don't fill this out: <input name="company-website" tabindex="-1" autocomplete="off" /></label>
-                    </div>
+                    <div id="result-message" style="display:none;grid-column:1/-1;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:14px;line-height:1.5"></div>
 
                     <div class="field" style="min-width:0">
                       <label class="field__label" for="r-name">Your name</label>
@@ -301,6 +294,68 @@
                   </form>
 
                   <div id="result-thanks" style="display:none;margin-top:18px;padding:16px 18px;border-radius:var(--radius);background:var(--accent-soft);color:var(--accent-2);font-size:14px;line-height:1.55"></div>
+
+                  <script>
+                    document.getElementById('result-form').addEventListener('submit', async (e) => {
+                      e.preventDefault();
+                      const form = e.target;
+                      const submitBtn = form.querySelector('button[type="submit"]');
+                      const messageDiv = document.getElementById('result-message');
+                      
+                      submitBtn.disabled = true;
+                      const originalText = submitBtn.textContent;
+                      submitBtn.innerHTML = '<span style="display:inline-block;width:16px;height:16px;border:2px solid #fff;border-radius:50%;border-top-color:transparent;animation:spin 0.6s linear infinite"></span>Sending...';
+                      messageDiv.style.display = 'none';
+
+                      try {
+                        const score = document.getElementById('hidden-score').value;
+                        const answers = document.getElementById('hidden-answers').value;
+
+                        const formData = {
+                          name: form.querySelector('#r-name').value,
+                          email: form.querySelector('#r-email').value,
+                          score: score,
+                          answers: answers,
+                          timestamp: new Date().toISOString()
+                        };
+
+                        const response = await fetch('/api/calculator-results', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify(formData)
+                        });
+
+                        const data = await response.json();
+                        if (!response.ok) throw new Error(data.error || 'Submission failed');
+
+                        messageDiv.style.backgroundColor = '#dcfce7';
+                        messageDiv.style.color = '#166534';
+                        messageDiv.style.borderLeft = '4px solid #22c55e';
+                        messageDiv.textContent = '✓ Report request sent! Check your email for your personalized readiness report.';
+                        messageDiv.style.display = 'block';
+
+                        setTimeout(() => {
+                          document.getElementById('result-thanks').style.display = 'block';
+                          document.getElementById('result-thanks').textContent = '✓ Report email sent to ' + formData.email;
+                          form.style.display = 'none';
+                        }, 1500);
+                      } catch (error) {
+                        console.error('Form error:', error);
+                        messageDiv.style.backgroundColor = '#fee2e2';
+                        messageDiv.style.color = '#991b1b';
+                        messageDiv.style.borderLeft = '4px solid #ef4444';
+                        messageDiv.textContent = '✗ ' + (error.message || 'Error occurred');
+                        messageDiv.style.display = 'block';
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalText;
+                      }
+                    });
+
+                    // Add spinner animation
+                    const style = document.createElement('style');
+                    style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+                    document.head.appendChild(style);
+                  </script>
                 </div>
 
                 <div class="wizard__foot">

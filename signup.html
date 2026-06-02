@@ -478,47 +478,22 @@
       }
     });
 
-    // Send confirmation email
+    // Send confirmation email via Resend API
     async function sendConfirmationEmail(email, companyName) {
       try {
-        const response = await fetch('https://formspree.io/f/mzbnepzw', {
+        const response = await fetch('/api/signup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            email: email,
             company_name: companyName,
-            subject: `Welcome to Ledgr, ${companyName}!`,
-            message: `
-Welcome to Ledgr!
-
-Your account has been created successfully. Here's what you get:
-
-✓ 14-day free trial - no credit card required
-✓ Real-time UAE accounting compliance tracking
-✓ VAT filing and Corporate Tax tracking
-✓ AI-supervised books and financial control
-✓ Unlimited transactions during trial
-✓ Free onboarding assistance
-
-Log in to your account: https://ledgr.ai/dashboard
-Email: ${email}
-
-Your trial period includes:
-- Complete access to all Ledgr features
-- Dedicated accountant support
-- 30-day money-back guarantee
-- Unlimited document uploads
-
-If you have any questions, reply to this email or contact us at support@ledgr.ai
-
-Welcome aboard!
-The Ledgr Team
-https://ledgr.ai
-            `
+            email: email,
+            password: document.getElementById('password').value,
+            timestamp: new Date().toISOString()
           })
         });
+        const data = await response.json();
         return response.ok;
       } catch (error) {
         console.error('Email sending error:', error);
