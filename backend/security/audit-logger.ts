@@ -1,6 +1,6 @@
 import { Pool, QueryResult } from 'pg';
 import { createHash, createHmac } from 'crypto';
-import { generateHash } from './encryption';
+import { generateHash } from "./encryption.js";
 
 /**
  * Audit Event Types - Comprehensive logging for security and compliance

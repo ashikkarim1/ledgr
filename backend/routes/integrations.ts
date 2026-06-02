@@ -3,8 +3,8 @@
 
 import { Router, Request, Response, NextFunction } from 'express';
 import crypto from 'crypto';
-import { IntegrationManager } from '../integrations/integration-factory';
-import { PlaidIntegration } from '../integrations/plaid';
+import { IntegrationManager } from "../integrations/integration-factory.js";
+import { PlaidIntegration } from "../integrations/plaid.js";
 
 /**
  * Express router for integration endpoints

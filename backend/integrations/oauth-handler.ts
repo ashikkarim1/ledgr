@@ -11,8 +11,8 @@ import {
   OAuthToken,
   OAuthFlowState,
   OAuthConfig,
-} from './integration-types';
-import { Logger } from './base';
+} from "./integration-types.js";
+import { Logger } from "./base.js";
 
 // ============================================================================
 // OAuth State Management

@@ -14,12 +14,12 @@ import type {
   OnboardingStatus,
   OnboardingProgress,
   OnboardingError,
-} from '../types/onboarding-types';
+} from "../types/onboarding-types.js";
 
 import {
   OnboardingStep as Step,
   OnboardingStatus,
-} from '../types/onboarding-types';
+} from "../types/onboarding-types.js";
 
 // ============================================================================
 // CONSTANTS

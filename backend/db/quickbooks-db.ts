@@ -3,7 +3,7 @@
  * Helper functions for storing and retrieving QB integration data
  */
 
-import { getDbPool } from '../lib/db-helpers';
+import { getDbPool } from "../lib/db-helpers.js";
 
 /**
  * User workspace access verification

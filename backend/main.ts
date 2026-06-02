@@ -13,8 +13,8 @@ const __dirname = path.dirname(__filename);
 // Load environment variables
 dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
-import { createApp } from './server';
-import { initializeIntegrationSystem, runMigrations, shutdownIntegrationSystem } from './lib/integration-init';
+import { createApp } from "./server.js";
+import { initializeIntegrationSystem, runMigrations, shutdownIntegrationSystem } from "./lib/integration-init.js";
 
 /**
  * Start application

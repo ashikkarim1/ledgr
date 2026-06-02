@@ -13,8 +13,8 @@ import { v4 as uuidv4 } from 'uuid';
 // Imports
 // ============================================================================
 
-import { AuthenticationService } from './auth';
-import { AuthorizationService } from './permissions';
+import { AuthenticationService } from "./auth.js";
+import { AuthorizationService } from "./permissions.js";
 import {
   authenticate,
   requirePermission,
@@ -26,14 +26,14 @@ import {
   configureAuthMiddleware,
   generateCSRFToken,
   verifyCsrfToken
-} from './middleware';
+} from "./middleware.js";
 import {
   User,
   LoginRequest,
   RegistrationRequest,
   AuthError,
   RefreshTokenRequest
-} from './types';
+} from "./types.js";
 
 // ============================================================================
 // Mock Database (replace with your actual DB)

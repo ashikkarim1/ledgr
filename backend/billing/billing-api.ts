@@ -4,15 +4,15 @@
  */
 
 import { Router, Request, Response, NextFunction } from 'express';
-import { BillingService } from './billing';
-import { StripeIntegration } from './stripe-integration';
+import { BillingService } from "./billing.js";
+import { StripeIntegration } from "./stripe-integration.js";
 import {
   CreateSubscriptionRequest,
   UpdateSubscriptionRequest,
   UpgradeSubscriptionRequest,
   CancelSubscriptionRequest,
   BillingResponse,
-} from './billing-types';
+} from "./billing-types.js";
 
 export function createBillingRouter(
   billingService: BillingService,

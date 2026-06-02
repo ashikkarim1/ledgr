@@ -3,8 +3,8 @@
  * Real-time bank account and transaction feeds, multi-institution support
  */
 
-import BaseIntegration, { Logger } from './base';
-import { HttpClient } from './oauth-handler';
+import BaseIntegration, { Logger } from "./base.js";
+import { HttpClient } from "./oauth-handler.js";
 import {
   OAuthToken,
   IntegrationSetup,
@@ -15,7 +15,7 @@ import {
   Invoice,
   Bill,
   Transaction,
-} from './integration-types';
+} from "./integration-types.js";
 
 export class PlaidIntegration extends BaseIntegration {
   private httpClient: HttpClient;

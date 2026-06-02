@@ -4,13 +4,13 @@
  */
 
 import { Request, Response } from "express";
-import { ApiErrors, asyncHandler } from "../middleware/error-handler";
+import { ApiErrors, asyncHandler } from "../middleware/error-handler.js";
 import {
   ApiResponse,
   FinancialDashboard,
   ChartOfAccountsItem,
   Transaction,
-} from "../response-types";
+} from "../response-types.js";
 
 /**
  * GET /v1/financials/dashboard
@@ -370,8 +370,38 @@ async function userHasWorkspaceAccess(userId: string, workspaceId: string): Prom
 }
 
 async function fetchDashboardData(workspaceId: string): Promise<DashboardData | null> {
-  // TODO: Query database
-  return null;
+  try {
+    const { getDbPool } = await import("../lib/db-helpers");
+    const pool = getDbPool();
+
+    // Get summary financial data for dashboard
+    const query = `
+      SELECT 
+        COALESCE(SUM(CASE WHEN account_type = 'ASSET' THEN debit_amount - credit_amount ELSE 0 END), 0) as total_assets,
+        COALESCE(SUM(CASE WHEN account_type = 'LIABILITY' THEN credit_amount - debit_amount ELSE 0 END), 0) as total_liabilities,
+        COALESCE(SUM(CASE WHEN account_type = 'EQUITY' THEN credit_amount - debit_amount ELSE 0 END), 0) as total_equity,
+        COALESCE(SUM(CASE WHEN account_type = 'INCOME' THEN credit_amount - debit_amount ELSE 0 END), 0) as total_income,
+        COALESCE(SUM(CASE WHEN account_type = 'EXPENSE' THEN debit_amount - credit_amount ELSE 0 END), 0) as total_expenses
+      FROM general_ledger_entries gle
+      JOIN chart_of_accounts coa ON gle.account_id = coa.id
+      WHERE gle.organization_id = $1 AND gle.status = 'APPROVED'
+    `;
+
+    const result = await pool.query(query, [workspaceId]);
+    const row = result.rows[0];
+
+    return {
+      total_assets: parseFloat(row.total_assets || "0"),
+      total_liabilities: parseFloat(row.total_liabilities || "0"),
+      total_equity: parseFloat(row.total_equity || "0"),
+      total_income: parseFloat(row.total_income || "0"),
+      total_expenses: parseFloat(row.total_expenses || "0"),
+      net_profit: parseFloat(row.total_income || "0") - parseFloat(row.total_expenses || "0"),
+    };
+  } catch (error) {
+    console.error(`[fetchDashboardData] Error fetching dashboard data for workspace ${workspaceId}:`, error);
+    return null;
+  }
 }
 
 async function getWorkspaceAccounts(
@@ -380,8 +410,50 @@ async function getWorkspaceAccounts(
   limit: number,
   offset: number
 ): Promise<{ accounts: Account[]; total: number }> {
-  // TODO: Query database
-  return { accounts: [], total: 0 };
+  try {
+    const { getDbPool } = await import("../lib/db-helpers");
+    const pool = getDbPool();
+
+    let whereClause = "WHERE organization_id = $1";
+    const params: any[] = [workspaceId];
+
+    if (filters.account_type) {
+      whereClause += ` AND account_type = $${params.length + 1}`;
+      params.push(filters.account_type);
+    }
+
+    // Get total count
+    const countQuery = `SELECT COUNT(*) as count FROM chart_of_accounts ${whereClause}`;
+    const countResult = await pool.query(countQuery, params);
+    const total = parseInt(countResult.rows[0].count);
+
+    // Get paginated accounts
+    const query = `
+      SELECT id, organization_id, account_number, account_name, account_type, 
+             account_category, parent_account_id, is_active, description, created_at, updated_at
+      FROM chart_of_accounts
+      ${whereClause}
+      ORDER BY account_number ASC
+      LIMIT $${params.length + 1} OFFSET $${params.length + 2}
+    `;
+
+    const result = await pool.query(query, [...params, limit, offset]);
+    
+    const accounts = result.rows.map((row: any) => ({
+      id: row.id,
+      account_number: row.account_number,
+      account_name: row.account_name,
+      account_type: row.account_type,
+      account_category: row.account_category,
+      is_active: row.is_active,
+      description: row.description,
+    }));
+
+    return { accounts, total };
+  } catch (error) {
+    console.error(`[getWorkspaceAccounts] Error fetching accounts for workspace ${workspaceId}:`, error);
+    return { accounts: [], total: 0 };
+  }
 }
 
 async function getWorkspaceTransactions(
@@ -391,8 +463,59 @@ async function getWorkspaceTransactions(
   limit: number,
   offset: number
 ): Promise<{ transactions: Transaction[]; total: number }> {
-  // TODO: Query database
-  return { transactions: [], total: 0 };
+  try {
+    const { getDbPool } = await import("../lib/db-helpers");
+    const pool = getDbPool();
+
+    let whereClause = "WHERE gle.organization_id = $1";
+    const params: any[] = [workspaceId];
+
+    if (filters.account_id) {
+      whereClause += ` AND gle.account_id = $${params.length + 1}`;
+      params.push(filters.account_id);
+    }
+
+    if (filters.status) {
+      whereClause += ` AND gle.status = $${params.length + 1}`;
+      params.push(filters.status);
+    }
+
+    // Get total count
+    const countQuery = `SELECT COUNT(*) as count FROM general_ledger_entries gle ${whereClause}`;
+    const countResult = await pool.query(countQuery, params);
+    const total = parseInt(countResult.rows[0].count);
+
+    // Get paginated transactions
+    const query = `
+      SELECT gle.id, gle.account_id, gle.entry_date, gle.description, 
+             gle.debit_amount, gle.credit_amount, gle.status,
+             coa.account_name, coa.account_number
+      FROM general_ledger_entries gle
+      JOIN chart_of_accounts coa ON gle.account_id = coa.id
+      ${whereClause}
+      ORDER BY gle.entry_date DESC
+      LIMIT $${params.length + 1} OFFSET $${params.length + 2}
+    `;
+
+    const result = await pool.query(query, [...params, limit, offset]);
+    
+    const transactions = result.rows.map((row: any) => ({
+      id: row.id,
+      account_id: row.account_id,
+      account_name: row.account_name,
+      account_number: row.account_number,
+      entry_date: row.entry_date,
+      description: row.description,
+      debit_amount: row.debit_amount,
+      credit_amount: row.credit_amount,
+      status: row.status,
+    }));
+
+    return { transactions, total };
+  } catch (error) {
+    console.error(`[getWorkspaceTransactions] Error fetching transactions for workspace ${workspaceId}:`, error);
+    return { transactions: [], total: 0 };
+  }
 }
 
 async function getUserWorkspaceRole(userId: string, workspaceId: string): Promise<string | null> {

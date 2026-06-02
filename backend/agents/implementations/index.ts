@@ -3,22 +3,22 @@
  * Exports all agent type implementations for easy importing
  */
 
-export { AccountsPayableAgent } from './accounts-payable.agent';
-export { AccountsReceivableAgent } from './accounts-receivable.agent';
-export { ReconciliationAgent } from './reconciliation.agent';
-export { TaxAgent } from './tax.agent';
-export { PayrollAgent } from './payroll.agent';
-export { GeneralLedgerAgent } from './general-ledger.agent';
+export { AccountsPayableAgent } from "./accounts-payable.agent.js";
+export { AccountsReceivableAgent } from "./accounts-receivable.agent.js";
+export { ReconciliationAgent } from "./reconciliation.agent.js";
+export { TaxAgent } from "./tax.agent.js";
+export { PayrollAgent } from "./payroll.agent.js";
+export { GeneralLedgerAgent } from "./general-ledger.agent.js";
 
 // Agent mapping for factory pattern
-import { AccountsPayableAgent } from './accounts-payable.agent';
-import { AccountsReceivableAgent } from './accounts-receivable.agent';
-import { ReconciliationAgent } from './reconciliation.agent';
-import { TaxAgent } from './tax.agent';
-import { PayrollAgent } from './payroll.agent';
-import { GeneralLedgerAgent } from './general-ledger.agent';
-import { AgentType } from '../agent-types';
-import { FinancialAgent } from '../agent-framework';
+import { AccountsPayableAgent } from "./accounts-payable.agent.js";
+import { AccountsReceivableAgent } from "./accounts-receivable.agent.js";
+import { ReconciliationAgent } from "./reconciliation.agent.js";
+import { TaxAgent } from "./tax.agent.js";
+import { PayrollAgent } from "./payroll.agent.js";
+import { GeneralLedgerAgent } from "./general-ledger.agent.js";
+import { AgentType } from "../agent-types.js";
+import { FinancialAgent } from "../agent-framework.js";
 
 export const AGENT_IMPLEMENTATIONS: Record<AgentType, new (orgId: string, database?: any, auditLog?: any, complianceEngine?: any) => FinancialAgent> = {
   'accounts_payable': AccountsPayableAgent,

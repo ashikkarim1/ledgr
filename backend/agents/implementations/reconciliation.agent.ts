@@ -1,5 +1,5 @@
-import { FinancialAgent } from '../agent-framework';
-import { Task, Action, ActionType } from '../agent-types';
+import { FinancialAgent } from "../agent-framework.js";
+import { Task, Action, ActionType } from "../agent-types.js";
 import { v4 as uuidv4 } from 'uuid';
 
 /**

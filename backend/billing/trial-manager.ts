@@ -9,7 +9,7 @@
  * - Graceful degradation without hard upgrade walls
  */
 
-import { TrialStatus, TrialUsage, TrialUsageStatus, TrialStatusResponse } from './billing-types';
+import { TrialStatus, TrialUsage, TrialUsageStatus, TrialStatusResponse } from "./billing-types.js";
 
 export interface TrialConfig {
   durationDays: number;

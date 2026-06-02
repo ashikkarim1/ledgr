@@ -5,13 +5,13 @@
 
 import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { asyncHandler, ApiErrorHandler } from '../middleware/error-handler';
-import { ApiResponse, HttpStatus } from '../response-types';
+import { asyncHandler, ApiErrorHandler } from "../middleware/error-handler.js";
+import { ApiResponse, HttpStatus } from "../response-types.js";
 import {
   getTrialInfo,
   getSubscriptionByWorkspace,
   getDbPool,
-} from '../lib/db-helpers';
+} from "../lib/db-helpers.js";
 
 interface UpgradeRequest {
   plan: 'professional' | 'enterprise';

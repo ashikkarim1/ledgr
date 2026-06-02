@@ -13,7 +13,7 @@ import {
   CostBreakdown,
   Agent,
   AgentType,
-} from './agent-types';
+} from "./agent-types.js";
 
 // ============================================================================
 // Agent Monitor

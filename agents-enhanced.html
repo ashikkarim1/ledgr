@@ -1,0 +1,1357 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f9f9f9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0b0e" media="(prefers-color-scheme: dark)" />
+    <title>AI Financial Agents — Groundbreaking Compliance Automation</title>
+    <meta name="description" content="Meet Ledgr's AI agents: Six groundbreaking specialists eliminating finance gaps. Rock solid 99.9% accuracy. FTA, VAT, payroll, e-invoicing automation. Supervised by chartered accountants. 24/7 availability." />
+    <meta property="og:title" content="AI Financial Agents — Six Specialists Eliminating Compliance Gaps" />
+    <meta property="og:description" content="Groundbreaking AI agents supervised by chartered accountants. 99.9% accuracy. FTA compliance, VAT automation, payroll processing, e-invoicing. Real-time, audit-ready." />
+    <meta property="og:image" content="https://www.ledgr.ae/assets/og-image.png" />
+    <meta property="og:url" content="https://www.ledgr.ae/agents.html" />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#FF5C00" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='-apple-system,sans-serif' font-size='17' font-weight='600' fill='%23fbfaf7'%3EL%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/tailwind-output.css" />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <style>
+      /* Real-Time Agent Dashboard */
+      .agent-dashboard-section {
+        padding: 80px 40px;
+        background: linear-gradient(135deg, var(--paper) 0%, #ffffff 100%);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .agent-dashboard__inner {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .dashboard-header h2 {
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        font-weight: 700;
+        margin: 0;
+        color: var(--ink-1);
+      }
+
+      .dashboard-status {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 14px;
+        color: var(--ink-2);
+      }
+
+      .status-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #34c759;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+
+      .agent-status-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        margin-bottom: 40px;
+      }
+
+      .agent-status-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 24px;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .agent-status-card:hover {
+        border-color: var(--accent);
+        box-shadow: 0 4px 12px rgba(255, 92, 0, 0.08);
+      }
+
+      .agent-header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        margin-bottom: 16px;
+      }
+
+      .agent-name {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--ink-1);
+        margin: 0;
+      }
+
+      .agent-status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .status-online {
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .status-busy {
+        background: #fff7ed;
+        color: #92400e;
+      }
+
+      .status-away {
+        background: #fecaca;
+        color: #7f1d1d;
+      }
+
+      .status-offline {
+        background: #e5e7eb;
+        color: #374151;
+      }
+
+      .agent-role {
+        font-size: 12px;
+        color: var(--ink-2);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+      }
+
+      .agent-utilization {
+        margin-bottom: 16px;
+      }
+
+      .utilization-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: var(--ink-2);
+        margin-bottom: 8px;
+      }
+
+      .utilization-bar {
+        height: 6px;
+        background: var(--line);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+
+      .utilization-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent) 0%, #cc4a00 100%);
+        border-radius: 3px;
+        transition: width 0.4s ease;
+      }
+
+      .agent-metrics {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding-top: 12px;
+        border-top: 1px solid var(--line);
+      }
+
+      .metric-item {
+        text-align: center;
+      }
+
+      .metric-label {
+        font-size: 11px;
+        color: var(--ink-2);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 4px;
+      }
+
+      .metric-value {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--accent);
+      }
+
+      /* Team Performance Summary */
+      .team-performance {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 32px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 32px;
+        margin-bottom: 60px;
+      }
+
+      .perf-stat {
+        text-align: center;
+      }
+
+      .perf-stat__label {
+        font-size: 12px;
+        color: var(--ink-2);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+      }
+
+      .perf-stat__value {
+        font-size: 32px;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 8px;
+      }
+
+      .perf-stat__desc {
+        font-size: 13px;
+        color: var(--ink-2);
+        line-height: 1.4;
+      }
+
+      /* Integration Data Display Sections */
+      .sync-status-section {
+        margin-bottom: 60px;
+      }
+
+      .sync-status-section h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--ink-1);
+        margin: 0 0 24px 0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .sync-systems-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+      }
+
+      .sync-system-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .sync-system-card:hover {
+        border-color: var(--accent);
+        box-shadow: 0 4px 12px rgba(255, 92, 0, 0.08);
+      }
+
+      .sync-system-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .sync-system-name {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--ink-1);
+        margin: 0;
+      }
+
+      .health-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .health-healthy {
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .health-degraded {
+        background: #fff7ed;
+        color: #92400e;
+      }
+
+      .health-unhealthy {
+        background: #fecaca;
+        color: #7f1d1d;
+      }
+
+      .sync-detail-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--line);
+        font-size: 14px;
+      }
+
+      .sync-detail-row:last-child {
+        border-bottom: none;
+      }
+
+      .sync-detail-label {
+        color: var(--ink-2);
+        font-weight: 500;
+      }
+
+      .sync-detail-value {
+        color: var(--ink-1);
+        font-weight: 600;
+      }
+
+      .sync-detail-value.accent {
+        color: var(--accent);
+      }
+
+      /* Data Ingestion Section */
+      .data-ingestion-section {
+        margin-bottom: 60px;
+      }
+
+      .data-ingestion-section h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--ink-1);
+        margin: 0 0 24px 0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .ingestion-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 16px;
+      }
+
+      .ingestion-stat {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .ingestion-stat:hover {
+        border-color: var(--accent);
+        background: linear-gradient(135deg, var(--surface) 0%, rgba(255, 92, 0, 0.02) 100%);
+      }
+
+      .ingestion-stat-label {
+        font-size: 12px;
+        color: var(--ink-2);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+      }
+
+      .ingestion-stat-value {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 8px;
+      }
+
+      .ingestion-stat-source {
+        font-size: 11px;
+        color: var(--ink-3);
+      }
+
+      /* Sync Task Queue Section */
+      .sync-task-queue-section {
+        margin-bottom: 60px;
+      }
+
+      .sync-task-queue-section h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--ink-1);
+        margin: 0 0 24px 0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .task-queue-lists {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 24px;
+        margin-bottom: 40px;
+      }
+
+      .task-list-container {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 24px;
+      }
+
+      .task-list-header {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--ink-1);
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--line);
+      }
+
+      .task-list-header.completed {
+        color: #34c759;
+        border-bottom-color: #34c759;
+      }
+
+      .task-list-header.pending {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+      }
+
+      .task-queue-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .task-queue-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--line);
+        font-size: 13px;
+      }
+
+      .task-queue-item:last-child {
+        border-bottom: none;
+      }
+
+      .task-name {
+        color: var(--ink-1);
+        font-weight: 500;
+      }
+
+      .task-status-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+      }
+
+      .task-status-completed {
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .task-status-pending {
+        background: #fff7ed;
+        color: #92400e;
+      }
+
+      .task-status-failed {
+        background: #fecaca;
+        color: #7f1d1d;
+      }
+
+      /* Reconciliation Summary */
+      .reconciliation-summary {
+        background: var(--surface);
+        border: 2px solid var(--accent);
+        border-radius: 12px;
+        padding: 24px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 24px;
+      }
+
+      .reconciliation-stat {
+        text-align: center;
+      }
+
+      .reconciliation-stat-label {
+        font-size: 12px;
+        color: var(--ink-2);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+      }
+
+      .reconciliation-stat-value {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 8px;
+      }
+
+      .reconciliation-stat-desc {
+        font-size: 12px;
+        color: var(--ink-2);
+      }
+
+      /* Agents Hero */
+      .agents-hero {
+        padding: 80px 40px;
+        background: linear-gradient(135deg, #f9f9f9 0%, #fafafa 100%);
+      }
+
+      .agents-hero__inner {
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .agents-hero h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 700;
+        margin: 0 0 24px 0;
+        color: var(--ink-1);
+        line-height: 1.2;
+      }
+
+      .agents-hero p {
+        font-size: clamp(16px, 2vw, 18px);
+        color: var(--ink-2);
+        line-height: 1.7;
+        margin: 0 0 40px 0;
+      }
+
+      .agents-hero__ctas {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* Agents Grid */
+      .agents-section {
+        padding: 80px 40px;
+        background: var(--paper);
+      }
+
+      .agents-section__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .agents-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .agents-header h2 {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 700;
+        margin: 0 0 16px 0;
+        color: var(--ink-1);
+      }
+
+      .agents-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 28px;
+        margin-bottom: 80px;
+      }
+
+      .agent-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 40px 32px;
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .agent-card:hover {
+        border-color: var(--accent);
+        box-shadow: 0 8px 24px rgba(255, 92, 0, 0.08);
+        transform: translateY(-4px);
+      }
+
+      .agent-icon {
+        font-size: 48px;
+        margin-bottom: 16px;
+      }
+
+      .agent-card h3 {
+        font-size: 20px;
+        font-weight: 700;
+        margin: 0 0 12px 0;
+        color: var(--ink-1);
+      }
+
+      .agent-card p {
+        font-size: 14px;
+        color: var(--ink-2);
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      /* Demos Section */
+      .demos-section {
+        background: var(--surface);
+        padding: 80px 40px;
+      }
+
+      .demos-section__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .demos-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .demos-header h2 {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 700;
+        margin: 0 0 16px 0;
+        color: var(--ink-1);
+      }
+
+      .demos-header p {
+        font-size: 16px;
+        color: var(--ink-2);
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      /* CTA Section */
+      .agents-cta {
+        padding: 80px 40px;
+        background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+        text-align: center;
+      }
+
+      .agents-cta__inner {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .agents-cta h2 {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 700;
+        margin: 0 0 24px 0;
+        color: white;
+      }
+
+      .agents-cta p {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.6;
+        margin: 0 0 32px 0;
+      }
+
+      .agents-cta__buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* WebSocket Connection Indicator */
+      .ws-indicator {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        font-size: 12px;
+        color: var(--ink-2);
+        z-index: 1000;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .ws-status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #34c759;
+      }
+
+      .ws-status-dot.disconnected {
+        background: #ff3b30;
+      }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Thing",
+      "name": "Ledgr AI Financial Agents",
+      "description": "Six AI agents supervised by chartered accountants: Financial Director, Accounting Manager, Document Processor, Bank Verifier, Tax Specialist, and Regulatory Filer",
+      "url": "https://ledgr.ai/agents.html"
+    }
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="skip">Skip to content</a>
+
+    <!-- WebSocket Connection Indicator -->
+    <div class="ws-indicator">
+      <div class="ws-status-dot"></div>
+      <span id="ws-status">Connecting to live agent dashboard...</span>
+    </div>
+
+    <header class="nav" id="nav">
+      <div class="wrap nav__inner">
+        <a class="brand" href="index.html">
+          <span class="brand__mark" aria-hidden="true">L</span>
+          <span>Ledgr</span>
+        </a>
+
+        <nav class="nav__links" aria-label="Primary">
+          <a href="index.html#platform">Platform</a>
+          <a href="agents.html" aria-current="page">AI Agents</a>
+          <a href="demo.html#dashboard">See Demo</a>
+          <a href="resources.html">Resources</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="accountants.html">Accountants</a>
+          <a href="reviews.html">Reviews</a>
+        </nav>
+
+        <div class="nav__cta">
+          <a class="btn btn--primary" href="trial.html">Start Free Trial</a>
+          <a class="btn btn--dark" href="index.html#waitlist">Join the waitlist</a>
+        </div>
+        <button class="nav__menu-toggle" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- Hero Section -->
+      <section class="agents-hero">
+        <div class="agents-hero__inner">
+          <h1>Your groundbreaking AI finance team</h1>
+          <p>Six intelligent AI specialists work 24/7, processing 1000+ transactions daily with 99.9% accuracy. Licensed accountants supervise in real-time. Your team stays in control. Replace your finance team without losing control.</p>
+          <div class="agents-hero__ctas">
+            <a class="btn btn--primary" href="#demos">See Your Team In Action</a>
+            <a class="btn btn--dark" href="index.html#waitlist">Schedule Demo</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Real-Time Agent Dashboard Section -->
+      <section class="agent-dashboard-section" id="dashboard">
+        <div class="agent-dashboard__inner">
+          <div class="dashboard-header">
+            <h2>Live Agent Status Dashboard</h2>
+            <div class="dashboard-status">
+              <div class="status-indicator"></div>
+              <span id="connection-status">All agents online and ready</span>
+            </div>
+          </div>
+
+          <!-- Agent Status Cards -->
+          <div class="agent-status-grid" id="agent-status-grid">
+            <!-- Cards will be populated by JavaScript -->
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; color: var(--ink-2);">
+              <p>Loading live agent data...</p>
+            </div>
+          </div>
+
+          <!-- Team Performance Summary -->
+          <div class="team-performance" id="team-performance">
+            <div class="perf-stat">
+              <div class="perf-stat__label">Total Agents</div>
+              <div class="perf-stat__value" id="stat-total-agents">-</div>
+              <div class="perf-stat__desc">Available specialists</div>
+            </div>
+            <div class="perf-stat">
+              <div class="perf-stat__label">Avg Performance</div>
+              <div class="perf-stat__value" id="stat-avg-performance">-</div>
+              <div class="perf-stat__desc">Team accuracy score</div>
+            </div>
+            <div class="perf-stat">
+              <div class="perf-stat__label">Avg Utilization</div>
+              <div class="perf-stat__value" id="stat-avg-utilization">-</div>
+              <div class="perf-stat__desc">Workload distribution</div>
+            </div>
+            <div class="perf-stat">
+              <div class="perf-stat__label">Active Tasks</div>
+              <div class="perf-stat__value" id="stat-active-tasks">-</div>
+              <div class="perf-stat__desc">Currently in progress</div>
+            </div>
+          </div>
+
+          <!-- Integration Data Display Section -->
+          <!-- Sync Status Section -->
+          <div class="sync-status-section">
+            <h3>Real-Time Integration Status</h3>
+            <div class="sync-systems-grid" id="sync-systems-grid">
+              <!-- Sync cards populated by JavaScript -->
+            </div>
+          </div>
+
+          <!-- Data Ingestion Section -->
+          <div class="data-ingestion-section">
+            <h3>Data Ingestion Summary</h3>
+            <div class="ingestion-stats-grid" id="ingestion-stats-grid">
+              <!-- Ingestion stats populated by JavaScript -->
+            </div>
+          </div>
+
+          <!-- Sync Task Queue Section -->
+          <div class="sync-task-queue-section">
+            <h3>Sync Task Queue & Agent Assignments</h3>
+            <div class="task-queue-lists" id="task-queue-lists">
+              <!-- Task lists populated by JavaScript -->
+            </div>
+
+            <!-- Reconciliation Summary -->
+            <div>
+              <h3 style="font-size: 14px; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px;">Cross-System Reconciliation Status</h3>
+              <div class="reconciliation-summary" id="reconciliation-summary">
+                <!-- Reconciliation data populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Agents Grid -->
+      <section class="agents-section">
+        <div class="agents-section__inner">
+          <div class="agents-header">
+            <h2>Six specialists. One rock solid engine.</h2>
+            <p style="font-size:16px;color:var(--ink-2);margin-top:12px;max-width:700px;margin-left:auto;margin-right:auto;">Enterprise-grade AI that learns from 500+ UAE firms' patterns. Processes every transaction at lightning speed. Catches errors humans miss. Real-time FTA validation means compliance violations are caught before submission, not in an audit.</p>
+          </div>
+
+          <div class="agents-grid">
+            <div class="agent-card" data-agent="financial-director">
+              <div class="agent-icon">💰</div>
+              <h3>Financial Director</h3>
+              <p>Cash flow planning, budgets, and financial reports for leadership decisions</p>
+            </div>
+
+            <div class="agent-card" data-agent="accounting-manager">
+              <div class="agent-icon">📊</div>
+              <h3>Accounting Manager</h3>
+              <p>Day-to-day bookkeeping, expense tracking, and financial control</p>
+            </div>
+
+            <div class="agent-card" data-agent="document-processor">
+              <div class="agent-icon">📸</div>
+              <h3>Document Processor</h3>
+              <p>Reads invoices and receipts from email, phone, or any format instantly</p>
+            </div>
+
+            <div class="agent-card" data-agent="bank-verifier">
+              <div class="agent-icon">✓</div>
+              <h3>Bank Verifier</h3>
+              <p>Matches your bank statements to your records automatically</p>
+            </div>
+
+            <div class="agent-card" data-agent="tax-specialist">
+              <div class="agent-icon">⚖️</div>
+              <h3>Tax Specialist</h3>
+              <p>Calculates VAT, corporate tax, and tracks compliance requirements</p>
+            </div>
+
+            <div class="agent-card" data-agent="regulatory-filer">
+              <div class="agent-icon">📋</div>
+              <h3>Regulatory Filer</h3>
+              <p>Files returns to FTA, MoF, and other agencies on schedule</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="agents-cta">
+        <div class="agents-cta__inner">
+          <h2>Ready to see your team in action?</h2>
+          <p>Schedule a personalized demo where our agents handle YOUR data. 30 minutes. Real results.</p>
+          <div class="agents-cta__buttons">
+            <a class="btn btn--primary" href="trial.html">Start Free Trial</a>
+            <a class="btn btn--dark" href="index.html#waitlist">Schedule Demo</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      /**
+       * Live Agent Dashboard WebSocket Client
+       */
+      class AgentDashboardClient {
+        constructor() {
+          this.ws = null;
+          this.reconnectAttempts = 0;
+          this.maxReconnectAttempts = 5;
+          this.reconnectDelay = 3000;
+          this.agents = new Map();
+          this.teamStats = null;
+          this.syncData = null;
+          this.init();
+        }
+
+        init() {
+          // Extract org_id from URL or use demo org
+          const params = new URLSearchParams(window.location.search);
+          this.org_id = params.get('org_id') || 'f47ac10b-58cc-4372-a567-0e02b2c3d479';
+          this.user_id = params.get('user_id') || 'dashboard-user-' + Math.random().toString(36).substr(2, 9);
+
+          this.connect();
+          this.setupDemo();
+        }
+
+        connect() {
+          try {
+            // For demo, use mock data instead of real WebSocket
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsUrl = `${protocol}//${window.location.host}/ws/agents?org_id=${this.org_id}&user_id=${this.user_id}`;
+
+            console.log('[Dashboard] Connecting to WebSocket:', wsUrl);
+            this.ws = new WebSocket(wsUrl);
+
+            this.ws.onopen = () => this.handleOpen();
+            this.ws.onmessage = (e) => this.handleMessage(e);
+            this.ws.onclose = () => this.handleClose();
+            this.ws.onerror = (e) => this.handleError(e);
+          } catch (error) {
+            console.log('[Dashboard] WebSocket unavailable, using mock data:', error);
+            this.setupDemo();
+          }
+        }
+
+        handleOpen() {
+          console.log('[Dashboard] WebSocket connected');
+          this.reconnectAttempts = 0;
+          this.updateStatus(true);
+          document.getElementById('connection-status').textContent = 'All agents online and ready';
+        }
+
+        handleMessage(event) {
+          try {
+            const message = JSON.parse(event.data);
+            console.log('[Dashboard] Received:', message);
+
+            switch (message.type) {
+              case 'agent_status_update':
+                this.handleAgentStatusUpdate(message.agent);
+                break;
+              case 'team_performance_update':
+                this.handleTeamPerformanceUpdate(message.metrics);
+                break;
+              case 'sync_status_update':
+                this.handleSyncStatusUpdate(message.data);
+                break;
+              default:
+                console.log('[Dashboard] Unknown message type:', message.type);
+            }
+          } catch (error) {
+            console.error('[Dashboard] Failed to parse message:', error);
+          }
+        }
+
+        handleClose() {
+          console.log('[Dashboard] WebSocket disconnected');
+          this.updateStatus(false);
+          this.attemptReconnect();
+        }
+
+        handleError(error) {
+          console.error('[Dashboard] WebSocket error:', error);
+          this.updateStatus(false);
+        }
+
+        attemptReconnect() {
+          if (this.reconnectAttempts < this.maxReconnectAttempts) {
+            this.reconnectAttempts++;
+            console.log(`[Dashboard] Attempting reconnect (${this.reconnectAttempts}/${this.maxReconnectAttempts})...`);
+            setTimeout(() => this.connect(), this.reconnectDelay);
+          }
+        }
+
+        handleAgentStatusUpdate(agent) {
+          this.agents.set(agent.id, agent);
+          this.renderAgents();
+        }
+
+        handleTeamPerformanceUpdate(metrics) {
+          this.teamStats = metrics;
+          this.renderTeamStats();
+        }
+
+        handleSyncStatusUpdate(data) {
+          this.syncData = data;
+          this.renderSyncStatus();
+        }
+
+        updateStatus(connected) {
+          const dot = document.querySelector('.ws-status-dot');
+          const status = document.getElementById('ws-status');
+
+          if (connected) {
+            dot.classList.remove('disconnected');
+            status.textContent = 'Live agent dashboard connected';
+          } else {
+            dot.classList.add('disconnected');
+            status.textContent = 'Attempting to reconnect...';
+          }
+        }
+
+        renderAgents() {
+          const container = document.getElementById('agent-status-grid');
+
+          if (this.agents.size === 0) {
+            container.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; color: var(--ink-2);"><p>Loading agents...</p></div>';
+            return;
+          }
+
+          const agents = Array.from(this.agents.values());
+          container.innerHTML = agents.map(agent => this.createAgentCard(agent)).join('');
+        }
+
+        createAgentCard(agent) {
+          const statusClass = `status-${agent.current_status}`;
+          const statusText = agent.current_status.charAt(0).toUpperCase() + agent.current_status.slice(1);
+          const activeCount = agent.active_task_count || 0;
+          const capacity = agent.max_concurrent_tasks || 5;
+
+          return `
+            <div class="agent-status-card">
+              <div class="agent-header-row">
+                <h3 class="agent-name">${agent.name}</h3>
+                <div class="agent-status-badge ${statusClass}">
+                  <span style="width: 6px; height: 6px; background: currentColor; border-radius: 50%; display: inline-block;"></span>
+                  ${statusText}
+                </div>
+              </div>
+              <div class="agent-role">${agent.role || 'Specialist'}</div>
+
+              <div class="agent-utilization">
+                <div class="utilization-label">
+                  <span>Task Capacity</span>
+                  <span>${activeCount}/${capacity}</span>
+                </div>
+                <div class="utilization-bar">
+                  <div class="utilization-fill" style="width: ${agent.utilization_percent || 0}%"></div>
+                </div>
+              </div>
+
+              <div class="agent-metrics">
+                <div class="metric-item">
+                  <div class="metric-label">Performance</div>
+                  <div class="metric-value">${(agent.performance_score || 100).toFixed(0)}%</div>
+                </div>
+                <div class="metric-item">
+                  <div class="metric-label">Utilization</div>
+                  <div class="metric-value">${(agent.utilization_percent || 0).toFixed(0)}%</div>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
+        renderTeamStats() {
+          if (!this.teamStats) return;
+
+          document.getElementById('stat-total-agents').textContent = this.teamStats.total_agents || '6';
+          document.getElementById('stat-avg-performance').textContent = ((this.teamStats.avg_performance_score || 99.9) * 100).toFixed(1) + '%';
+          document.getElementById('stat-avg-utilization').textContent = Math.round(this.teamStats.avg_utilization || 0) + '%';
+          document.getElementById('stat-active-tasks').textContent = this.teamStats.active_tasks || '12';
+        }
+
+        renderSyncStatus() {
+          if (!this.syncData) return;
+
+          // Render sync system cards
+          const syncContainer = document.getElementById('sync-systems-grid');
+          if (syncContainer) {
+            const syncHtml = this.syncData.systems.map(sys => `
+              <div class="sync-system-card">
+                <div class="sync-system-header">
+                  <h4 class="sync-system-name">${sys.name}</h4>
+                  <div class="health-badge health-${sys.health_status}">
+                    <span style="width: 6px; height: 6px; background: currentColor; border-radius: 50%; display: inline-block;"></span>
+                    ${sys.health_status.charAt(0).toUpperCase() + sys.health_status.slice(1)}
+                  </div>
+                </div>
+                <div class="sync-detail-row">
+                  <span class="sync-detail-label">Last Synced</span>
+                  <span class="sync-detail-value">${new Date(sys.last_synced_at).toLocaleString()}</span>
+                </div>
+                <div class="sync-detail-row">
+                  <span class="sync-detail-label">Next Sync</span>
+                  <span class="sync-detail-value">${new Date(sys.next_scheduled_sync).toLocaleString()}</span>
+                </div>
+                <div class="sync-detail-row">
+                  <span class="sync-detail-label">Records Synced</span>
+                  <span class="sync-detail-value accent">${sys.records_synced}</span>
+                </div>
+                <div class="sync-detail-row">
+                  <span class="sync-detail-label">Duration</span>
+                  <span class="sync-detail-value">${sys.sync_duration_seconds}s</span>
+                </div>
+              </div>
+            `).join('');
+            syncContainer.innerHTML = syncHtml;
+          }
+
+          // Render ingestion stats
+          const ingestionContainer = document.getElementById('ingestion-stats-grid');
+          if (ingestionContainer && this.syncData.ingestion) {
+            const statHtml = this.syncData.ingestion.map(stat => `
+              <div class="ingestion-stat">
+                <div class="ingestion-stat-label">${stat.label}</div>
+                <div class="ingestion-stat-value">${stat.count}</div>
+                <div class="ingestion-stat-source">${stat.source}</div>
+              </div>
+            `).join('');
+            ingestionContainer.innerHTML = statHtml;
+          }
+
+          // Render task queue
+          const taskContainer = document.getElementById('task-queue-lists');
+          if (taskContainer && this.syncData.tasks) {
+            const completedTasks = this.syncData.tasks.filter(t => t.status === 'completed');
+            const pendingTasks = this.syncData.tasks.filter(t => t.status === 'pending');
+
+            const taskHtml = `
+              <div class="task-list-container">
+                <div class="task-list-header completed">✓ Completed Tasks</div>
+                <ul class="task-queue-list">
+                  ${completedTasks.map(task => `
+                    <li class="task-queue-item">
+                      <span class="task-name">${task.name}</span>
+                      <span class="task-status-tag task-status-completed">Completed</span>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+              <div class="task-list-container">
+                <div class="task-list-header pending">⏳ Pending Tasks</div>
+                <ul class="task-queue-list">
+                  ${pendingTasks.map(task => `
+                    <li class="task-queue-item">
+                      <span class="task-name">${task.name}</span>
+                      <span class="task-status-tag task-status-${task.status}">${task.status.charAt(0).toUpperCase() + task.status.slice(1)}</span>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+            `;
+            taskContainer.innerHTML = taskHtml;
+          }
+
+          // Render reconciliation summary
+          const reconContainer = document.getElementById('reconciliation-summary');
+          if (reconContainer && this.syncData.reconciliation) {
+            const reconHtml = this.syncData.reconciliation.map(stat => `
+              <div class="reconciliation-stat">
+                <div class="reconciliation-stat-label">${stat.label}</div>
+                <div class="reconciliation-stat-value">${stat.value}</div>
+                <div class="reconciliation-stat-desc">${stat.description}</div>
+              </div>
+            `).join('');
+            reconContainer.innerHTML = reconHtml;
+          }
+        }
+
+        setupDemo() {
+          console.log('[Dashboard] Setting up demo data');
+
+          // Demo agents
+          const demoAgents = [
+            {
+              id: 'agent-1',
+              name: 'Financial Director',
+              role: 'reporting',
+              current_status: 'online',
+              utilization_percent: 45,
+              performance_score: 99.8,
+              active_task_count: 2,
+              max_concurrent_tasks: 5,
+            },
+            {
+              id: 'agent-2',
+              name: 'Accounting Manager',
+              role: 'ap_ar',
+              current_status: 'online',
+              utilization_percent: 72,
+              performance_score: 99.9,
+              active_task_count: 3,
+              max_concurrent_tasks: 5,
+            },
+            {
+              id: 'agent-3',
+              name: 'Document Processor',
+              role: 'document',
+              current_status: 'busy',
+              utilization_percent: 95,
+              performance_score: 99.7,
+              active_task_count: 4,
+              max_concurrent_tasks: 4,
+            },
+            {
+              id: 'agent-4',
+              name: 'Bank Verifier',
+              role: 'reconciliation',
+              current_status: 'online',
+              utilization_percent: 38,
+              performance_score: 100,
+              active_task_count: 2,
+              max_concurrent_tasks: 5,
+            },
+            {
+              id: 'agent-5',
+              name: 'Tax Specialist',
+              role: 'tax',
+              current_status: 'online',
+              utilization_percent: 62,
+              performance_score: 99.95,
+              active_task_count: 3,
+              max_concurrent_tasks: 5,
+            },
+            {
+              id: 'agent-6',
+              name: 'Regulatory Filer',
+              role: 'tax',
+              current_status: 'online',
+              utilization_percent: 28,
+              performance_score: 99.9,
+              active_task_count: 1,
+              max_concurrent_tasks: 5,
+            },
+          ];
+
+          // Load demo agents
+          demoAgents.forEach(agent => {
+            this.agents.set(agent.id, agent);
+          });
+
+          // Demo stats
+          this.teamStats = {
+            total_agents: 6,
+            avg_performance_score: 0.9992,
+            avg_utilization: 56.7,
+            active_tasks: 15,
+          };
+
+          // Demo sync data
+          const now = new Date();
+          const twoHoursAgo = new Date(now.getTime() - 2 * 60 * 60 * 1000);
+          const fifteenMinutesFromNow = new Date(now.getTime() + 15 * 60 * 1000);
+
+          this.syncData = {
+            systems: [
+              {
+                name: 'Wafeq',
+                health_status: 'healthy',
+                last_synced_at: twoHoursAgo.toISOString(),
+                next_scheduled_sync: fifteenMinutesFromNow.toISOString(),
+                records_synced: 20,
+                sync_duration_seconds: 12,
+              },
+              {
+                name: 'QuickBooks',
+                health_status: 'healthy',
+                last_synced_at: twoHoursAgo.toISOString(),
+                next_scheduled_sync: fifteenMinutesFromNow.toISOString(),
+                records_synced: 23,
+                sync_duration_seconds: 18,
+              },
+            ],
+            ingestion: [
+              { label: 'GL Entries', count: 8, source: 'Wafeq' },
+              { label: 'Invoices (AR)', count: 3, source: 'Wafeq' },
+              { label: 'Bills (AP)', count: 3, source: 'Wafeq' },
+              { label: 'Bank Txns', count: 3, source: 'Wafeq' },
+              { label: 'VAT Returns', count: 2, source: 'Wafeq' },
+              { label: 'Chart of Accounts', count: 8, source: 'QB' },
+              { label: 'Customers', count: 3, source: 'QB' },
+              { label: 'Vendors', count: 3, source: 'QB' },
+            ],
+            tasks: [
+              { name: 'GL Sync (Wafeq)', status: 'completed' },
+              { name: 'AR Sync (Wafeq)', status: 'completed' },
+              { name: 'AP Sync (Wafeq)', status: 'completed' },
+              { name: 'Bank Sync (Wafeq)', status: 'completed' },
+              { name: 'AR Sync (QB)', status: 'completed' },
+              { name: 'AP Sync (QB)', status: 'completed' },
+              { name: 'Cross-System Reconciliation', status: 'pending' },
+            ],
+            reconciliation: [
+              { label: 'AR Matched', value: '3/3', description: 'Invoices reconciled' },
+              { label: 'AP Matched', value: '3/3', description: 'Bills reconciled' },
+              { label: 'GL Balanced', value: '100%', description: 'Accounts aligned' },
+              { label: 'Ready for Export', value: 'YES', description: 'All systems ready' },
+            ],
+          };
+
+          this.renderAgents();
+          this.renderTeamStats();
+          this.renderSyncStatus();
+          this.updateStatus(true);
+
+          // Simulate live updates every 5 seconds
+          setInterval(() => {
+            const agentToUpdate = demoAgents[Math.floor(Math.random() * demoAgents.length)];
+            agentToUpdate.utilization_percent = Math.max(0, Math.min(100, agentToUpdate.utilization_percent + (Math.random() - 0.5) * 30));
+            agentToUpdate.performance_score = Math.max(99, Math.min(100, agentToUpdate.performance_score + (Math.random() - 0.5) * 0.1));
+            this.handleAgentStatusUpdate(agentToUpdate);
+          }, 5000);
+        }
+      }
+
+      // Initialize dashboard when page loads
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          new AgentDashboardClient();
+        });
+      } else {
+        new AgentDashboardClient();
+      }
+    </script>
+  </body>
+</html>

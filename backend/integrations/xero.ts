@@ -3,8 +3,8 @@
  * OAuth 2.0 with PKCE, GL sync, batch operations, real-time webhooks
  */
 
-import BaseIntegration, { Logger } from './base';
-import { OAuthHandler, getOAuthConfig, HttpClient } from './oauth-handler';
+import BaseIntegration, { Logger } from "./base.js";
+import { OAuthHandler, getOAuthConfig, HttpClient } from "./oauth-handler.js";
 import {
   OAuthToken,
   IntegrationSetup,
@@ -15,7 +15,7 @@ import {
   Transaction,
   BankAccount,
   BankTransaction,
-} from './integration-types';
+} from "./integration-types.js";
 
 export class XeroIntegration extends BaseIntegration {
   private oauthHandler: OAuthHandler;

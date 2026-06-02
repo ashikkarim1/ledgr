@@ -4,8 +4,8 @@
  */
 
 import { Pool } from 'pg';
-import StripeIntegration, { SUBSCRIPTION_TIERS, METERED_PRICING } from './stripe-integration';
-import { UsageTracker } from './usage-tracker';
+import StripeIntegration, { SUBSCRIPTION_TIERS, METERED_PRICING } from "./stripe-integration.js";
+import { UsageTracker } from "./usage-tracker.js";
 import {
   Subscription,
   Customer,
@@ -20,7 +20,7 @@ import {
   UpgradeSubscriptionRequest,
   CancelSubscriptionRequest,
   UsageMetrics,
-} from './billing-types';
+} from "./billing-types.js";
 
 export class BillingService {
   private stripe: StripeIntegration;

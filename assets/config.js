@@ -19,14 +19,19 @@
       return 'https://api-staging.ledgr.com';
     }
 
-    // Production environment
+    // Production environment - UAE domain
+    if (hostname === 'ledgr.ae' || hostname === 'app.ledgr.ae' || hostname === 'www.ledgr.ae') {
+      return 'https://api.ledgr.ae';
+    }
+
+    // Production environment - Global domain
     if (hostname === 'ledgr.com' || hostname === 'app.ledgr.com') {
       return 'https://api.ledgr.com';
     }
 
-    // Custom domain fallback (assume API is on same domain, port 3001)
+    // Custom domain fallback (assume API is on same domain)
     if (hostname.includes('ledgr') || hostname.includes('accounting')) {
-      return `${protocol}//${hostname.split(':')[0]}:3001`;
+      return `${protocol}//${hostname.split(':')[0]}`;
     }
 
     // Default: assume API is on same domain

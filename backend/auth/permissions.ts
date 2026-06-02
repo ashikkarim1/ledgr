@@ -12,7 +12,7 @@ import {
   AuthorizationCheckOptions,
   EntityAccessControl,
   AuthError
-} from './types';
+} from "./types.js";
 
 // ============================================================================
 // Permission Definitions (Hierarchical)

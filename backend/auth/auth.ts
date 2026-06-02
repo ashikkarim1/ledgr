@@ -22,7 +22,7 @@ import {
   SecurityEventType,
   AuthError,
   RefreshTokenRequest
-} from './types';
+} from "./types.js";
 
 // ============================================================================
 // Configuration & Secrets

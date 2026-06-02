@@ -8,7 +8,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as crypto from 'crypto';
 import { Readable } from 'stream';
-import BaseIntegration, { Logger } from './base';
+import BaseIntegration, { Logger } from "./base.js";
 import {
   IntegrationSetup,
   CompanyInfo,
@@ -20,7 +20,7 @@ import {
   BankTransaction,
   OAuthToken,
   IntegrationError,
-} from './integration-types';
+} from "./integration-types.js";
 
 // ============================================================================
 // Types

@@ -14,7 +14,7 @@ import {
   SubscriptionTierConfig,
   Invoice as BillingInvoice,
   InvoiceLineItem,
-} from './billing-types';
+} from "./billing-types.js";
 
 /**
  * Stripe Configuration & Pricing

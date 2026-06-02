@@ -4,15 +4,15 @@
  */
 
 import { Request, Response, NextFunction } from 'express';
-import { ApiErrorHandler } from './error-handler';
-import { ErrorCodes, HttpStatus } from '../response-types';
+import { ApiErrorHandler } from "./error-handler.js";
+import { ErrorCodes, HttpStatus } from "../response-types.js";
 import {
   getTrialUsageStats,
   checkTrialDocumentLimit,
   checkTrialExecutionLimit,
   checkTrialUserLimit,
   getTrialInfo,
-} from '../lib/db-helpers';
+} from "../lib/db-helpers.js";
 
 /**
  * Note: Express Request.user is already declared in auth-middleware.ts with JWTPayload type

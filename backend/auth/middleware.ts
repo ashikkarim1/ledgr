@@ -4,9 +4,9 @@
  */
 
 import { Request, Response, NextFunction } from 'express';
-import { AuthContext, AuthError, SecurityEventType } from './types';
-import { AuthenticationService } from './auth';
-import { AuthorizationService } from './permissions';
+import { AuthContext, AuthError, SecurityEventType } from "./types.js";
+import { AuthenticationService } from "./auth.js";
+import { AuthorizationService } from "./permissions.js";
 
 // ============================================================================
 // Middleware Configuration

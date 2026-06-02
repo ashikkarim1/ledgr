@@ -16,9 +16,9 @@ import type {
   TeamSetupData,
   AgentDeploymentData,
   VerificationData,
-} from '../types/onboarding-types';
+} from "../types/onboarding-types.js";
 
-import { OnboardingStep as Step } from '../types/onboarding-types';
+import { OnboardingStep as Step } from "../types/onboarding-types.js";
 
 // ============================================================================
 // VALIDATION RULES

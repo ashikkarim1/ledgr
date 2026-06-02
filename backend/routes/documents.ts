@@ -5,8 +5,8 @@
 
 import express, { Router } from "express";
 import multer from "multer";
-import { authMiddleware } from "../middleware/auth-middleware";
-import * as documentsController from "../controllers/documents.controller";
+import { authMiddleware } from "../middleware/auth-middleware.js";
+import * as documentsController from "../controllers/documents.controller.js";
 
 export function createDocumentsRoutes(): Router {
   const router = express.Router();

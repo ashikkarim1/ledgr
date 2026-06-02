@@ -11,8 +11,8 @@ import {
   Subscription,
   PlanTier,
   SUBSCRIPTION_TIERS,
-} from './billing-types';
-import { SUBSCRIPTION_TIERS } from './stripe-integration';
+} from "./billing-types.js";
+import { SUBSCRIPTION_TIERS } from "./stripe-integration.js";
 
 export class UsageTracker {
   constructor(private db: Pool) {}

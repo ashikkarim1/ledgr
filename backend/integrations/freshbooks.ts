@@ -2,7 +2,7 @@
 // Implements OAuth 2.0 Client Credentials flow with FreshBooks API v3
 // Supports invoice/bill management, transaction sync, account hierarchy
 
-import { BaseIntegration } from './base';
+import { BaseIntegration } from "./base.js";
 import { 
   IIntegrationService, 
   OAuthToken, 
@@ -13,9 +13,9 @@ import {
   Transaction,
   SyncJob,
   SyncError
-} from './integration-types';
-import { OAuthHandler } from './oauth-handler';
-import { HttpClient } from './oauth-handler';
+} from "./integration-types.js";
+import { OAuthHandler } from "./oauth-handler.js";
+import { HttpClient } from "./oauth-handler.js";
 
 /**
  * FreshBooks Integration Service

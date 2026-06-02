@@ -4,7 +4,7 @@
  */
 
 import { Request, Response, NextFunction } from "express";
-import { ApiResponse, ApiError, ErrorCodes, HttpStatus } from "../response-types";
+import { ApiResponse, ApiError, ErrorCodes, HttpStatus } from "../response-types.js";
 
 export class ApiErrorHandler extends Error {
   constructor(

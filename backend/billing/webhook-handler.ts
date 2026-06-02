@@ -10,8 +10,8 @@ import {
   WebhookEvent,
   Subscription,
   SubscriptionStatus,
-} from './billing-types';
-import { BillingService } from './billing';
+} from "./billing-types.js";
+import { BillingService } from "./billing.js";
 
 export class WebhookHandler {
   constructor(

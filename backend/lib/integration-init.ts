@@ -4,8 +4,8 @@
  */
 
 import { Pool, Client } from 'pg';
-import { PersistentIntegrationManager } from '../integrations/integration-manager';
-import { IntegrationPersistence, TokenEncryption } from './integration-persistence';
+import { PersistentIntegrationManager } from "../integrations/integration-manager.js";
+import { IntegrationPersistence, TokenEncryption } from "./integration-persistence.js";
 
 /**
  * Initialize integration system with database connection

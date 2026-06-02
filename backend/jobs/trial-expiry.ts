@@ -4,7 +4,7 @@
  */
 
 import { Pool } from 'pg';
-import { getDbPool } from '../lib/db-helpers';
+import { getDbPool } from "../lib/db-helpers.js";
 
 /**
  * Main job function: Check for expired trials and transition status

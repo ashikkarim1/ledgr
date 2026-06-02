@@ -5,12 +5,12 @@
  */
 
 import { v4 as uuidv4 } from "uuid";
-import * as APAgent from "./implementations/accounts-payable-agent";
-import * as ARAgent from "./implementations/accounts-receivable-agent";
-import * as ReconciliationAgent from "./implementations/reconciliation-agent";
-import * as TaxAgent from "./implementations/tax-agent";
-import * as PayrollAgent from "./implementations/payroll-agent";
-import * as GLAgent from "./implementations/general-ledger-agent";
+import * as APAgent from "./implementations/accounts-payable-agent.js";
+import * as ARAgent from "./implementations/accounts-receivable-agent.js";
+import * as ReconciliationAgent from "./implementations/reconciliation-agent.js";
+import * as TaxAgent from "./implementations/tax-agent.js";
+import * as PayrollAgent from "./implementations/payroll-agent.js";
+import * as GLAgent from "./implementations/general-ledger-agent.js";
 
 export interface ProcessingJob {
   job_id: string;

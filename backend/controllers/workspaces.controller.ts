@@ -4,14 +4,14 @@
  */
 
 import { Request, Response } from "express";
-import { ApiErrors, asyncHandler } from "../middleware/error-handler";
+import { ApiErrors, asyncHandler } from "../middleware/error-handler.js";
 import {
   ApiResponse,
   Workspace,
   WorkspaceDetails,
   WorkspaceMember,
-} from "../response-types";
-import { checkTrialUserLimit, getTrialInfo } from "../lib/db-helpers";
+} from "../response-types.js";
+import { checkTrialUserLimit, getTrialInfo } from "../lib/db-helpers.js";
 
 /**
  * POST /v1/workspaces

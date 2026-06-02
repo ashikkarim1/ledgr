@@ -4,7 +4,7 @@
  * Optimized for accuracy, compliance, and financial domain expertise
  */
 
-import { AgentType } from './agent-types';
+import { AgentType } from "./agent-types.js";
 
 export interface AgentPrompt {
   agent_type: AgentType;

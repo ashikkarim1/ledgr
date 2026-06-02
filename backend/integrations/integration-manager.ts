@@ -4,9 +4,9 @@
  */
 
 import { Pool } from 'pg';
-import { IntegrationManager } from './integration-factory';
-import { IntegrationPersistence } from '../lib/integration-persistence';
-import { BaseIntegration, OAuthToken, SyncJob } from './integration-types';
+import { IntegrationManager } from "./integration-factory.js";
+import { IntegrationPersistence } from "../lib/integration-persistence.js";
+import { BaseIntegration, OAuthToken, SyncJob } from "./integration-types.js";
 
 /**
  * Enhanced Integration Manager with Database Persistence

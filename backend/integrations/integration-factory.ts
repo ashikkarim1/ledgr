@@ -1,14 +1,14 @@
 // Integration Factory & Manager
 // Provides centralized creation, lifecycle management, and configuration of integrations
 
-import { BaseIntegration } from './base';
-import { QuickBooksIntegration } from './quickbooks';
-import { XeroIntegration } from './xero';
-import { FreshBooksIntegration } from './freshbooks';
-import { PlaidIntegration } from './plaid';
-import { WafeqIntegration } from './wafeq-integration';
-import { SyncScheduler } from './sync-scheduler';
-import { IntegrationSetup, SyncJob } from './integration-types';
+import { BaseIntegration } from "./base.js";
+import { QuickBooksIntegration } from "./quickbooks.js";
+import { XeroIntegration } from "./xero.js";
+import { FreshBooksIntegration } from "./freshbooks.js";
+import { PlaidIntegration } from "./plaid.js";
+import { WafeqIntegration } from "./wafeq-integration.js";
+import { SyncScheduler } from "./sync-scheduler.js";
+import { IntegrationSetup, SyncJob } from "./integration-types.js";
 
 /**
  * Integration Factory

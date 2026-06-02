@@ -4,8 +4,8 @@
  */
 
 import { Request, Response } from "express";
-import { ApiErrors, asyncHandler } from "../middleware/error-handler";
-import { ApiResponse } from "../response-types";
+import { ApiErrors, asyncHandler } from "../middleware/error-handler.js";
+import { ApiResponse } from "../response-types.js";
 import {
   processDocument,
   getProcessingJob,
@@ -13,8 +13,8 @@ import {
   approveProcessingResults,
   rejectProcessingResults,
   ProcessingJob,
-} from "../agents/document-processor";
-import { checkTrialDocumentLimit, getTrialInfo, updateTrialUsage } from "../lib/db-helpers";
+} from "../agents/document-processor.js";
+import { checkTrialDocumentLimit, getTrialInfo, updateTrialUsage } from "../lib/db-helpers.js";
 
 /**
  * POST /v1/documents/upload

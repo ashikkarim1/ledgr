@@ -5,8 +5,8 @@
 
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import { AuthContext, JWTPayload, AuthError } from '../auth/types';
-import { maskSensitiveFields } from './encryption';
+import { AuthContext, JWTPayload, AuthError } from "../auth/types.js";
+import { maskSensitiveFields } from "./encryption.js";
 import { RedisClient } from 'redis'; // Assumed Redis client
 
 // ============================================================================

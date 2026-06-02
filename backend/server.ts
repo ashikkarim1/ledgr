@@ -11,45 +11,45 @@ import rateLimit from "express-rate-limit";
 import morgan from "morgan";
 
 // Middleware
-import { authMiddleware, optionalAuthMiddleware, requireRole, workspaceIsolation } from "./middleware/auth-middleware";
-import { errorHandler, asyncHandler } from "./middleware/error-handler";
-import { rateLimiter, requestLogger, startRateLimitCleanup } from "./middleware/rate-limiter";
+import { authMiddleware, optionalAuthMiddleware, requireRole, workspaceIsolation } from "./middleware/auth-middleware.js";
+import { errorHandler, asyncHandler } from "./middleware/error-handler.js";
+import { rateLimiter, requestLogger, startRateLimitCleanup } from "./middleware/rate-limiter.js";
 import {
   checkDocumentLimit,
   checkExecutionLimit,
   checkUserLimit,
   checkTrialExpired,
-} from "./middleware/trial-limits";
+} from "./middleware/trial-limits.js";
 
 // Controllers
-import * as authController from "./controllers/auth.controller";
-import * as workspacesController from "./controllers/workspaces.controller";
-import * as financialsController from "./controllers/financials.controller";
-import * as agentsController from "./controllers/agents.controller";
-import * as helpController from "./controllers/help.controller";
-import * as billingController from "./controllers/billing.controller";
-import * as integrationsController from "./controllers/integrations.controller";
-import * as auditController from "./controllers/audit.controller";
-import * as wafeqController from "./controllers/wafeq.controller";
-import * as trialUpgradeController from "./controllers/trial-upgrade.controller";
+import * as authController from "./controllers/auth.controller.js";
+import * as workspacesController from "./controllers/workspaces.controller.js";
+import * as financialsController from "./controllers/financials.controller.js";
+import * as agentsController from "./controllers/agents.controller.js";
+import * as helpController from "./controllers/help.controller.js";
+import * as billingController from "./controllers/billing.controller.js";
+import * as integrationsController from "./controllers/integrations.controller.js";
+import * as auditController from "./controllers/audit.controller.js";
+import * as wafeqController from "./controllers/wafeq.controller.js";
+import * as trialUpgradeController from "./controllers/trial-upgrade.controller.js";
 
 // Routes
-import { createIntegrationRoutes, createWebhookRoutes } from "./routes/integrations";
-import { createDocumentsRoutes } from "./routes/documents";
+import { createIntegrationRoutes, createWebhookRoutes } from "./routes/integrations.js";
+import { createDocumentsRoutes } from "./routes/documents.js";
 
 // Integration Manager
-import { IntegrationManager } from "./integrations/integration-factory";
-import { PersistentIntegrationManager } from "./integrations/integration-manager";
+import { IntegrationManager } from "./integrations/integration-factory.js";
+import { PersistentIntegrationManager } from "./integrations/integration-manager.js";
 
 // Jobs
-import { startTrialExpiryJob } from "./jobs/trial-expiry";
+import { startTrialExpiryJob } from "./jobs/trial-expiry.js";
 
 // Database
 import { Pool } from "pg";
-import { setDbPool } from "./lib/db-helpers";
+import { setDbPool } from "./lib/db-helpers.js";
 
 // Types
-import { ApiResponse, HealthCheckResponse } from "./response-types";
+import { ApiResponse, HealthCheckResponse } from "./response-types.js";
 
 /**
  * Initialize Express Application
@@ -83,9 +83,34 @@ export function createApp(
 
   // Security
   app.use(helmet());
+  
+  // CORS configuration - allow requests from frontend
+  const allowedOrigins = [
+    "http://localhost:5555",
+    "http://localhost:8000",
+    "http://localhost:3000",
+    "http://localhost:5173",
+  ];
+  
   app.use(cors({
-    origin: process.env.CORS_ORIGIN || "*",
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) {
+        return callback(null, true);
+      }
+      
+      // Check if origin is in allowed list
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        // Allow all origins for now - dev mode
+        callback(null, true);
+      }
+    },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    optionsSuccessStatus: 200,
   }));
 
   // Compression

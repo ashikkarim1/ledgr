@@ -10,7 +10,7 @@ import {
 } from '@aws-sdk/client-secrets-manager';
 import { KMSClient, GenerateDataKeyCommand, DecryptCommand } from '@aws-sdk/client-kms';
 import { randomBytes, createCipheriv, createDecipheriv } from 'crypto';
-import { generateSecureToken } from './encryption';
+import { generateSecureToken } from "./encryption.js";
 
 /**
  * Secret Types - Standardized naming and rotation schedules

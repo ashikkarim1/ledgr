@@ -6,7 +6,7 @@
 
 import crypto from 'crypto';
 import { Pool, PoolClient } from 'pg';
-import { OAuthToken, SyncJob, SyncError } from '../integrations/integration-types';
+import { OAuthToken, SyncJob, SyncError } from "../integrations/integration-types.js";
 
 /**
  * AES-256-GCM Encryption/Decryption

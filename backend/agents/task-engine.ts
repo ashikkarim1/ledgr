@@ -4,8 +4,8 @@
  */
 
 import { v4 as uuidv4 } from 'uuid';
-import { Task, TaskStatus, TaskPriority, AgentSchedule, ScheduleFrequency } from './agent-types';
-import { FinancialAgent } from './agent-framework';
+import { Task, TaskStatus, TaskPriority, AgentSchedule, ScheduleFrequency } from "./agent-types.js";
+import { FinancialAgent } from "./agent-framework.js";
 
 // ============================================================================
 // Task Execution Engine

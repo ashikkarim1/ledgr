@@ -4,9 +4,9 @@
  */
 
 import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest';
-import { IntegrationManager } from '../integrations/integration-factory';
-import { QuickBooksIntegration } from '../integrations/quickbooks';
-import { OAuthHandler } from '../integrations/oauth-handler';
+import { IntegrationManager } from "../integrations/integration-factory.js";
+import { QuickBooksIntegration } from "../integrations/quickbooks.js";
+import { OAuthHandler } from "../integrations/oauth-handler.js";
 
 // Mock setup
 vi.mock('../integrations/oauth-handler');

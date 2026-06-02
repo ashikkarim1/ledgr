@@ -4,8 +4,8 @@
  */
 
 import { Request, Response } from "express";
-import { asyncHandler, ApiErrors } from "../middleware/error-handler";
-import { ApiResponse } from "../response-types";
+import { asyncHandler, ApiErrors } from "../middleware/error-handler.js";
+import { ApiResponse } from "../response-types.js";
 
 /**
  * POST /integrations/wafeq/import

@@ -11,10 +11,10 @@
 
 import { Request, Response } from 'express';
 import { Pool } from 'pg';
-import { IntegrationManager } from '../integrations/integration-factory';
-import { QuickBooksIntegration } from '../integrations/quickbooks';
-import { ApiErrors, asyncHandler } from '../middleware/error-handler';
-import { ApiResponse } from '../response-types';
+import { IntegrationManager } from "../integrations/integration-factory.js";
+import { QuickBooksIntegration } from "../integrations/quickbooks.js";
+import { ApiErrors, asyncHandler } from "../middleware/error-handler.js";
+import { ApiResponse } from "../response-types.js";
 import {
   userHasWorkspaceAccess,
   getUserWorkspaceRole,
@@ -26,7 +26,7 @@ import {
   storeQBInvoice,
   storeQBBill,
   storeQBTransaction,
-} from '../db/quickbooks-db';
+} from "../db/quickbooks-db.js";
 
 /**
  * POST /v1/integrations/quickbooks/auth

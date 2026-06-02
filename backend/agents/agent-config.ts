@@ -10,7 +10,7 @@ import {
   ApprovalThresholds,
   IntegrationSettings,
   EscalationSettings,
-} from './agent-types';
+} from "./agent-types.js";
 
 // ============================================================================
 // Default Configurations

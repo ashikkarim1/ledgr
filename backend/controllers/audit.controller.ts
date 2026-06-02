@@ -4,12 +4,12 @@
  */
 
 import { Request, Response } from "express";
-import { ApiErrors, asyncHandler } from "../middleware/error-handler";
+import { ApiErrors, asyncHandler } from "../middleware/error-handler.js";
 import {
   ApiResponse,
   AuditLog,
   ComplianceReport,
-} from "../response-types";
+} from "../response-types.js";
 
 /**
  * GET /v1/audit/logs

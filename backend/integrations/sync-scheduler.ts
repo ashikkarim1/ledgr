@@ -4,13 +4,13 @@
  */
 
 import crypto from 'crypto';
-import { Logger } from './base';
+import { Logger } from "./base.js";
 import {
   SyncJob,
   SyncError,
   IntegrationSetup,
   SyncSettings,
-} from './integration-types';
+} from "./integration-types.js";
 
 // ============================================================================
 // Sync Job Queue

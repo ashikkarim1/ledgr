@@ -10,7 +10,7 @@ export {
   refresh,
   logout,
   setupTwoFactor,
-} from "./auth.controller";
+} from "./auth.controller.js";
 
 // Workspaces controller
 export {
@@ -20,7 +20,7 @@ export {
   updateWorkspace,
   inviteMember,
   listMembers,
-} from "./workspaces.controller";
+} from "./workspaces.controller.js";
 
 // Financial data controller
 export {
@@ -29,7 +29,7 @@ export {
   listTransactions,
   createTransaction,
   getProfitLossReport,
-} from "./financials.controller";
+} from "./financials.controller.js";
 
 // Agents controller
 export {
@@ -38,7 +38,7 @@ export {
   executeAgent,
   getAgentHistory,
   getExecution,
-} from "./agents.controller";
+} from "./agents.controller.js";
 
 // Help centre controller
 export {
@@ -48,7 +48,7 @@ export {
   listTickets,
   getTicket,
   addTicketMessage,
-} from "./help.controller";
+} from "./help.controller.js";
 
 // Billing controller
 export {
@@ -57,7 +57,7 @@ export {
   listInvoices,
   listPaymentMethods,
   addPaymentMethod,
-} from "./billing.controller";
+} from "./billing.controller.js";
 
 // Integrations controller
 export {
@@ -66,7 +66,7 @@ export {
   handleCallback,
   getIntegrationStatus,
   disconnectIntegration,
-} from "./integrations.controller";
+} from "./integrations.controller.js";
 
 // Audit controller
 export {
@@ -74,4 +74,4 @@ export {
   getComplianceReport,
   getUserActivity,
   exportAuditLogs,
-} from "./audit.controller";
+} from "./audit.controller.js";

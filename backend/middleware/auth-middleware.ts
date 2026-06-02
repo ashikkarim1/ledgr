@@ -5,8 +5,8 @@
 
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { JWTPayload, UserRole } from "../response-types";
-import { ApiErrors } from "./error-handler";
+import { JWTPayload, UserRole } from "../response-types.js";
+import { ApiErrors } from "./error-handler.js";
 
 declare global {
   namespace Express {

@@ -5,7 +5,7 @@
  */
 
 import { Request, Response, NextFunction } from "express";
-import { ApiErrors } from "./error-handler";
+import { ApiErrors } from "./error-handler.js";
 
 /**
  * Rate limit configuration by subscription plan

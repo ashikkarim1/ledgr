@@ -4,8 +4,8 @@
  * Production-ready implementation for Ledgr accounting platform
  */
 
-import BaseIntegration, { Logger } from './base';
-import { OAuthHandler, getOAuthConfig, HttpClient } from './oauth-handler';
+import BaseIntegration, { Logger } from "./base.js";
+import { OAuthHandler, getOAuthConfig, HttpClient } from "./oauth-handler.js";
 import {
   OAuthToken,
   IntegrationSetup,
@@ -18,7 +18,7 @@ import {
   BankAccount,
   BankTransaction,
   IntegrationError,
-} from './integration-types';
+} from "./integration-types.js";
 
 /**
  * QuickBooks OAuth configuration

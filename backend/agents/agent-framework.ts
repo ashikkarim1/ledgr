@@ -18,7 +18,7 @@ import {
   ComplianceCheckResult,
   TaskExecutionMetadata,
   AgentFeedback,
-} from './agent-types';
+} from "./agent-types.js";
 
 // ============================================================================
 // Base Agent Class

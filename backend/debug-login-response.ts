@@ -3,7 +3,7 @@
  */
 
 import { Pool } from 'pg';
-import { createApp } from './server';
+import { createApp } from "./server.js";
 import request from 'supertest';
 
 async function debugLoginResponse() {

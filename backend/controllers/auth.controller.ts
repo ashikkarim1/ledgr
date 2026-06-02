@@ -6,15 +6,15 @@
 import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
-import { generateToken, generateRefreshToken, verifyRefreshToken } from "../middleware/auth-middleware";
-import { ApiErrors, asyncHandler } from "../middleware/error-handler";
+import { generateToken, generateRefreshToken, verifyRefreshToken } from "../middleware/auth-middleware.js";
+import { ApiErrors, asyncHandler } from "../middleware/error-handler.js";
 import {
   ApiResponse,
   SignupResponse,
   LoginResponse,
   RefreshResponse,
   TwoFactorSetupResponse,
-} from "../response-types";
+} from "../response-types.js";
 import {
   findUserByEmail,
   createUserWithTrial,
@@ -24,7 +24,7 @@ import {
   getUserById,
   updateUserLastLogin,
   getTrialInfo,
-} from "../lib/db-helpers";
+} from "../lib/db-helpers.js";
 
 /**
  * POST /auth/signup

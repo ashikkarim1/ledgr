@@ -4,13 +4,13 @@
  */
 
 import { Request, Response } from "express";
-import { ApiErrors, asyncHandler } from "../middleware/error-handler";
+import { ApiErrors, asyncHandler } from "../middleware/error-handler.js";
 import {
   ApiResponse,
   HelpArticle,
   SupportTicket,
   ChatMessage,
-} from "../response-types";
+} from "../response-types.js";
 
 /**
  * GET /v1/help/articles

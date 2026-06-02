@@ -17,11 +17,11 @@ import type {
   ValidateStepRequest,
   ValidateStepResponse,
   GetProgressResponse,
-} from '../types/onboarding-types';
+} from "../types/onboarding-types.js";
 
-import { OnboardingStep } from '../types/onboarding-types';
-import OnboardingStateMachine, { createOnboardingProgress } from '../lib/onboarding-flow';
-import { validateStep } from '../lib/onboarding-validation';
+import { OnboardingStep } from "../types/onboarding-types.js";
+import OnboardingStateMachine, { createOnboardingProgress } from "../lib/onboarding-flow.js";
+import { validateStep } from "../lib/onboarding-validation.js";
 
 // ============================================================================
 // DATABASE INTERFACE (abstraction layer)

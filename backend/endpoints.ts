@@ -48,7 +48,7 @@ import {
   HealthCheckResponse,
   ListQueryParams,
   FilterableQueryParams,
-} from "./response-types";
+} from "./response-types.js";
 
 /**
  * ==========================================

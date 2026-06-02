@@ -4,7 +4,7 @@
  */
 
 import { Pool } from 'pg';
-import { TrialUsage } from '../billing/billing-types';
+import { TrialUsage } from "../billing/billing-types.js";
 
 // Global database pool (set by middleware or server initialization)
 let dbPool: Pool | null = null;

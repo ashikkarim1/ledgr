@@ -4,8 +4,8 @@
  */
 
 import { describe, it, expect, beforeEach } from '@jest/globals';
-import { WafeqIntegration, ArabicTextHandler, WafeqCSVParser } from './integrations/wafeq-integration';
-import { IntegrationSetup } from './integrations/integration-types';
+import { WafeqIntegration, ArabicTextHandler, WafeqCSVParser } from "./integrations/wafeq-integration.js";
+import { IntegrationSetup } from "./integrations/integration-types.js";
 import { randomUUID } from 'crypto';
 
 // ============================================================================

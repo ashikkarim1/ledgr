@@ -21,7 +21,7 @@ import {
   Transaction,
   BankAccount,
   BankTransaction,
-} from './integration-types';
+} from "./integration-types.js";
 
 // ============================================================================
 // Encryption Utilities for Token Storage

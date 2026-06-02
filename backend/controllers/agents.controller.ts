@@ -4,13 +4,13 @@
  */
 
 import { Request, Response } from "express";
-import { ApiErrors, asyncHandler } from "../middleware/error-handler";
+import { ApiErrors, asyncHandler } from "../middleware/error-handler.js";
 import {
   ApiResponse,
   Agent,
   AgentExecution,
-} from "../response-types";
-import { checkTrialExecutionLimit, getTrialInfo } from "../lib/db-helpers";
+} from "../response-types.js";
+import { checkTrialExecutionLimit, getTrialInfo } from "../lib/db-helpers.js";
 
 /**
  * GET /v1/agents
