@@ -202,7 +202,7 @@
             name="password"
             placeholder="••••••••"
             required
-            value="tester"
+            value="password123"
           />
         </div>
 
@@ -241,6 +241,10 @@
       submitBtn.innerHTML = '<span class="loading"></span>Signing in...';
 
       try {
+        // Add 10-second timeout to fetch request
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
+
         const response = await fetch(window.LedgrConfig.auth.login(), {
           method: 'POST',
           headers: {
@@ -248,23 +252,26 @@
             'Accept': 'application/json',
           },
           credentials: 'include',
+          signal: controller.signal,
           body: JSON.stringify({
             email: email,
             password: password,
           }),
         });
 
+        clearTimeout(timeoutId);
         const data = await response.json();
 
         if (!response.ok || !data.success) {
           throw new Error(data.errors?.[0]?.message || 'Sign in failed. Please check your credentials.');
         }
 
-        // Store tokens
+        // Store tokens and user info
         localStorage.setItem(window.LedgrConfig.storage.accessToken, data.data.access_token);
         localStorage.setItem(window.LedgrConfig.storage.refreshToken, data.data.refresh_token);
         localStorage.setItem(window.LedgrConfig.storage.userId, data.data.user_id);
         localStorage.setItem(window.LedgrConfig.storage.workspaceId, data.data.workspace_id);
+        localStorage.setItem('user_email', email);
 
         // Show success message
         successMessage.textContent = 'Sign in successful! Redirecting to dashboard...';
@@ -279,9 +286,13 @@
         console.error('Login error:', error);
         let errorText = error.message;
         
+        // Check if it's an abort/timeout error
+        if (error.name === 'AbortError') {
+          errorText = `Request timeout: Backend server at ${window.LedgrConfig.apiEndpoint} is not responding. Please try again.`;
+        }
         // Check if it's a network error
-        if (error instanceof TypeError) {
-          errorText = `Network error: Cannot reach backend server at ${window.LedgrConfig.apiEndpoint}. Make sure the backend is running.`;
+        else if (error instanceof TypeError) {
+          errorText = `Network error: Cannot reach backend server at ${window.LedgrConfig.apiEndpoint}. Make sure the backend is running and CORS is configured.`;
         }
         
         errorMessage.textContent = errorText;

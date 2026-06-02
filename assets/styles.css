@@ -2074,8 +2074,8 @@ section + section {
 
 .foot__grid {
   display: grid;
-  grid-template-columns: 1.5fr repeat(4, 1fr);
-  gap: 40px;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
   margin-bottom: 48px;
 }
 
@@ -2116,9 +2116,15 @@ section + section {
   flex-wrap: wrap;
 }
 
-@media (min-width: 821px) {
+@media (max-width: 820px) {
   .foot__grid {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .foot__grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -5746,6 +5752,56 @@ section + section {
   .field-row {
     grid-template-columns: 1fr;
   }
+}
+
+/* ---------- Input password toggle ---------- */
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-group .input {
+  width: 100%;
+  padding-right: 44px;
+}
+
+.input-toggle-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: var(--ink-3);
+  transition: color 0.2s var(--ease);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.input-toggle-btn:hover {
+  color: var(--accent);
+}
+
+.input-toggle-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.eye-icon {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
 }
 
 .honeypot {
