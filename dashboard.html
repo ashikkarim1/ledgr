@@ -327,6 +327,15 @@
         }
       }
     </style>
+    <script>
+      // Hide nav when loaded in iframe (demo.html context)
+      if (window.self !== window.top) {
+        document.addEventListener('DOMContentLoaded', () => {
+          const nav = document.getElementById('nav');
+          if (nav) nav.style.display = 'none';
+        });
+      }
+    </script>
   </head>
   <body>
     <header class="nav" id="nav">
