@@ -36,6 +36,7 @@ import * as trialUpgradeController from "./controllers/trial-upgrade.controller.
 // Routes
 import { createIntegrationRoutes, createWebhookRoutes } from "./routes/integrations.js";
 import { createDocumentsRoutes } from "./routes/documents.js";
+import { createInterestRoutes } from "./routes/interest.js";
 
 // Integration Manager
 import { IntegrationManager } from "./integrations/integration-factory.js";
@@ -349,6 +350,15 @@ export function createApp(
 
   // Mount document processing routes
   app.use("/v1/documents", authMiddleware, checkTrialExpired, checkDocumentLimit, createDocumentsRoutes());
+
+  /**
+   * ==========================================
+   * INTEREST FORM ROUTES (PUBLIC)
+   * ==========================================
+   */
+
+  // Mount interest form routes (no auth required - public pricing page submissions)
+  app.use("/api/interest", createInterestRoutes());
 
   /**
    * ==========================================
