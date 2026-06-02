@@ -651,9 +651,9 @@
 
         let emailSent = false;
 
-        // Send to backend API via Resend
+        // Send to Formspree for email delivery
         try {
-          const response = await fetch('/api/interest', {
+          const response = await fetch('https://formspree.io/f/mxyzpad', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -664,15 +664,16 @@
               company: data.company,
               phone: data.phone,
               plan: data.plan,
-              timestamp: data.timestamp
+              timestamp: data.timestamp,
+              _replyto: data.email,
+              _subject: `New Interest Form Submission from ${data.name}`
             })
           });
           if (response.ok) {
             emailSent = true;
-            console.log('Interest submitted successfully via Resend');
+            console.log('Interest submitted successfully via Formspree');
           } else {
-            const error = await response.json();
-            console.log('Interest submission error:', error);
+            console.log('Interest submission status:', response.status);
           }
         } catch (error) {
           console.log('Interest submission error:', error.message);
