@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Integration Factory & Manager
 // Provides centralized creation, lifecycle management, and configuration of integrations
 

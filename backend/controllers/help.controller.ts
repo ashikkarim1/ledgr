@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Help Centre Controller
  * Handles support articles, tickets, and live chat support

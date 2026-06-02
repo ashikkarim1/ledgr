@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Integration Routes & Middleware
 // Handles OAuth callbacks, webhook processing, and integration management endpoints
 

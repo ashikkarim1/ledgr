@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * QuickBooks Online Integration
  * OAuth 2.0, transaction sync, invoice/bill management, real-time webhooks

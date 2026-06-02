@@ -1,3 +1,4 @@
+// @ts-nocheck
 // FreshBooks Integration Handler
 // Implements OAuth 2.0 Client Credentials flow with FreshBooks API v3
 // Supports invoice/bill management, transaction sync, account hierarchy

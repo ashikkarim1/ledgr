@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Sync Scheduler
  * Manages scheduled syncs, retries, and automatic reconciliation

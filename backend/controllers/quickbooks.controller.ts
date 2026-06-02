@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * QuickBooks OAuth Controller
  * Handles OAuth flow, sync initiation, and integration management

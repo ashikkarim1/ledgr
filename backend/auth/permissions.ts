@@ -346,7 +346,7 @@ export class RBACManager {
 // ============================================================================
 
 export class AuthorizationService {
-  private rbac = new RBACManager();
+  rbac = new RBACManager();
   private entityAcl = new Map<string, EntityAccessControl[]>(); // entity_id -> acl
 
   /**

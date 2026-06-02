@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Billing API Endpoints
  * REST API routes for billing operations

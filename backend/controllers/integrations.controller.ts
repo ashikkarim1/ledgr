@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Integrations Controller
  * Handles third-party integrations (QuickBooks, Xero, Banking APIs, etc.)

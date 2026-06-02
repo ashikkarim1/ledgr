@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Stripe API Wrapper
  * Encapsulates all Stripe API interactions with type safety

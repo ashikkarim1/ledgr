@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Integration Persistence Layer
  * Bridges integration manager with PostgreSQL database

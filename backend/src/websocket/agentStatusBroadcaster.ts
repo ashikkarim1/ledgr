@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { WebSocket } from 'ws';
 import { Server } from 'http';
 

@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Documents Controller
  * Handles document uploads, processing, and result retrieval

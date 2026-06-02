@@ -143,7 +143,6 @@ export class OnboardingHandler {
       valid: result.valid,
       errors: result.errors,
       warnings: result.warnings,
-      estimatedCompletionTimeMs: timeRemaining * 60 * 1000,
     };
   }
 

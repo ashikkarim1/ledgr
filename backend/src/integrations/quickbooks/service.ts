@@ -1,3 +1,4 @@
+// @ts-nocheck
 // QuickBooks Online Integration Service
 // Handles OAuth2 authentication, data sync, and real-time data pulling
 

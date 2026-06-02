@@ -213,7 +213,7 @@ export interface VerifyTwoFactorRequest {
 export interface TwoFactorChallenge {
   session_token: string; // Temporary token to complete login
   expires_in: number;
-  methods: ('totp' | 'sms' | 'email')[];
+  methods: ('totp' | 'sms' | 'email' | 'backup_code')[];
 }
 
 // ============================================================================
@@ -322,6 +322,7 @@ declare global {
       user?: AuthContext;
       auth_token?: JWTPayload;
       session_id?: string;
+      workspace_id?: string;
     }
   }
 }

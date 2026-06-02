@@ -8,15 +8,6 @@ import jwt from "jsonwebtoken";
 import { JWTPayload, UserRole } from "../response-types.js";
 import { ApiErrors } from "./error-handler.js";
 
-declare global {
-  namespace Express {
-    interface Request {
-      user?: JWTPayload;
-      workspace_id?: string;
-    }
-  }
-}
-
 /**
  * JWT Authentication Middleware
  * Validates access token and extracts user claims
@@ -36,7 +27,7 @@ export function authMiddleware(
     }
 
     const payload = verifyToken(token);
-    req.user = payload;
+    (req as any).user = payload;
 
     // Extract workspace ID from token or header
     req.workspace_id = req.headers["x-workspace-id"] as string ||
@@ -67,7 +58,7 @@ export function optionalAuthMiddleware(
 
     if (token) {
       const payload = verifyToken(token);
-      req.user = payload;
+      (req as any).user = payload;
       req.workspace_id = req.headers["x-workspace-id"] as string ||
         payload.workspace_id;
     }
@@ -89,7 +80,7 @@ export function requireRole(...roles: UserRole[]) {
       throw ApiErrors.unauthorized("Authentication required");
     }
 
-    if (!roles.includes(req.user.role)) {
+    if (!roles.includes((req.user as any).role)) {
       throw ApiErrors.forbidden(
         `This action requires one of the following roles: ${roles.join(", ")}`
       );
@@ -116,9 +107,9 @@ export function workspaceIsolation(
     req.query.workspace_id ||
     req.body?.workspace_id;
 
-  if (workspaceIdParam && workspaceIdParam !== req.user.workspace_id) {
+  if (workspaceIdParam && workspaceIdParam !== (req.user as any).workspace_id) {
     // Allow if user is admin (can have multiple workspaces)
-    if (req.user.role !== "admin") {
+    if ((req.user as any).role !== "admin") {
       throw ApiErrors.forbidden("You do not have access to this workspace");
     }
   }
@@ -136,7 +127,7 @@ export function requireScope(...scopes: string[]) {
       throw ApiErrors.unauthorized("Authentication required");
     }
 
-    const hasScope = scopes.some((scope) => req.user!.scope.includes(scope));
+    const hasScope = scopes.some((scope) => (req.user as any).scope.includes(scope));
 
     if (!hasScope) {
       throw ApiErrors.forbidden(

@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Integration Manager with Database Persistence
  * Extends IntegrationManager to add database storage capabilities

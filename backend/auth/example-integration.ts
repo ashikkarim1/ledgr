@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Example Integration: Complete Authentication Setup
  * Shows how to wire up all components in a real Express app

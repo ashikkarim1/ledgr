@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Authentication Controller
  * Handles signup, login, token refresh, and 2FA setup

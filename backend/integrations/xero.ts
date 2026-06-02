@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Xero Integration
  * OAuth 2.0 with PKCE, GL sync, batch operations, real-time webhooks

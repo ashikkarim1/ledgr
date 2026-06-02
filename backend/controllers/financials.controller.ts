@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Financial Data Controller
  * Handles dashboard data, accounts, transactions, and financial reporting

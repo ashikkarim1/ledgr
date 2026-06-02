@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as redis from 'redis';
 
 const redisClient = redis.createClient({

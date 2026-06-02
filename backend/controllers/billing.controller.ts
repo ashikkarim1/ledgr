@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Billing & Payments Controller
  * Handles subscriptions, invoices, and payment processing

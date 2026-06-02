@@ -325,7 +325,7 @@ const csrfTokenStore = new Map<string, CSRFToken>();
 
 export function generateCSRFToken(req: Request, res: Response): string {
   const token = require('crypto').randomUUID();
-  const session_id = req.sessionID || req.ip || '';
+  const session_id = req.session_id || req.ip || '';
 
   csrfTokenStore.set(session_id, {
     token,
@@ -350,7 +350,7 @@ export function verifyCsrfToken() {
       return next();
     }
 
-    const session_id = req.sessionID || req.ip || '';
+    const session_id = req.session_id || req.ip || '';
     const storedToken = csrfTokenStore.get(session_id);
 
     if (!storedToken) {
