@@ -8,27 +8,14 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { full_name, email, password, workspace_name, country, role, team_size } = req.body;
+    const { full_name, email, workspace_name, country, role, team_size } = req.body;
 
     // Validate required fields
-    if (!full_name || !email || !password || !workspace_name) {
+    if (!full_name || !email || !workspace_name) {
       return res.status(400).json({ 
-        error: 'Missing required fields: full_name, email, password, workspace_name' 
+        error: 'Missing required fields: full_name, email, workspace_name' 
       });
     }
-
-    // Validate password length
-    if (password.length < 12) {
-      return res.status(400).json({ 
-        error: 'Password must be at least 12 characters' 
-      });
-    }
-
-    // Create mock auth response with tokens
-    const userId = `user_${Date.now()}`;
-    const workspaceId = `ws_${Date.now()}`;
-    const accessToken = `token_${Buffer.from(email).toString('base64')}`;
-    const refreshToken = `refresh_${Buffer.from(email).toString('base64')}`;
 
     // Send admin notification email
     await resend.emails.send({
@@ -76,17 +63,9 @@ export default async function handler(req, res) {
       `
     }).catch(err => console.error('User email failed:', err));
 
-    // Return mock auth response
+    // Return confirmation
     res.status(200).json({
       success: true,
-      data: {
-        user_id: userId,
-        workspace_id: workspaceId,
-        access_token: accessToken,
-        refresh_token: refreshToken,
-        email: email,
-        workspace_name: workspace_name
-      },
       message: 'Interest signup received successfully'
     });
   } catch (error) {

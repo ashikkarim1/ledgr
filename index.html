@@ -2888,8 +2888,8 @@
             name="waitlist"
           >
             <div>
-              <h3 class="waitlist__title">Create your Ledgr account</h3>
-              <p class="waitlist__sub">Free access for the first 80 organizations launching in Q3 2026.</p>
+              <h3 class="waitlist__title">Join the early community</h3>
+              <p class="waitlist__sub">Express your interest in Ledgr. Free access for the first 80 organizations launching in Q3 2026.</p>
             </div>
 
             <div id="form-message" class="form-message" style="display:none;padding:14px;border-radius:6px;margin-bottom:20px;font-size:14px;line-height:1.5"></div>
@@ -2904,19 +2904,7 @@
               <input id="wl-email" name="email" class="input" type="email" required autocomplete="email" placeholder="sara@yourcompany.ae" />
             </div>
 
-            <div class="field">
-              <label for="wl-password" class="field__label">Password</label>
-              <div class="input-group">
-                <input id="wl-password" name="password" class="input" type="password" required autocomplete="new-password" placeholder="Minimum 12 characters" minlength="12" />
-                <button type="button" class="input-toggle-btn" data-toggle="#wl-password" aria-label="Toggle password visibility">
-                  <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                </button>
-              </div>
-              <p style="font-size:12px;color:color-mix(in srgb,var(--paper) 60%,transparent);margin-top:6px">Must be at least 12 characters long</p>
-            </div>
+
 
             <div class="field">
               <label for="wl-company" class="field__label">Company / Workspace</label>
@@ -2963,7 +2951,7 @@
             </div>
 
             <button type="submit" class="btn waitlist__submit" id="wl-submit">
-              Create account and get started
+              Join the early community
             </button>
 
             <p class="waitlist__legal">
@@ -2971,36 +2959,22 @@
               We'll email you when your account is verified.
             </p>
 
-            <div class="waitlist__success" aria-live="polite">
+            <div class="waitlist__success" aria-live="polite" style="display:none">
               <div class="waitlist__check" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19.5 8"/></svg>
               </div>
               <div>
-                <div class="waitlist__success-title" id="wl-success-name">You're on the list.</div>
+                <div class="waitlist__success-title" id="wl-success-name">Interest received.</div>
                 <p class="waitlist__success-body" id="wl-success-body">
-                  Our team will reach out within one working day to schedule
-                  your onboarding call. Keep an eye on your inbox — including
-                  the spam folder, just in case.
+                  Thank you for joining our early community. We'll send you a 
+                  personal invitation when Ledgr launches in Q3 2026. Keep an eye 
+                  on your inbox — including the spam folder, just in case.
                 </p>
               </div>
-              <div class="waitlist__success-meta" id="wl-success-meta">REF · pending</div>
+              <div class="waitlist__success-meta" id="wl-success-meta">REF · confirmed</div>
             </div>
 
             <script>
-              // Password toggle functionality
-              document.querySelectorAll('.input-toggle-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                  e.preventDefault();
-                  const targetSelector = btn.getAttribute('data-toggle');
-                  const input = document.querySelector(targetSelector);
-                  if (input.type === 'password') {
-                    input.type = 'text';
-                  } else {
-                    input.type = 'password';
-                  }
-                });
-              });
-
               document.getElementById('waitlist-form').addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const form = e.target;
@@ -3009,21 +2983,16 @@
                 
                 submitBtn.disabled = true;
                 const originalText = submitBtn.textContent;
-                submitBtn.textContent = 'Creating account...';
+                submitBtn.textContent = 'Submitting...';
                 messageDiv.style.display = 'none';
 
                 try {
                   const formData = {
                     full_name: form.querySelector('#wl-name').value,
                     email: form.querySelector('#wl-email').value,
-                    password: form.querySelector('#wl-password').value,
                     workspace_name: form.querySelector('#wl-company').value,
                     country: form.querySelector('#wl-zone').value
                   };
-
-                  if (formData.password.length < 12) {
-                    throw new Error('Password must be at least 12 characters');
-                  }
 
                   const response = await fetch('/api/auth-signup', {
                     method: 'POST',
@@ -3040,20 +3009,16 @@
                   }
                   if (!response.ok) throw new Error(data.message || 'Signup failed');
 
-                  if (data.data && data.data.access_token) {
-                    localStorage.setItem('ledgr-access-token', data.data.access_token);
-                    localStorage.setItem('ledgr-refresh-token', data.data.refresh_token);
-                    localStorage.setItem('ledgr-user-id', data.data.user_id);
-                    localStorage.setItem('ledgr-workspace-id', data.data.workspace_id);
-                  }
-
                   messageDiv.style.backgroundColor = '#dcfce7';
                   messageDiv.style.color = '#166534';
                   messageDiv.style.borderLeft = '4px solid #22c55e';
-                  messageDiv.textContent = '✓ Account created! Redirecting...';
+                  messageDiv.textContent = '✓ Interest received! Check your email for details.';
                   messageDiv.style.display = 'block';
 
-                  setTimeout(() => { window.location.href = '/onboarding.html'; }, 1500);
+                  setTimeout(() => {
+                    form.style.display = 'none';
+                    document.querySelector('.waitlist__success').style.display = 'block';
+                  }, 1500);
                 } catch (error) {
                   console.error('Signup error:', error);
                   messageDiv.style.backgroundColor = '#fee2e2';
