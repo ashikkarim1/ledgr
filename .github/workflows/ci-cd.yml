@@ -147,7 +147,7 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           scope: ${{ secrets.VERCEL_ORG_ID }}
-          production: ${{ github.ref == 'refs/heads/main' }}
+          vercel-args: ${{ github.ref == 'refs/heads/main' && '--prod' || '' }}
 
   # Job 5: Notify Deployment Status
   notify-deployment:
