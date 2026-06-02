@@ -9773,12 +9773,19 @@ section + section {
   font-size: 24px;
   cursor: pointer;
   box-shadow: 0 4px 16px rgba(255, 92, 0, 0.3);
-  display: flex;
+  display: none; /* Hidden by default (not implemented in JavaScript yet) */
   align-items: center;
   justify-content: center;
   z-index: 999;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Show on desktop only when JavaScript initializes it */
+@media (min-width: 1100px) {
+  .feedback-intelligence-toggle {
+    display: flex;
+  }
 }
 
 .feedback-intelligence-toggle:hover {
