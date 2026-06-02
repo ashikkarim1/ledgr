@@ -1795,8 +1795,28 @@ const DashboardModule = (() => {
     try {
       const response = await fetch('/demo-data/financial-dataset.json');
       if (!response.ok) throw new Error('Failed to load financial data');
-      financialData = await response.json();
-      console.log('[Dashboard] Financial data loaded:', financialData);
+      const rawData = await response.json();
+
+      // Transform the JSON structure to match what the dashboard code expects
+      financialData = {
+        cash: {
+          onHand: rawData.metrics?.cash || 0,
+          forecastNext90Days: rawData.forecast?.projections?.map(p => p.balance) || []
+        },
+        vat: {
+          amountDue: rawData.metrics?.vat || 0
+        },
+        tax: {
+          ctEstimate: rawData.metrics?.tax || 0
+        },
+        payroll: {
+          runwayMonths: rawData.metrics?.payroll || 0
+        },
+        // Keep original data for other components that might need it
+        _raw: rawData
+      };
+
+      console.log('[Dashboard] Financial data loaded and transformed:', financialData);
       return financialData;
     } catch (error) {
       console.error('[Dashboard] Error loading financial data:', error);
@@ -1970,37 +1990,52 @@ const DashboardModule = (() => {
   }
 
   /**
-   * Generate realistic agent activity entries
+   * Generate agent activity entries from financial data
    */
   function generateAgentActivity() {
-    const activities = [
-      {
-        agent: 'Capture',
-        icon: '📄',
-        description: 'Processed 4 transactions in last hour',
-        time: '5m ago',
-      },
-      {
-        agent: 'VAT',
-        icon: '✓',
-        description: 'Filed Q2 return 11 days early',
-        time: '2d ago',
-      },
-      {
-        agent: 'Payroll',
-        icon: '💼',
-        description: 'Automated WPS filing to EOSB',
-        time: '16-May',
-      },
-      {
-        agent: 'Revenue',
-        icon: '💰',
-        description: 'E-invoiced 42k AED via Peppol',
-        time: '18-May',
-      },
-    ];
+    if (!financialData || !financialData._raw?.agents?.active?.length) {
+      // Fallback activities if no data
+      const fallbackActivities = [
+        {
+          agent: 'Capture',
+          icon: '📄',
+          description: 'Processed 4 transactions in last hour',
+          time: '5m ago',
+        },
+        {
+          agent: 'VAT',
+          icon: '✓',
+          description: 'Filed Q2 return 11 days early',
+          time: '2d ago',
+        },
+        {
+          agent: 'Payroll',
+          icon: '💼',
+          description: 'Automated WPS filing to EOSB',
+          time: '16-May',
+        },
+      ];
+      return fallbackActivities[Math.floor(Math.random() * fallbackActivities.length)];
+    }
 
-    return activities[Math.floor(Math.random() * activities.length)];
+    // Get agents from loaded data
+    const agents = financialData._raw.agents.active;
+    const agentIcons = {
+      'Transaction Capture': '📄',
+      'VAT Compliance': '✓',
+      'Payroll Processor': '💼',
+    };
+
+    // Create activity from real agent data
+    const agent = agents[Math.floor(Math.random() * agents.length)];
+    const icon = agentIcons[agent.name] || '⚙️';
+
+    return {
+      agent: agent.name,
+      icon: icon,
+      description: `Processed ${agent.processed} items with ${agent.accuracy} accuracy`,
+      time: agent.lastActivity,
+    };
   }
 
   /**
@@ -2010,15 +2045,22 @@ const DashboardModule = (() => {
     const feed = document.getElementById('agent-activity');
     if (!feed) return;
 
+    // Remove loading indicator on first update
+    const loadingItem = feed.querySelector('.activity-item.loading');
+    if (loadingItem) {
+      loadingItem.remove();
+      console.log('[Dashboard] Removed loading indicator from activity feed');
+    }
+
     const activity = generateAgentActivity();
     const item = document.createElement('div');
     item.className = 'activity-item';
-    
+
     const agentType = activity.agent.toLowerCase().replace(/\s+/g, '');
     item.innerHTML = `
       <div class="activity-icon ${agentType}">${activity.icon}</div>
       <div class="activity-text">
-        <span class="activity-agent">${activity.agent} Agent</span>
+        <span class="activity-agent">${activity.agent}</span>
         <div class="activity-description">${activity.description}</div>
       </div>
       <span class="activity-time">${activity.time}</span>
