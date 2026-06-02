@@ -2966,8 +2966,6 @@
               Create account and get started
             </button>
 
-            <div id="form-message" class="form-message" style="display:none;padding:14px;border-radius:6px;margin-bottom:20px;font-size:14px;line-height:1.5"></div>
-
             <p class="waitlist__legal">
               Your data is secure and encrypted. No third-party sharing.
               We'll email you when your account is verified.
@@ -2989,6 +2987,20 @@
             </div>
 
             <script>
+              // Password toggle functionality
+              document.querySelectorAll('.input-toggle-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  const targetSelector = btn.getAttribute('data-toggle');
+                  const input = document.querySelector(targetSelector);
+                  if (input.type === 'password') {
+                    input.type = 'text';
+                  } else {
+                    input.type = 'password';
+                  }
+                });
+              });
+
               document.getElementById('waitlist-form').addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const form = e.target;
@@ -3019,7 +3031,13 @@
                     body: JSON.stringify(formData)
                   });
 
-                  const data = await response.json();
+                  let data;
+                  try {
+                    data = await response.json();
+                  } catch (parseErr) {
+                    console.error('Response status:', response.status, 'Response text:', response.statusText);
+                    throw new Error(`Server error: ${response.status} - ${response.statusText}`);
+                  }
                   if (!response.ok) throw new Error(data.message || 'Signup failed');
 
                   if (data.data && data.data.access_token) {
