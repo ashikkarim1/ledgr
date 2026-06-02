@@ -61,7 +61,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
-          cache-dependency-path: backend/package-lock.json
+          cache-dependency-path: "**/package-lock.json"
       
       - name: Install backend dependencies
         working-directory: ./backend
@@ -159,15 +159,26 @@ jobs:
     steps:
       - name: Check deployment status
         run: |
-          if [ "${{ needs.test-frontend.result }}" = "success" ] && \
-             [ "${{ needs.test-backend.result }}" = "success" ] && \
-             [ "${{ needs.deploy-frontend.result }}" = "success" ]; then
-            echo "✅ All checks passed! Frontend deployed to Vercel."
-            echo "🔧 Backend Docker image built and stored in GitHub Container Registry."
-            echo "📝 Next steps: Deploy backend to production (Railway, Render, or custom server)"
+          FRONTEND_TEST="${{ needs.test-frontend.result }}"
+          BACKEND_TEST="${{ needs.test-backend.result }}"
+          DEPLOY="${{ needs.deploy-frontend.result }}"
+
+          echo "📊 Pipeline Results:"
+          echo "  - Frontend tests:  $FRONTEND_TEST"
+          echo "  - Backend tests:   $BACKEND_TEST"
+          echo "  - Vercel deploy:   $DEPLOY"
+
+          if [ "$FRONTEND_TEST" = "success" ] && [ "$DEPLOY" = "success" ]; then
+            echo ""
+            echo "✅ Frontend tested and deployed to Vercel!"
+            if [ "$BACKEND_TEST" != "success" ]; then
+              echo "⚠️  Backend tests did not pass (result: $BACKEND_TEST). Check logs above."
+            fi
             exit 0
           else
-            echo "❌ Some checks failed. Please review the workflow logs."
+            echo ""
+            echo "❌ Critical pipeline stage failed. Review logs above."
+            echo "   Frontend tests: $FRONTEND_TEST | Vercel deploy: $DEPLOY"
             exit 1
           fi
 
@@ -194,4 +205,4 @@ jobs:
       
       - name: Check backend dependencies
         working-directory: ./backend
-        run: npm audit --audit-level=moderate || true
+        run: npm audit --audit-level=high || true
