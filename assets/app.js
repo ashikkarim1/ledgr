@@ -548,7 +548,11 @@ const AuthModule = (() => {
       });
     });
     
+    // Initialize password visibility toggle
+    initPasswordToggle();
+    
     console.log("[App] Carousel animations initialized");
+    console.log("[App] Password toggle initialized");
   });
 
   /* ---------- Tabs ---------- */
@@ -3297,6 +3301,39 @@ const FeedbackIntelligence = (() => {
     const notifications = JSON.parse(localStorage.getItem('ledgr_admin_notifications') || '[]');
     const filtered = notifications.filter(n => n.id !== notificationId);
     localStorage.setItem('ledgr_admin_notifications', JSON.stringify(filtered));
+  }
+
+  // ===== PASSWORD TOGGLE FUNCTIONALITY =====
+  // Initialize password visibility toggle for all input-toggle-btn elements
+  function initPasswordToggle() {
+    document.addEventListener('click', function(e) {
+      const toggleBtn = e.target.closest('.input-toggle-btn');
+      if (!toggleBtn) return;
+      
+      e.preventDefault();
+      const targetSelector = toggleBtn.getAttribute('data-toggle');
+      const targetInput = document.querySelector(targetSelector);
+      
+      if (!targetInput) return;
+      
+      // Toggle input type between 'password' and 'text'
+      const isPassword = targetInput.type === 'password';
+      targetInput.type = isPassword ? 'text' : 'password';
+      
+      // Toggle icon appearance by changing stroke-dashoffset or class
+      const eyeIcon = toggleBtn.querySelector('.eye-icon');
+      if (eyeIcon) {
+        toggleBtn.classList.toggle('eye-open', !isPassword);
+        // Update path for visual feedback (optional: use CSS classes instead)
+        const paths = eyeIcon.querySelectorAll('path');
+        if (paths.length > 1) {
+          // Hide/show circle for "eye open" vs "eye closed"
+          paths[1].style.opacity = isPassword ? '0' : '1';
+        }
+      }
+      
+      console.log(`[Password Toggle] Input type changed to: ${targetInput.type}`);
+    });
   }
 
   // ===== END PHASE 5 =====
