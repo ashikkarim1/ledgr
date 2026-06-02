@@ -651,9 +651,9 @@
 
         let emailSent = false;
 
-        // Send to Formspree for email delivery
+        // Send to Vercel serverless API function
         try {
-          const response = await fetch('https://formspree.io/f/mxyzpad', {
+          const response = await fetch('/api/interest', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -664,16 +664,15 @@
               company: data.company,
               phone: data.phone,
               plan: data.plan,
-              timestamp: data.timestamp,
-              _replyto: data.email,
-              _subject: `New Interest Form Submission from ${data.name}`
+              timestamp: data.timestamp
             })
           });
           if (response.ok) {
             emailSent = true;
-            console.log('Interest submitted successfully via Formspree');
+            console.log('Interest submitted successfully');
           } else {
-            console.log('Interest submission status:', response.status);
+            const error = await response.json();
+            console.log('Interest submission error:', error);
           }
         } catch (error) {
           console.log('Interest submission error:', error.message);
