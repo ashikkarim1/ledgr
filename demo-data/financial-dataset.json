@@ -1,201 +1,139 @@
 {
-  "company": {
-    "name": "Hilal Trading FZ-LLC",
-    "zone": "JAFZA, Dubai",
-    "filingType": "JAFZ Licensed Trading Company",
-    "employeeCount": 18,
-    "fiscalYear": "2025",
-    "currency": "AED"
-  },
-  "period": {
-    "year": 2025,
-    "quarter": "Q2",
-    "month": "May",
-    "startDate": "2025-04-01",
-    "endDate": "2025-06-30",
-    "monthEndDate": "2025-05-31"
-  },
-  "cash": {
-    "onHand": 482318,
-    "weeklyChange": 4.2,
-    "weeklyChangeAbsolute": 20000,
-    "lastWeekAmount": 462318,
-    "forecastNext90Days": [
-      480000, 485000, 490000, 495000, 498000,
-      502000, 505000, 510000, 512000, 515000,
-      520000, 518000, 522000, 525000, 530000
-    ]
-  },
-  "vat": {
-    "dueDateQ2": "2025-07-15",
-    "amountDue": 41205,
-    "status": "Filed 11 days early",
-    "Q2Progress": 0.62,
-    "quarterlyBreakdown": {
-      "output": 67420,
-      "input": -26215,
-      "reverseCharge": 0,
-      "designatedZone": 0,
-      "netLiability": 41205
-    },
-    "filingHistory": [
-      { "period": "Q1 2025", "amount": 38900, "status": "Filed on time", "date": "2025-04-15" },
-      { "period": "Q4 2024", "amount": 45200, "status": "Filed on time", "date": "2025-01-15" }
-    ]
-  },
-  "tax": {
-    "ctEstimate": 19840,
-    "status": "Above SBR threshold",
-    "threshold": 375000,
-    "estimatedIncome": 520000,
-    "thresholdExceeded": true,
-    "quarterlyProjection": 78500,
-    "annualProjection": 235000
-  },
-  "payroll": {
-    "runway": "14.2 months",
-    "burnRate": 33500,
-    "monthlyPayroll": 284000,
-    "employees": 18,
-    "nextWPSDeadline": "2025-06-10",
-    "wpsStatus": "Automated - Filed on time"
-  },
   "transactions": [
     {
-      "id": "TXN-20250521-001",
-      "date": "2025-05-21",
-      "description": "Etisalat e& — fibre & mobile, May",
-      "source": "Bank - ENBD",
-      "amount": -1242.00,
-      "category": "Telecommunications",
-      "vat": "5% VAT",
-      "matched": true,
-      "invoice": "INV-2410",
-      "agent": "Capture agent",
-      "timeAgo": "4 in last hour"
+      "id": "TXN001",
+      "date": "2026-06-01",
+      "description": "Client Invoice - Al Fardan Services",
+      "category": "Revenue",
+      "amount": 45000,
+      "type": "credit",
+      "status": "completed"
     },
     {
-      "id": "TXN-20250519-001",
-      "date": "2025-05-19",
-      "description": "DEWA — Business Bay office",
-      "source": "Bank - Mashreq",
-      "amount": -3818.40,
-      "category": "Utilities",
-      "vat": "5% VAT",
-      "ocr": true,
-      "slipAttached": true,
-      "agent": "OCR agent",
-      "confidence": "98%"
+      "id": "TXN002",
+      "date": "2026-05-31",
+      "description": "Office Rent - Al Khaleej Tower",
+      "category": "Operating Expenses",
+      "amount": 8500,
+      "type": "debit",
+      "status": "completed"
     },
     {
-      "id": "TXN-20250518-001",
-      "date": "2025-05-18",
-      "description": "Al Mazaya Holding — consulting retainer",
-      "source": "Bank - Stripe",
-      "amount": 42000.00,
-      "category": "Revenue - designated zone",
-      "designatedZone": true,
-      "eInvoice": "via Peppol",
-      "agent": "Revenue agent"
-    },
-    {
-      "id": "TXN-20250517-001",
-      "date": "2025-05-17",
-      "description": "RAK Customs Clearance - Air freight Feb shipment",
-      "source": "Bank - FAB",
-      "amount": -8950.00,
-      "category": "COGS - Freight",
-      "vat": "0% (import)",
-      "agent": "Category agent",
-      "matched": true,
-      "invoice": "CSD-2025-512"
-    },
-    {
-      "id": "TXN-20250516-001",
-      "date": "2025-05-16",
-      "description": "Payroll - 18 employees + benefits",
-      "source": "Internal - Payroll",
-      "amount": -284000.00,
+      "id": "TXN003",
+      "date": "2026-05-30",
+      "description": "Payroll - May 2026",
       "category": "Payroll",
-      "breakdown": "Salaries: 216000, Benefits: 48000, Withholding: 20000",
-      "wpsStatus": "Filed with EOSB",
-      "agent": "Payroll agent",
-      "automated": true
+      "amount": 125000,
+      "type": "debit",
+      "status": "completed"
+    },
+    {
+      "id": "TXN004",
+      "date": "2026-05-29",
+      "description": "Vendor Payment - Tech Supplies LLC",
+      "category": "Operating Expenses",
+      "amount": 3200,
+      "type": "debit",
+      "status": "completed"
+    },
+    {
+      "id": "TXN005",
+      "date": "2026-05-28",
+      "description": "Client Deposit - Emirates Bank",
+      "category": "Revenue",
+      "amount": 32000,
+      "type": "credit",
+      "status": "completed"
     }
   ],
-  "reconciliation": {
-    "status": "95% reconciled",
-    "pending": 12400,
-    "lastReconciled": "2025-05-20",
-    "bankFeeds": 3,
-    "matchRate": 0.95
-  },
-  "invoices": {
-    "outstandingAR": 285600,
-    "avgDaysOutstanding": 34,
-    "overdue": 45200,
-    "invoicesSent": 28,
-    "invoicesOverdue": 3,
-    "eInvoicingReady": true,
-    "peppol": "Connected"
-  },
   "agents": {
     "active": [
       {
-        "name": "Capture Agent",
-        "function": "Transaction capture & categorization",
-        "lastActivity": "4 in last hour",
-        "accuracy": 98.5,
-        "processedToday": 43
+        "id": "agent-001",
+        "name": "Transaction Capture",
+        "status": "active",
+        "processed": 1247,
+        "accuracy": "99.2%",
+        "lastActivity": "2 minutes ago"
       },
       {
-        "name": "VAT Agent",
-        "function": "VAT compliance & filing",
-        "lastActivity": "Filed Q2 11 days early",
-        "accuracy": 99.8,
-        "processedToday": "Q2 complete"
+        "id": "agent-002",
+        "name": "VAT Compliance",
+        "status": "active",
+        "processed": 342,
+        "accuracy": "100%",
+        "lastActivity": "5 minutes ago"
       },
       {
-        "name": "Payroll Agent",
-        "function": "WPS & EOSB filing",
-        "lastActivity": "Filed on 16-May",
-        "accuracy": 100,
-        "processedToday": "Automated"
-      },
-      {
-        "name": "Revenue Agent",
-        "function": "E-invoicing & Peppol",
-        "lastActivity": "18-May",
-        "accuracy": 99.2,
-        "processedToday": 2
+        "id": "agent-003",
+        "name": "Payroll Processor",
+        "status": "active",
+        "processed": 24,
+        "accuracy": "99.8%",
+        "lastActivity": "10 minutes ago"
       }
     ]
   },
-  "compliance": {
-    "vat": {
-      "status": "Compliant",
-      "nextDeadline": "2025-07-15",
-      "filingsDue": 0,
-      "daysUntilDeadline": 45,
-      "certifications": ["FTA Registered", "Peppol Ready"]
-    },
-    "payroll": {
-      "status": "Compliant",
-      "nextDeadline": "2025-06-10",
-      "filingsDue": 1,
-      "daysUntilDeadline": 10,
-      "certifications": ["WPS Automated", "EOSB Connected"]
-    },
-    "corporateTax": {
-      "status": "Filed (2024)",
-      "nextDeadline": "2026-03-31",
-      "amountPaid": 45200,
-      "certifications": ["CT Registered", "SBR Threshold Exceeded"]
-    },
-    "aml": {
-      "status": "Compliant",
-      "lastAudit": "2025-05-10",
-      "certifications": ["AML Screening Active", "JAFZ Compliant"]
-    }
+  "reconciliation": {
+    "status": "in-progress",
+    "progress": 87,
+    "reconciled": 1847,
+    "pending": 284,
+    "discrepancies": 12
+  },
+  "invoices": {
+    "total": 156,
+    "paid": 124,
+    "pending": 28,
+    "overdue": 4,
+    "totalValue": 2847500,
+    "recent": [
+      {
+        "id": "INV-2026-045",
+        "client": "Al Fardan Services",
+        "amount": 45000,
+        "date": "2026-06-01",
+        "dueDate": "2026-06-15",
+        "status": "pending"
+      },
+      {
+        "id": "INV-2026-044",
+        "client": "Emirates Trading Co.",
+        "amount": 32000,
+        "date": "2026-05-28",
+        "dueDate": "2026-06-11",
+        "status": "paid"
+      },
+      {
+        "id": "INV-2026-043",
+        "client": "Gulf Services Ltd",
+        "amount": 28500,
+        "date": "2026-05-25",
+        "dueDate": "2026-06-08",
+        "status": "paid"
+      }
+    ]
+  },
+  "forecast": {
+    "period": 90,
+    "startDate": "2026-06-01",
+    "projections": [
+      {"date": "2026-06-01", "balance": 482318},
+      {"date": "2026-06-02", "balance": 487650},
+      {"date": "2026-06-03", "balance": 492120},
+      {"date": "2026-06-04", "balance": 488900},
+      {"date": "2026-06-05", "balance": 495200},
+      {"date": "2026-06-06", "balance": 501450},
+      {"date": "2026-06-07", "balance": 498870},
+      {"date": "2026-06-08", "balance": 505320},
+      {"date": "2026-06-09", "balance": 512100},
+      {"date": "2026-06-10", "balance": 508650}
+    ]
+  },
+  "metrics": {
+    "cash": 482318,
+    "vat": 41205,
+    "tax": 19840,
+    "payroll": 14.2
   }
 }

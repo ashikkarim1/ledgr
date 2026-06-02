@@ -2750,7 +2750,7 @@ const FeedbackIntelligence = (() => {
 
   // Initialize widget on page load
   function init() {
-    createWidget();
+    // createWidget(); // Disabled: keeping only the basic feedback-button, not the feedback-intelligence-toggle
     attachEventListeners();
     updateFeedbackCounter();
   }
