@@ -35,10 +35,10 @@ export const SUBSCRIPTION_TIERS: Record<PlanTier, SubscriptionTierConfig> = {
   },
   professional: {
     tier: 'professional',
-    name: 'Professional',
+    name: 'Essential',
     description: '5 users, 3 agents, priority support',
-    monthlyPrice: 299,
-    annualPrice: 2871.6, // 20% discount
+    monthlyPrice: 199,
+    annualPrice: 1910.4, // 20% discount
     features: {
       maxUsers: 5,
       maxAgents: 3,

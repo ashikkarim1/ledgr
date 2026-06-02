@@ -90,6 +90,42 @@
       color: #999999;
     }
 
+    .password-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .password-input-wrapper input {
+      width: 100%;
+      padding-right: 44px;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: #999999;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      line-height: 1;
+    }
+
+    .password-toggle:hover {
+      color: #FF5C00;
+    }
+
+    .password-toggle svg {
+      width: 20px;
+      height: 20px;
+    }
+
     .signup-benefits {
       background: #f9f9f9;
       padding: 15px;
@@ -294,15 +330,27 @@
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="At least 8 characters"
-            required
-            minlength="8"
-            autocomplete="new-password"
-          />
+          <div class="password-input-wrapper">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="At least 8 characters"
+              required
+              minlength="8"
+              autocomplete="new-password"
+            />
+            <button type="button" class="password-toggle" id="password-toggle" aria-label="Toggle password visibility">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-icon">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-off-icon" style="display:none;">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </button>
+          </div>
         </div>
 
         <div class="signup-benefits">
@@ -387,14 +435,17 @@
       const originalText = submitBtn.textContent;
       submitBtn.innerHTML = '<span class="loading-spinner"></span>Creating account...';
 
-      // Simulate account creation
-      setTimeout(() => {
+      // Simulate account creation and send email
+      setTimeout(async () => {
         // Track conversion
         trackConversion();
 
+        // Send confirmation email
+        await sendConfirmationEmail(email, companyName);
+
         // Show success
         form.style.display = 'none';
-        successDisplay.textContent = `✓ Welcome ${companyName}! Redirecting to your dashboard...`;
+        successDisplay.textContent = `✓ Welcome ${companyName}! Confirmation email sent to ${email}. Redirecting...`;
         successDisplay.style.display = 'block';
 
         // Redirect after 2 seconds
@@ -403,6 +454,76 @@
           window.location.href = 'index.html?action=dashboard&company=' + encodeURIComponent(companyName);
         }, 2000);
       }, 1200);
+    }
+
+    // Password toggle functionality
+    const passwordInput = document.getElementById('password');
+    const passwordToggle = document.getElementById('password-toggle');
+    const eyeIcon = document.querySelector('.eye-icon');
+    const eyeOffIcon = document.querySelector('.eye-off-icon');
+
+    passwordToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const isPassword = passwordInput.type === 'password';
+      passwordInput.type = isPassword ? 'text' : 'password';
+      
+      // Toggle icon visibility
+      if (isPassword) {
+        eyeIcon.style.display = 'none';
+        eyeOffIcon.style.display = 'block';
+      } else {
+        eyeIcon.style.display = 'block';
+        eyeOffIcon.style.display = 'none';
+      }
+    });
+
+    // Send confirmation email
+    async function sendConfirmationEmail(email, companyName) {
+      try {
+        const response = await fetch('https://formspree.io/f/mzbnepzw', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+            company_name: companyName,
+            subject: `Welcome to Ledgr, ${companyName}!`,
+            message: `
+Welcome to Ledgr!
+
+Your account has been created successfully. Here's what you get:
+
+✓ 14-day free trial - no credit card required
+✓ Real-time UAE accounting compliance tracking
+✓ VAT filing and Corporate Tax tracking
+✓ AI-supervised books and financial control
+✓ Unlimited transactions during trial
+✓ Free onboarding assistance
+
+Log in to your account: https://ledgr.ai/dashboard
+Email: ${email}
+
+Your trial period includes:
+- Complete access to all Ledgr features
+- Dedicated accountant support
+- 30-day money-back guarantee
+- Unlimited document uploads
+
+If you have any questions, reply to this email or contact us at support@ledgr.ai
+
+Welcome aboard!
+The Ledgr Team
+https://ledgr.ai
+            `
+          })
+        });
+        return response.ok;
+      } catch (error) {
+        console.error('Email sending error:', error);
+        return false;
+      }
     }
 
     // Initialize

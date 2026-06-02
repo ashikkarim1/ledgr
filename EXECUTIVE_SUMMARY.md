@@ -30,7 +30,7 @@
 
 | Segment | Price | Target | CAC | LTV |
 |---------|-------|--------|-----|-----|
-| **Tier 1: Micro (1-5 employees)** | AED 299/mo | 60% of market | USD 8 | USD 1,200 |
+| **Tier 1: Micro (1-5 employees)** | Essential AED 199/mo | 60% of market | USD 8 | USD 1,200 |
 | **Tier 2: Small (6-20 employees)** | AED 599/mo | 30% of market | USD 15 | USD 2,700 |
 | **Tier 3: Growth (20-50 employees)** | AED 1,299/mo | 8% of market | USD 25 | USD 5,850 |
 | **Tier 4: Enterprise (50+ employees)** | Custom | 2% of market | USD 50 | Custom |

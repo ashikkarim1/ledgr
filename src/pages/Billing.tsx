@@ -32,8 +32,8 @@ interface PaymentMethod {
 const PLANS: Plan[] = [
   {
     id: 'starter',
-    name: 'Starter',
-    price: 299,
+    name: 'Essential',
+    price: 199,
     billingCycle: 'monthly',
     features: ['Up to 5 team members', '10 AI agents', 'Basic reporting', 'Email support'],
     limits: {

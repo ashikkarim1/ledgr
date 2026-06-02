@@ -63,7 +63,7 @@ A: "We have APIs for QuickBooks, Xero, Plaid (banks), Stripe, and WhatsApp. We'r
 ### Business Model & Unit Economics
 
 **Q: How do you make money?**
-A: "Freemium SaaS. Lite (AED 299/month) for micro businesses, Pro (AED 599) for small, Business (AED 1,299) for growth, Enterprise (custom) for 50+ employees. Blended ARPU: AED 600 (USD 160/month)."
+A: "Freemium SaaS. Essential (AED 199/month) for micro businesses, Pro (AED 599) for small, Business (AED 1,299) for growth, Enterprise (custom) for 50+ employees. Blended ARPU: AED 600 (USD 160/month)."
 
 **Q: What's your CAC and LTV?**
 A: "CAC: USD 8-50 via partnerships and organic. LTV: USD 1,200-5,850 depending on tier. Payback period: 12-15 months Year 1, dropping to 6-8 months by Year 3."
