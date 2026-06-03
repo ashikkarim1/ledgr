@@ -5,46 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#FF5C00" />
     <title>CFO Dashboard — Advanced Capabilities | Ledgr</title>
-    <meta name="description" content="Advanced CFO decision-making capabilities: Real-time compliance risk, predictive cash flow, transfer pricing optimization, AI fraud detection, and more. Ledgr's competitive edge for UAE businesses." />
+    <meta name="description" content="Advanced CFO decision-making capabilities: Real-time compliance risk, predictive cash flow, transfer pricing optimization, AI fraud detection, and more." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/tailwind-output.css" />
     <link rel="stylesheet" href="assets/styles.css" />
     <style>
-      .cfo-intro {
+      .cfo-hero {
         background: var(--paper);
-        padding: clamp(40px, 8vw, 80px) 0;
+        padding: clamp(24px, 4vw, 48px) 0;
       }
 
-      .cfo-intro h1 {
-        font-size: clamp(32px, 6vw, 52px);
+      .cfo-hero h1 {
+        font-size: clamp(28px, 5vw, 44px);
         line-height: 1.08;
         font-weight: 700;
         color: var(--ink-1);
-        margin-bottom: 16px;
+        margin-bottom: 12px;
       }
 
-      .cfo-intro p {
-        font-size: clamp(16px, 2vw, 20px);
+      .cfo-hero p {
+        font-size: clamp(14px, 1.8vw, 16px);
         color: var(--ink-2);
         max-width: 680px;
-        line-height: 1.6;
-        margin-bottom: 32px;
+        line-height: 1.5;
+        margin: 0;
       }
 
-      .cfo-grid {
+      .capability-group {
+        padding: clamp(24px, 3vw, 40px) 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .capability-group:first-of-type {
+        border-top: none;
+        padding-top: clamp(16px, 2vw, 24px);
+      }
+
+      .group-header {
+        margin-bottom: clamp(16px, 2vw, 24px);
+      }
+
+      .group-header h2 {
+        font-size: clamp(20px, 3vw, 28px);
+        line-height: 1.1;
+        font-weight: 700;
+        color: var(--ink-1);
+        margin: 0 0 6px 0;
+      }
+
+      .group-header p {
+        font-size: 13px;
+        color: var(--ink-3);
+        margin: 0;
+        font-weight: 500;
+      }
+
+      .capability-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: clamp(20px, 3vw, 32px);
-        margin-top: clamp(32px, 5vw, 64px);
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: clamp(12px, 2vw, 16px);
       }
 
       .capability-card {
         background: var(--surface);
         border: 1px solid var(--line);
         border-radius: var(--radius-sm);
-        padding: clamp(24px, 4vw, 32px);
+        padding: clamp(16px, 2vw, 20px);
         transition: all 0.3s var(--ease);
       }
 
@@ -55,38 +83,43 @@
       }
 
       .capability-card h3 {
-        font-size: 18px;
+        font-size: 15px;
         font-weight: 600;
         color: var(--ink-1);
-        margin-bottom: 12px;
+        margin: 0 0 8px 0;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
       }
 
       .capability-card h3::before {
         content: "";
-        width: 8px;
-        height: 8px;
+        width: 6px;
+        height: 6px;
         background: var(--accent);
-        border-radius: 2px;
+        border-radius: 1px;
         flex-shrink: 0;
       }
 
       .capability-card p {
-        font-size: 14px;
+        font-size: 13px;
         color: var(--ink-2);
-        line-height: 1.6;
-        margin-bottom: 16px;
+        line-height: 1.5;
+        margin: 0 0 10px 0;
       }
 
       .capability-stat {
         background: var(--paper-2);
-        padding: 12px 16px;
-        border-radius: var(--radius-xs);
-        font-size: 13px;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 12px;
         color: var(--ink-2);
-        margin-bottom: 8px;
+        margin-bottom: 6px;
+        line-height: 1.4;
+      }
+
+      .capability-stat:last-child {
+        margin-bottom: 0;
       }
 
       .capability-stat strong {
@@ -94,138 +127,47 @@
         font-weight: 600;
       }
 
-      .dashboard-preview {
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: var(--radius-sm);
-        padding: clamp(24px, 4vw, 40px);
-        margin: clamp(32px, 5vw, 64px) 0;
-      }
-
-      .dashboard-preview h3 {
-        font-size: 16px;
-        font-weight: 600;
-        color: var(--ink-1);
-        margin-bottom: 20px;
-      }
-
-      .metrics-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: clamp(16px, 2vw, 24px);
-      }
-
-      .metric-card {
-        padding: 20px;
-        background: var(--paper);
-        border-radius: var(--radius-xs);
-        border-left: 3px solid var(--accent);
-      }
-
-      .metric-label {
-        font-size: 12px;
-        color: var(--ink-3);
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 8px;
-        font-weight: 600;
-      }
-
-      .metric-value {
-        font-size: 28px;
-        font-weight: 700;
-        color: var(--accent);
-        line-height: 1.2;
-      }
-
-      .metric-note {
-        font-size: 12px;
-        color: var(--ink-2);
-        margin-top: 8px;
-      }
-
-      .capability-section {
-        padding: clamp(40px, 8vw, 80px) 0;
-        border-top: 1px solid var(--line);
-      }
-
-      .capability-section:first-of-type {
-        border-top: none;
-        padding-top: 0;
-      }
-
-      .capability-section h2 {
-        font-size: clamp(28px, 5vw, 42px);
-        line-height: 1.1;
-        font-weight: 700;
-        color: var(--ink-1);
-        margin-bottom: 16px;
-      }
-
-      .capability-desc {
-        font-size: clamp(16px, 2vw, 18px);
-        color: var(--ink-2);
-        max-width: 680px;
-        margin-bottom: 32px;
-        line-height: 1.6;
-      }
-
       .cta-section {
         background: linear-gradient(135deg, var(--paper) 0%, var(--paper-2) 100%);
-        padding: clamp(48px, 8vw, 96px) clamp(20px, 4vw, 40px);
+        padding: clamp(32px, 4vw, 48px) clamp(16px, 3vw, 32px);
         border-radius: var(--radius-sm);
-        margin-top: clamp(48px, 8vw, 96px);
+        margin-top: clamp(32px, 5vw, 48px);
         text-align: center;
       }
 
       .cta-section h2 {
-        font-size: clamp(28px, 5vw, 42px);
+        font-size: clamp(24px, 4vw, 36px);
         font-weight: 700;
         color: var(--ink-1);
-        margin-bottom: 16px;
+        margin: 0 0 12px 0;
       }
 
       .cta-section p {
-        font-size: clamp(16px, 2vw, 18px);
+        font-size: clamp(14px, 1.8vw, 16px);
         color: var(--ink-2);
-        max-width: 680px;
-        margin: 0 auto 32px;
-        line-height: 1.6;
+        max-width: 640px;
+        margin: 0 auto 20px;
+        line-height: 1.5;
       }
 
-      .cfo-nav {
+      .cta-buttons {
         display: flex;
         gap: 12px;
+        justify-content: center;
         flex-wrap: wrap;
-        margin: 24px 0;
-      }
-
-      .cfo-nav a {
-        padding: 10px 20px;
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: var(--radius-xs);
-        color: var(--ink-1);
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 500;
-        transition: all 0.2s var(--ease);
-      }
-
-      .cfo-nav a:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-      }
-
-      .cfo-nav a.active {
-        background: var(--accent);
-        color: white;
-        border-color: var(--accent);
       }
 
       @media (max-width: 760px) {
-        .cfo-grid {
+        .capability-grid {
           grid-template-columns: 1fr;
+        }
+
+        .cta-buttons {
+          flex-direction: column;
+        }
+
+        .cta-buttons .btn {
+          width: 100%;
         }
       }
     </style>
@@ -263,369 +205,192 @@
     </header>
 
     <main id="main">
-      <!-- CFO Dashboard Intro -->
-      <section class="cfo-intro">
+      <!-- Hero -->
+      <section class="cfo-hero">
         <div class="wrap">
           <h1>Advanced CFO Capabilities</h1>
           <p>
-            Beyond basics. Ledgr delivers 10 decision-making superpowers that competitors don't offer: real-time compliance intelligence, predictive cash flow, transfer pricing optimization, AI fraud detection, and more. Built for CFOs who need precision, speed, and zero surprises.
+            10 advanced decision-making features that no UAE fintech offers. Real-time compliance risk, predictive cash flow, transfer pricing optimization, AI fraud detection, and more. Built for CFOs who demand precision, speed, and zero surprises.
           </p>
-
-          <!-- Quick Navigation -->
-          <div class="cfo-nav">
-            <a href="#compliance" class="active">Compliance Risk</a>
-            <a href="#cashflow">Cash Flow</a>
-            <a href="#transfer-pricing">Transfer Pricing</a>
-            <a href="#fraud">Fraud Detection</a>
-            <a href="#regulatory">Regulatory Engine</a>
-            <a href="#benchmarking">Benchmarking</a>
-          </div>
         </div>
       </section>
 
-      <!-- Capability 1: Compliance Risk Dashboard -->
-      <section class="capability-section" id="compliance">
+      <!-- Group 1: Financial Control -->
+      <section class="capability-group">
         <div class="wrap">
-          <h2>Real-Time Compliance Risk Dashboard</h2>
-          <p class="capability-desc">
-            Know your FTA exposure in AED before filing. Real-time VAT compliance, Corporate Tax positioning, e-invoicing validation. Zero surprises at audit.
-          </p>
-
-          <div class="cfo-grid">
-            <div class="capability-card">
-              <h3>Compliance Exposure</h3>
-              <p>Real-time scoring of VAT, Corporate Tax, and regulatory compliance gaps across all entities.</p>
-              <div class="capability-stat"><strong>340K–2.1M AED</strong> at-risk exposure (flagged in real-time)</div>
-              <div class="capability-stat">VAT threshold tracking with <strong>automatic alerts</strong> when 80% of limit is reached</div>
-              <div class="capability-stat">E-invoice validation: <strong>100%</strong> of transactions checked before submission</div>
-            </div>
-
-            <div class="capability-card">
-              <h3>FTA Defense Ready</h3>
-              <p>Auto-generated documentation for audit defense. Transfer pricing support, cash flow narratives.</p>
-              <div class="capability-stat">Documentation auto-generated in <strong>FTA format</strong> (CBCR, master file, local file)</div>
-              <div class="capability-stat">Audit trail: <strong>100% immutable</strong> event logs for every transaction and adjustment</div>
-              <div class="capability-stat">Last audit prep: <strong>2 days</strong> vs. 3–4 weeks manually</div>
-            </div>
-
-            <div class="capability-card">
-              <h3>Risk Trend Analytics</h3>
-              <p>12-month forward view. Predict if you'll breach compliance thresholds before year-end.</p>
-              <div class="capability-stat">Breach prediction: <strong>91% accuracy</strong> (vs. manual review: 65%)</div>
-              <div class="capability-stat">Recommended actions auto-surfaced from <strong>500+ firm database</strong></div>
-            </div>
+          <div class="group-header">
+            <h2>Financial Control & Compliance</h2>
+            <p>Know your exposure before filing. FTA-ready documentation. Zero audit surprises.</p>
           </div>
 
-          <div class="dashboard-preview">
-            <h3>Live Dashboard Preview</h3>
-            <div class="metrics-grid">
-              <div class="metric-card">
-                <div class="metric-label">Overall Compliance Score</div>
-                <div class="metric-value">7.8/10</div>
-                <div class="metric-note">Medium risk | 2 open items</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-label">VAT Status</div>
-                <div class="metric-value">✓ Compliant</div>
-                <div class="metric-note">Next filing: June 30, 2026</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-label">Corporate Tax Exposure</div>
-                <div class="metric-value">340K AED</div>
-                <div class="metric-note">If TP challenged</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-label">E-Invoice Readiness</div>
-                <div class="metric-value">100%</div>
-                <div class="metric-note">All vendors registered</div>
-              </div>
+          <div class="capability-grid">
+            <div class="capability-card">
+              <h3>Real-Time Compliance Risk</h3>
+              <p>VAT, Corporate Tax, and e-invoice exposure scored in real-time across all entities.</p>
+              <div class="capability-stat"><strong>340K–2.1M AED</strong> at-risk exposure (live alerts)</div>
+              <div class="capability-stat"><strong>100%</strong> of transactions validated before filing</div>
+              <div class="capability-stat">Audit prep: <strong>2 days</strong> vs. 3–4 weeks manual</div>
+            </div>
+
+            <div class="capability-card">
+              <h3>Audit Readiness Scoring</h3>
+              <p>Real-time 0–100 score. P&L complete? GL reconciled? Compliance clear? Know instantly.</p>
+              <div class="capability-stat">Reduces audit adjustments by <strong>60%</strong></div>
+              <div class="capability-stat">Auto-identifies missing accounts and unreconciled items</div>
+            </div>
+
+            <div class="capability-card">
+              <h3>Debt Covenant Monitoring</h3>
+              <p>Auto-track Debt/EBITDA, Interest Coverage, Current Ratio. 12-month breach forecast.</p>
+              <div class="capability-stat">Prevents default surprises | <strong>Zero existential risk</strong></div>
+              <div class="capability-stat">Updated every <strong>15 minutes</strong> post-entry</div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Capability 2: Predictive Cash Flow -->
-      <section class="capability-section" id="cashflow">
+      <!-- Group 2: Tax & Transfer Pricing -->
+      <section class="capability-group">
         <div class="wrap">
-          <h2>Predictive Cash Flow with Scenarios</h2>
-          <p class="capability-desc">
-            30/60/90-day runway forecasting. "What-if" scenario modeling (payment delays, customer concentration, seasonal swings). Never run out of cash again.
-          </p>
-
-          <div class="cfo-grid">
-            <div class="capability-card">
-              <h3>30/60/90-Day Forecast</h3>
-              <p>Automated time-series forecasting using 12+ months of historical data.</p>
-              <div class="capability-stat">Accuracy: <strong>±5%</strong> on 30-day forecast (vs. spreadsheet: ±15%)</div>
-              <div class="capability-stat">Updated daily post-bank sync, <strong>real-time</strong> accuracy</div>
-            </div>
-
-            <div class="capability-card">
-              <h3>What-If Scenarios</h3>
-              <p>Model payment delays, customer loss, seasonal patterns. See impact on runway instantly.</p>
-              <div class="capability-stat">Scenario modeling: <strong>unlimited</strong> variations without breaking formulas</div>
-              <div class="capability-stat">Sensitivity analysis: Identify your <strong>top 3 cash drivers</strong></div>
-            </div>
-
-            <div class="capability-card">
-              <h3>Actionable Insights</h3>
-              <p>AI-powered recommendations. "If you close this deal, runway extends by 45 days."</p>
-              <div class="capability-stat">Working capital optimization: <strong>890K AED</strong> liquidity freed up (avg. firm)</div>
-              <div class="capability-stat">Days cash on hand: <strong>94 days</strong> (healthy; industry median: 45–60)</div>
-            </div>
+          <div class="group-header">
+            <h2>Tax Optimization & Transfer Pricing</h2>
+            <p>Multi-entity consolidation. FTA-defensible pricing. Automatic TP documentation.</p>
           </div>
 
-          <div class="dashboard-preview">
-            <h3>Live Dashboard Preview</h3>
-            <div class="metrics-grid">
-              <div class="metric-card">
-                <div class="metric-label">Current Cash Position</div>
-                <div class="metric-value">8.4M AED</div>
-                <div class="metric-note">✓ Healthy | 3 months runway</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-label">30-Day Forecast</div>
-                <div class="metric-value">7.2M AED</div>
-                <div class="metric-note">Expected end of June</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-label">60-Day Forecast</div>
-                <div class="metric-value">6.8M AED</div>
-                <div class="metric-note">If 15% fewer collections</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-label">Days Cash on Hand</div>
-                <div class="metric-value">94 days</div>
-                <div class="metric-note">✓ Safe | Industry: 45–60 days</div>
-              </div>
+          <div class="capability-grid">
+            <div class="capability-card">
+              <h3>Transfer Pricing Optimization</h3>
+              <p>Multi-entity consolidation with automatic TP risk scoring. Defend your pricing before audit.</p>
+              <div class="capability-stat">TP Risk Score: <strong>5.2/10</strong> | Manageable risk</div>
+              <div class="capability-stat">Tax exposure if challenged: <strong>340K AED</strong></div>
+              <div class="capability-stat">Optimization opportunity: <strong>75K AED</strong> annual savings</div>
+            </div>
+
+            <div class="capability-card">
+              <h3>Regulatory Change Impact</h3>
+              <p>FTA announces a regulation. Within 2 hours, Ledgr maps impact to your GL. Auto-checklist generated.</p>
+              <div class="capability-stat">Detection time: <strong>2 hours</strong> vs. 2 weeks</div>
+              <div class="capability-stat">Saves <strong>15K AED</strong> per regulation (vs. advisor fees)</div>
+            </div>
+
+            <div class="capability-card">
+              <h3>FTA-Ready Documentation</h3>
+              <p>Auto-generates CBCR, Master File, Local File. Pre-audited by AI. Print and file.</p>
+              <div class="capability-stat">Ready in <strong>90 seconds</strong></div>
+              <div class="capability-stat">Comparables from <strong>500+ UAE firm</strong> database</div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Capability 3: Transfer Pricing -->
-      <section class="capability-section" id="transfer-pricing">
+      <!-- Group 3: Predictive Intelligence -->
+      <section class="capability-group">
         <div class="wrap">
-          <h2>Transfer Pricing Optimization</h2>
-          <p class="capability-desc">
-            Multi-entity consolidation with automatic TP risk scoring. Defend your inter-company pricing before the FTA auditor arrives.
-          </p>
+          <div class="group-header">
+            <h2>Predictive Intelligence & Forecasting</h2>
+            <p>See cash runway weeks ahead. Model scenarios. Make confident decisions faster.</p>
+          </div>
 
-          <div class="cfo-grid">
+          <div class="capability-grid">
             <div class="capability-card">
-              <h3>Multi-Entity Consolidation</h3>
-              <p>Unified GL across all entities (UAE, Free Zones, offshore). Real-time intercompany elimination.</p>
-              <div class="capability-stat">Setup time: <strong>4 hours</strong> vs. 2 weeks in SAP</div>
-              <div class="capability-stat">Currency support: <strong>15+ currencies</strong> with live FX rates</div>
+              <h3>Predictive Cash Flow</h3>
+              <p>30/60/90-day runway forecasting. What-if scenarios (payment delays, customer loss, seasonality).</p>
+              <div class="capability-stat">Accuracy: <strong>±5%</strong> vs. spreadsheet ±15%</div>
+              <div class="capability-stat">Frees up <strong>890K AED</strong> working capital (avg.)</div>
+              <div class="capability-stat"><strong>94 days</strong> cash on hand (vs. industry 45–60)</div>
             </div>
 
             <div class="capability-card">
-              <h3>TP Risk Scoring</h3>
-              <p>Compare your markups against 500+ UAE market comparables. Spot outliers. Defend with data.</p>
-              <div class="capability-stat">TP Risk Score: <strong>5.2/10</strong> (Medium risk | Manageable)</div>
-              <div class="capability-stat">Tax exposure if challenged: <strong>340K AED</strong> across 4 entities</div>
-              <div class="capability-stat">Optimization opportunity: <strong>75K AED</strong> annual savings via safer pricing</div>
-            </div>
-
-            <div class="capability-card">
-              <h3>FTA Documentation</h3>
-              <p>Auto-generate CBCR, Master File, Local File. Pre-audited by AI. Print and file.</p>
-              <div class="capability-stat">Documentation ready in <strong>90 seconds</strong></div>
-              <div class="capability-stat">All comparables sourced from <strong>UAE market data (500+ firms)</strong></div>
+              <h3>Segment Profitability</h3>
+              <p>Customer, Product, Region, Channel drill-down with ABC cost allocation. "Which segments lose money?"</p>
+              <div class="capability-stat">Identify <strong>180–300K AED</strong> elimination opportunities</div>
+              <div class="capability-stat">Real-time dimension slicing: <strong>unlimited</strong> queries</div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Capability 4: Fraud Detection -->
-      <section class="capability-section" id="fraud">
+      <!-- Group 4: Risk & Fraud Detection -->
+      <section class="capability-group">
         <div class="wrap">
-          <h2>AI-Powered Anomaly Detection</h2>
-          <p class="capability-desc">
-            Every transaction risk-scored in real-time. Internal fraud, supplier anomalies, round-trip schemes detected before damage happens.
-          </p>
+          <div class="group-header">
+            <h2>Risk & Fraud Detection</h2>
+            <p>Every transaction risk-scored. Internal fraud caught. Supplier anomalies flagged.</p>
+          </div>
 
-          <div class="cfo-grid">
+          <div class="capability-grid">
             <div class="capability-card">
-              <h3>Real-Time Scoring</h3>
-              <p>Each transaction analyzed instantly. Fraud probability, anomaly flags, supplier risk.</p>
-              <div class="capability-stat">Transactions analyzed/day: <strong>847</strong> | 100% real-time</div>
-              <div class="capability-stat">High-risk flagged: <strong>12</strong> (1.4% flagged rate)</div>
-              <div class="capability-stat">Fraud detection rate: <strong>40%</strong> (vs. competitors: ~5%)</div>
+              <h3>AI-Powered Anomaly Detection</h3>
+              <p>Real-time transaction scoring. Fraud probability, anomaly flags, supplier risk alerts.</p>
+              <div class="capability-stat">Fraud detection: <strong>40%</strong> (vs. competitors 5%)</div>
+              <div class="capability-stat">False positive rate: <strong>2.1%</strong> (vs. manual 8%)</div>
+              <div class="capability-stat">Trained on <strong>500K+ transactions</strong> from 50+ firms</div>
             </div>
 
             <div class="capability-card">
               <h3>Internal Fraud Prevention</h3>
-              <p>Round-trip detection. Related-party network analysis. Employee reimbursement anomalies.</p>
-              <div class="capability-stat">Detection model trained on <strong>500K+ transactions</strong> from 50+ firms</div>
-              <div class="capability-stat">False positive rate: <strong>2.1%</strong> (vs. manual review: 8%)</div>
+              <p>Round-trip detection. Related-party networks. Employee reimbursement anomalies.</p>
+              <div class="capability-stat"><strong>100%</strong> coverage of GL entries daily</div>
+              <div class="capability-stat">Catches schemes competitors miss</div>
             </div>
 
             <div class="capability-card">
               <h3>Supplier Risk Scoring</h3>
               <p>KYC freshness, jurisdiction risk, registration validity. One risk score per supplier.</p>
-              <div class="capability-stat">Supplier database: <strong>47 matches</strong> from UAE market</div>
-              <div class="capability-stat">Risk updates: <strong>Real-time</strong> (FRA/CBR monitoring)</div>
+              <div class="capability-stat">Real-time FRA/CBR monitoring</div>
+              <div class="capability-stat">Alerts on registration changes or status shifts</div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Capability 5: Regulatory Engine -->
-      <section class="capability-section" id="regulatory">
+      <!-- Group 5: Data Intelligence -->
+      <section class="capability-group">
         <div class="wrap">
-          <h2>Regulatory Change Impact Engine</h2>
-          <p class="capability-desc">
-            FTA announces a regulation change. Within 2 hours, Ledgr maps impact to your GL, identifies affected GL accounts, generates a compliance checklist.
-          </p>
-
-          <div class="cfo-grid">
-            <div class="capability-card">
-              <h3>Automated Monitoring</h3>
-              <p>Ledgr monitors FTA announcements, MOF circulars, and e-invoicing updates 24/7.</p>
-              <div class="capability-stat">Detection time: <strong>2 hours</strong> vs. 2 weeks (email from advisor)</div>
-              <div class="capability-stat">Coverage: <strong>VAT, Corporate Tax, e-invoicing, QFZP, CRS</strong></div>
-            </div>
-
-            <div class="capability-card">
-              <h3>Impact Assessment</h3>
-              <p>AI reads the regulation, maps it to your P&L/GL. Creates a task list for the compliance team.</p>
-              <div class="capability-stat">Accuracy: <strong>94%</strong> (validated against Big 4 interpretations)</div>
-              <div class="capability-stat">Action items auto-created in your <strong>task system</strong></div>
-            </div>
-
-            <div class="capability-card">
-              <h3>Readiness Checklist</h3>
-              <p>Interactive checklist. "Did you update the GL mapping? Retrain the team? File with FRA?"</p>
-              <div class="capability-stat">Cost savings: <strong>15K AED</strong> per regulation (vs. external advisor)</div>
-              <div class="capability-stat">Compliance peace of mind: <strong>100%</strong> visibility into implementation status</div>
-            </div>
+          <div class="group-header">
+            <h2>Data Intelligence & Integration</h2>
+            <p>Single source of truth. Benchmark against peers. Optimize with data.</p>
           </div>
-        </div>
-      </section>
 
-      <!-- Capability 6: Peer Benchmarking -->
-      <section class="capability-section" id="benchmarking">
-        <div class="wrap">
-          <h2>Anonymized Peer Benchmarking (UAE Market Exclusive)</h2>
-          <p class="capability-desc">
-            Your metrics compared against 500+ UAE companies in your industry. "You're in the 68th percentile for gross margin. Top performers do 22%. Here's how."
-          </p>
-
-          <div class="cfo-grid">
+          <div class="capability-grid">
             <div class="capability-card">
-              <h3>Industry Comparison</h3>
-              <p>Gross margin, OpEx ratio, DSO, EBITDA margin. See where you stand instantly.</p>
-              <div class="capability-stat">Your gross margin: <strong>42%</strong> | Peers: 38–48% | <strong>68th percentile</strong></div>
-              <div class="capability-stat">OpEx opportunity: <strong>180K AED</strong> savings if you hit peer median (15% vs. your 18%)</div>
-            </div>
-
-            <div class="capability-card">
-              <h3>Actionable Insights</h3>
-              <p>See how top performers operate. What's different? Pricing? Procurement? Headcount ratio?</p>
-              <div class="capability-stat">Top 25% analysis: <strong>Identify 3 operational levers</strong> you can control</div>
-              <div class="capability-stat">Optimization opportunity: <strong>300K–1.2M AED</strong> per firm (avg.)</div>
-            </div>
-
-            <div class="capability-card">
-              <h3>Privacy First</h3>
-              <p>All data anonymized. Hash company IDs. Ledgr never sells individual firm data.</p>
-              <div class="capability-stat">Benchmark universe: <strong>500+ UAE firms</strong> | Only Ledgr has this dataset</div>
-              <div class="capability-stat">Data freshness: Updated <strong>quarterly</strong></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Additional Capabilities Teaser -->
-      <section class="capability-section">
-        <div class="wrap">
-          <h2>+ 4 More Capabilities</h2>
-          <p class="capability-desc">
-            Audit Readiness Scoring, Debt Covenant Monitoring, Integration-Driven Intelligence, and Segment Profitability Analysis. All designed for CFO precision and speed.
-          </p>
-
-          <div class="cfo-grid">
-            <div class="capability-card">
-              <h3>Audit Readiness Scoring</h3>
-              <p>Real-time 0–100 score. P&L complete? GL reconciled? Compliance clear? Know before the auditor knocks.</p>
-              <div class="capability-stat">Reduces audit adjustments by <strong>60%</strong></div>
-            </div>
-
-            <div class="capability-card">
-              <h3>Debt Covenant Monitoring</h3>
-              <p>Parse loan docs. Auto-track Debt/EBITDA, Interest Coverage, Current Ratio. 12-month breach forecast.</p>
-              <div class="capability-stat">Prevents existential risk. Zero default surprises.</div>
+              <h3>Peer Benchmarking (UAE Exclusive)</h3>
+              <p>Compare your metrics against 500+ anonymized UAE firms in your industry. See where you stand.</p>
+              <div class="capability-stat">Your gross margin: <strong>42%</strong> | Peers: 38–48%</div>
+              <div class="capability-stat">OpEx savings opportunity: <strong>180K AED</strong></div>
+              <div class="capability-stat">Total optimization: <strong>300K–1.2M AED</strong> per firm</div>
             </div>
 
             <div class="capability-card">
               <h3>Integration Intelligence</h3>
-              <p>Single source of truth. ERP, banking, AR/AP all synced. No more "which system is correct?"</p>
-              <div class="capability-stat"><strong>99.95% uptime</strong> real-time data integration</div>
-            </div>
-
-            <div class="capability-card">
-              <h3>Segment Profitability</h3>
-              <p>Customer, Product, Region, Channel drill-down. ABC cost allocation. "Which segments are losing money?"</p>
-              <div class="capability-stat">Identify <strong>180–300K AED</strong> elimination opportunities</div>
+              <p>Single source of truth. ERP, banking, AR/AP all synced. Real-time consolidation across entities.</p>
+              <div class="capability-stat"><strong>99.95%</strong> uptime guarantee</div>
+              <div class="capability-stat">Setup: <strong>4 hours</strong> vs. 2 weeks in SAP</div>
+              <div class="capability-stat">Supports <strong>15+ currencies</strong> with live FX rates</div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- CTA Section -->
+      <!-- CTA -->
       <section class="cta-section">
         <div class="wrap">
-          <h2>Ready for the Financial Command Center?</h2>
+          <h2>Ready to Transform Your Finance Function?</h2>
           <p>
-            These 10 capabilities represent the future of CFO decision-making in the UAE. Get early access. Shape the roadmap. Transform your finance team.
+            Get early access. Shape the roadmap. These 10 capabilities are built for CFOs who demand precision, speed, and zero surprises.
           </p>
-          <a class="btn btn--primary" href="trial.html">Start Free Trial</a>
-          <a class="btn btn--dark" href="index.html#waitlist">Join the Waitlist</a>
+          <div class="cta-buttons">
+            <a class="btn btn--primary" href="trial.html">Start Free Trial</a>
+            <a class="btn btn--dark" href="index.html#waitlist">Join the Waitlist</a>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="footer" style="margin-top: clamp(60px, 10vw, 120px);">
-      <div class="wrap" style="padding: clamp(40px, 6vw, 60px) 0; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-2); text-align: center;">
+    <footer class="footer" style="margin-top: clamp(40px, 6vw, 80px);">
+      <div class="wrap" style="padding: clamp(32px, 4vw, 48px) 0; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-2); text-align: center;">
         <p style="margin: 0;">© 2026 Ledgr. Your AI Finance Team. In Complete Control.</p>
       </div>
     </footer>
-
-    <script>
-      // Smooth scroll for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-          const href = this.getAttribute('href');
-          if (href !== '#main' && href !== '#nav' && document.querySelector(href)) {
-            e.preventDefault();
-            const target = document.querySelector(href);
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            window.history.pushState(null, null, href);
-          }
-        });
-      });
-
-      // Update active nav link on scroll
-      function updateActiveNav() {
-        const sections = document.querySelectorAll('[id]');
-        const scrollPos = window.scrollY + 120;
-        
-        sections.forEach(section => {
-          const link = document.querySelector(`.cfo-nav a[href="#${section.id}"]`);
-          if (!link) return;
-          
-          const sectionTop = section.offsetTop;
-          const sectionHeight = section.offsetHeight;
-          
-          if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-            document.querySelectorAll('.cfo-nav a').forEach(a => a.classList.remove('active'));
-            link.classList.add('active');
-          }
-        });
-      }
-
-      window.addEventListener('scroll', updateActiveNav);
-    </script>
   </body>
 </html>
